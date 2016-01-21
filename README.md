@@ -1,2 +1,2 @@
 # kiilto
-Peli, jossa timangeja tuhlataan, va(a)rallisuutta haalitaan ja vaikutusvaltaisia henkilöitä houkutellaan kylään
+Peli, jossa nallekarkkeja tuhlataan, va(a)rallisuutta haalitaan ja vaikutusvaltaisia henkilöitä houkutellaan (yö)kylään.
