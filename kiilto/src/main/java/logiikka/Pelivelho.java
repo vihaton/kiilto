@@ -1,5 +1,7 @@
-
 package logiikka;
+
+import java.util.*;
+import ui.*;
 
 /**
  *
@@ -7,4 +9,33 @@ package logiikka;
  */
 public class Pelivelho {
 
+    TUI tui;
+    ArrayList<Pelaaja> pelaajat;
+    Poyta poyta;
+
+    public Pelivelho() {
+        tui = new TUI(new Scanner(System.in));
+    }
+
+    public void pelaa() {
+
+    }
+
+    public void alustaPeli() {
+        int pm = tui.selvitaPelaajienMaara();
+        ArrayList<String> nimet = tui.selvitaPelaajienNimet(pm);
+        
+        luoPelaajat(nimet);
+        luoPoyta();
+    }
+
+    private void luoPelaajat(ArrayList<String> nimet) {
+        for (int i = 0; i < nimet.size(); i++) {
+            this.pelaajat.add(new Pelaaja(nimet.get(i)));
+        }
+    }
+
+    private void luoPoyta() {
+        
+    }
 }

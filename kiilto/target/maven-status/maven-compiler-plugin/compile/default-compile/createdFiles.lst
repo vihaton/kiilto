@@ -1,6 +1,13 @@
-logiikka/Nallekarkkikasa.class
-logiikka/Omistus.class
-logiikka/Vari.class
+logiikka/omaisuusluokat/Varaus.class
+logiikka/Poyta.class
+logiikka/valineluokat/Kasakokoelma.class
+ui/TUI.class
+logiikka/omaisuusluokat/Omaisuusjoukko.class
 logiikka/Pelaaja.class
 kiilto/Main.class
-logiikka/Merkkihenkilo.class
+logiikka/omaisuusluokat/Omaisuusvaatimus.class
+logiikka/valineluokat/Nallekarkkikasa.class
+logiikka/valineluokat/Merkkihenkilo.class
+logiikka/valineluokat/Vari.class
+logiikka/omaisuusluokat/Omistus.class
+logiikka/Pelivelho.class

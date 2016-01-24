@@ -1,6 +1,7 @@
 package ui;
 
 import java.util.*;
+import logiikka.*;
 
 /**
  *
@@ -9,19 +10,14 @@ import java.util.*;
 public class TUI {
 
     Scanner lukija;
+    Pelivelho pv;
 
     public TUI(Scanner sc) {
         lukija = sc;
-    }
-
-    public void alustaPeli() {
-        int pm = selvitaPelaajienMaara();
-        ArrayList<String> nimet = selvitaPelaajienNimet(pm);
-        
         
     }
 
-    private int selvitaPelaajienMaara() {
+    public int selvitaPelaajienMaara() {
         int pm = -1;
 
         while (pm == -1) {
@@ -40,7 +36,7 @@ public class TUI {
         return pm;
     }
 
-    private ArrayList<String> selvitaPelaajienNimet(int pm) {
+    public ArrayList<String> selvitaPelaajienNimet(int pm) {
         ArrayList<String> nimet = new ArrayList<>();
         for (int i = 0; i < pm; i++) {
             String nimi = lukija.nextLine();
