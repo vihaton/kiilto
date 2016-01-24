@@ -16,3 +16,11 @@ Homma | aika
 Tehtävän ja kansiohierarkian ihmetteleminen | 1h
 ---|---
 Sovelluslogiikan ensimmäisten luokkien koodaus | 2,5h
+
+**23.1 2h**
+
+Luokkakaaviot 1.0 ja 1.1 | 2h
+---|---
+Uusien luokkien luominen luokkakaaviota vastaavaksi
+
+
