@@ -32,16 +32,9 @@ Omaisuutta voi ostaa nallekarkeilla, joita pelaaja voi vuorollaan (tiettyjen sä
     * pelaajalla saa olla max 10 nallekarkkia
 
 
-##Luokkakaaviot
-
-###yksinkertaistettu luokkakaavio tavoitteesta
+##Luokkakaavio
 
 ![Teksti](https://raw.githubusercontent.com/xvixvi/kiilto/master/dokumentointi/luokkakaavio1-11.jpg "luokkakaavio 1-11")
-
-###alussa toteutettava luokkakokonaisuus
-
-![LK1.2](http://yuml.me/e5c7183d)
-
 
 wip
 
