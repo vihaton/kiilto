@@ -1,9 +1,9 @@
 
-package logiikka.omaisuus;
+package logiikka.omaisuusluokat;
 
 import java.util.*;
-import logiikka.Nallekarkkikasa;
-import logiikka.Vari;
+import logiikka.valineluokat.Nallekarkkikasa;
+import logiikka.valineluokat.Vari;
 /**
  *
  * @author xvixvi
