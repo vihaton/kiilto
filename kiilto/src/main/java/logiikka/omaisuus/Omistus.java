@@ -1,20 +1,22 @@
 
-package logiikka;
+package logiikka.omaisuus;
 
 import java.util.*;
+import fi.lipasto1.logiikka.Nallekarkkikasa;
+import fi.lipasto1.logiikka.Vari;
 /**
  *
  * @author xvixvi
  */
 public class Omistus {
-    ArrayList<Nallekarkkikasa> hinta;
-    Vari lisaKarkinVari;
-    int pistearvo;
+    private ArrayList<Nallekarkkikasa> hinta;
+    private Vari lisaKarkinVari;
+    private int arvovalta;
     
     public Omistus(ArrayList<Nallekarkkikasa> h, String vari, int arvo) {
         this.hinta = h;
         this.lisaKarkinVari = Vari.valueOf(vari.toLowerCase().trim());
-        pistearvo = arvo;
+        arvovalta = arvo;
     }
 
     public Omistus(ArrayList<Nallekarkkikasa> h, int vari, int arvo) {
@@ -29,7 +31,7 @@ public class Omistus {
         return lisaKarkinVari;
     }
     
-    public int getPistearvo() {
-        return pistearvo;
+    public int getArvovalta() {
+        return arvovalta;
     }
 }

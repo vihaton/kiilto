@@ -1,5 +1,5 @@
 
-package logiikka;
+package fi.lipasto1.logiikka;
 
 /**
  *

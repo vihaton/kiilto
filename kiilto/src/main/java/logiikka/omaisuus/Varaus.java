@@ -1,5 +1,5 @@
 
-package logiikka;
+package logiikka.omaisuus;
 
 /**
  *
