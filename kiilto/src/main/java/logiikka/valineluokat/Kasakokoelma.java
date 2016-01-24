@@ -7,4 +7,8 @@ package logiikka.valineluokat;
  */
 public class Kasakokoelma {
 
+    public Kasakokoelma(int i) {
+
+    }
+
 }

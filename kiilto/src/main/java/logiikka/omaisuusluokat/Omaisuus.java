@@ -5,6 +5,6 @@ package logiikka.omaisuusluokat;
  *
  * @author xvixvi
  */
-public class Omaisuusjoukko {
+public class Omaisuus {
 
 }
