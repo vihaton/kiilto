@@ -1,6 +1,7 @@
 
-package ui;
+package logiikka;
 
+import ui.TUI;
 import java.util.Scanner;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,7 +15,7 @@ import static org.junit.Assert.*;
  * @author xvixvi
  */
 public class PelivelhoTest {
-    Pelivelho pv;
+    TUI pv;
     
     public PelivelhoTest() {
     }
@@ -29,7 +30,7 @@ public class PelivelhoTest {
     
     @Before
     public void setUp() {
-        pv = new Pelivelho(new Scanner(System.in));
+        pv = new TUI(new Scanner(System.in));
     }
     
     @After

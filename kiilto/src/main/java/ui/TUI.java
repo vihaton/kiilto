@@ -1,24 +1,27 @@
 package ui;
 
-import java.util.Scanner;
+import java.util.*;
 
 /**
  *
  * @author xvixvi
  */
-public class Pelivelho {
+public class TUI {
 
     Scanner lukija;
 
-    public Pelivelho(Scanner sc) {
+    public TUI(Scanner sc) {
         lukija = sc;
     }
 
     public void alustaPeli() {
         int pm = selvitaPelaajienMaara();
+        ArrayList<String> nimet = selvitaPelaajienNimet(pm);
+        
+        
     }
 
-    public int selvitaPelaajienMaara() {
+    private int selvitaPelaajienMaara() {
         int pm = -1;
 
         while (pm == -1) {
@@ -35,5 +38,16 @@ public class Pelivelho {
             }
         }
         return pm;
+    }
+
+    private ArrayList<String> selvitaPelaajienNimet(int pm) {
+        ArrayList<String> nimet = new ArrayList<>();
+        for (int i = 0; i < pm; i++) {
+            String nimi = lukija.nextLine();
+            if (nimi.isEmpty())  break;
+            
+            nimet.add(nimi);
+        }
+        return nimet;
     }
 }
