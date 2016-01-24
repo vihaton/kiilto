@@ -15,7 +15,6 @@ import static org.junit.Assert.*;
  * @author xvixvi
  */
 public class PelivelhoTest {
-    TUI pv;
     
     public PelivelhoTest() {
     }
@@ -30,7 +29,6 @@ public class PelivelhoTest {
     
     @Before
     public void setUp() {
-        pv = new TUI(new Scanner(System.in));
     }
     
     @After

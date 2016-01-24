@@ -34,7 +34,7 @@ Omaisuutta voi ostaa nallekarkeilla, joita pelaaja voi vuorollaan (tiettyjen sä
 
 ##Luokkakaavio
 
-![Alti text](/kiilto/dokumentointi/kiilto_luokkakaavio1.11.png "luokkakaavio 1.11")
+![Alti text](/kiilto/dokumentointi/kiilto_luokkakaavio1.11.jpg "luokkakaavio 1.11")
 
 wip
 
