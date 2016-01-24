@@ -7,7 +7,7 @@ Homma | aika
  netbeansprojektin sisällyttäminen|
  Markdown Basics|
 **Aiheen valitseminen** | 2h
-**Dokumentaation aloittaminen** | 0,5h
+**Dokumentaation aloittaminen** | 1,5h
  aiheen alustus |
  tuntikirjanpidon luominen |
 
