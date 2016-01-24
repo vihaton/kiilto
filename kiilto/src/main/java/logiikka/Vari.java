@@ -1,4 +1,4 @@
-package fi.lipasto1.logiikka;
+package logiikka;
 
 /**
  *

@@ -2,8 +2,8 @@
 package logiikka.omaisuus;
 
 import java.util.*;
-import fi.lipasto1.logiikka.Nallekarkkikasa;
-import fi.lipasto1.logiikka.Vari;
+import logiikka.Nallekarkkikasa;
+import logiikka.Vari;
 /**
  *
  * @author xvixvi
