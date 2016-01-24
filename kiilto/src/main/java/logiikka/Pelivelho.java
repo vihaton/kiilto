@@ -27,7 +27,7 @@ public class Pelivelho {
         ArrayList<String> nimet = tui.selvitaPelaajienNimet(pm);
         
         luoPelaajat(nimet);
-        luoPoyta();
+        poyta = new Poyta(pelaajat);
     }
 
     private void luoPelaajat(ArrayList<String> nimet) {
@@ -35,9 +35,5 @@ public class Pelivelho {
         for (int i = 0; i < nimet.size(); i++) {
             this.pelaajat.add(new Pelaaja(nimet.get(i)));
         }
-    }
-
-    private void luoPoyta() {
-        
     }
 }
