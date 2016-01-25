@@ -24,7 +24,7 @@ public class Poyta {
 
     private void alustaOmistuspakat() {
         omistuspakat = new ArrayList<>();
-        //splendorkorttien kopioiminen tekstitiedostoon -> tässä luetaan tekstitiedosto ja luodaan
+        //tässä luetaan tekstitiedosto ja luodaan
         //kolme omistuspakkaa
     }
 
