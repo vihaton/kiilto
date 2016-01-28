@@ -18,10 +18,17 @@ public class Pelivelho {
     }
 
     public void pelaa() {
-        alustaPeli();
-
+//        alustaPeli();
+        alustaTestiPeli();
     }
 
+    private void alustaTestiPeli() {
+        ArrayList<String> p = new ArrayList<>();
+        p.add("homo1"); p.add("homo2");
+        luoPelaajat(p);
+        poyta = new Poyta(pelaajat);
+    }
+    
     public void alustaPeli() {
         int pm = tui.selvitaPelaajienMaara();
         ArrayList<String> nimet = tui.selvitaPelaajienNimet(pm);

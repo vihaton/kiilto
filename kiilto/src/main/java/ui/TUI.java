@@ -39,7 +39,7 @@ public class TUI {
     public ArrayList<String> selvitaPelaajienNimet(int pm) {
         ArrayList<String> nimet = new ArrayList<>();
         for (int i = 0; i < pm; i++) {
-            System.out.println("Anna pelaaja nro" +i+1 +" nimi:");
+            System.out.println("Anna pelaaja nro" +(i+1) +" nimi:");
             String nimi = lukija.nextLine();
             if (nimi.isEmpty())  break;
             

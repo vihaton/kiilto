@@ -7,11 +7,11 @@ package logiikka.valineluokat;
 public enum Vari {
 
     KULTAINEN("kultainen"),
-    MUSTA("musta"),
     VALKOINEN("valkoinen"),
     SININEN("sininen"),
+    VIHREA("vihrea"),
     PUNAINEN("punainen"),
-    VIHREA("vihrea");
+    MUSTA("musta");
 
     private final String nimi;
 

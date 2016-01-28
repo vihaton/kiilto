@@ -13,14 +13,18 @@ public class Omistus {
     private Vari lisaKarkinVari;
     private int arvovalta;
     
-    public Omistus(ArrayList<Nallekarkkikasa> h, String vari, int arvo) {
+    public Omistus(ArrayList<Nallekarkkikasa> h, Vari vari, int arvo) {
         this.hinta = h;
-        this.lisaKarkinVari = Vari.valueOf(vari.toLowerCase().trim());
+        this.lisaKarkinVari = vari;
         arvovalta = arvo;
+    }
+    
+    public Omistus(ArrayList<Nallekarkkikasa> h, String vari, int arvo) {
+        this(h,Vari.valueOf(vari.toLowerCase().trim()),arvo);
     }
 
     public Omistus(ArrayList<Nallekarkkikasa> h, int vari, int arvo) {
-        this(h, Vari.values()[vari].toString(), arvo);
+        this(h, Vari.values()[vari], arvo);
     }
     
     public ArrayList<Nallekarkkikasa> getHinta() {
