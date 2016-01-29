@@ -73,8 +73,9 @@ public class Poyta {
         }
         s = s.concat("***\n");
         s = s.concat("karkkimarkkinat: " +karkkimarkkinat.toString() + "\n");
+        s = s.concat("***\nomistuspakat:\n");
         for (Omaisuus o : omistuspakat) {
-            s = s.concat(o.toString());
+            s = s.concat("omistuspakka:\n" + o.toString());
         }
         return s;
     }
