@@ -1,4 +1,4 @@
-package kiilto;
+package main;
 
 import java.util.Scanner;
 import ui.TUI;
