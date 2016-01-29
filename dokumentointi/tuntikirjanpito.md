@@ -1,6 +1,6 @@
 #Tuntikirjanpito
 
-##Viikko 1 5,5h
+##Viikko 1 *5,5h*
 
 **21.1 5,5h**
 
@@ -15,7 +15,7 @@ Homma | aika
  aiheen alustus |
  tuntikirjanpidon luominen |
 
-##Viikko 2 14,5h
+##Viikko 2 *14,5h*
 
 **22.1(23.1) 3,5h**
 
@@ -40,3 +40,4 @@ Luokkien työstämistä niin, että omistukset saadaan generoitua pelin alussa |
 toString -metodien vääntämistä käsintestaamista ja tulevaa tui-pelaamista varten | 2h
 ensimmäisten testien pyöräyttäminen | 1h
 
+##Viikko 3 
