@@ -27,7 +27,7 @@ Sovelluslogiikan ensimmäisten luokkien koodaus | 2,5h
 
 Luokkakaaviot 1.0 ja 1.1 | 2h
 ---|---
-Uusien luokkien luominen luokkakaaviota vastaavaksi
+Uusien luokkien luominen luokkakaaviota vastaavaksi |
 
 **28.1 3h**
 
