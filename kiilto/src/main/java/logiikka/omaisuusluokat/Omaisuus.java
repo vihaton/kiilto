@@ -33,4 +33,17 @@ public class Omaisuus {
     public boolean onkoPA() {
         return omistukset.isEmpty();
     }
+    
+    @Override
+    public String toString() {
+        if (this.onkoPA()) {
+            return "olen köyhä, minulla ei ole omaisuutta :´(" + "\n";
+        }
+        
+        String s = "";
+        for (Omistus o : omistukset) {
+            s = s.concat(o.toString()+"\n");
+        }
+        return s;
+    }
 }

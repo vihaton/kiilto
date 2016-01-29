@@ -29,14 +29,15 @@ public class Kasakokoelma {
 
     //konstruktori omistusten hintoja kuvaaville kasoille
     public Kasakokoelma(String[] palat) {
+        kasat[0] = new Nallekarkkikasa(0);
         for (int i = 1; i < 6; i++) {
             kasat[i] = new Nallekarkkikasa(i, Integer.parseInt(palat[i+2]));
         }
     }
     
-    public int getKasanKoko(int n) {
-        if (n<0||n>5) return 0;
-        return kasat[n].getKoko();
+    public int getKasanKoko(int kasanNro) {
+        if (kasanNro<0||kasanNro>5) return 0;
+        return kasat[kasanNro].getKoko();
     }
 
     @Override
