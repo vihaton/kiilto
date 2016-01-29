@@ -21,6 +21,6 @@ public class Pelaaja {
     
     @Override
     public String toString() { //ilman omistuksia
-        return nimi + ", karkit: " + karkit;
+        return nimi + "\n" + karkit +"\n";
     }
 }
