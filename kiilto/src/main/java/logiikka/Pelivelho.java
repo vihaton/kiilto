@@ -18,8 +18,8 @@ public class Pelivelho {
     }
 
     public void pelaa() {
-//        alustaPeli();
-        alustaTestiPeli();
+        alustaPeli();
+//        alustaTestiPeli();
         tulostaKaikki();
     }
 
@@ -52,7 +52,12 @@ public class Pelivelho {
     }
 
     private void tulostaKaikki() {
+        System.out.println("Peli on nyt alustettu.");
+        System.out.println("Tässä on pelipöydän ääreen ja päälle päätyneet asiat ja olennot:");
+        System.out.println("");
         System.out.println(poyta);
+        System.out.println("**********'");
+        System.out.println("wip");
         //wip
     }
 }
