@@ -60,8 +60,7 @@ public class Poyta {
     }
 
     private Omistus luoOmistus(String rivi) {
-        System.out.println(rivi);
-        
+        String[] palat = rivi.split(",", 9);
         return new Omistus(new ArrayList<Nallekarkkikasa>(), Vari.KULTAINEN, 0);
     }
 
