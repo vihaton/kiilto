@@ -61,7 +61,19 @@ public class Poyta {
 
     private Omistus luoOmistus(String rivi) {
         String[] palat = rivi.split(",", 9);
-        return new Omistus(new ArrayList<Nallekarkkikasa>(), Vari.KULTAINEN, 0);
+        Kasakokoelma hinta = new Kasakokoelma(palat);
+        return new Omistus(hinta, Vari.KULTAINEN, 0);
     }
 
+    @Override
+    public String toString() { //ilman omistuksia
+        String s = "Pöydässä pelaajat:\n";
+        for (Pelaaja p : pelaajat) {
+            s = s.concat(p+"\n");
+        }
+        s = s.concat("***\n");
+        s = s.concat("karkkimarkkinat: " +karkkimarkkinat.toString() + "\n");
+        
+        return s;
+    }
 }

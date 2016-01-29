@@ -9,11 +9,10 @@ import logiikka.valineluokat.*;
  * @author xvixvi
  */
 public class Kasakokoelma {
-    private Nallekarkkikasa[] kasat;
+    private Nallekarkkikasa[] kasat = new Nallekarkkikasa[6];
 
     //konstruktori pelaajien karkeille ja pöydän karkkimarkkinoille
     public Kasakokoelma(int pelaajia) { // 0 -> tyhjät kasat pelaajille, 2-4 -> pelaajien lukumäärän mukaiset markkinat
-        kasat = new Nallekarkkikasa[6];
         int karkkeja = 0;
         if (pelaajia == 2) karkkeja = 4;
         else if (pelaajia == 3) karkkeja = 5;
@@ -29,13 +28,24 @@ public class Kasakokoelma {
     }
 
     //konstruktori omistusten hintoja kuvaaville kasoille
-    public Kasakokoelma(int val, int sin, int vih, int pun, int mus)  {
-        kasat = new Nallekarkkikasa[6]; //hinnoissa ei ole kultaisia, kasat[0] == null
-        kasat[1] = new Nallekarkkikasa(1, val);
-        kasat[2] = new Nallekarkkikasa(2, sin);
-        kasat[3] = new Nallekarkkikasa(3, vih);
-        kasat[4] = new Nallekarkkikasa(4, pun);
-        kasat[5] = new Nallekarkkikasa(5, mus);
+    public Kasakokoelma(String[] palat) {
+        for (int i = 1; i < 6; i++) {
+            kasat[i] = new Nallekarkkikasa(i, Integer.parseInt(palat[i+2]));
+        }
+    }
+    
+    public int getKasanKoko(int n) {
+        if (n<0||n>5) return 0;
+        return kasat[n].getKoko();
     }
 
+    @Override
+    public String toString() {
+        String s = "";
+        for (int i = 0; i < kasat.length-1; i++) {
+            s = s.concat(kasat[i].toString() + ", ");
+        }
+        s = s.concat(kasat[5].toString());
+        return s;
+    }
 }

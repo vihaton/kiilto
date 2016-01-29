@@ -20,6 +20,7 @@ public class Pelivelho {
     public void pelaa() {
 //        alustaPeli();
         alustaTestiPeli();
+        tulostaKaikki();
     }
 
     private void alustaTestiPeli() {
@@ -42,5 +43,10 @@ public class Pelivelho {
         for (int i = 0; i < nimet.size(); i++) {
             this.pelaajat.add(new Pelaaja(nimet.get(i)));
         }
+    }
+
+    private void tulostaKaikki() {
+        System.out.println(poyta);
+        //wip
     }
 }

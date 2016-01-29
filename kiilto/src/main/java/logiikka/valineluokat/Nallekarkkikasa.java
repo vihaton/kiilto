@@ -42,4 +42,9 @@ public class Nallekarkkikasa {
     public boolean onTyhja() {
         return this.koko < 1;
     }
+    
+    @Override
+    public String toString() {
+        return vari + ": " + koko;
+    }
 }

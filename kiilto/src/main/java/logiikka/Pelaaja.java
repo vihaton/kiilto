@@ -19,4 +19,8 @@ public class Pelaaja {
         karkit = new Kasakokoelma(0);
     }
     
+    @Override
+    public String toString() { //ilman omistuksia
+        return nimi + ", karkit: " + karkit;
+    }
 }
