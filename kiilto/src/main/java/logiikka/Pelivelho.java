@@ -52,6 +52,7 @@ public class Pelivelho {
     }
 
     private void tulostaKaikki() {
+        System.out.println("");
         System.out.println("Peli on nyt alustettu.");
         System.out.println("Tässä on pelipöydän ääreen ja päälle päätyneet asiat ja olennot:");
         System.out.println("");
