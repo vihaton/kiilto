@@ -31,7 +31,7 @@ Uusien luokkien luominen luokkakaaviota vastaavaksi |
 
 **28.1 3h**
 
-Voimistelua omistuskorttien tallettaminen csv-tiedostoon, tiedoston lukeminen skannerilla järkevästi.
+Omistuskorttien tallettaminen csv-tiedostoon, tiedoston lukeminen skannerilla järkevästi.
 
 **29.1 6h**
 
