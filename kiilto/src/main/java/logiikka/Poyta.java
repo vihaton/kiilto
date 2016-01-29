@@ -62,7 +62,7 @@ public class Poyta {
     private Omistus luoOmistus(String rivi) {
         String[] palat = rivi.split(",", 9);
         Kasakokoelma hinta = new Kasakokoelma(palat);
-        return new Omistus(hinta, Vari.KULTAINEN, 0);
+        return new Omistus(palat[0], Integer.parseInt(palat[1]), palat[2], hinta);
     }
 
     @Override

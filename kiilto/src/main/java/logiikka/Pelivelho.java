@@ -26,6 +26,8 @@ public class Pelivelho {
     private void alustaTestiPeli() {
         ArrayList<String> p = new ArrayList<>();
         p.add("homo1"); p.add("homo2");
+        p.add("homo3");
+        p.add("mr Gandalf");
         luoPelaajat(p);
         poyta = new Poyta(pelaajat);
     }

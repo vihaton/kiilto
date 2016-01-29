@@ -13,18 +13,19 @@ public class Omistus {
     private Vari lisaKarkinVari;
     private int arvovalta;
     
-    public Omistus(Kasakokoelma h, Vari vari, int arvo) {
+    public Omistus(String n, int arvo, Vari vari, Kasakokoelma h) {
+        this.nimi = n;
         this.hinta = h;
         this.lisaKarkinVari = vari;
         arvovalta = arvo;
     }
     
-    public Omistus(Kasakokoelma h, String vari, int arvo) {
-        this(h,Vari.valueOf(vari.toLowerCase().trim()),arvo);
+    public Omistus(String n, int arvo, String vari, Kasakokoelma h) {
+        this(n, arvo, Vari.valueOf(vari.toUpperCase()), h);
     }
 
-    public Omistus(Kasakokoelma h, int vari, int arvo) {
-        this(h, Vari.values()[vari], arvo);
+    public Omistus(String n, int arvo, int vari, Kasakokoelma h) {
+        this(n, arvo, Vari.values()[vari], h);
     }
     
     public Kasakokoelma getHintaKasat() {

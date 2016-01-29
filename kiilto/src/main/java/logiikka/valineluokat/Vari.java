@@ -17,5 +17,5 @@ public enum Vari {
 
     Vari(String name) {
         this.nimi = name;
-    }  
+    }
 }
