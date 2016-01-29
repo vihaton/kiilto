@@ -40,11 +40,15 @@ public class Pelivelho {
         poyta = new Poyta(pelaajat);
     }
 
-    private void luoPelaajat(ArrayList<String> nimet) {
+    public void luoPelaajat(ArrayList<String> nimet) {
         pelaajat = new ArrayList<>();
         for (int i = 0; i < nimet.size(); i++) {
             this.pelaajat.add(new Pelaaja(nimet.get(i)));
         }
+    }
+    
+    public ArrayList<Pelaaja> getPelaajat() {
+        return pelaajat;
     }
 
     private void tulostaKaikki() {

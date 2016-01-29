@@ -30,6 +30,10 @@ public class Omaisuus {
         return omistukset.get(omistukset.size()-1);
     }
     
+    public int getOmaisuudenKoko() {
+        return omistukset.size();
+    }
+    
     public boolean onkoPA() {
         return omistukset.isEmpty();
     }
