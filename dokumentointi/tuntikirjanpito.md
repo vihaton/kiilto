@@ -41,3 +41,7 @@ toString -metodien vääntämistä käsintestaamista ja tulevaa tui-pelaamista v
 ensimmäisten testien pyöräyttäminen | 1h
 
 ##Viikko 3 
+
+**29.1(30.1)**
+
+pitvääntöä 2h
