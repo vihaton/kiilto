@@ -59,4 +59,8 @@ public class Omistus {
                 + arvovalta + ", " + lisaKarkinVari + "\n" 
                 + hinta.toStringIlmanKultaa();
     }
+
+    String getNimi() {
+        return this.nimi;
+    }
 }

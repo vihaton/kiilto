@@ -129,5 +129,9 @@ public class TUI {
                 + "vähintään 4kpl kyseistä väriä, jotta siirto on laillinen.");
         System.out.println("\n'm' tulostaa markkinatilanteen.\n");
     }
+
+    public int mikaOmistusOstetaan(ArrayList<String> nakyvatOmistukset) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
         
 }

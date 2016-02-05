@@ -14,7 +14,6 @@ public class Poyta {
     private ArrayList<Pelaaja> pelaajat;
     private Kasakokoelma karkkimarkkinat;
     private ArrayList<Omaisuus> omistuspakat;
-    private ArrayList<Omaisuus> nakyvatOmistukset; //0 halvimmat, 1 keskitaso ja 2 kalleimmat
     private Random arpoja = new Random();
 
     Poyta(ArrayList<Pelaaja> pelaajat) {
@@ -22,7 +21,6 @@ public class Poyta {
         karkkimarkkinat = new Kasakokoelma(pelaajat.size());
         alustaOmistuspakat();
         luoOmistukset(luoLukija());
-        nakyvatOmistukset = new ArrayList<>();
     }
 
     private void alustaOmistuspakat() {
@@ -84,12 +82,36 @@ public class Poyta {
             s = s.concat(oma.paallimmaisetToString()+"\n");
         }
         s = s.concat("***\n");
-        s = s.concat("karkkimarkkinat: " +karkkimarkkinat.toString() + "\n");
+        s = s.concat("karkkimarkkinat:\n" +karkkimarkkinat.toString() + "\n");
         s = s.concat("***\n\n");
         return s;
     }
 
     Kasakokoelma getMarkkinat() {
         return karkkimarkkinat;
+    }
+    
+    public ArrayList<String> getNakyvienNimet() {
+        ArrayList<String> nimet = new ArrayList<>();
+        for (Omaisuus o : omistuspakat) {
+            nimet.addAll(o.getPaallimmaistenNimet());
+        }
+        return nimet;
+    }
+
+    boolean suoritaOsto(Pelaaja pelaaja, int ostonNumero) {
+        Omaisuus omistuspakka;
+
+        if (ostonNumero < 41) omistuspakka=omistuspakat.get(0);
+        else if (ostonNumero < 71) omistuspakka=omistuspakat.get(1);
+        else omistuspakka=omistuspakat.get(2);
+        
+        //kysytään pelaajalta, onko hänellä varaa ostaa nimeämänsä omistus
+        Omistus o = omistuspakka.getOmistus(ostonNumero);
+        if (pelaaja.onkoVaraa(o)) {
+            pelaaja.osta(omistuspakka, o, karkkimarkkinat);
+            return true;
+        }
+        return false;
     }
 }

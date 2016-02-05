@@ -25,6 +25,15 @@ public class Omaisuus {
         return arvovalta;
     }
     
+    public int[] getOmaisuudestaTulevatBonusKarkit() {
+        int[] bonukset = new int[5];
+        for (Omistus o : omistukset) {
+            int lisakarkinVari = o.getLisaKarkinVariNumerona();
+            bonukset[lisakarkinVari-1]++;
+        }
+        return bonukset;
+    }
+    
     public Omistus getEkaOmistus() {
         return omistukset.get(0);
     }
@@ -69,8 +78,39 @@ public class Omaisuus {
         String s = "";
         int raja = omistukset.size() < 4 ? omistukset.size() : 4;
         for (int i = 0; i < raja; i++) {
-            s = s.concat(omistukset.get(i).toString() + "\n");
+            s = s.concat(omistukset.get(i).toString() + "\n\n");
         }
         return s;
+    }
+    
+    public ArrayList<String> getPaallimmaistenNimet() {
+        ArrayList<String> nimet = new ArrayList<>();
+        int raja = omistukset.size() < 4 ? omistukset.size() : 4;
+        for (int i = 0; i < raja; i++) {
+            nimet.add(omistukset.get(i).getNimi());
+        }
+        return nimet;
+    }
+    
+    public ArrayList<Omistus> getPaallimmaiset() {
+        ArrayList<Omistus> paallimmaiset =  new ArrayList<>();
+        int raja = omistukset.size() < 4 ? omistukset.size() : 4;
+        for (int i = 0; i < raja; i++) {
+            paallimmaiset.add(omistukset.get(i));
+        }
+        return paallimmaiset;
+    }
+    
+    public Omistus getOmistus(int numero) {
+        ArrayList<Omistus> nakyvat = this.getPaallimmaiset();
+        for (Omistus o : nakyvat) {
+            if (numero == Integer.parseInt(o.getNimi())) return o;
+        }
+        return null;
+    }
+
+    public void siirraOmistus(Omaisuus kohdeOmaisuus, Omistus o) {
+        omistukset.remove(o);
+        kohdeOmaisuus.lisaaOmistus(o);
     }
 }

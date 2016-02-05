@@ -99,6 +99,7 @@ public class Pelivelho {
         } else if (valinta == 3) { // tehdään varaus pöydästä
             teeVaraus(pelaaja);
         }
+        System.out.println("");
     }
 
     private void nostaNallekarkkeja(Pelaaja pelaaja) {
@@ -113,10 +114,24 @@ public class Pelivelho {
     }
 
     private void ostaOmaisuutta(Pelaaja pelaaja) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        while (true) {
+            int ostonNumero = tui.mikaOmistusOstetaan(poyta.getNakyvienNimet());
+            
+            if (ostonNumero == 0) {
+                if (ostaVaraus(pelaaja)) break;
+            }
+            else if (poyta.suoritaOsto(pelaaja, ostonNumero)) break;
+            
+            System.out.println("Sinulla ei ollut varaa moiseen! Mene töihin rikastumaan, lortto!");
+        }
     }
 
     private void teeVaraus(Pelaaja pelaaja) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+    private boolean ostaVaraus(Pelaaja pelaaja) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
