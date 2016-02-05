@@ -40,8 +40,12 @@ Luokkien työstämistä niin, että omistukset saadaan generoitua pelin alussa |
 toString -metodien vääntämistä käsintestaamista ja tulevaa tui-pelaamista varten | 2h
 ensimmäisten testien pyöräyttäminen | 1h
 
-##Viikko 3 
+##Viikko 3 *7h*
 
-**29.1(30.1)**
+**29.1(30.1) 2h**
 
 pitvääntöä 2h
+
+**5.2 7h**
+
+Pelin perus-perustoiminnallisuuden rakentaminen, ja tekstikäyttöliittymän päivittäminen tarpeeseen 7h
