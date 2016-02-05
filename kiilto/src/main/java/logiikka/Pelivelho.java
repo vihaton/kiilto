@@ -18,8 +18,8 @@ public class Pelivelho {
     }
 
     public void pelaa() {
-        alustaPeli();
-//        alustaTestiPeli();
+//        alustaPeli();
+        alustaTestiPeli();
         tulostaKaikki();
     }
 

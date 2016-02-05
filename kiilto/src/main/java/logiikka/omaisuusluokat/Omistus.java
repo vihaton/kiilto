@@ -41,6 +41,14 @@ public class Omistus {
         return lisaKarkinVari;
     }
     
+    public int getLisaKarkinVariNumerona() {
+        Vari[] varit = Vari.values();
+        for (int i = 0; i < varit.length; i++) {
+            if (varit[i]==lisaKarkinVari) return i;
+        }
+        return -1;
+    }
+    
     public int getArvovalta() {
         return arvovalta;
     }
