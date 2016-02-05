@@ -122,7 +122,7 @@ public class Pelivelho {
             }
             else if (poyta.suoritaOsto(pelaaja, ostonNumero)) break;
             
-            System.out.println("Sinulla ei ollut varaa moiseen! Mene töihin rikastumaan, lortto!");
+            System.out.println("Sinulla ei ollut varaa moiseen! Mene töihin rikastumaan, lortto!\n");
         }
     }
 

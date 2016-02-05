@@ -131,7 +131,24 @@ public class TUI {
     }
 
     public int mikaOmistusOstetaan(ArrayList<String> nakyvatOmistukset) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int omistuksenNro = 0;
+        System.out.println("Haluatko ostaa omistuksen pöydältä vai varauksistasi?\n"
+                + "'v' -> varauksistasi, kaikki muut syötteet -> pöydältä.");
+        String syote = lukija.nextLine();
+        if (syote.equalsIgnoreCase("v")) return 0;
+    
+        while (omistuksenNro==0) {
+            System.out.println("Anna ostettavan omistuksen numero:");
+            try {
+                syote = lukija.nextLine();
+                if (!nakyvatOmistukset.contains(syote.trim())) throw new IllegalArgumentException();
+                omistuksenNro = Integer.parseInt(syote);
+            } catch (Exception e) {
+                omistuksenNro = 0;
+                System.out.println("Huono syöte, yritäppä uudestaan tahmanäppi!");
+            }
+        }
+        return omistuksenNro;
     }
         
 }
