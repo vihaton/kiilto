@@ -106,7 +106,9 @@ public class Pelivelho {
         Kasakokoelma karkit = pelaaja.getKarkit();
         for (int i = 0; i < maarat.length; i++) {
             int m = maarat[i];
-            if (m>1) karkit.kasvataKasaa(i, m);
+            if (m>0) {
+                poyta.getMarkkinat().siirraToiseenKasaan(karkit, i, m);
+            }
         }
     }
 

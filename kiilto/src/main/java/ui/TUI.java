@@ -73,8 +73,6 @@ public class TUI {
 
     public int[] mitaKarkkejaNostetaan(Kasakokoelma markkinat) {
         int[] nosto = new int[5];
-        int summa = 0;
-        boolean sama = false;
         
         while (true) {
             System.out.println("Mitä nallekarkkeja haluaisit? ('o' -ohjeet)");
@@ -82,30 +80,39 @@ public class TUI {
             if (syote.equalsIgnoreCase("o")) {
                 tulostaKarkkienNostamisOhjeet();
             } else {
-                nosto = new int[5];
                 try {
-                    String[] maarat = syote.split(",", 5);
-                    
-                    for (int i = 0; i < 5; i++) {
-                        int maara = Integer.parseInt(maarat[i].trim());
-                        if (maara<0 || maara>2) throw new IllegalArgumentException("luvut voivat olla 0,1 tai 2.");
-                        if (maara == 2) sama = true;
-                        summa += maara;
-                        if (summa > 3) throw new IllegalArgumentException("eipäs rohmuta!");
-                        if (sama && summa > 2) throw new IllegalArgumentException("eipäs rohmuta!");
-                        if (markkinat.getKasanKoko(i+1)< maara) throw new IllegalArgumentException("liian vähän karkkeja markkinoilla!");
-                        if (maara == 2 && markkinat.getKasanKoko(i+1) < 4) throw new IllegalArgumentException("kasassa on liian vähän karkkeja kahden ottamiseen!");
-                        //syöte on ollu tähän numeroon mennessä hyväksyttävä
-                        nosto[i] = maara;
-                    }
-                    if (sama && summa!=2) throw new IllegalArgumentException();
-                    if (!sama && summa !=3) throw new IllegalArgumentException();
+                    nosto = tarkistaKarrkienNostamisSyote(syote, markkinat);
                     break;
                 } catch (Exception e) {
-                    System.out.println("Syötteesi oli huono.\n" +e +"\n");
+                    System.out.println("Syötteesi oli huono.\n" + e.getMessage()+"\n");
                 }
             }
         }
+        return nosto;
+    }
+    
+    private int[] tarkistaKarrkienNostamisSyote(String syote, Kasakokoelma markkinat) throws Exception {
+        int[] nosto = new int[5];
+        int summa = 0;
+        boolean sama = false;
+        
+        String[] maarat = syote.split(",", 5);
+                    
+        for (int i = 0; i < 5; i++) {
+            int maara = Integer.parseInt(maarat[i].trim());
+            if (maara<0 || maara>2) throw new IllegalArgumentException("luvut voivat olla 0,1 tai 2.");
+            if (maara == 2) sama = true;
+            summa += maara;
+            if (summa > 3) throw new IllegalArgumentException("eipäs rohmuta!");
+            if (sama && summa > 2) throw new IllegalArgumentException("eipäs rohmuta!");
+            if (markkinat.getKasanKoko(i+1)< maara) throw new IllegalArgumentException("liian vähän karkkeja markkinoilla!");
+            if (maara == 2 && markkinat.getKasanKoko(i+1) < 4) throw new IllegalArgumentException("kasassa on liian vähän karkkeja kahden ottamiseen!");
+            //syöte on ollu tähän numeroon mennessä hyväksyttävä
+            nosto[i] = maara;
+        }
+        if (sama && summa!=2) throw new IllegalArgumentException();
+        if (!sama && summa !=3) throw new IllegalArgumentException();
+        
         return nosto;
     }
      

@@ -62,4 +62,9 @@ public class Kasakokoelma {
     public void kasvataKasaa(int i, int maara) {
         kasat[i+1].kasvata(maara);
     }
+
+    public void siirraToiseenKasaan(Kasakokoelma karkit, int i, int m) {
+        this.kasvataKasaa(i, -m);
+        karkit.kasvataKasaa(i, m);
+    }
 }
