@@ -47,4 +47,8 @@ public class TUI {
         }
         return nimet;
     }
+
+    public int selvitaVoittoonTarvittavaValta() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -15,6 +15,7 @@ public class Poyta {
     private Kasakokoelma karkkimarkkinat;
     private ArrayList<Omaisuus> omistuspakat;
     private ArrayList<Omaisuus> nakyvatOmistukset; //0 halvimmat, 1 keskitaso ja 2 kalleimmat
+    private Random arpoja = new Random();
 
     Poyta(ArrayList<Pelaaja> pelaajat) {
         this.pelaajat = pelaajat;
@@ -67,6 +68,10 @@ public class Poyta {
         return omistuspakat;
     }
     
+    public void sekoitaOmistuspakka(Omaisuus op) {
+        op.sekoita(arpoja);
+    }
+    
     @Override
     public String toString() { //ilman omistuksia
         String s = "Pöydässä pelaajat:\n";
@@ -75,9 +80,11 @@ public class Poyta {
         }
         s = s.concat("***\n");
         s = s.concat("karkkimarkkinat: " +karkkimarkkinat.toString() + "\n");
-        s = s.concat("***\nomistuspakat:\n");
-        for (Omaisuus o : omistuspakat) {
-            s = s.concat("omistuspakka:\n" + o.toString());
+        s = s.concat("***\n\n");
+        for (int i = 0; i < omistuspakat.size(); i++) {
+            s = s.concat("Omistuspakasta " + (i+1) +":\n\n");
+            Omaisuus oma = omistuspakat.get(i);
+            s = s.concat(oma.paallimmaisetToString()+"\n");
         }
         return s;
     }

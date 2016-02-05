@@ -49,4 +49,13 @@ public class Kasakokoelma {
         s = s.concat(kasat[5].toString());
         return s;
     }
+    
+    public String toStringIlmanKultaa() {
+        String s = "";
+        for (int i = 1; i < kasat.length-1; i++) {
+            s = s.concat(kasat[i].toString() + ", ");
+        }
+        s = s.concat(kasat[5].toString());
+        return s;
+    }
 }

@@ -23,4 +23,11 @@ public class Pelaaja {
     public String toString() { //ilman omistuksia
         return nimi + "\n" + karkit +"\n" + omaisuus;
     }
+
+    public boolean voittaja(int voittoraja) {
+        if (omaisuus.getArvovalta() >= voittoraja) {
+            return true;
+        }
+        return false;
+    }
 }

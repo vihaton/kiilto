@@ -45,6 +45,6 @@ public class Nallekarkkikasa {
     
     @Override
     public String toString() {
-        return vari + ": " + koko;
+        return vari.toString().substring(0, 3).toLowerCase() + ":" + koko;
     }
 }

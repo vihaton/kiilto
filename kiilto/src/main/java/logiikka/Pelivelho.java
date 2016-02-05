@@ -9,9 +9,11 @@ import ui.*;
  */
 public class Pelivelho {
 
-    TUI tui;
-    ArrayList<Pelaaja> pelaajat;
-    Poyta poyta;
+    private TUI tui;
+    private ArrayList<Pelaaja> pelaajat;
+    private Poyta poyta;
+    private int voittoValta;
+    private int kierros = 0;
 
     public Pelivelho() {
         tui = new TUI(new Scanner(System.in));
@@ -20,7 +22,11 @@ public class Pelivelho {
     public void pelaa() {
 //        alustaPeli();
         alustaTestiPeli();
-        tulostaKaikki();
+//        tulostaKaikki();
+        
+        while(eiVoittajaa()) {
+            pelaaKierros();
+        }
     }
 
     private void alustaTestiPeli() {
@@ -29,12 +35,15 @@ public class Pelivelho {
         p.add("homo3");
         p.add("mr Gandalf");
         luoPelaajat(p);
+        voittoValta = 10;
         poyta = new Poyta(pelaajat);
     }
     
     public void alustaPeli() {
         int pm = tui.selvitaPelaajienMaara();
         ArrayList<String> nimet = tui.selvitaPelaajienNimet(pm);
+//        voittoValta = tui.selvitaVoittoonTarvittavaValta();
+        voittoValta=10;
         
         luoPelaajat(nimet);
         poyta = new Poyta(pelaajat);
@@ -61,4 +70,25 @@ public class Pelivelho {
         System.out.println("wip");
         //wip
     }
+
+    private boolean eiVoittajaa() {
+        for (Pelaaja p : pelaajat) {
+            if (p.voittaja(voittoValta)) return false;
+        }
+        return true;
+    }
+
+    private void pelaaKierros() {
+        kierros++;
+        System.out.println("Kierros numero " + kierros +"\n");
+        for (Pelaaja p : pelaajat) {
+            pelaaVuoro(p);
+        }
+    }
+
+    private void pelaaVuoro(Pelaaja p) {
+        System.out.println("Pelaajan " + p.nimi + " vuoro.\n");
+        System.out.println(poyta);
+    }
+
 }
