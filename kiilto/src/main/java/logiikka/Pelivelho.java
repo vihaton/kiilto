@@ -2,6 +2,8 @@ package logiikka;
 
 import java.util.*;
 import ui.*;
+import logiikka.omaisuusluokat.*;
+import logiikka.valineluokat.*;
 
 /**
  *
@@ -86,9 +88,34 @@ public class Pelivelho {
         }
     }
 
-    private void pelaaVuoro(Pelaaja p) {
-        System.out.println("Pelaajan " + p.nimi + " vuoro.\n");
+    private void pelaaVuoro(Pelaaja pelaaja) {
+        System.out.println("Pelaajan " + pelaaja.getNimi() + " vuoro.\n");
         System.out.println(poyta);
+        int valinta = tui.pelaajanToimi();
+        if (valinta == 1) { // nostetaan nallekarkkeja
+            nostaNallekarkkeja(pelaaja);
+        } else if (valinta == 2) { // ostetaan omaisuutta
+            ostaOmaisuutta(pelaaja);
+        } else if (valinta == 3) { // tehdään varaus pöydästä
+            teeVaraus(pelaaja);
+        }
+    }
+
+    private void nostaNallekarkkeja(Pelaaja pelaaja) {
+        int[] maarat = tui.mitaKarkkejaNostetaan(poyta.getMarkkinat());
+        Kasakokoelma karkit = pelaaja.getKarkit();
+        for (int i = 0; i < maarat.length; i++) {
+            int m = maarat[i];
+            if (m>1) karkit.kasvataKasaa(i, m);
+        }
+    }
+
+    private void ostaOmaisuutta(Pelaaja pelaaja) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void teeVaraus(Pelaaja pelaaja) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

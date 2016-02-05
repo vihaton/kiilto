@@ -30,6 +30,10 @@ public class Nallekarkkikasa {
     public void setKoko(int uk) {
         this.koko = uk;
     }
+
+    void kasvata(int maara) {
+        koko += maara;
+    }
     
     public void kasvataYhdella() {
         this.koko += 1;

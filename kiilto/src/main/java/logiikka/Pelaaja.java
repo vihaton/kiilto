@@ -9,14 +9,22 @@ import logiikka.valineluokat.*;
  * @author xvixvi
  */
 public class Pelaaja {
-    Kasakokoelma karkit;
-    Omaisuus omaisuus;
-    String nimi;
+    private Kasakokoelma karkit;
+    private Omaisuus omaisuus;
+    private String nimi;
 
     Pelaaja(String nimi) {
         this.nimi = nimi;
         omaisuus = new Omaisuus();
         karkit = new Kasakokoelma(0);
+    }
+    
+    public Kasakokoelma getKarkit() {
+        return karkit;
+    }
+    
+    String getNimi() {
+        return nimi;
     }
     
     @Override
@@ -30,4 +38,5 @@ public class Pelaaja {
         }
         return false;
     }
+
 }

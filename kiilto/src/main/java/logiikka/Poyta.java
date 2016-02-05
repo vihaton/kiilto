@@ -78,14 +78,18 @@ public class Poyta {
         for (Pelaaja p : pelaajat) {
             s = s.concat(p+"\n");
         }
-        s = s.concat("***\n");
-        s = s.concat("karkkimarkkinat: " +karkkimarkkinat.toString() + "\n");
-        s = s.concat("***\n\n");
         for (int i = 0; i < omistuspakat.size(); i++) {
             s = s.concat("Omistuspakasta " + (i+1) +":\n\n");
             Omaisuus oma = omistuspakat.get(i);
             s = s.concat(oma.paallimmaisetToString()+"\n");
         }
+        s = s.concat("***\n");
+        s = s.concat("karkkimarkkinat: " +karkkimarkkinat.toString() + "\n");
+        s = s.concat("***\n\n");
         return s;
+    }
+
+    Kasakokoelma getMarkkinat() {
+        return karkkimarkkinat;
     }
 }

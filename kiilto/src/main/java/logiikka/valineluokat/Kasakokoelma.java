@@ -58,4 +58,8 @@ public class Kasakokoelma {
         s = s.concat(kasat[5].toString());
         return s;
     }
+
+    public void kasvataKasaa(int i, int maara) {
+        kasat[i+1].kasvata(maara);
+    }
 }

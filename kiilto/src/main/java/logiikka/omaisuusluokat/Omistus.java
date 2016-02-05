@@ -55,6 +55,8 @@ public class Omistus {
     
     @Override
     public String toString(){
-        return "Omistus nro " + nimi + "\n" + arvovalta + ", " + lisaKarkinVari + "\n" + hinta.toStringIlmanKultaa();
+        return "Omistus nro " + nimi + "\n"
+                + arvovalta + ", " + lisaKarkinVari + "\n" 
+                + hinta.toStringIlmanKultaa();
     }
 }
