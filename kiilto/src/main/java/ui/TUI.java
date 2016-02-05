@@ -10,12 +10,11 @@ import logiikka.valineluokat.*;
  */
 public class TUI {
 
-    Scanner lukija;
-    Pelivelho pv;
+    private Scanner lukija;
+    private Pelivelho pv;
 
     public TUI(Scanner sc) {
         lukija = sc;
-        
     }
 
     public int selvitaPelaajienMaara() {

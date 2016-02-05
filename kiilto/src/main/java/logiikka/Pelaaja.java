@@ -9,14 +9,12 @@ import logiikka.valineluokat.*;
  * @author xvixvi
  */
 public class Pelaaja {
-    private Kasakokoelma karkit;
-    private Omaisuus omaisuus;
-    private String nimi;
+    private final Kasakokoelma karkit = new Kasakokoelma(0);
+    private final Omaisuus omaisuus = new Omaisuus();
+    private final String nimi;
 
     Pelaaja(String nimi) {
         this.nimi = nimi;
-        omaisuus = new Omaisuus();
-        karkit = new Kasakokoelma(0);
     }
     
     public Kasakokoelma getKarkit() {
