@@ -22,8 +22,9 @@ public class Pelivelho {
     }
 
     public void pelaa() {
-//        alustaPeli();
-        alustaTestiPeli();
+        alustaPeli();
+        
+//        alustaTestiPeli();
 //        tulostaKaikki();
         
         while(eiVoittajaa()) {
@@ -82,7 +83,9 @@ public class Pelivelho {
 
     private void pelaaKierros() {
         kierros++;
-        System.out.println("Kierros numero " + kierros +"\n");
+        System.out.println("*******************");
+        System.out.println("Kierros numero " + kierros +", voittamiseen tarvitaan " + voittoValta +" arvovaltapistettä.");
+        System.out.println("*******************\n");
         for (Pelaaja p : pelaajat) {
             pelaaVuoro(p);
         }

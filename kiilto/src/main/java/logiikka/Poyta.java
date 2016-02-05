@@ -21,6 +21,7 @@ public class Poyta {
         karkkimarkkinat = new Kasakokoelma(pelaajat.size());
         alustaOmistuspakat();
         luoOmistukset(luoLukija());
+        sekoitaOmistuspakat();
     }
 
     private void alustaOmistuspakat() {
@@ -64,6 +65,12 @@ public class Poyta {
 
     public ArrayList<Omaisuus> getOmistuspakat() {
         return omistuspakat;
+    }
+    
+    public void sekoitaOmistuspakat() {
+        for (Omaisuus o : omistuspakat) {
+            sekoitaOmistuspakka(o);
+        }
     }
     
     public void sekoitaOmistuspakka(Omaisuus op) {
