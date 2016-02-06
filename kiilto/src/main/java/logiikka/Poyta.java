@@ -83,7 +83,7 @@ public class Poyta {
         for (Pelaaja p : pelaajat) {
             s = s.concat(p+"\n");
         }
-        for (int i = 0; i < omistuspakat.size(); i++) {
+        for (int i = omistuspakat.size()-1; i > -1; i--) {
             s = s.concat("Omistuspakasta " + (i+1) +":\n\n");
             Omaisuus oma = omistuspakat.get(i);
             s = s.concat(oma.paallimmaisetToString()+"\n");
