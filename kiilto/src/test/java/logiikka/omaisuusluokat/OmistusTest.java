@@ -57,4 +57,18 @@ public class OmistusTest {
         assertTrue(o.getKasanKoko(-1)==0);
         assertTrue(o.getKasanKoko(100)==0);
     }
+    
+    @Test
+    public void getLisaKarkinVariNumeronaToimii() {
+        o = new Omistus("testi", 666, 0, new Kasakokoelma(0));
+        assertTrue(o.getLisaKarkinVari().equals(Vari.KULTAINEN) && o.getLisaKarkinVariNumerona()==0);
+        o = new Omistus("testi", 666, 1, new Kasakokoelma(0));
+        assertTrue(o.getLisaKarkinVari().equals(Vari.VALKOINEN) && o.getLisaKarkinVariNumerona()==1);
+        o = new Omistus("testi", 666, 2, new Kasakokoelma(0));
+        assertTrue(o.getLisaKarkinVari().equals(Vari.SININEN) && o.getLisaKarkinVariNumerona()==2);
+        o = new Omistus("testi", 666, 3, new Kasakokoelma(0));
+        assertTrue(o.getLisaKarkinVari().equals(Vari.VIHREA) && o.getLisaKarkinVariNumerona()==3);
+        o = new Omistus("testi", 666, 4, new Kasakokoelma(0));
+        assertTrue(o.getLisaKarkinVari().equals(Vari.PUNAINEN) && o.getLisaKarkinVariNumerona()==4);
+    }
 }

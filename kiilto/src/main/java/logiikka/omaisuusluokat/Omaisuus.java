@@ -34,6 +34,18 @@ public class Omaisuus {
         return bonukset;
     }
     
+    public int getKoko() {
+        return omistukset.size();
+    }
+    
+    public Omistus getOmistusIndeksista(int i) {
+        return omistukset.get(i);
+    }
+    
+    public String getOmistuksenNimiIndeksista(int i) {
+        return omistukset.get(i).getNimi();
+    }
+    
     public Omistus getEkaOmistus() {
         return omistukset.get(0);
     }
