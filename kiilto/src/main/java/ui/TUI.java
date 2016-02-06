@@ -52,11 +52,11 @@ public class TUI {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public int pelaajanToimi() {
+    public int pelaajanToimi(String nimi) {
         int v = 0;
         while (v < 1 || v > 3) {
             try {
-                System.out.println("Mitä haluat tehdä? Valitse kokonaisluku 1-3:");
+                System.out.println("Mitä haluat tehdä " + nimi +"? Valitse kokonaisluku 1-3:");
                 System.out.println("  1. nosta nallekarkkeja markkinoilta ('1')");
                 System.out.println("  2. osta omaisuutta ('2')");
                 System.out.println("  3. varaa omaisuutta ('3')");
@@ -109,8 +109,8 @@ public class TUI {
             //syöte on ollu tähän numeroon mennessä hyväksyttävä
             nosto[i] = maara;
         }
-        if (sama && summa!=2) throw new IllegalArgumentException();
-        if (!sama && summa !=3) throw new IllegalArgumentException();
+        if (sama && summa!=2) throw new IllegalArgumentException("Jos otat kaksi samanväristä, saat vain yhtä väriä.");
+        if (!sama && summa !=3) throw new IllegalArgumentException("Et nostanut kolmea karkkia.");
         
         return nosto;
     }

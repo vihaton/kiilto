@@ -9,6 +9,7 @@ import logiikka.valineluokat.*;
  * @author xvixvi
  */
 public class Kasakokoelma {
+    //0-kul, 1-val, 2-sin, 3-vih, 4-pun, 5-mus
     private Nallekarkkikasa[] kasat = new Nallekarkkikasa[6];
 
     //konstruktori pelaajien karkeille ja pöydän karkkimarkkinoille
@@ -60,10 +61,14 @@ public class Kasakokoelma {
     }
 
     public void kasvataKasaa(int i, int maara) {
-        kasat[i+1].kasvata(maara);
+        kasat[i].kasvata(maara);
     }
 
     public void siirraToiseenKasaan(Kasakokoelma karkit, int i, int m) {
+        if (m > this.getKasanKoko(i)) {
+            //jos ei ole varaa siirtää niin paljon, siirretään kaikki muttei enempää;
+            m = this.getKasanKoko(i);
+        }
         this.kasvataKasaa(i, -m);
         karkit.kasvataKasaa(i, m);
     }

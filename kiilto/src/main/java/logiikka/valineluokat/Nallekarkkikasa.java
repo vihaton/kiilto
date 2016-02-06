@@ -6,8 +6,8 @@ package logiikka.valineluokat;
  * @author xvixvi
  */
 public class Nallekarkkikasa {
-    Vari vari;
-    int koko;
+    private Vari vari;
+    private int koko;
     
     public Nallekarkkikasa(int vari) {
         this.koko = 0;
@@ -32,7 +32,7 @@ public class Nallekarkkikasa {
     }
 
     void kasvata(int maara) {
-        koko += maara;
+        this.koko += maara;
     }
     
     public void kasvataYhdella() {

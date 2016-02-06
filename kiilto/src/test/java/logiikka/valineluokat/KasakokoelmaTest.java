@@ -29,7 +29,7 @@ public class KasakokoelmaTest {
     
     @Before
     public void setUp() {
-        k = new Kasakokoelma(0);
+        k = new Kasakokoelma(0); //luo tyhjän kasakokoelman
     }
     
     @After
@@ -77,5 +77,40 @@ public class KasakokoelmaTest {
         assertTrue(k.getKasanKoko(1) == 4);
         assertTrue(k.getKasanKoko(0) == 5);
         assertTrue(k.getKasanKoko(100) == 0);
+    }
+    
+    @Test
+    public void toStringIlmanKultaaTulostaaVainViisiKasaa() {
+        String[] palat = k.toStringIlmanKultaa().split(":");
+        assertTrue(palat.length == 6);
+    }
+    
+    @Test
+    public void kasvataKasaaToimii() {
+        k.kasvataKasaa(0,5);
+        assertTrue("kultakasaa kasvatettiin 5.llä, lopputuloksena kasassa " + k.getKasanKoko(0),
+                k.getKasanKoko(0) == 5);
+        k.kasvataKasaa(3, 10);
+        assertTrue(k.getKasanKoko(3) == 10);
+        k.kasvataKasaa(3, -100);
+        assertTrue(k.getKasanKoko(3) <= 0);
+    }
+    
+    @Test
+    public void siirraKasastaToiseenToimii() {
+        k = new Kasakokoelma(2);
+        Kasakokoelma tyhjatKasat = new Kasakokoelma(0);
+        int maksajallaKultaa = k.getKasanKoko(0);
+        int maksValkoisia = k.getKasanKoko(1);
+        
+        k.siirraToiseenKasaan(tyhjatKasat, 1, maksValkoisia);
+        assertTrue("laillinen siirto ei toimi", tyhjatKasat.getKasanKoko(1) == maksValkoisia);
+        
+        k.siirraToiseenKasaan(tyhjatKasat, 1, maksValkoisia);
+        tyhjatKasat = new Kasakokoelma(0);
+        assertTrue("tyhjästä on paha nyhjästä!", tyhjatKasat.getKasanKoko(1) == 0);
+        
+        k.siirraToiseenKasaan(tyhjatKasat, 0, 100);
+        assertTrue("siirretään maksimissaan kaikki mitä löytyy", tyhjatKasat.getKasanKoko(0) == maksajallaKultaa);
     }
 }

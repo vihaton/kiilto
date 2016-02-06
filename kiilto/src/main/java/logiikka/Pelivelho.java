@@ -94,7 +94,7 @@ public class Pelivelho {
     private void pelaaVuoro(Pelaaja pelaaja) {
         System.out.println("Pelaajan " + pelaaja.getNimi() + " vuoro.\n");
         System.out.println(poyta);
-        int valinta = tui.pelaajanToimi();
+        int valinta = tui.pelaajanToimi(pelaaja.getNimi());
         if (valinta == 1) { // nostetaan nallekarkkeja
             nostaNallekarkkeja(pelaaja);
         } else if (valinta == 2) { // ostetaan omaisuutta
@@ -108,7 +108,7 @@ public class Pelivelho {
     private void nostaNallekarkkeja(Pelaaja pelaaja) {
         int[] maarat = tui.mitaKarkkejaNostetaan(poyta.getMarkkinat());
         Kasakokoelma karkit = pelaaja.getKarkit();
-        for (int i = 0; i < maarat.length; i++) {
+        for (int i = 1; i < maarat.length+1; i++) {
             int m = maarat[i];
             if (m>0) {
                 poyta.getMarkkinat().siirraToiseenKasaan(karkit, i, m);
