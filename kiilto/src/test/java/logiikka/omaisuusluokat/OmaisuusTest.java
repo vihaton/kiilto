@@ -98,16 +98,21 @@ public class OmaisuusTest {
         double p1 = 11 / Math.pow(16, 5);
         int vsj = 0; //viidenSarjojaJärjestyksessä
         
-        //sekoitetaan omaisuus 500krt ja katsotaan, kuinka
+        //sekoitetaan omaisuus 1000krt ja katsotaan, kuinka
         //monessa tapauksessa löytyy alisarja, joka on järjestyksessä
         //verrataan näin saatua todennäköisyyttä täysin satunnaiseen
         for (int i = 0; i < 1000; i++) {
-//            o.sekoita(new Random());
+            o.sekoita(new Random());
             if (onkoAlisarjaaJokaOnJarjestyksessa(o, 16)) ksj++;
             if (onkoAlisarjaaJokaOnJarjestyksessa(o, 5)) vsj++;
         }
-        assertTrue(o.toString() + " "+ksj,ksj == 1000);
-        assertTrue(o.toString() + " "+vsj,vsj == 1000);
+        assertTrue("Sekoitus tuotti todella epätonnennäköiset järjestykset useasti.\n"
+                + "Sekoitus tuotti " + ksj + "kpl samaa järjestystä sekoitettaessa 1000krt.\n"
+                + "Todennäköisyys saada täysin satunnaisesti sama järjestys on 1 / (16^16)"
+                ,ksj < 5);
+        assertTrue("Sekoitus tuotti todella epätodennäköisen sarjan useasti.\n"
+                + "Sekoitettaessa 1000krt sekoitus tuotti " +vsj+"tapauksessa viiden sarjan, joka oli järjestyksessä.\n"
+                + "Täysin satunainen todennäköisyys olisi 11 / 16^5.",vsj < 10);
     }
 
     private boolean onkoAlisarjaaJokaOnJarjestyksessa(Omaisuus o, int alisarjanPituus) {
@@ -116,9 +121,11 @@ public class OmaisuusTest {
         int joap = 1; //järjestyksessä olevan alisarjan pituus
         int edellinen = Integer.parseInt(o.getEkaOmistus().getNimi());
         for (int i = 1; i < o.getKoko(); i++) {
-            if (edellinen+1 == Integer.parseInt(o.getOmistuksenNimiIndeksista(i))) {
+            int seuraava = Integer.parseInt(o.getOmistuksenNimiIndeksista(i));
+            if (edellinen+1 == seuraava) {
                 joap++;
             } else joap=1;
+            edellinen = seuraava;
             
             if (joap == alisarjanPituus) return true;
         }

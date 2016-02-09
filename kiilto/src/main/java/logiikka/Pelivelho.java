@@ -108,10 +108,10 @@ public class Pelivelho {
     private void nostaNallekarkkeja(Pelaaja pelaaja) {
         int[] maarat = tui.mitaKarkkejaNostetaan(poyta.getMarkkinat());
         Kasakokoelma karkit = pelaaja.getKarkit();
-        for (int i = 1; i < maarat.length+1; i++) {
+        for (int i = 0; i < maarat.length; i++) {
             int m = maarat[i];
             if (m>0) {
-                poyta.getMarkkinat().siirraToiseenKasaan(karkit, i, m);
+                poyta.getMarkkinat().siirraToiseenKasaan(karkit, i+1, m);
             }
         }
     }
