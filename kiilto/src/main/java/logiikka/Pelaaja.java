@@ -21,6 +21,15 @@ public class Pelaaja {
         return karkit;
     }
     
+    public boolean setKarkit(int[] maarat) {
+        if (maarat.length!=6) return false;
+        
+        for (int i = 0; i < maarat.length; i++) {
+            karkit.kasvataKasaa(i, maarat[i]);
+        }
+        return true;
+    }
+    
     String getNimi() {
         return nimi;
     }
@@ -50,6 +59,7 @@ public class Pelaaja {
     }
 
     boolean onkoVaraa(Omistus omistus) {
+        if (omistus == null) return false;
         int[] hintaOmaisuustulotHuomioituna = getHintaOmaisuustulotHuomioituna(omistus);
         
         int kaytettyKulta = 0;

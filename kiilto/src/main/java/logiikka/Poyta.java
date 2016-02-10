@@ -78,7 +78,7 @@ public class Poyta {
     }
     
     @Override
-    public String toString() { //ilman omistuksia
+    public String toString() {
         String s = "Pöydässä pelaajat:\n";
         for (Pelaaja p : pelaajat) {
             s = s.concat(p+"\n");
@@ -108,13 +108,14 @@ public class Poyta {
 
     boolean suoritaOsto(Pelaaja pelaaja, int ostonNumero) {
         Omaisuus omistuspakka;
+        if (!this.getNakyvienNimet().contains(""+ostonNumero)) return false;
 
         if (ostonNumero < 41) omistuspakka=omistuspakat.get(0);
         else if (ostonNumero < 71) omistuspakka=omistuspakat.get(1);
         else omistuspakka=omistuspakat.get(2);
         
         //kysytään pelaajalta, onko hänellä varaa ostaa nimeämänsä omistus
-        Omistus o = omistuspakka.getOmistus(ostonNumero);
+        Omistus o = omistuspakka.getNakyvaOmistus(ostonNumero);
         if (pelaaja.onkoVaraa(o)) {
             pelaaja.osta(omistuspakka, o, karkkimarkkinat);
             return true;

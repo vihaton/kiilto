@@ -113,7 +113,7 @@ public class Omaisuus {
         return paallimmaiset;
     }
     
-    public Omistus getOmistus(int numero) {
+    public Omistus getNakyvaOmistus(int numero) {
         ArrayList<Omistus> nakyvat = this.getPaallimmaiset();
         for (Omistus o : nakyvat) {
             if (numero == Integer.parseInt(o.getNimi())) return o;

@@ -5,6 +5,7 @@
  */
 package logiikka.omaisuusluokat;
 
+import java.util.ArrayList;
 import java.util.Random;
 import logiikka.valineluokat.Kasakokoelma;
 import org.junit.After;
@@ -132,5 +133,70 @@ public class OmaisuusTest {
         
         //koko omaisuus käyty läpi, eikä tarpeeksi pitkää ehjää sarjaa löytynyt
         return false;
+    }
+    
+    private void generoiOmaisuuteenOmistukset(int montako) {
+        for (int i = 0; i < montako; i++) {
+            o.lisaaOmistus(new Omistus(""+i, i, i, null));
+        }
+    }
+    
+    @Test
+    public void getPaallimmaistenNimetToimii() {
+        generoiOmaisuuteenOmistukset(5);
+        ArrayList<String> nimet = o.getPaallimmaistenNimet();
+        
+        assertTrue(nimet.size()==4);
+        for (int i = 0; i < nimet.size(); i++) {
+           int nimi = Integer.parseInt(nimet.get(i));
+            assertTrue(i == nimi);
+        }
+        
+        o = new Omaisuus();
+        generoiOmaisuuteenOmistukset(2);
+        
+        for (int i = 0; i < nimet.size(); i++) {
+           int nimi = Integer.parseInt(nimet.get(i));
+            assertTrue(i == nimi);
+        }
+    }
+    
+    @Test
+    public void getPaallimmaisetToimii() {
+        generoiOmaisuuteenOmistukset(5);
+        ArrayList<Omistus> paallimmaiset = o.getPaallimmaiset();
+        
+        assertTrue(paallimmaiset.size() == 4);
+        
+        for (int i = 0; i < 4; i++) {
+            int nimi = Integer.parseInt(paallimmaiset.get(i).getNimi());
+            assertTrue(nimi == i);
+        }
+        o = new Omaisuus();
+        generoiOmaisuuteenOmistukset(2);
+        paallimmaiset = o.getPaallimmaiset();
+        
+        assertTrue(paallimmaiset.size() == 2);
+        
+        for (int i = 0; i < 2; i++) {
+            int nimi = Integer.parseInt(paallimmaiset.get(i).getNimi());
+            assertTrue(nimi == i);
+        }
+    }
+    
+    @Test
+    public void getNakyvaOmistusToimii() {
+        generoiOmaisuuteenOmistukset(5);
+        assertTrue(o.getNakyvaOmistus(4) == null);
+        assertTrue(o.getNakyvaOmistus(2) != null);
+    }
+
+    @Test
+    public void omaisuudenSiirtoToimii() {
+        Omistus omi = new Omistus(""+1,1,1,null);
+        Omaisuus o2 = new Omaisuus();
+        o.siirraOmistus(o2, omi);
+        assertTrue(o.onkoPA());
+        assertTrue(o2.getEkaOmistus()==omi);
     }
 }
