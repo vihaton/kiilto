@@ -48,12 +48,12 @@ public class Pelaaja {
     
     public int[] getHintaOmaisuustulotHuomioituna(Omistus omistus) {
         int[] bonukset = omaisuus.getOmaisuudestaTulevatBonusKarkit();
-        int[] hintaOmaisuustulotHuomioituna = new int[5];
+        int[] hintaOmaisuustulotHuomioituna = new int[6];
         
         Kasakokoelma hinta = omistus.getHintaKasat();
-        for (int i = 1; i < 6; i++) {
+        for (int i = 0; i < 6; i++) {
             int kasanKoko = hinta.getKasanKoko(i);
-            hintaOmaisuustulotHuomioituna[i-1] = kasanKoko-bonukset[i-1];
+            hintaOmaisuustulotHuomioituna[i] = kasanKoko-bonukset[i];
         }
         return hintaOmaisuustulotHuomioituna;
     }
@@ -68,7 +68,7 @@ public class Pelaaja {
         //käydään läpi pelaajan karkkikasat, ja vertaillaan niitä oston hintaan pelaajan omaisuus huomioituna
         for (int i = 1; i < 6; i++) {
             int kki = karkit.getKasanKoko(i); //kasan koko i
-            int hohi = hintaOmaisuustulotHuomioituna[i-1];
+            int hohi = hintaOmaisuustulotHuomioituna[i];
             
             //jos pelaajalla ei ole varaa, tarkistetaan kultavarannot
             if (kki < hohi) {
@@ -106,6 +106,10 @@ public class Pelaaja {
         }
         
         lahtoOmaisuus.siirraOmistus(omaisuus, o);
+    }
+    
+    void lisaaOmistus(Omistus omistus) {
+        omaisuus.lisaaOmistus(omistus);
     }
 
 }

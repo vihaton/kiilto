@@ -27,6 +27,14 @@ public class Kasakokoelma {
             kasat[j] = new Nallekarkkikasa(j, karkkeja);
         }
     }
+    
+    public Kasakokoelma(int[] karkkeja) {
+        if (karkkeja.length != 6) return;
+        
+        for (int i = 0; i < kasat.length; i++) {
+            kasat[i] = new Nallekarkkikasa(i, karkkeja[i]);
+        }
+    }
 
     //konstruktori omistusten hintoja kuvaaville kasoille
     public Kasakokoelma(String[] palat) {

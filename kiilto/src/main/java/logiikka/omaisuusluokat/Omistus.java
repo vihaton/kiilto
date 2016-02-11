@@ -28,6 +28,10 @@ public class Omistus {
         this(n, arvo, Vari.values()[vari], h);
     }
     
+    public Omistus(String n, int arvo, int vari, int[] karkkeja) {
+        this(n, arvo, vari, new Kasakokoelma(karkkeja));
+    }
+    
     public Kasakokoelma getHintaKasat() {
         return hinta;
     }

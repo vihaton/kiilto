@@ -50,7 +50,7 @@ public class OmaisuusTest {
         Omistus omistus = new Omistus("testi", 1, 0, new Kasakokoelma(0));
         o.lisaaOmistus(omistus);
         assertTrue(o.getArvovalta()==1);
-        o.lisaaOmistus(new Omistus(null, 0, 0, null));
+        o.lisaaOmistus(new Omistus("", 0, 0, new Kasakokoelma(0)));
         assertTrue(omistus.getArvovalta() == 1); //lisättiin 0 arvovallan omistus
         
         for (int i = 0; i < 10; i++) {
@@ -62,7 +62,7 @@ public class OmaisuusTest {
     @Test
     public void getOmaisuudenBonuskarkitToimii() {
         for (int i = 1; i < 4; i++) {
-            o.lisaaOmistus(new Omistus("testi"+i, i, i, null));
+            o.lisaaOmistus(new Omistus("testi"+i, i, i, new Kasakokoelma(0)));
         }
         int[] bonukset = o.getOmaisuudestaTulevatBonusKarkit();
         
@@ -76,7 +76,7 @@ public class OmaisuusTest {
         assertTrue(bonukset[3] == 1);
         assertTrue(bonukset[4] == 0);
         
-        o.lisaaOmistus(new Omistus("testi"+5, 1, 1, null));
+        o.lisaaOmistus(new Omistus("testi"+5, 1, 1, new Kasakokoelma(0)));
         bonukset = o.getOmaisuudestaTulevatBonusKarkit();
         assertTrue(bonukset[1] == 2);
     }
@@ -138,7 +138,7 @@ public class OmaisuusTest {
     
     private void generoiOmaisuuteenOmistukset(int montako) {
         for (int i = 0; i < montako; i++) {
-            o.lisaaOmistus(new Omistus(""+i, i, i, null));
+            o.lisaaOmistus(new Omistus(""+i, i, i, new Kasakokoelma(0)));
         }
     }
     
@@ -194,7 +194,7 @@ public class OmaisuusTest {
 
     @Test
     public void omaisuudenSiirtoToimii() {
-        Omistus omi = new Omistus(""+1,1,1,null);
+        Omistus omi = new Omistus(""+1,1,1,new Kasakokoelma(0));
         Omaisuus o2 = new Omaisuus();
         o.siirraOmistus(o2, omi);
         assertTrue(o.onkoPA());
