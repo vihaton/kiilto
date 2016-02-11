@@ -108,15 +108,15 @@ public class PoytaTest {
         while (p.getNakyvienNimet().contains(""+ostonNro)) {
             ostonNro++;
         }
-        String s = p.getNakyvienNimet().toString();
+        String nakyvilla = p.getNakyvienNimet().toString();
         
         //omistus ei ole näkyvillä
-        assertFalse("pelaaja "+pelaaja.toString() + "osti pöydästä omistuksen nro " + ostonNro + " " + s,
+        assertFalse("pelaaja "+pelaaja.toString() + "osti pöydästä omistuksen nro " + ostonNro + " " + nakyvilla,
                 p.suoritaOsto(pelaaja, ostonNro));
         
         pelaaja.setKarkit(new int[] {5,5,5,5,5,5});
         //omistus ei ole näkyvilla mutta pelaajalla on varaa
-        assertFalse("pelaaja "+pelaaja.toString() + "osti pöydästä omistuksen nro " + ostonNro + " " + s,
+        assertFalse("pelaaja "+pelaaja.toString() + "osti pöydästä omistuksen nro " + ostonNro + " " + nakyvilla,
                 p.suoritaOsto(pelaaja, ostonNro));
     }
 }

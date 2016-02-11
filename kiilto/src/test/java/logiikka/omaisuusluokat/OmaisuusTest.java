@@ -65,19 +65,20 @@ public class OmaisuusTest {
             o.lisaaOmistus(new Omistus("testi"+i, i, i, null));
         }
         int[] bonukset = o.getOmaisuudestaTulevatBonusKarkit();
+        
         int bonuksiaYhteensa = 0;
         for (int i = 0; i < bonukset.length; i++) {
             bonuksiaYhteensa += bonukset[i];
         }
         assertTrue(bonuksiaYhteensa == 3);
-        assertTrue(bonukset[0] == 1);
         assertTrue(bonukset[1] == 1);
         assertTrue(bonukset[2] == 1);
-        assertTrue(bonukset[3] == 0);
+        assertTrue(bonukset[3] == 1);
+        assertTrue(bonukset[4] == 0);
         
         o.lisaaOmistus(new Omistus("testi"+5, 1, 1, null));
         bonukset = o.getOmaisuudestaTulevatBonusKarkit();
-        assertTrue(bonukset[0] == 2);
+        assertTrue(bonukset[1] == 2);
     }
     
     @Test

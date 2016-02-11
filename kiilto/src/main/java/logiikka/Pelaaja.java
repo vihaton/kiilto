@@ -46,7 +46,7 @@ public class Pelaaja {
         return false;
     }
     
-    private int[] getHintaOmaisuustulotHuomioituna(Omistus omistus) {
+    public int[] getHintaOmaisuustulotHuomioituna(Omistus omistus) {
         int[] bonukset = omaisuus.getOmaisuudestaTulevatBonusKarkit();
         int[] hintaOmaisuustulotHuomioituna = new int[5];
         
@@ -93,6 +93,7 @@ public class Pelaaja {
             int karkkia = todellinenHinta[i];
             if (karkkia > 0) {
                 int pelaajanKarkkikasanKoko = karkit.getKasanKoko(i+1);
+                //onko pelaajalla tarpeeksi samaa väriä?
                 if (karkkia > pelaajanKarkkikasanKoko) {
                     //korvataan puuttuvat karkit kultaisilla
                     karkit.siirraToiseenKasaan(markkinat, 0, karkkia-pelaajanKarkkikasanKoko);

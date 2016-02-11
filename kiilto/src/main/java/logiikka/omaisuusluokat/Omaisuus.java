@@ -26,10 +26,9 @@ public class Omaisuus {
     }
     
     public int[] getOmaisuudestaTulevatBonusKarkit() {
-        int[] bonukset = new int[5];
+        int[] bonukset = new int[6];
         for (Omistus o : omistukset) {
-            int lisakarkinVari = o.getLisaKarkinVariNumerona();
-            bonukset[lisakarkinVari-1]++;
+            bonukset[o.getLisaKarkinVariNumerona()]++;
         }
         return bonukset;
     }
