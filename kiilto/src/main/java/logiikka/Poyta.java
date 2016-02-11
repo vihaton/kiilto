@@ -90,7 +90,7 @@ public class Poyta {
         }
         s = s.concat("***\n");
         s = s.concat("karkkimarkkinat:\n" +karkkimarkkinat.toString() + "\n");
-        s = s.concat("***\n\n");
+        s = s.concat("***\n");
         return s;
     }
 

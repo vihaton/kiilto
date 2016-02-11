@@ -26,10 +26,8 @@ public class Pelivelho {
     }
 
     public void pelaa() {
-        alustaPeli();
-        
-//        alustaTestiPeli();
-//        tulostaKaikki();
+//        alustaPeli();
+        alustaTestiPeli();
         
         while(eiVoittajaa()) {
             pelaaKierros();
@@ -39,8 +37,8 @@ public class Pelivelho {
     private void alustaTestiPeli() {
         ArrayList<String> p = new ArrayList<>();
         p.add("homo1"); p.add("homo2");
-        p.add("homo3");
-        p.add("mr Gandalf");
+//        p.add("homo3");
+//        p.add("mr Gandalf");
         luoPelaajat(p);
         voittoValta = 10;
         poyta = new Poyta(pelaajat);
@@ -61,10 +59,6 @@ public class Pelivelho {
         for (int i = 0; i < nimet.size(); i++) {
             this.pelaajat.add(new Pelaaja(nimet.get(i)));
         }
-    }
-    
-    public ArrayList<Pelaaja> getPelaajat() {
-        return pelaajat;
     }
 
     private boolean eiVoittajaa() {
@@ -87,6 +81,7 @@ public class Pelivelho {
     private void pelaaVuoro(Pelaaja pelaaja) {
         System.out.println("Pelaajan " + pelaaja.getNimi() + " vuoro.\n");
         System.out.println(poyta);
+        System.out.println(pelaaja);
         int valinta = tui.pelaajanToimi(pelaaja.getNimi());
         if (valinta == 1) { // nostetaan nallekarkkeja
             nostaNallekarkkeja(pelaaja);
@@ -129,6 +124,10 @@ public class Pelivelho {
     
     private boolean ostaVaraus(Pelaaja pelaaja) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public ArrayList<Pelaaja> getPelaajat() {
+        return pelaajat;
     }
 
 }
