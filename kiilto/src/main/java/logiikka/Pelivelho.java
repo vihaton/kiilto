@@ -8,6 +8,10 @@ import logiikka.valineluokat.*;
 /**
  *
  * @author xvixvi
+ * 
+ * Luokka vastaa pelin pyörittämisestä. Esimerkiksi pelin alustaminen, vuorojen organisoiminen
+ * sekä UI.n ja logiikan rajapintana toimiminen ovat sen tehtäviä.
+ * 
  */
 public class Pelivelho {
 
