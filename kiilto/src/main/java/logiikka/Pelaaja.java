@@ -1,6 +1,7 @@
 
 package logiikka;
 
+import java.util.*;
 import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
 
@@ -12,9 +13,22 @@ public class Pelaaja {
     private final Kasakokoelma karkit = new Kasakokoelma(0);
     private final Omaisuus omaisuus = new Omaisuus();
     private final String nimi;
+    private ArrayList<Varaus> varaukset;
+    private ArrayList<Merkkihenkilo> merkkihenkilot;
 
     Pelaaja(String nimi) {
         this.nimi = nimi;
+        varaukset = new ArrayList<>();
+        merkkihenkilot = new ArrayList<>();
+    }
+    
+    public void lisaaOmistus(Omistus omistus) {
+        omaisuus.lisaaOmistus(omistus);
+    }
+
+    public boolean liikaaKarkkeja() {
+        if (karkit.getKarkkienMaara() > 10) return true;
+        return false;
     }
     
     public Kasakokoelma getKarkit() {
@@ -40,7 +54,7 @@ public class Pelaaja {
     }
 
     public boolean voittaja(int voittoraja) {
-        if (omaisuus.getArvovalta() >= voittoraja) {
+        if (omaisuus.getArvovalta() + getMerkkihenkiloidenArvo() >= voittoraja) {
             return true;
         }
         return false;
@@ -107,9 +121,23 @@ public class Pelaaja {
         
         lahtoOmaisuus.siirraOmistus(omaisuus, o);
     }
-    
-    void lisaaOmistus(Omistus omistus) {
-        omaisuus.lisaaOmistus(omistus);
-    }
 
+    public void merkkihenkiloVierailee(Merkkihenkilo mh) {
+        merkkihenkilot.add(mh);
+    }
+    
+    public int getMerkkihenkiloidenArvo() {
+        int summa = 0;
+        for (Merkkihenkilo mh : merkkihenkilot) {
+            summa += mh.getArvo();
+        }
+        return summa;
+    }
+    
+    public boolean teeVaraus(Omistus o) {
+        if (varaukset.size() >= 3 || o==null) return false;
+        
+        varaukset.add(new Varaus(o));
+        return true;
+    }
 }

@@ -90,6 +90,10 @@ public class Pelivelho {
         } else if (valinta == 3) { // tehdään varaus pöydästä
             teeVaraus(pelaaja);
         }
+        
+        if (pelaaja.liikaaKarkkeja()) {
+            //wip
+        }
         System.out.println("");
     }
 

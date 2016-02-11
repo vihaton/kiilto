@@ -7,7 +7,7 @@ import logiikka.valineluokat.Kasakokoelma;
  *
  * @author xvixvi
  * 
- * Luokka kuvaa omistuksia, jotka pelaaja on varannut
+ * Luokka kuvaa omistusta, jonka pelaaja on varannut ostamista varten
  */
 public class Varaus {
     private Omistus omistus;
@@ -23,6 +23,4 @@ public class Varaus {
     public Omistus getOmistus() {
         return omistus;
     }
-    
-    
 }

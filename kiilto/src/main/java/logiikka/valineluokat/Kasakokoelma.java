@@ -80,4 +80,12 @@ public class Kasakokoelma {
         this.kasvataKasaa(i, -m);
         karkit.kasvataKasaa(i, m);
     }
+
+    public int getKarkkienMaara() {
+        int summa = 0;
+        for (Nallekarkkikasa kasa : kasat) {
+            summa += kasa.getKoko();
+        }
+        return summa;
+    }
 }
