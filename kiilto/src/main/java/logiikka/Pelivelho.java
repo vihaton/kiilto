@@ -63,17 +63,6 @@ public class Pelivelho {
         return pelaajat;
     }
 
-    private void tulostaKaikki() {
-        System.out.println("");
-        System.out.println("Peli on nyt alustettu.");
-        System.out.println("Tässä on pelipöydän ääreen ja päälle päätyneet asiat ja olennot:");
-        System.out.println("");
-        System.out.println(poyta);
-        System.out.println("**********'");
-        System.out.println("wip");
-        //wip
-    }
-
     private boolean eiVoittajaa() {
         for (Pelaaja p : pelaajat) {
             if (p.voittaja(voittoValta)) return false;
