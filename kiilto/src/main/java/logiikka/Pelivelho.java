@@ -25,6 +25,9 @@ public class Pelivelho {
         tui = new TUI(new Scanner(System.in));
     }
 
+    /**
+     * Alustaa ja pelaa kiilto-pelin.
+     */
     public void pelaa() {
 //        alustaPeli();
         alustaTestiPeli();
@@ -67,7 +70,10 @@ public class Pelivelho {
         }
         return true;
     }
-
+    
+    /**
+     * Pelataan kaikkien pelaajien vuorot.
+     */
     private void pelaaKierros() {
         kierros++;
         System.out.println("*******************");
@@ -78,6 +84,11 @@ public class Pelivelho {
         }
     }
 
+    /**
+     * Pelataan yhden pelaajan vuoro alusta loppuun.
+     * 
+     * @param pelaaja pelaaja kenen vuoro pelataan.
+     */
     private void pelaaVuoro(Pelaaja pelaaja) {
         System.out.println("Pelaajan " + pelaaja.getNimi() + " vuoro.\n");
         System.out.println(poyta);

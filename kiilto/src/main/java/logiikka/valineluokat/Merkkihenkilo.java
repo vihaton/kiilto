@@ -17,6 +17,7 @@ public class Merkkihenkilo {
     private int arvovaltalisa;
     
     public Merkkihenkilo(int[] ov, int arvo) {
+        if (ov.length != 6) throw new IllegalArgumentException("taulukko ei ole koko != 6.");
         this.omaisuusvaatimus = ov;
         arvovaltalisa = arvo;
     }
@@ -35,6 +36,12 @@ public class Merkkihenkilo {
         return arvovaltalisa;
     }
     
+    /**
+     * Metodi merkkihenkilön mielenliikkeiden selvittämiseksi.
+     * 
+     * @param omaisuus omaisuus jolla yritetään houkutella merkkihenkilö kylään.
+     * @return vaikuttuuko merkkihenkilö.
+     */
     public boolean vaikuttuukoOmaisuudesta(Omaisuus o) {
         int[] omaisuusBonukset = o.getOmaisuudestaTulevatBonusKarkit();
         

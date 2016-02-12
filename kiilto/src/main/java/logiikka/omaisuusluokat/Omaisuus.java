@@ -25,6 +25,11 @@ public class Omaisuus {
         return arvovalta;
     }
     
+    /**
+     * Palauttaa omaisuudesta tulevat bonukset kuuden kokoisessa taulukossa (kul,val,sin,vih,pun,mus).
+     * 
+     * @return int[] bonukset, koko = 6
+     */
     public int[] getOmaisuudestaTulevatBonusKarkit() {
         int[] bonukset = new int[6];
         for (Omistus o : omistukset) {
