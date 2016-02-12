@@ -16,6 +16,11 @@ public class Merkkihenkilo {
     private int[] omaisuusvaatimus;
     private int arvovaltalisa;
     
+    /**
+     * 
+     * @param ov int[] jossa omaisuusvaatimus (kul,val,sin,vih,pun,mus).
+     * @param arvo Merkkihenkilön vierailun pelaajalle antama lisäarvovalta.
+     */
     public Merkkihenkilo(int[] ov, int arvo) {
         if (ov.length != 6) throw new IllegalArgumentException("taulukko ei ole koko != 6.");
         this.omaisuusvaatimus = ov;
