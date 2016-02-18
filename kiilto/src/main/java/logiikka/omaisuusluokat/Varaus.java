@@ -26,6 +26,6 @@ public class Varaus {
     
     @Override
     public String toString() {
-        return "**varaus**\n" + omistus.toString() + "\n********";
+        return "**varaus**\n" + omistus.toString() + "\n**********";
     }
 }

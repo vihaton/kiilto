@@ -156,4 +156,16 @@ public class Pelaaja {
         }
         return s;
     }
+
+    int getVarauksienMaara() {
+        return varaukset.size();
+    }
+
+    void ostaVaraus(Omistus o, Kasakokoelma karkkimarkkinat) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    Omistus getVaraus(int varauksenNumero) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

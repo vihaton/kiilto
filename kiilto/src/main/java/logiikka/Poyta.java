@@ -150,6 +150,12 @@ public class Poyta {
         return nimet;
     }
 
+    /**
+     * 
+     * @param pelaaja Joka ostaa omaisuutta pöydältä.
+     * @param ostonNumero Joka ostetaan.
+     * @return boolean Onnistuiko osto.
+     */
     boolean suoritaOsto(Pelaaja pelaaja, int ostonNumero) {
         Omaisuus omistuspakka;
         if (!this.getNakyvienNimet().contains(""+ostonNumero)) return false;
@@ -166,6 +172,23 @@ public class Poyta {
         }
         return false;
     }
+    
+    /**
+     * 
+     * @param pelaaja joka yrittää lunastaa varauksensa.
+     * @param varauksenNumero varaus, jota lunastetaan.
+     * @return Boolean onnistuiko yritys.
+     */
+    public boolean suoritaOstoVarauksista(Pelaaja pelaaja, int varauksenNumero) {
+        if (!pelaaja.getVaraustenNumerot().contains(""+varauksenNumero)) return false;
+        
+        Omistus o = pelaaja.getVaraus(varauksenNumero);
+        if (pelaaja.onkoVaraa(o)) {
+            pelaaja.ostaVaraus(o, karkkimarkkinat);
+            return true;
+        }
+        return false;
+    }
 
     /**
      * 
@@ -174,6 +197,7 @@ public class Poyta {
      * @return boolean, onnistuiko varaaminen.
      */
     boolean teeVaraus(Pelaaja pelaaja, int varauksenNro) {
+        if (pelaaja.getVarauksienMaara()>=3) return false;
         int pakka = 0;
         if (varauksenNro>40) pakka = 1;
         if (varauksenNro>70) pakka = 2;

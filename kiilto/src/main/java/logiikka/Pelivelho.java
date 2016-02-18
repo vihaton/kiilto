@@ -171,7 +171,7 @@ public class Pelivelho {
             
             if (poyta.teeVaraus(pelaaja, varauksenNro)) break;
             
-            System.out.println("Ei onnistunut, uudestaan!");
+            System.out.println("Ei onnistunut, uusi yritys?");
         }
     }
     
