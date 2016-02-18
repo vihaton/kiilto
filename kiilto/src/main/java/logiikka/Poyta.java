@@ -20,6 +20,7 @@ public class Poyta {
     Poyta(ArrayList<Pelaaja> pelaajat) {
         this.pelaajat = pelaajat;
         karkkimarkkinat = new Kasakokoelma(pelaajat.size());
+        merkkihenkilot = new ArrayList<>();
         alustaOmistuspakat();
         luoOmistukset(luoLukija("/home/xvixvi/kiilto/kiilto/src/main/java/aputiedostoja/omistustentiedot.csv"));
         sekoitaOmistuspakat();
@@ -88,7 +89,8 @@ public class Poyta {
     
     private void luoMerkkihenkilot(Scanner lukija) {
         for (int i = 0; i < 10; i++) {
-            merkkihenkilot.add(luoMerkkihenkilo(lukija.nextLine()));
+            Merkkihenkilo m = luoMerkkihenkilo(lukija.nextLine());
+            merkkihenkilot.add(m);
         }
     }
     
@@ -98,7 +100,7 @@ public class Poyta {
         for (int i = 2; i < 7; i++) {
             vaatimus[i-2] = Integer.parseInt(palat[i]);
         }
-        return new Merkkihenkilo(palat[0], vaatimus, Integer.parseInt(palat[8]));
+        return new Merkkihenkilo(palat[0], vaatimus, Integer.parseInt(palat[1]));
     }
         
     private void valitsePelinMerkkihenkilot() {
