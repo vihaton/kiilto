@@ -13,6 +13,7 @@ import logiikka.omaisuusluokat.*;
  */
 public class Merkkihenkilo {
     
+    private String nimi;
     private int[] omaisuusvaatimus;
     private int arvovaltalisa;
     
@@ -21,10 +22,11 @@ public class Merkkihenkilo {
      * @param ov int[] jossa omaisuusvaatimus (kul,val,sin,vih,pun,mus).
      * @param arvo Merkkihenkilön vierailun pelaajalle antama lisäarvovalta.
      */
-    public Merkkihenkilo(int[] ov, int arvo) {
+    public Merkkihenkilo(String nimi, int[] ov, int arvo) {
         if (ov.length != 6) throw new IllegalArgumentException("taulukko ei ole koko != 6.");
         this.omaisuusvaatimus = ov;
         arvovaltalisa = arvo;
+        this.nimi = nimi;
     }
     
     /**
@@ -33,12 +35,20 @@ public class Merkkihenkilo {
      * 
      * @param omaisuusvaatimus kuuden kokoisessa taulukossa. 
      */
+    public Merkkihenkilo(String nimi, int[] ov) {
+        this(nimi, ov, 3);
+    }
+    
     public Merkkihenkilo(int[] ov) {
-        this(ov, 3);
+        this("homo", ov, 3);
     }
     
     public int getArvo() {
         return arvovaltalisa;
+    }
+    
+    public String getNimi() {
+        return nimi;
     }
     
     /**
@@ -56,4 +66,10 @@ public class Merkkihenkilo {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "olen " + nimi + ", arvovallaltani " + arvovaltalisa + "ja vaadin kauppiaalta\n"
+                + omaisuusvaatimus;
+        
+    }
 }

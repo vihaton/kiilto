@@ -15,13 +15,16 @@ public class Poyta {
     private Kasakokoelma karkkimarkkinat;
     private ArrayList<Omaisuus> omistuspakat;
     private Random arpoja = new Random();
+    private ArrayList<Merkkihenkilo> merkkihenkilot;
 
     Poyta(ArrayList<Pelaaja> pelaajat) {
         this.pelaajat = pelaajat;
         karkkimarkkinat = new Kasakokoelma(pelaajat.size());
         alustaOmistuspakat();
-        luoOmistukset(luoLukija());
+        luoOmistukset(luoLukija("/home/xvixvi/kiilto/kiilto/src/main/java/aputiedostoja/omistustentiedot.csv"));
         sekoitaOmistuspakat();
+        luoMerkkihenkilot(luoLukija("/home/xvixvi/kiilto/kiilto/src/main/java/aputiedostoja/merkkihenkilot.csv"));
+        valitsePelinMerkkihenkilot();
     }
 
     private void alustaOmistuspakat() {
@@ -31,10 +34,16 @@ public class Poyta {
         }
     }
 
-    public Scanner luoLukija() {
+    /**
+     * Yrittää luoda lukijan annetusta tiedostopolusta.
+     * 
+     * @param String filePath.
+     * @return Scanner lukija, joka lukee parametrina annetusta tiedostosta.
+     */
+    public Scanner luoLukija(String filePath) {
         Scanner lukija = null;
         try {
-            File f = new File("/home/xvixvi/kiilto/kiilto/src/main/java/aputiedostoja/omistustentiedot.csv");
+            File f = new File(filePath);
             lukija = new Scanner(f);
         } catch (Exception e) {
             System.out.println("lukuongelmia @ Poyta:luoLukija" + e);
@@ -77,12 +86,45 @@ public class Poyta {
         op.sekoita(arpoja);
     }
     
+    private void luoMerkkihenkilot(Scanner lukija) {
+        for (int i = 0; i < 10; i++) {
+            merkkihenkilot.add(luoMerkkihenkilo(lukija.nextLine()));
+        }
+    }
+    
+    private Merkkihenkilo luoMerkkihenkilo(String rivi) {
+        String[] palat = rivi.split(",",9);
+        int[] vaatimus = new int[6];
+        for (int i = 2; i < 7; i++) {
+            vaatimus[i-2] = Integer.parseInt(palat[i]);
+        }
+        return new Merkkihenkilo(palat[0], vaatimus, Integer.parseInt(palat[8]));
+    }
+        
+    private void valitsePelinMerkkihenkilot() {
+        int henkiloita = 5;
+        if (pelaajat.size() == 3) henkiloita = 4;
+        if (pelaajat.size() == 2) henkiloita = 2;
+        
+        while (merkkihenkilot.size() > henkiloita) {
+            int poistettava = arpoja.nextInt(merkkihenkilot.size());
+            merkkihenkilot.remove(poistettava);
+        }
+    }
+
+    
     @Override
     public String toString() {
         String s = "Pöydässä pelaajat:\n";
         for (Pelaaja p : pelaajat) {
             s = s.concat(p+"\n");
         }
+        
+        s = s.concat("Merkkihenkilöt:\n");
+        for (int i = 0; i < merkkihenkilot.size(); i++) {
+            s = s.concat(merkkihenkilot.get(i).toString() + "\n");
+        }
+        
         for (int i = omistuspakat.size()-1; i > -1; i--) {
             s = s.concat("Omistuspakasta " + (i+1) +":\n\n");
             Omaisuus oma = omistuspakat.get(i);
@@ -122,4 +164,6 @@ public class Poyta {
         }
         return false;
     }
+
+
 }

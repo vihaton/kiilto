@@ -47,7 +47,7 @@ public class PoytaTest {
 
     @Test
     public void poytaLuoLukijan() {
-        assertTrue(!p.luoLukija().equals(null));
+        assertTrue(!p.luoLukija("").equals(null));
     }
     
     @Test
