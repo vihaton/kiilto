@@ -177,7 +177,7 @@ public class TUI {
         
         while (nro == 0) {
             System.out.println("Minkä nimisen (numeroisen) varauksesi haluasit ostaa? 'e' vie takaisin\n"
-                    + "Varauksesi:\n");
+                    + "Varauksesi:");
             System.out.println(pelaaja.varauksetToString());
             String syote = lukija.nextLine();
             

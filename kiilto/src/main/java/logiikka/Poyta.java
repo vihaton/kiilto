@@ -184,8 +184,7 @@ public class Poyta {
         
         Omistus o = pelaaja.getVaraus(varauksenNumero);
         if (pelaaja.onkoVaraa(o)) {
-            pelaaja.ostaVaraus(o, karkkimarkkinat);
-            return true;
+            return pelaaja.ostaVaraus(o, karkkimarkkinat);
         }
         return false;
     }

@@ -109,23 +109,7 @@ public class Pelaaja {
 
     //luotetaan, että pelaajalla on varaa suorittaa ostos
     void osta(Omaisuus lahtoOmaisuus, Omistus o, Kasakokoelma markkinat) {
-        int[] todellinenHinta = getHintaOmaisuustulotHuomioituna(o);
-        
-        for (int i = 0; i < todellinenHinta.length; i++) {
-            int karkkia = todellinenHinta[i];
-            if (karkkia > 0) {
-                int pelaajanKarkkikasanKoko = karkit.getKasanKoko(i+1);
-                //onko pelaajalla tarpeeksi samaa väriä?
-                if (karkkia > pelaajanKarkkikasanKoko) {
-                    //korvataan puuttuvat karkit kultaisilla
-                    karkit.siirraToiseenKasaan(markkinat, 0, karkkia-pelaajanKarkkikasanKoko);
-                    karkit.siirraToiseenKasaan(markkinat, i, pelaajanKarkkikasanKoko);
-                } else {
-                    //pelaajalla on vaara maksaa karkit samanvärisinä
-                    karkit.siirraToiseenKasaan(markkinat, i, karkkia);
-                }
-            }
-        }
+        siirraKarkit(o, markkinat);
         
         lahtoOmaisuus.siirraOmistus(omaisuus, o);
     }
@@ -161,11 +145,61 @@ public class Pelaaja {
         return varaukset.size();
     }
 
-    void ostaVaraus(Omistus o, Kasakokoelma karkkimarkkinat) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Omistus getVaraus(int varauksenNumero) {
+        for (int i = 0; i < varaukset.size(); i++) {
+            Omistus o = varaukset.get(i).getOmistus();
+            if (o.getNimi().equalsIgnoreCase(""+varauksenNumero)) {
+                return o;
+            }
+        }
+        return null;
     }
 
-    Omistus getVaraus(int varauksenNumero) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean ostaVaraus(Omistus omistus, Kasakokoelma karkkimarkkinat) {
+        if (varaukset.isEmpty()) return false;
+        
+        int i = 0;
+        while (i<varaukset.size()) {
+            if (varaukset.get(i).getOmistus() == omistus) {
+                break;
+            }
+            i++;
+        }
+        
+        //jos i on mennyt indekseistä yli, ei varauksissa ole kysyttyä omistusta!
+        if (i==varaukset.size()) return false;
+        
+        siirraKarkit(omistus, karkkimarkkinat);
+        varaukset.remove(i);
+        omaisuus.lisaaOmistus(omistus);
+        
+        return true;
+    }
+    
+    /**
+     * Siirtää ostettavan omaisuuden hinnan (korjattuna ostavan pelaajan omaisuuden
+     * vaikutuksella) mukaisen määrän karkkeja takaisin markkinoille.
+     * 
+     * @param omaisuus jonka (omaisuuskorjatun)hinnan mukaan karkit siirretään.
+     * @param markkinat karkkikasat, joihin omistuksen hinnan mukainen määrä karkkeja siirretään.
+     */
+    private void siirraKarkit(Omistus o, Kasakokoelma markkinat) {
+        int[] todellinenHinta = getHintaOmaisuustulotHuomioituna(o);
+        
+        for (int i = 0; i < todellinenHinta.length; i++) {
+            int karkkia = todellinenHinta[i];
+            if (karkkia > 0) {
+                int pelaajanKarkkikasanKoko = karkit.getKasanKoko(i+1);
+                //onko pelaajalla tarpeeksi samaa väriä?
+                if (karkkia > pelaajanKarkkikasanKoko) {
+                    //korvataan puuttuvat karkit kultaisilla
+                    karkit.siirraToiseenKasaan(markkinat, 0, karkkia-pelaajanKarkkikasanKoko);
+                    karkit.siirraToiseenKasaan(markkinat, i, pelaajanKarkkikasanKoko);
+                } else {
+                    //pelaajalla on vaara maksaa karkit samanvärisinä
+                    karkit.siirraToiseenKasaan(markkinat, i, karkkia);
+                }
+            }
+        }
     }
 }

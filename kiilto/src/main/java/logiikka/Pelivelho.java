@@ -39,11 +39,12 @@ public class Pelivelho {
 
     private void alustaTestiPeli() {
         ArrayList<String> p = new ArrayList<>();
-        p.add("homo1"); p.add("homo2");
+        p.add("varakas"); p.add("v2");
 //        p.add("homo3");
 //        p.add("mr Gandalf");
         luoPelaajat(p);
-        voittoValta = 10;
+        pelaajat.get(0).setKarkit(new int[]{3,5,5,5,5,5});
+        voittoValta = 5;
         poyta = new Poyta(pelaajat);
     }
     
@@ -154,7 +155,7 @@ public class Pelivelho {
                 return;
             }
 
-            if (poyta.suoritaOsto(pelaaja, ostettava)) break;
+            if (poyta.suoritaOstoVarauksista(pelaaja, ostettava)) break;
             
             System.out.println("Serkkusi jääkaappi on likainen, koitappa uudestaan poronkorvainen söpöliini!\n");
         }
