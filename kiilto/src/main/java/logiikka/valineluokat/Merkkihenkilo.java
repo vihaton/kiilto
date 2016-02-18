@@ -52,6 +52,17 @@ public class Merkkihenkilo {
     }
     
     /**
+     * 
+     * 
+     * @param i indeksi, mitä vaatimusta halutaan (kul, val, sin, vih, pun, mus).
+     * @return vaatimus.
+     */
+    public int getVaatimus(int i) {
+        if (i<0 || i>5) return 0;
+        return omaisuusvaatimus[i];
+    }
+    
+    /**
      * Metodi merkkihenkilön mielenliikkeiden selvittämiseksi.
      * 
      * @param omaisuus omaisuus jolla yritetään houkutella merkkihenkilö kylään.
@@ -68,8 +79,12 @@ public class Merkkihenkilo {
 
     @Override
     public String toString() {
-        return "olen " + nimi + ", arvovallaltani " + arvovaltalisa + "ja vaadin kauppiaalta\n"
-                + omaisuusvaatimus;
-        
+        String vaatimus = "";
+        for (int i = 1; i < 5; i++) {
+            vaatimus = vaatimus.concat(""+omaisuusvaatimus[i])+"-";
+        }
+        vaatimus += ""+omaisuusvaatimus[5];
+        return "'olen " + nimi + ", arvovallaltani " + arvovaltalisa + " ja vaadin kauppiaalta omaisuutta mallia\n"
+                + vaatimus + "'\n";
     }
 }
