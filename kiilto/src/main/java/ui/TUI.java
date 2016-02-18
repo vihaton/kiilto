@@ -74,10 +74,12 @@ public class TUI {
         int[] nosto = new int[5];
         
         while (true) {
-            System.out.println("Mitä nallekarkkeja haluaisit? ('o' -ohjeet)");
+            System.out.println("Mitä nallekarkkeja haluaisit? ('o' ohjeet, 'e' takaisin)");
             String syote = lukija.nextLine();
             if (syote.equalsIgnoreCase("o")) {
                 tulostaKarkkienNostamisOhjeet();
+            } else if (syote.equalsIgnoreCase("e")) {
+                return null;
             } else {
                 try {
                     nosto = tarkistaKarrkienNostamisSyote(syote, markkinat);
@@ -132,10 +134,11 @@ public class TUI {
     public int mikaOmistusOstetaan(ArrayList<String> nakyvatOmistukset) {
         int omistuksenNro = 0;
         System.out.println("Haluatko ostaa omistuksen pöydältä vai varauksistasi?\n"
-                + "'v' -> varauksistasi, kaikki muut syötteet -> pöydältä.");
+                + "'v' -> varauksistasi, 'e' -> exit, kaikki muut syötteet -> pöydältä.");
         String syote = lukija.nextLine();
         if (syote.equalsIgnoreCase("v")) return 0;
-    
+        if (syote.equalsIgnoreCase("e")) return -1;
+        
         while (omistuksenNro==0) {
             System.out.println("Anna ostettavan omistuksen numero:");
             try {
@@ -148,6 +151,47 @@ public class TUI {
             }
         }
         return omistuksenNro;
+    }
+
+    public int mikaOmistusVarataan(ArrayList<String> nakyvienNimet) {
+        int varattavanNro = 0;
+
+        while (varattavanNro==0) {
+            System.out.println("Mikä omistus varataan, anna nimi (eli numero). 'e' Vie takaisin");
+            String syote = lukija.nextLine();
+            if (syote.equalsIgnoreCase("e")) return -1;
+            
+            try {
+                if (!nakyvienNimet.contains(syote.trim())) throw new IllegalArgumentException();
+                varattavanNro = Integer.parseInt(syote);
+            } catch (Exception e) {
+                varattavanNro = 0;
+                System.out.println("Huono syöte, yritäppä uudestaan tahmanäppi!");
+            }
+        }
+        return varattavanNro;
+    }
+
+    public int ostettavanVarauksenNro(Pelaaja pelaaja) {
+        int nro = 0;
+        
+        while (nro == 0) {
+            System.out.println("Minkä nimisen (numeroisen) varauksesi haluasit ostaa? 'e' vie takaisin\n"
+                    + "Varauksesi:\n");
+            System.out.println(pelaaja.varauksetToString());
+            String syote = lukija.nextLine();
+            
+            if (syote.equalsIgnoreCase("e")) return -1;
+            
+            try {
+                if (!pelaaja.getVaraustenNumerot().contains(syote.trim())) throw new IllegalArgumentException();
+                nro = Integer.parseInt(syote);
+            } catch (Exception e) {
+                nro = 0;
+                System.out.println("Huono syöte, yritäppä uudestaan tahmanäppi!");
+            }
+        }
+        return nro;
     }
         
 }

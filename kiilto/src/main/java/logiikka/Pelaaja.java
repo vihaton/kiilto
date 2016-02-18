@@ -48,9 +48,17 @@ public class Pelaaja {
         return nimi;
     }
     
+    public ArrayList<String> getVaraustenNumerot() {
+        ArrayList<String> varaustenNrot = new ArrayList<>();
+        for (int i = 0; i < varaukset.size(); i++) {
+            varaustenNrot.add(varaukset.get(i).getOmistus().getNimi());
+        }
+        return varaustenNrot;
+    }
+    
     @Override
-    public String toString() { //ilman omistuksia
-        return nimi + "\n" + karkit +"\n" + omaisuus;
+    public String toString() {
+        return nimi + "\n" + karkit +"\n" + varauksetToString() + omaisuus;
     }
 
     public boolean voittaja(int voittoraja) {
@@ -139,5 +147,13 @@ public class Pelaaja {
         
         varaukset.add(new Varaus(o));
         return true;
+    }
+
+    public String varauksetToString() {
+        String s = "";
+        for (int i = 0; i < varaukset.size(); i++) {
+            s += varaukset.get(i).toString() + "\n";
+        }
+        return s;
     }
 }

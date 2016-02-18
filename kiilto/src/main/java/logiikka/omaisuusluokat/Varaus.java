@@ -23,4 +23,9 @@ public class Varaus {
     public Omistus getOmistus() {
         return omistus;
     }
+    
+    @Override
+    public String toString() {
+        return "**varaus**\n" + omistus.toString() + "\n********";
+    }
 }

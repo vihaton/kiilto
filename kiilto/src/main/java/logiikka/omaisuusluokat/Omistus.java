@@ -64,7 +64,7 @@ public class Omistus {
                 + hinta.toStringIlmanKultaa();
     }
 
-    String getNimi() {
+    public String getNimi() {
         return this.nimi;
     }
 }

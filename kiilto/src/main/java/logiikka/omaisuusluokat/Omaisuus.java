@@ -129,4 +129,9 @@ public class Omaisuus {
         omistukset.remove(o);
         kohdeOmaisuus.lisaaOmistus(o);
     }
+    
+    public boolean poistaOmistus(Omistus o) {
+        if (o == null || !omistukset.contains(o)) return false;
+        return omistukset.remove(o);
+    }
 }

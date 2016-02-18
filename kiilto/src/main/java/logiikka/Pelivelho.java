@@ -110,6 +110,13 @@ public class Pelivelho {
 
     private void nostaNallekarkkeja(Pelaaja pelaaja) {
         int[] maarat = tui.mitaKarkkejaNostetaan(poyta.getMarkkinat());
+        //testataan, halusiko pelaaja tehdä toisen toiminnon
+        if (maarat == null) {
+            pelaaVuoro(pelaaja);
+            return;
+        }
+                
+                
         Kasakokoelma karkit = pelaaja.getKarkit();
         for (int i = 0; i < maarat.length; i++) {
             int m = maarat[i];
@@ -123,22 +130,49 @@ public class Pelivelho {
         while (true) {
             int ostonNumero = tui.mikaOmistusOstetaan(poyta.getNakyvienNimet());
             
+            if (ostonNumero == -1) {
+                pelaaVuoro(pelaaja);
+                return;
+            }
+            
             if (ostonNumero == 0) {
-                if (ostaVaraus(pelaaja)) break;
+                ostaVaraus(pelaaja);
+                return;
             }
             else if (poyta.suoritaOsto(pelaaja, ostonNumero)) break;
             
             System.out.println("Sinulla ei ollut varaa moiseen! Mene töihin rikastumaan, lortto!\n");
         }
     }
-
-    private void teeVaraus(Pelaaja pelaaja) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     
-    private boolean ostaVaraus(Pelaaja pelaaja) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void ostaVaraus(Pelaaja pelaaja) {
+        while (true) {
+            int ostettava = tui.ostettavanVarauksenNro(pelaaja);
+
+            if (ostettava == -1) {
+                pelaaVuoro(pelaaja);
+                return;
+            }
+
+            if (poyta.suoritaOsto(pelaaja, ostettava)) break;
+            
+            System.out.println("Serkkusi jääkaappi on likainen, koitappa uudestaan poronkorvainen söpöliini!\n");
+        }
+    }
+    
+    private void teeVaraus(Pelaaja pelaaja) {
+        while (true) {
+            int varauksenNro = tui.mikaOmistusVarataan(poyta.getNakyvienNimet());
+            
+            if (varauksenNro == -1) {
+                pelaaVuoro(pelaaja);
+                return;
+            }
+            
+            if (poyta.teeVaraus(pelaaja, varauksenNro)) break;
+            
+            System.out.println("Ei onnistunut, uudestaan!");
+        }
     }
     
     public ArrayList<Pelaaja> getPelaajat() {

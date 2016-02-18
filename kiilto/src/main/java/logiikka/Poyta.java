@@ -167,5 +167,39 @@ public class Poyta {
         return false;
     }
 
+    /**
+     * 
+     * @param pelaaja
+     * @param varauksenNro varattavan varauksen numero (eli nimi).
+     * @return boolean, onnistuiko varaaminen.
+     */
+    boolean teeVaraus(Pelaaja pelaaja, int varauksenNro) {
+        int pakka = 0;
+        if (varauksenNro>40) pakka = 1;
+        if (varauksenNro>70) pakka = 2;
+        Omaisuus omistusPakka = omistuspakat.get(pakka);
+        
+        try {
+            Omistus varattava = omistusPakka.getNakyvaOmistus(varauksenNro);
+            pelaaja.teeVaraus(varattava);
+            omistusPakka.poistaOmistus(varattava);
+            annaPelaajalleKulta(pelaaja);
+        } catch (Exception e) {
+            return false;
+        }
+        
+        return true;
+    }
+
+    /**
+     * Jos karkkimarkkinoilla on kultaa, pelaaja saa yhden kultakarkin!
+     * @param pelaaja Pelaaja, jolle karkki annetaan, jos sellainen löytyy.
+     */
+    private void annaPelaajalleKulta(Pelaaja pelaaja) {
+        if (karkkimarkkinat.getKasanKoko(0) > 0) {
+            karkkimarkkinat.siirraToiseenKasaan(pelaaja.getKarkit(), 0, 1);
+        }
+    }
+
 
 }
