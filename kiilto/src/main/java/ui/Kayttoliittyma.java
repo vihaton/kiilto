@@ -57,8 +57,6 @@ public class Kayttoliittyma implements Runnable {
 
         container.add(pelaa);
         container.add(lopeta);
-
-
     }
 
 }

@@ -50,7 +50,7 @@ public class Pelaaja {
         return true;
     }
 
-    String getNimi() {
+    public String getNimi() {
         return nimi;
     }
 

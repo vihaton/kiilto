@@ -223,5 +223,17 @@ public class TUI {
         }
         return nro;
     }
+    
+    public void tulostaKierroksenVaihto(int kierros, int voittoValta) {
+        System.out.println("*******************");
+        System.out.println("Kierros numero " + kierros + ", voittamiseen tarvitaan " + voittoValta + " arvovaltapistettä.");
+        System.out.println("*******************\n");
+    }
+
+    public void tulostaVuoronAlkuinfot(Pelaaja pelaaja, Poyta poyta) {
+        System.out.println("Pelaajan " + pelaaja.getNimi() + " vuoro.\n");
+        System.out.println(poyta);
+        System.out.println(pelaaja);
+    }
 
 }

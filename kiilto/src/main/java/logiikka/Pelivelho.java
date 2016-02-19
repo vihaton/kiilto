@@ -84,9 +84,7 @@ public class Pelivelho {
      */
     private void pelaaKierros() {
         kierros++;
-        System.out.println("*******************");
-        System.out.println("Kierros numero " + kierros + ", voittamiseen tarvitaan " + voittoValta + " arvovaltapistettä.");
-        System.out.println("*******************\n");
+        tui.tulostaKierroksenVaihto(kierros, voittoValta);
         for (Pelaaja p : pelaajat) {
             pelaaVuoro(p);
         }
@@ -98,9 +96,7 @@ public class Pelivelho {
      * @param pelaaja pelaaja kenen vuoro pelataan.
      */
     private void pelaaVuoro(Pelaaja pelaaja) {
-        System.out.println("Pelaajan " + pelaaja.getNimi() + " vuoro.\n");
-        System.out.println(poyta);
-        System.out.println(pelaaja);
+        tui.tulostaVuoronAlkuinfot(pelaaja, poyta);
         int valinta = tui.pelaajanToimi(pelaaja.getNimi());
         if (valinta == 1) { // nostetaan nallekarkkeja
             nostaNallekarkkeja(pelaaja);
@@ -113,7 +109,6 @@ public class Pelivelho {
         if (pelaaja.liikaaKarkkeja()) {
             //wip
         }
-        System.out.println("");
     }
 
     private void nostaNallekarkkeja(Pelaaja pelaaja) {
@@ -148,8 +143,6 @@ public class Pelivelho {
             } else if (poyta.suoritaOsto(pelaaja, ostonNumero)) {
                 break;
             }
-
-            System.out.println("Sinulla ei ollut varaa moiseen! Mene töihin rikastumaan, lortto!\n");
         }
     }
 
@@ -165,8 +158,6 @@ public class Pelivelho {
             if (poyta.suoritaOstoVarauksista(pelaaja, ostettava)) {
                 break;
             }
-
-            System.out.println("Serkkusi jääkaappi on likainen, koitappa uudestaan poronkorvainen söpöliini!\n");
         }
     }
 
@@ -182,8 +173,6 @@ public class Pelivelho {
             if (poyta.teeVaraus(pelaaja, varauksenNro)) {
                 break;
             }
-
-            System.out.println("Ei onnistunut, uusi yritys?");
         }
     }
 
