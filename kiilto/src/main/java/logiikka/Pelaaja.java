@@ -55,14 +55,6 @@ public class Pelaaja {
         return nimi;
     }
     
-    public ArrayList<String> getVaraustenNumerot() {
-        ArrayList<String> varaustenNrot = new ArrayList<>();
-        for (int i = 0; i < varaukset.size(); i++) {
-            varaustenNrot.add(varaukset.get(i).getOmistus().getNimi());
-        }
-        return varaustenNrot;
-    }
-    
     @Override
     public String toString() {
         return nimi + "\n" + karkit +"\n" + varauksetToString() + omaisuus;
@@ -145,13 +137,6 @@ public class Pelaaja {
         }
         return summa;
     }
-    
-    public boolean teeVaraus(Omistus o) {
-        if (varaukset.size() >= 3 || o==null) return false;
-        
-        varaukset.add(new Varaus(o));
-        return true;
-    }
 
     public String varauksetToString() {
         String s = "";
@@ -165,6 +150,14 @@ public class Pelaaja {
         return varaukset.size();
     }
 
+    public ArrayList<String> getVaraustenNumerot() {
+        ArrayList<String> varaustenNrot = new ArrayList<>();
+        for (int i = 0; i < varaukset.size(); i++) {
+            varaustenNrot.add(varaukset.get(i).getOmistus().getNimi());
+        }
+        return varaustenNrot;
+    }
+    
     public Omistus getVaraus(int varauksenNumero) {
         for (int i = 0; i < varaukset.size(); i++) {
             Omistus o = varaukset.get(i).getOmistus();
@@ -174,7 +167,21 @@ public class Pelaaja {
         }
         return null;
     }
+    
+    public boolean teeVaraus(Omistus o) {
+        if (varaukset.size() >= 3 || o==null) return false;
+        
+        varaukset.add(new Varaus(o));
+        return true;
+    }
 
+    /**
+     * Metodi varauksen ostamiseksi. Metodi olettaa, että pelaajalla on varaa ostaa varaus. 
+     * 
+     * @param omistus joka ostetaan.
+     * @param karkkimarkkinat jonne maksukarkit ohjataan.
+     * @return boolean olivatko parametrit ok.
+     */
     public boolean ostaVaraus(Omistus omistus, Kasakokoelma karkkimarkkinat) {
         if (varaukset.isEmpty()) return false;
         

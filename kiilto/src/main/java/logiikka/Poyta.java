@@ -196,21 +196,19 @@ public class Poyta {
      * @return boolean, onnistuiko varaaminen.
      */
     boolean teeVaraus(Pelaaja pelaaja, int varauksenNro) {
+        if (pelaaja == null) return false;
         if (pelaaja.getVarauksienMaara()>=3) return false;
         int pakka = 0;
         if (varauksenNro>40) pakka = 1;
         if (varauksenNro>70) pakka = 2;
         Omaisuus omistusPakka = omistuspakat.get(pakka);
         
-        try {
-            Omistus varattava = omistusPakka.getNakyvaOmistus(varauksenNro);
-            pelaaja.teeVaraus(varattava);
-            omistusPakka.poistaOmistus(varattava);
-            annaPelaajalleKulta(pelaaja);
-        } catch (Exception e) {
-            return false;
-        }
-        
+        Omistus varattava = omistusPakka.getNakyvaOmistus(varauksenNro);
+        if (varattava == null) return false;
+        if (!pelaaja.teeVaraus(varattava)) return false;
+        omistusPakka.poistaOmistus(varattava);
+        annaPelaajalleKulta(pelaaja);
+
         return true;
     }
 

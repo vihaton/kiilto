@@ -119,4 +119,48 @@ public class PoytaTest {
         assertFalse("pelaaja "+pelaaja.toString() + "osti pöydästä omistuksen nro " + ostonNro + " " + nakyvilla,
                 p.suoritaOsto(pelaaja, ostonNro));
     }
+    
+    @Test
+    public void varauksenOstaminenToimii() {
+        Omistus o = new Omistus("1",1,1,new Kasakokoelma(0));
+        Pelaaja pel = new Pelaaja("testihomo");
+        
+        int varattavanNro = 0;
+        while (!p.getNakyvienNimet().contains(""+varattavanNro)) {
+            varattavanNro++;
+        }
+        
+        p.teeVaraus(pel, varattavanNro);
+        
+        assertFalse(p.suoritaOstoVarauksista(pel, 100)); //ei ole varauksissa
+        assertFalse(p.suoritaOstoVarauksista(pel, varattavanNro)); //ei ole varaa
+        
+        pel.setKarkit(new int[]{5,5,5,5,5,5});
+        assertFalse(p.suoritaOstoVarauksista(pel, 100)); //ei ole varauksissa
+        assertTrue(p.suoritaOstoVarauksista(pel, varattavanNro)); //on varaa
+        assertTrue(p.getMarkkinat().getKarkkienMaara() > 40); //pelaajalta on siirtynyt >0 kpl karkkeja markkinoille.
+    }
+    
+    @Test
+    public void teeVarausToimii() {
+        Pelaaja pel = new Pelaaja("testihomo");
+        assertFalse(p.teeVaraus(pel, 100)); //väärä nro
+        
+        int varattavanNro = Integer.parseInt(p.getNakyvienNimet().get(0));
+        assertFalse(p.teeVaraus(null, varattavanNro)); //ei pelaajaa
+        
+        for (int i = 0; i < 3; i++) {
+            assertTrue(pel.getKarkit().getKasanKoko(0) == i); //kultaa on aluksi 0, kasvaa varattaessa
+            
+            assertTrue(p.teeVaraus(pel, varattavanNro)); //varaus onnistuu
+            assertTrue(pel.getVarauksienMaara()==i+1); //varausten määrä kasvaa
+            assertTrue(varattavanNro != Integer.parseInt(p.getNakyvienNimet().get(0))); //varaus lähtee pöydästä
+            
+            varattavanNro = Integer.parseInt(p.getNakyvienNimet().get(0));
+        }
+        
+        assertFalse(p.teeVaraus(pel, varattavanNro)); //varaus ei onnistu (kolmen raja)
+        assertTrue(pel.getVarauksienMaara()==3); //varausten määrä ei kasva
+        assertFalse(varattavanNro != Integer.parseInt(p.getNakyvienNimet().get(0))); //varaus ei lähde pöydästä
+    }
 }

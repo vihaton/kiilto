@@ -170,4 +170,64 @@ public class PelaajaTest {
         p.setKarkit(new int[]{0,0,0,0,0,11});
         assertTrue(p.liikaaKarkkeja());
     }
+    
+    @Test
+    public void merkkiHenkiloVieraileeToimii() {
+        p.merkkihenkiloVierailee(new Merkkihenkilo("nimi",new int[]{0,3,3,3,0,0},3));
+        assertTrue(p.getMerkkihenkiloidenArvo()==3);
+    }
+    
+    @Test
+    public void getMerkkihenkiloidenArvoToimii() {
+        assertTrue(p.getMerkkihenkiloidenArvo() == 0);
+        p.merkkihenkiloVierailee(new Merkkihenkilo(new int[]{0,1,1,1,1,1}));
+        assertTrue(p.getMerkkihenkiloidenArvo() == 3);
+        p.merkkihenkiloVierailee(new Merkkihenkilo(new int[]{0,1,1,1,1,1}));
+        assertTrue(p.getMerkkihenkiloidenArvo() == 6);
+    }
+    
+    @Test
+    public void getVarausToimii() {
+        assertTrue(p.getVaraus(100)==null);
+        Omistus o = new Omistus(""+100, 1, 1, new Kasakokoelma(0));
+        p.teeVaraus(o);
+        assertTrue(p.getVaraus(100) == o);
+        p.teeVaraus(new Omistus(""+101, 1, 1, new Kasakokoelma(0)));
+        assertTrue(p.getVaraus(100) == o);
+        assertTrue(p.getVaraus(101) != o && p.getVaraus(101) != null);
+    }
+    
+    @Test
+    public void teeVarausToimii() {
+        assertFalse(p.teeVaraus(null));
+        for (int i = 0; i < 3; i++) {
+            assertTrue(p.teeVaraus(new Omistus(""+i,1,1,new Kasakokoelma(0))));
+        }
+        assertFalse(p.teeVaraus(new Omistus("o",1,1,new Kasakokoelma(0))));
+        assertTrue(p.getVaraus(1) != null);
+    }
+    
+    @Test
+    public void ostaVarausToimii() {
+        assertFalse(p.ostaVaraus(null, null));
+        assertTrue(p.getVarauksienMaara()==0);
+        
+        Omistus ostettava = new Omistus("o",1,1,new int[]{0,2,2,2,0,0});
+        assertFalse(p.ostaVaraus(ostettava, null));
+        assertTrue(p.getVarauksienMaara()==0);
+        
+        Kasakokoelma k = new Kasakokoelma(0);
+        assertFalse(p.ostaVaraus(ostettava, k));
+        assertTrue(p.getVarauksienMaara()==0);
+        
+        p.teeVaraus(ostettava);
+        p.setKarkit(new int[]{1,2,2,1,0,0});
+        
+        assertTrue(p.ostaVaraus(ostettava, k));
+        
+        assertTrue(p.getKarkit().getKarkkienMaara()==0);
+        assertTrue(k.getKarkkienMaara()==6);
+        assertTrue(p.getVarauksienMaara()==0);
+        assertTrue(p.voittaja(1));
+    }
 }
