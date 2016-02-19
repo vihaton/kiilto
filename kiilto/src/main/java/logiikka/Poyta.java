@@ -22,9 +22,9 @@ public class Poyta {
         karkkimarkkinat = new Kasakokoelma(pelaajat.size());
         merkkihenkilot = new ArrayList<>();
         alustaOmistuspakat();
-        luoOmistukset(luoLukija("/home/xvixvi/kiilto/kiilto/src/main/java/aputiedostoja/omistustentiedot.csv"));
+        luoOmistukset(luoLukija("/home/xvixvi/kiilto/kiilto/src/aputiedostoja/omistustentiedot.csv"));
         sekoitaOmistuspakat();
-        luoMerkkihenkilot(luoLukija("/home/xvixvi/kiilto/kiilto/src/main/java/aputiedostoja/merkkihenkilot.csv"));
+        luoMerkkihenkilot(luoLukija("/home/xvixvi/kiilto/kiilto/src/aputiedostoja/merkkihenkilot.csv"));
         valitsePelinMerkkihenkilot();
     }
 
@@ -46,8 +46,14 @@ public class Poyta {
         try {
             File f = new File(filePath);
             lukija = new Scanner(f);
+//            File f = new File(getClass().getResource(filePath).toURI());
+//            lukija = new Scanner(f);
+//            lukija = new Scanner(Poyta.class.getResourceAsStream(filePath));
+            
+//            URL url = this.getClass().getResource("/com/path/to/file.txt")
+//            File file = new File(url.toURI());
         } catch (Exception e) {
-            System.out.println("lukuongelmia @ Poyta:luoLukija" + e);
+            System.out.println("lukuongelmia @ Poyta:luoLukija, syötteellä " + filePath + "\n" + e);
         }
         
         return lukija;
@@ -56,13 +62,13 @@ public class Poyta {
     private void luoOmistukset(Scanner lukija) {
         for (int i = 0; i < 3; i++) {
             Omaisuus omistuspakka = omistuspakat.get(i);
-            int j = 40;
-            if (i == 1) j = 30;
-            if (i == 2) j = 20;
+            int omistustenMaara = 40;
+            if (i == 1) omistustenMaara = 30;
+            if (i == 2) omistustenMaara = 20;
             
-            while (j>0) {
+            while (omistustenMaara>0) {
                 omistuspakka.lisaaOmistus(luoOmistus(lukija.nextLine()));
-                j--;
+                omistustenMaara--;
             }
         }
     }

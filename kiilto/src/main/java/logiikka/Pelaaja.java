@@ -13,13 +13,11 @@ public class Pelaaja {
     private final Kasakokoelma karkit = new Kasakokoelma(0);
     private final Omaisuus omaisuus = new Omaisuus();
     private final String nimi;
-    private ArrayList<Varaus> varaukset;
-    private ArrayList<Merkkihenkilo> merkkihenkilot;
+    private final ArrayList<Varaus> varaukset = new ArrayList<>();
+    private final ArrayList<Merkkihenkilo> merkkihenkilot = new ArrayList<>();
 
     Pelaaja(String nimi) {
         this.nimi = nimi;
-        varaukset = new ArrayList<>();
-        merkkihenkilot = new ArrayList<>();
     }
     
     public void lisaaOmistus(Omistus omistus) {
@@ -27,8 +25,7 @@ public class Pelaaja {
     }
 
     public boolean liikaaKarkkeja() {
-        if (karkit.getKarkkienMaara() > 10) return true;
-        return false;
+        return karkit.getKarkkienMaara() > 10;
     }
     
     public Kasakokoelma getKarkit() {
@@ -61,10 +58,7 @@ public class Pelaaja {
     }
 
     public boolean voittaja(int voittoraja) {
-        if (omaisuus.getArvovalta() + getMerkkihenkiloidenArvo() >= voittoraja) {
-            return true;
-        }
-        return false;
+        return omaisuus.getArvovalta() + getMerkkihenkiloidenArvo() >= voittoraja;
     }
     
     /**
