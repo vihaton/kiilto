@@ -48,12 +48,12 @@ public class Poyta {
             lukija = new Scanner(f);
 //            File f = new File(getClass().getResource(filePath).toURI());
 //            lukija = new Scanner(f);
-//            lukija = new Scanner(Poyta.class.getResourceAsStream(filePath));
+//            lukija = new Scanner(getClass().getResourceAsStream(filePath));
             
 //            URL url = this.getClass().getResource("/com/path/to/file.txt")
 //            File file = new File(url.toURI());
         } catch (Exception e) {
-            System.out.println("lukuongelmia @ Poyta:luoLukija, syötteellä " + filePath + "\n" + e);
+            System.out.println("lukuongelmia @ Poyta:luoLukija,\n syötteellä " + filePath + "\n" + e);
         }
         
         return lukija;
