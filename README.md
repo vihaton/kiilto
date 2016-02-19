@@ -3,3 +3,5 @@ Peli, jossa nallekarkkeja tuhlataan, va(a)rallisuutta haalitaan ja vaikutusvalta
 
 ##Dokumentointi
 [aiheen kuvaus ja rakenne](dokumentointi/aiheenKuvausJaRakenne.md)
+
+[tuntikirjanpito](/dokumentointi/tuntikirjanpito.md)
