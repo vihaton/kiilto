@@ -1,9 +1,11 @@
 package main;
 
-import logiikka.*;
+import javax.swing.SwingUtilities;
+import ui.*;
 
 /**
- *
+ * Pistetään peli pyörimään!
+ * 
  * @author xvixvi
  */
 public class Main {
@@ -12,8 +14,9 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Pelivelho pv = new Pelivelho();
-        pv.pelaa();
+        Kayttoliittyma k = new Kayttoliittyma();
+        SwingUtilities.invokeLater(k);
+
     }
 
 }

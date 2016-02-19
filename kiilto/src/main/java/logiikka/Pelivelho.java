@@ -6,13 +6,11 @@ import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
 
 /**
- *
- * @author xvixvi
- *
  * Luokka vastaa pelin pyörittämisestä. Esimerkiksi pelin alustaminen, vuorojen
  * organisoiminen sekä UI.n ja logiikan rajapintana toimiminen ovat sen
  * tehtäviä.
- *
+ * 
+ * @author xvixvi
  */
 public class Pelivelho {
 
@@ -41,7 +39,7 @@ public class Pelivelho {
     private void alustaTestiPeli() {
         ArrayList<String> p = new ArrayList<>();
         p.add("varakas");
-        p.add("v2");
+        p.add("homokaks");
 //        p.add("homo3");
 //        p.add("mr Gandalf");
         luoPelaajat(p);
