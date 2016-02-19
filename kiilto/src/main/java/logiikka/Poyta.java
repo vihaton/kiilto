@@ -53,12 +53,8 @@ public class Poyta {
             muissakin koneissa kuin alkuperäisessä,
             vaan kun ei toimi niin ei toimi...
             */
-//            File f = new File(getClass().getResource(filePath).toURI());
+//            File file = new File(getClass().getResource("/resources/classes/aputiedostoja/filename.file").getFile());
 //            lukija = new Scanner(f);
-//            lukija = new Scanner(getClass().getResourceAsStream(filePath));
-            
-//            URL url = this.getClass().getResource("/kiilto/kiilto/src/aputiedostoja/omistustentiedot.csv");
-//            File file = new File(url.toURI());
         } catch (Exception e) {
             System.out.println("lukuongelmia @ Poyta:luoLukija,\n syötteellä " + filePath + "\n" + e);
         }
