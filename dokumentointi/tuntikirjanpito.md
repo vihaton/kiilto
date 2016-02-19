@@ -49,3 +49,27 @@ pitvääntöä 2h
 **5.2 7h**
 
 Pelin perus-perustoiminnallisuuden rakentaminen, ja tekstikäyttöliittymän päivittäminen tarpeeseen 7h
+
+##Viikko 4 *10h*
+
+**6.2 3h**
+
+testejä
+
+**9.2 3h**
+
+testejä
+
+**11.2 3h**
+
+logiikkaa + testejä
+
+**12.2 1h**
+
+checkstyle ym kysyttyä, hieman logiikkaa
+
+##Viikko 5 *miljoona ziljoona h*
+
+**19.2 3h**
+
+Viimeiset (toivottavasti) logiikat: varaukset ja merkkihenkilöt näyttäisivät(!) toimivan. Testit vielä kirjoittamatta, mutta eiköhän pääpaino pitäisi tässä vaiheessa periodia olla siinä käyttöliittymässä, josko sen vaikka aloittaisi...
