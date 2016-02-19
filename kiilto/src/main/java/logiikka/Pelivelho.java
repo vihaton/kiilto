@@ -8,10 +8,11 @@ import logiikka.valineluokat.*;
 /**
  *
  * @author xvixvi
- * 
- * Luokka vastaa pelin pyörittämisestä. Esimerkiksi pelin alustaminen, vuorojen organisoiminen
- * sekä UI.n ja logiikan rajapintana toimiminen ovat sen tehtäviä.
- * 
+ *
+ * Luokka vastaa pelin pyörittämisestä. Esimerkiksi pelin alustaminen, vuorojen
+ * organisoiminen sekä UI.n ja logiikan rajapintana toimiminen ovat sen
+ * tehtäviä.
+ *
  */
 public class Pelivelho {
 
@@ -31,35 +32,37 @@ public class Pelivelho {
     public void pelaa() {
 //        alustaPeli();
         alustaTestiPeli();
-        
-        while(eiVoittajaa()) {
+
+        while (eiVoittajaa()) {
             pelaaKierros();
         }
     }
 
     private void alustaTestiPeli() {
         ArrayList<String> p = new ArrayList<>();
-        p.add("varakas"); p.add("v2");
+        p.add("varakas");
+        p.add("v2");
 //        p.add("homo3");
 //        p.add("mr Gandalf");
         luoPelaajat(p);
-        pelaajat.get(0).setKarkit(new int[]{3,5,5,5,5,5});
+        pelaajat.get(0).setKarkit(new int[]{3, 5, 5, 5, 5, 5});
         voittoValta = 5;
         poyta = new Poyta(pelaajat);
     }
-    
+
     private void alustaPeli() {
         int pm = tui.selvitaPelaajienMaara();
         ArrayList<String> nimet = tui.selvitaPelaajienNimet(pm);
 //        voittoValta = tui.selvitaVoittoonTarvittavaValta();
-        voittoValta=10;
-        
+        voittoValta = 10;
+
         luoPelaajat(nimet);
         poyta = new Poyta(pelaajat);
     }
 
     /**
      * Luo annettujen nimien mukaiset pelaajat.
+     *
      * @param nimet pelaajien nimet.
      */
     public void luoPelaajat(ArrayList<String> nimet) {
@@ -71,18 +74,20 @@ public class Pelivelho {
 
     private boolean eiVoittajaa() {
         for (Pelaaja p : pelaajat) {
-            if (p.voittaja(voittoValta)) return false;
+            if (p.voittaja(voittoValta)) {
+                return false;
+            }
         }
         return true;
     }
-    
+
     /**
      * Pelataan kaikkien pelaajien vuorot.
      */
     private void pelaaKierros() {
         kierros++;
         System.out.println("*******************");
-        System.out.println("Kierros numero " + kierros +", voittamiseen tarvitaan " + voittoValta +" arvovaltapistettä.");
+        System.out.println("Kierros numero " + kierros + ", voittamiseen tarvitaan " + voittoValta + " arvovaltapistettä.");
         System.out.println("*******************\n");
         for (Pelaaja p : pelaajat) {
             pelaaVuoro(p);
@@ -91,7 +96,7 @@ public class Pelivelho {
 
     /**
      * Pelataan yhden pelaajan vuoro alusta loppuun.
-     * 
+     *
      * @param pelaaja pelaaja kenen vuoro pelataan.
      */
     private void pelaaVuoro(Pelaaja pelaaja) {
@@ -106,7 +111,7 @@ public class Pelivelho {
         } else if (valinta == 3) { // tehdään varaus pöydästä
             teeVaraus(pelaaja);
         }
-        
+
         if (pelaaja.liikaaKarkkeja()) {
             //wip
         }
@@ -120,13 +125,12 @@ public class Pelivelho {
             pelaaVuoro(pelaaja);
             return;
         }
-                
-                
+
         Kasakokoelma karkit = pelaaja.getKarkit();
         for (int i = 0; i < maarat.length; i++) {
             int m = maarat[i];
-            if (m>0) {
-                poyta.getMarkkinat().siirraToiseenKasaan(karkit, i+1, m);
+            if (m > 0) {
+                poyta.getMarkkinat().siirraToiseenKasaan(karkit, i + 1, m);
             }
         }
     }
@@ -134,22 +138,23 @@ public class Pelivelho {
     private void ostaOmaisuutta(Pelaaja pelaaja) {
         while (true) {
             int ostonNumero = tui.mikaOmistusOstetaan(poyta.getNakyvienNimet());
-            
+
             if (ostonNumero == -1) {
                 pelaaVuoro(pelaaja);
                 return;
             }
-            
+
             if (ostonNumero == 0) {
                 ostaVaraus(pelaaja);
                 return;
+            } else if (poyta.suoritaOsto(pelaaja, ostonNumero)) {
+                break;
             }
-            else if (poyta.suoritaOsto(pelaaja, ostonNumero)) break;
-            
+
             System.out.println("Sinulla ei ollut varaa moiseen! Mene töihin rikastumaan, lortto!\n");
         }
     }
-    
+
     private void ostaVaraus(Pelaaja pelaaja) {
         while (true) {
             int ostettava = tui.ostettavanVarauksenNro(pelaaja);
@@ -159,27 +164,31 @@ public class Pelivelho {
                 return;
             }
 
-            if (poyta.suoritaOstoVarauksista(pelaaja, ostettava)) break;
-            
+            if (poyta.suoritaOstoVarauksista(pelaaja, ostettava)) {
+                break;
+            }
+
             System.out.println("Serkkusi jääkaappi on likainen, koitappa uudestaan poronkorvainen söpöliini!\n");
         }
     }
-    
+
     private void teeVaraus(Pelaaja pelaaja) {
         while (true) {
             int varauksenNro = tui.mikaOmistusVarataan(poyta.getNakyvienNimet());
-            
+
             if (varauksenNro == -1) {
                 pelaaVuoro(pelaaja);
                 return;
             }
-            
-            if (poyta.teeVaraus(pelaaja, varauksenNro)) break;
-            
+
+            if (poyta.teeVaraus(pelaaja, varauksenNro)) {
+                break;
+            }
+
             System.out.println("Ei onnistunut, uusi yritys?");
         }
     }
-    
+
     public ArrayList<Pelaaja> getPelaajat() {
         return pelaajat;
     }

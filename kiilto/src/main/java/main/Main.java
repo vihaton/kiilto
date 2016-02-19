@@ -1,6 +1,7 @@
 package main;
 
 import logiikka.*;
+
 /**
  *
  * @author xvixvi
@@ -14,5 +15,5 @@ public class Main {
         Pelivelho pv = new Pelivelho();
         pv.pelaa();
     }
-    
+
 }

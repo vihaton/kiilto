@@ -35,10 +35,12 @@ public class TUI {
     public ArrayList<String> selvitaPelaajienNimet(int pm) {
         ArrayList<String> nimet = new ArrayList<>();
         for (int i = 0; i < pm; i++) {
-            System.out.println("Anna pelaaja nro" +(i+1) +" nimi:");
+            System.out.println("Anna pelaaja nro" + (i + 1) + " nimi:");
             String nimi = lukija.nextLine();
-            if (nimi.isEmpty())  break;
-            
+            if (nimi.isEmpty()) {
+                break;
+            }
+
             nimet.add(nimi);
         }
         return nimet;
@@ -52,12 +54,14 @@ public class TUI {
         int v = 0;
         while (v < 1 || v > 3) {
             try {
-                System.out.println("Mitä haluat tehdä " + nimi +"? Valitse kokonaisluku 1-3:");
+                System.out.println("Mitä haluat tehdä " + nimi + "? Valitse kokonaisluku 1-3:");
                 System.out.println("  1. nosta nallekarkkeja markkinoilta ('1')");
                 System.out.println("  2. osta omaisuutta ('2')");
                 System.out.println("  3. varaa omaisuutta ('3')");
                 v = Integer.parseInt(lukija.nextLine());
-                if (v<1 || v>3) throw new IllegalArgumentException();
+                if (v < 1 || v > 3) {
+                    throw new IllegalArgumentException();
+                }
             } catch (Exception e) {
                 v = 0;
                 System.out.println("Koitappa uudestaan.");
@@ -68,7 +72,7 @@ public class TUI {
 
     public int[] mitaKarkkejaNostetaan(Kasakokoelma markkinat) {
         int[] nosto = new int[5];
-        
+
         while (true) {
             System.out.println("Mitä nallekarkkeja haluaisit? ('o' ohjeet, 'e' takaisin)");
             String syote = lukija.nextLine();
@@ -81,38 +85,54 @@ public class TUI {
                     nosto = tarkistaKarrkienNostamisSyote(syote, markkinat);
                     break;
                 } catch (Exception e) {
-                    System.out.println("Syötteesi oli huono.\n" + e.getMessage()+"\n");
+                    System.out.println("Syötteesi oli huono.\n" + e.getMessage() + "\n");
                 }
             }
         }
         return nosto;
     }
-    
+
     private int[] tarkistaKarrkienNostamisSyote(String syote, Kasakokoelma markkinat) throws Exception {
         int[] nosto = new int[5];
         int summa = 0;
         boolean sama = false;
-        
+
         String[] maarat = syote.split(",", 5);
-                    
+
         for (int i = 0; i < 5; i++) {
             int maara = Integer.parseInt(maarat[i].trim());
-            if (maara<0 || maara>2) throw new IllegalArgumentException("luvut voivat olla 0,1 tai 2.");
-            if (maara == 2) sama = true;
+            if (maara < 0 || maara > 2) {
+                throw new IllegalArgumentException("luvut voivat olla 0,1 tai 2.");
+            }
+            if (maara == 2) {
+                sama = true;
+            }
             summa += maara;
-            if (summa > 3) throw new IllegalArgumentException("eipäs rohmuta!");
-            if (sama && summa > 2) throw new IllegalArgumentException("eipäs rohmuta!");
-            if (markkinat.getKasanKoko(i+1)< maara) throw new IllegalArgumentException("liian vähän karkkeja markkinoilla!");
-            if (maara == 2 && markkinat.getKasanKoko(i+1) < 4) throw new IllegalArgumentException("kasassa on liian vähän karkkeja kahden ottamiseen!");
+            if (summa > 3) {
+                throw new IllegalArgumentException("eipäs rohmuta!");
+            }
+            if (sama && summa > 2) {
+                throw new IllegalArgumentException("eipäs rohmuta!");
+            }
+            if (markkinat.getKasanKoko(i + 1) < maara) {
+                throw new IllegalArgumentException("liian vähän karkkeja markkinoilla!");
+            }
+            if (maara == 2 && markkinat.getKasanKoko(i + 1) < 4) {
+                throw new IllegalArgumentException("kasassa on liian vähän karkkeja kahden ottamiseen!");
+            }
             //syöte on ollu tähän numeroon mennessä hyväksyttävä
             nosto[i] = maara;
         }
-        if (sama && summa!=2) throw new IllegalArgumentException("Jos otat kaksi samanväristä, saat vain yhtä väriä.");
-        if (!sama && summa !=3) throw new IllegalArgumentException("Et nostanut kolmea karkkia.");
-        
+        if (sama && summa != 2) {
+            throw new IllegalArgumentException("Jos otat kaksi samanväristä, saat vain yhtä väriä.");
+        }
+        if (!sama && summa != 3) {
+            throw new IllegalArgumentException("Et nostanut kolmea karkkia.");
+        }
+
         return nosto;
     }
-     
+
     private void tulostaKarkkienNostamisOhjeet() {
         System.out.println("\nValitse nostettavat nallekarkit antamalla syöte\n"
                 + "  'x1,x2,x3,x4,x5'\n"
@@ -132,14 +152,20 @@ public class TUI {
         System.out.println("Haluatko ostaa omistuksen pöydältä vai varauksistasi?\n"
                 + "'v' -> varauksistasi, 'e' -> exit, kaikki muut syötteet -> pöydältä.");
         String syote = lukija.nextLine();
-        if (syote.equalsIgnoreCase("v")) return 0;
-        if (syote.equalsIgnoreCase("e")) return -1;
-        
-        while (omistuksenNro==0) {
+        if (syote.equalsIgnoreCase("v")) {
+            return 0;
+        }
+        if (syote.equalsIgnoreCase("e")) {
+            return -1;
+        }
+
+        while (omistuksenNro == 0) {
             System.out.println("Anna ostettavan omistuksen numero:");
             try {
                 syote = lukija.nextLine();
-                if (!nakyvatOmistukset.contains(syote.trim())) throw new IllegalArgumentException();
+                if (!nakyvatOmistukset.contains(syote.trim())) {
+                    throw new IllegalArgumentException();
+                }
                 omistuksenNro = Integer.parseInt(syote);
             } catch (Exception e) {
                 omistuksenNro = 0;
@@ -152,13 +178,17 @@ public class TUI {
     public int mikaOmistusVarataan(ArrayList<String> nakyvienNimet) {
         int varattavanNro = 0;
 
-        while (varattavanNro==0) {
+        while (varattavanNro == 0) {
             System.out.println("Mikä omistus varataan, anna nimi (eli numero). 'e' Vie takaisin");
             String syote = lukija.nextLine();
-            if (syote.equalsIgnoreCase("e")) return -1;
-            
+            if (syote.equalsIgnoreCase("e")) {
+                return -1;
+            }
+
             try {
-                if (!nakyvienNimet.contains(syote.trim())) throw new IllegalArgumentException();
+                if (!nakyvienNimet.contains(syote.trim())) {
+                    throw new IllegalArgumentException();
+                }
                 varattavanNro = Integer.parseInt(syote);
             } catch (Exception e) {
                 varattavanNro = 0;
@@ -170,17 +200,21 @@ public class TUI {
 
     public int ostettavanVarauksenNro(Pelaaja pelaaja) {
         int nro = 0;
-        
+
         while (nro == 0) {
             System.out.println("Minkä nimisen (numeroisen) varauksesi haluasit ostaa? 'e' vie takaisin\n"
                     + "Varauksesi:");
             System.out.println(pelaaja.varauksetToString());
             String syote = lukija.nextLine();
-            
-            if (syote.equalsIgnoreCase("e")) return -1;
-            
+
+            if (syote.equalsIgnoreCase("e")) {
+                return -1;
+            }
+
             try {
-                if (!pelaaja.getVaraustenNumerot().contains(syote.trim())) throw new IllegalArgumentException();
+                if (!pelaaja.getVaraustenNumerot().contains(syote.trim())) {
+                    throw new IllegalArgumentException();
+                }
                 nro = Integer.parseInt(syote);
             } catch (Exception e) {
                 nro = 0;
@@ -189,5 +223,5 @@ public class TUI {
         }
         return nro;
     }
-        
+
 }
