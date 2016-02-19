@@ -46,11 +46,18 @@ public class Poyta {
         try {
             File f = new File(filePath);
             lukija = new Scanner(f);
+            
+            /*
+            yritys olisi kova muokata koodia siten,
+            että se lukee tiedoston
+            muissakin koneissa kuin alkuperäisessä,
+            vaan kun ei toimi niin ei toimi...
+            */
 //            File f = new File(getClass().getResource(filePath).toURI());
 //            lukija = new Scanner(f);
 //            lukija = new Scanner(getClass().getResourceAsStream(filePath));
             
-//            URL url = this.getClass().getResource("/com/path/to/file.txt")
+//            URL url = this.getClass().getResource("/kiilto/kiilto/src/aputiedostoja/omistustentiedot.csv");
 //            File file = new File(url.toURI());
         } catch (Exception e) {
             System.out.println("lukuongelmia @ Poyta:luoLukija,\n syötteellä " + filePath + "\n" + e);

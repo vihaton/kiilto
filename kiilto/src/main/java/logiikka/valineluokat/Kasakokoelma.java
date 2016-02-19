@@ -29,7 +29,7 @@ public class Kasakokoelma {
     }
     
     public Kasakokoelma(int[] karkkeja) {
-        if (karkkeja.length != 6) return;
+        if (karkkeja.length != 6) throw new IllegalArgumentException();
         
         for (int i = 0; i < kasat.length; i++) {
             kasat[i] = new Nallekarkkikasa(i, karkkeja[i]);
