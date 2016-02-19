@@ -48,7 +48,7 @@ public class Pelivelho {
         poyta = new Poyta(pelaajat);
     }
     
-    public void alustaPeli() {
+    private void alustaPeli() {
         int pm = tui.selvitaPelaajienMaara();
         ArrayList<String> nimet = tui.selvitaPelaajienNimet(pm);
 //        voittoValta = tui.selvitaVoittoonTarvittavaValta();
@@ -58,6 +58,10 @@ public class Pelivelho {
         poyta = new Poyta(pelaajat);
     }
 
+    /**
+     * Luo annettujen nimien mukaiset pelaajat.
+     * @param nimet pelaajien nimet.
+     */
     public void luoPelaajat(ArrayList<String> nimet) {
         pelaajat = new ArrayList<>();
         for (int i = 0; i < nimet.size(); i++) {

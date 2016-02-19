@@ -163,4 +163,5 @@ public class PoytaTest {
         assertTrue(pel.getVarauksienMaara()==3); //varausten määrä ei kasva
         assertFalse(varattavanNro != Integer.parseInt(p.getNakyvienNimet().get(0))); //varaus ei lähde pöydästä
     }
+
 }
