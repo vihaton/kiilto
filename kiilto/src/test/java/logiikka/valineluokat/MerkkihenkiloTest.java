@@ -43,6 +43,15 @@ public class MerkkihenkiloTest {
     Merkkihenkilo m;
     
     @Test
+    public void konstruktoritToimivat() {
+        assertTrue(m.getNimi() != null);
+        m = new Merkkihenkilo("homo", new int[]{0,3,3,3,0,0});
+        assertTrue(m.getNimi().equals("homo"));
+        m = new Merkkihenkilo("h", new int[]{0,3,3,3,0,0}, 100);
+        assertTrue(m.getArvo()==100);
+    }
+    
+    @Test
     public void vakuuttuukoOmaisuudestaToimii() {
         Omaisuus om = new Omaisuus();
         om.lisaaOmistus(new Omistus("1", 1, 1, new int[]{0,1,1,1,0,0}));
@@ -56,5 +65,13 @@ public class MerkkihenkiloTest {
         }
         
         assertTrue(m.vaikuttuukoOmaisuudesta(om));
+    }
+    
+    @Test
+    public void getVaatimusToimiiHuonollaSyotteella() {
+        assertTrue(m.getVaatimus(1)==3);
+        assertTrue(m.getVaatimus(0)==0);
+        assertTrue(m.getVaatimus(100)==0);
+        assertTrue(m.getVaatimus(-5)==0);
     }
 }

@@ -200,4 +200,14 @@ public class OmaisuusTest {
         assertTrue(o.onkoPA());
         assertTrue(o2.getEkaOmistus()==omi);
     }
+    
+    @Test
+    public void poistaOmistusToimii() {
+        assertFalse(o.poistaOmistus(null));
+        Omistus omi = new Omistus("nimi", 1, 1, new Kasakokoelma(0));
+        assertFalse(o.poistaOmistus(omi));
+        o.lisaaOmistus(omi);
+        assertTrue(o.poistaOmistus(omi));
+        assertTrue(o.onkoPA());
+    }
 }

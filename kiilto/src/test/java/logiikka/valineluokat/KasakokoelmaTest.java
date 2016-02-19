@@ -113,4 +113,14 @@ public class KasakokoelmaTest {
         k.siirraToiseenKasaan(tyhjatKasat, 0, 100);
         assertTrue("siirretään maksimissaan kaikki mitä löytyy", tyhjatKasat.getKasanKoko(0) == maksajallaKultaa);
     }
+    
+    @Test
+    public void getKarkkienMaaraToimii() {
+        k = new Kasakokoelma(0);
+        assertTrue(k.getKarkkienMaara()==0);
+        k = new Kasakokoelma(2);
+        assertTrue(k.getKarkkienMaara()==25);
+        k.kasvataKasaa(5, -100);
+        assertTrue(k.getKarkkienMaara()==21);
+    }
 }

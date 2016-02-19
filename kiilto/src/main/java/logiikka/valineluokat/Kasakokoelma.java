@@ -69,7 +69,11 @@ public class Kasakokoelma {
     }
 
     public void kasvataKasaa(int i, int maara) {
-        kasat[i].kasvata(maara);
+        if (maara < -this.getKasanKoko(i)) {
+            kasat[i].kasvata(-kasat[i].getKoko());
+        } else {
+            kasat[i].kasvata(maara);
+        }
     }
 
     public void siirraToiseenKasaan(Kasakokoelma karkit, int i, int m) {

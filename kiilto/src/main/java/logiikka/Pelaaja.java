@@ -35,11 +35,18 @@ public class Pelaaja {
         return karkit;
     }
     
+    /**
+     * Asettaa kaikille kuudelle karkkikasalle uudet, annetut, arvot.
+     * 
+     * @param maarat taulukko, jossa on kaikkien kuuden kasan uudet koot.
+     * @return boolean oliko annettu taulukko oikean kokoinen.
+     */
     public boolean setKarkit(int[] maarat) {
         if (maarat.length!=6) return false;
         
         for (int i = 0; i < maarat.length; i++) {
-            karkit.kasvataKasaa(i, maarat[i]);
+            
+            karkit.kasvataKasaa(i, maarat[i] - karkit.getKasanKoko(i));
         }
         return true;
     }
@@ -68,6 +75,12 @@ public class Pelaaja {
         return false;
     }
     
+    /**
+     * Palauttaa kuuden kokoisen taulukon, jossa omistuksen omaisuuskorjattu hinta.
+     * 
+     * @param omistus jonka hintaa tarkastellaan.
+     * @return int[], jossa omistuksen hinta korjattuna pelaajan omaisuuden vaikutuksella.
+     */
     public int[] getHintaOmaisuustulotHuomioituna(Omistus omistus) {
         int[] bonukset = omaisuus.getOmaisuudestaTulevatBonusKarkit();
         int[] hintaOmaisuustulotHuomioituna = new int[6];
@@ -107,7 +120,14 @@ public class Pelaaja {
         return true;
     }
 
-    //luotetaan, että pelaajalla on varaa suorittaa ostos
+    /**
+     * Siirtää annetun omistuksen annetusta omaisuudesta tälle pelaajalle, 
+     * ja ohjaa maksun annettuihin karkkikasoihin. Metodi olettaa, että pelaajalla on varaa suorittaa maksu.
+     * 
+     * @param lahtoOmaisuus omaisuus, josta ostos tehdään.
+     * @param o Omistus, joka ostetaan.
+     * @param markkinat Karkkimarkkinat, joille maksu kohdennetaan.
+     */
     void osta(Omaisuus lahtoOmaisuus, Omistus o, Kasakokoelma markkinat) {
         siirraKarkit(o, markkinat);
         
@@ -187,17 +207,17 @@ public class Pelaaja {
         int[] todellinenHinta = getHintaOmaisuustulotHuomioituna(o);
         
         for (int i = 0; i < todellinenHinta.length; i++) {
-            int karkkia = todellinenHinta[i];
-            if (karkkia > 0) {
-                int pelaajanKarkkikasanKoko = karkit.getKasanKoko(i+1);
+            int karkkihinta = todellinenHinta[i];
+            if (karkkihinta > 0) {
+                int pelaajanKarkkikasanKoko = karkit.getKasanKoko(i);
                 //onko pelaajalla tarpeeksi samaa väriä?
-                if (karkkia > pelaajanKarkkikasanKoko) {
+                if (karkkihinta > pelaajanKarkkikasanKoko) {
                     //korvataan puuttuvat karkit kultaisilla
-                    karkit.siirraToiseenKasaan(markkinat, 0, karkkia-pelaajanKarkkikasanKoko);
+                    karkit.siirraToiseenKasaan(markkinat, 0, karkkihinta-pelaajanKarkkikasanKoko);
                     karkit.siirraToiseenKasaan(markkinat, i, pelaajanKarkkikasanKoko);
                 } else {
                     //pelaajalla on vaara maksaa karkit samanvärisinä
-                    karkit.siirraToiseenKasaan(markkinat, i, karkkia);
+                    karkit.siirraToiseenKasaan(markkinat, i, karkkihinta);
                 }
             }
         }
