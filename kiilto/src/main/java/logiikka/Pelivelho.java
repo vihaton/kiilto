@@ -28,8 +28,8 @@ public class Pelivelho {
      * Alustaa ja pelaa kiilto-pelin.
      */
     public void pelaa() {
-//        alustaPeli();
-        alustaTestiPeli();
+        alustaPeli();
+//        alustaTestiPeli();
 
         while (eiVoittajaa()) {
             pelaaKierros();
@@ -49,12 +49,16 @@ public class Pelivelho {
     }
 
     private void alustaPeli() {
-        int pm = tui.selvitaPelaajienMaara();
-        ArrayList<String> nimet = tui.selvitaPelaajienNimet(pm);
-//        voittoValta = tui.selvitaVoittoonTarvittavaValta();
+        /*
+        tui kamaa
+        */
+//        int pm = tui.selvitaPelaajienMaara();
+//        ArrayList<String> nimet = tui.selvitaPelaajienNimet(pm);
+//        luoPelaajat(nimet);
+        
+        //voittoValta = tui.selvitaVoittoonTarvittavaValta();
         voittoValta = 10;
 
-        luoPelaajat(nimet);
         poyta = new Poyta(pelaajat);
     }
 
@@ -69,6 +73,24 @@ public class Pelivelho {
             this.pelaajat.add(new Pelaaja(nimet.get(i)));
         }
     }
+
+    /**
+     * Luo pelaaja-oliot oletusnimillä.
+     * 
+     * @param pelaajia kuinka monta pelaajaa luodaan.
+     */
+    public void luoPelaajat(int pelaajia) {
+        pelaajat = new ArrayList<>();
+        for (int i = 0; i < pelaajia; i++) {
+            Pelaaja p = new Pelaaja("Pelaaja"+ (i+1));
+            pelaajat.add(p);
+        }
+    }
+    
+    public ArrayList<Pelaaja> getPelaajat() {
+        return pelaajat;
+    }
+
 
     private boolean eiVoittajaa() {
         for (Pelaaja p : pelaajat) {
@@ -174,10 +196,6 @@ public class Pelivelho {
                 break;
             }
         }
-    }
-
-    public ArrayList<Pelaaja> getPelaajat() {
-        return pelaajat;
     }
 
 }
