@@ -70,6 +70,10 @@ checkstyle ym kysyttyä, hieman logiikkaa
 
 ##Viikko 5 *miljoona ziljoona h*
 
-**19.2 3h**
+**18.2 3h**
 
 Viimeiset (toivottavasti) logiikat: varaukset ja merkkihenkilöt näyttäisivät(!) toimivan. Testit vielä kirjoittamatta, mutta eiköhän pääpaino pitäisi tässä vaiheessa periodia olla siinä käyttöliittymässä, josko sen vaikka aloittaisi...
+
+**19.2 12,5h**
+
+Pyydettyjä raportteja (checkstyle ym), koodikatselmoinnit, tuskastuttava (ja hävitty) vääntö tiedoston lukemiseksi toisesta pakkauksesta (2h), GUI alkuun.
