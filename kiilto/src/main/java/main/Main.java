@@ -1,6 +1,6 @@
 package main;
 
-import ui.gui.Kayttoliittyma;
+import ui.gui.AlkuIkkuna;
 import javax.swing.SwingUtilities;
 import ui.*;
 
@@ -15,7 +15,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Kayttoliittyma k = new Kayttoliittyma();
+        AlkuIkkuna k = new AlkuIkkuna();
         SwingUtilities.invokeLater(k);
     }
 

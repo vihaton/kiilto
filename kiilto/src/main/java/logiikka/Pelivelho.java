@@ -1,7 +1,7 @@
 package logiikka;
 
 import java.awt.Color;
-import ui.gui.Pelipoyta;
+import ui.gui.Kayttoliittyma;
 import java.awt.Graphics;
 import java.util.*;
 import ui.*;
@@ -20,7 +20,7 @@ import logiikka.valineluokat.*;
 public class Pelivelho {
 
     private TUI tui;
-    private Pelipoyta pelipoyta;
+    private Kayttoliittyma pelipoyta;
     private ArrayList<Pelaaja> pelaajat;
     private Poyta poyta;
     private int voittoValta;
@@ -31,7 +31,7 @@ public class Pelivelho {
 
     public Pelivelho() {
         tui = new TUI(new Scanner(System.in));
-        pelipoyta = new Pelipoyta(this);
+        pelipoyta = new Kayttoliittyma(this);
         GUIPeli = true;
         pysahdy = false;
         syote = "";
