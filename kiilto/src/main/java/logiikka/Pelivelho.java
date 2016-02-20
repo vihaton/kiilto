@@ -1,5 +1,6 @@
 package logiikka;
 
+import java.awt.Color;
 import ui.gui.Pelipoyta;
 import java.awt.Graphics;
 import java.util.*;
@@ -40,33 +41,39 @@ public class Pelivelho {
      * Alustaa ja pelaa kiilto-pelin.
      */
     public void pelaa() {
-//        alustaTestiPeli(); //tui-peli
-        alustaPeli();
+//        alustaTestiTUIPeli(); //tui-peli
+//        alustaTUIPeli();
+        
+//        pelaaTUI();
+        
+        alustaGUIPeli();
 
-//        while (eiVoittajaa()) {
-//            pelaaKierros();
-//        }
+        pelipoyta.run();
+        
+    }
+    
+    private void pelaaTUI() {
+        while (eiVoittajaa()) {
+            pelaaKierros();
+        }
     }
 
-    private void alustaPeli() {
-        /*
-         tui kamaa
-        
-         int pm = tui.selvitaPelaajienMaara();
-         ArrayList<String> nimet = tui.selvitaPelaajienNimet(pm);
-         luoPelaajat(nimet);
-        
-         voittoValta = tui.selvitaVoittoonTarvittavaValta();
-         */
-
+    private void alustaGUIPeli() {
         voittoValta = 15;
 
         poyta = new Poyta(pelaajat);
-
-        pelipoyta.run();
+    }
+    
+    private void alustaTUIPeli() {
+        int pm = tui.selvitaPelaajienMaara();
+        ArrayList<String> nimet = tui.selvitaPelaajienNimet(pm);
+        luoPelaajat(nimet);
+        
+        voittoValta = tui.selvitaVoittoonTarvittavaValta();
+         
     }
 
-    private void alustaTestiPeli() {
+    private void alustaTestiTUIPeli() {
         GUIPeli = false;
         ArrayList<String> p = new ArrayList<>();
         p.add("varakas");
@@ -229,8 +236,8 @@ public class Pelivelho {
         pysahdy = false;
     }
 
-    public void piirra(Graphics graphics, int i, int i0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void piirra(Graphics graphics) {
+        poyta.piirra(graphics);
     }
 
 }

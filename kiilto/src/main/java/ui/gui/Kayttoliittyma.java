@@ -35,7 +35,7 @@ public class Kayttoliittyma implements Runnable {
     private void luoAlkuvalikko(Container container) {
         GridLayout layout = new GridLayout(5, 0);
         container.setLayout(layout);
-
+        
         JLabel pelaajia = new JLabel("Kuinka monen pelaajan pelin haluaisit pelata?");
         pelaajia.setHorizontalAlignment(JLabel.CENTER);
 

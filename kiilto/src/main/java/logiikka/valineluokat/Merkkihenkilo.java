@@ -1,5 +1,7 @@
 package logiikka.valineluokat;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import logiikka.omaisuusluokat.*;
 
 /**
@@ -91,5 +93,13 @@ public class Merkkihenkilo {
         vaatimus += "" + omaisuusvaatimus[5];
         return "'olen " + nimi + ", arvovallaltani " + arvovaltalisa + " ja vaadin kauppiaalta omaisuutta mallia\n"
                 + vaatimus + "'\n";
+    }
+
+    public void piirra(Graphics graphics, int x, int y) {
+        graphics.setColor(Color.black);
+        graphics.draw3DRect(x, y, 90, 100, true);
+        
+        graphics.setColor(Color.red);
+        graphics.drawString(nimi, x+7, y+13);
     }
 }

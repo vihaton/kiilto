@@ -1,5 +1,7 @@
 package logiikka;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.io.File;
 import java.util.*;
 import logiikka.omaisuusluokat.*;
@@ -258,5 +260,28 @@ public class Poyta {
             karkkimarkkinat.siirraToiseenKasaan(pelaaja.getKarkit(), 0, 1);
         }
     }
+
+    void piirra(Graphics graphics) {
+//        piirraOmistuspakat(graphics);
+        piirraMerkkihenkilot(graphics);
+    }
+    
+    
+    private void piirraOmistuspakat(Graphics graphics) {
+        graphics.setColor(Color.blue);
+        graphics.fill3DRect(10, 120, 100, 100, true);
+        graphics.fill3DRect(10, 250, 100, 100, true);
+        graphics.fill3DRect(10, 380, 100, 100, true);
+    }
+
+    private void piirraMerkkihenkilot(Graphics graphics) {
+        int x = 10;
+        int y = 10;
+        for (Merkkihenkilo mh : merkkihenkilot) {
+            mh.piirra(graphics, x, y);
+            x += 100;
+        }
+    }
+
 
 }
