@@ -3,6 +3,7 @@ package logiikka.valineluokat;
 import java.awt.Color;
 import java.awt.Graphics;
 import logiikka.omaisuusluokat.*;
+import ui.gui.VarinAsettaja;
 
 /**
  *
@@ -13,7 +14,7 @@ import logiikka.omaisuusluokat.*;
  * arvovaltaa, ja ehkä kupan.
  */
 public class Merkkihenkilo {
-
+    
     private String nimi;
     private int[] omaisuusvaatimus;
     private int arvovaltalisa;
@@ -40,15 +41,15 @@ public class Merkkihenkilo {
     public Merkkihenkilo(String nimi, int[] ov) {
         this(nimi, ov, 3);
     }
-
+    
     public Merkkihenkilo(int[] ov) {
         this("homo", ov, 3);
     }
-
+    
     public int getArvo() {
         return arvovaltalisa;
     }
-
+    
     public String getNimi() {
         return nimi;
     }
@@ -75,7 +76,7 @@ public class Merkkihenkilo {
      */
     public boolean vaikuttuukoOmaisuudesta(Omaisuus o) {
         int[] omaisuusBonukset = o.getOmaisuudestaTulevatBonusKarkit();
-
+        
         for (int i = 0; i < omaisuusBonukset.length; i++) {
             if (omaisuusBonukset[i] < omaisuusvaatimus[i]) {
                 return false;
@@ -83,7 +84,7 @@ public class Merkkihenkilo {
         }
         return true;
     }
-
+    
     @Override
     public String toString() {
         String vaatimus = "";
@@ -94,12 +95,27 @@ public class Merkkihenkilo {
         return "'olen " + nimi + ", arvovallaltani " + arvovaltalisa + " ja vaadin kauppiaalta omaisuutta mallia\n"
                 + vaatimus + "'\n";
     }
-
-    public void piirra(Graphics graphics, int x, int y) {
+    
+    public void piirra(Graphics graphics, VarinAsettaja va, int x, int y) {
+        //pohja
         graphics.setColor(Color.black);
         graphics.draw3DRect(x, y, 90, 100, true);
-        
+
+        //nimi
         graphics.setColor(Color.red);
-        graphics.drawString(nimi, x+7, y+13);
+        graphics.drawString("nimi: " + nimi, x + 45, y + 14);
+
+        //arvovalta
+        graphics.drawOval(x + 7, y + 7, 15, 15);
+        graphics.drawString("" + arvovaltalisa, x + 11, y + 20);
+        
+        piirraOmaisuusvaatimus(graphics, va, x + 10, y + 30);
+    }
+    
+    private void piirraOmaisuusvaatimus(Graphics graphics, VarinAsettaja va, int x, int y) {
+        for (int i = 1; i < 6; i++) {
+            va.asetaVari(graphics, i);
+            graphics.drawString("" + omaisuusvaatimus[i], x, y + i * 13);
+        }
     }
 }

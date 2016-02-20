@@ -30,6 +30,12 @@ public class AlkuIkkuna implements Runnable {
 
         alkuvalikko.pack();
         alkuvalikko.setVisible(true);
+        
+        //manuaalisen testaamisen nopeuttamiseksi
+        alkuvalikko.setVisible(false);
+        alkuvalikko.dispose();
+        pelivelho.luoPelaajat(3);
+        pelivelho.pelaa();
     }
 
     private void luoAlkuvalikko(Container container) {

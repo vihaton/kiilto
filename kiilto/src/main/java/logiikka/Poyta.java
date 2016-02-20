@@ -6,6 +6,7 @@ import java.io.File;
 import java.util.*;
 import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
+import ui.gui.VarinAsettaja;
 
 /**
  *
@@ -112,7 +113,7 @@ public class Poyta {
     private Merkkihenkilo luoMerkkihenkilo(String rivi) {
         String[] palat = rivi.split(",", 9);
         int[] vaatimus = new int[6];
-        for (int i = 2; i < 7; i++) {
+        for (int i = 3; i < 8; i++) {
             vaatimus[i - 2] = Integer.parseInt(palat[i]);
         }
         return new Merkkihenkilo(palat[0], vaatimus, Integer.parseInt(palat[1]));
@@ -261,9 +262,9 @@ public class Poyta {
         }
     }
 
-    void piirra(Graphics graphics) {
+    void piirra(Graphics graphics, VarinAsettaja va) {
 //        piirraOmistuspakat(graphics);
-        piirraMerkkihenkilot(graphics);
+        piirraMerkkihenkilot(graphics, va);
     }
     
     
@@ -274,11 +275,11 @@ public class Poyta {
         graphics.fill3DRect(10, 380, 100, 100, true);
     }
 
-    private void piirraMerkkihenkilot(Graphics graphics) {
+    private void piirraMerkkihenkilot(Graphics graphics, VarinAsettaja va) {
         int x = 10;
         int y = 10;
         for (Merkkihenkilo mh : merkkihenkilot) {
-            mh.piirra(graphics, x, y);
+            mh.piirra(graphics, va, x, y);
             x += 100;
         }
     }

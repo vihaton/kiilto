@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.util.*;
 import ui.*;
 import logiikka.valineluokat.*;
+import ui.gui.VarinAsettaja;
 
 /**
  * Luokka vastaa pelin pyörittämisestä. Esimerkiksi pelin alustaminen, vuorojen
@@ -236,8 +237,8 @@ public class Pelivelho {
         pysahdy = false;
     }
 
-    public void piirra(Graphics graphics) {
-        poyta.piirra(graphics);
+    public void piirra(Graphics graphics, VarinAsettaja va) {
+        poyta.piirra(graphics, va);
     }
 
 }
