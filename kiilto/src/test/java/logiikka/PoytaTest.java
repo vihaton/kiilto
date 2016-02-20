@@ -51,14 +51,6 @@ public class PoytaTest {
     }
     
     @Test
-    public void luoOmistuksenOikein() {
-        String esimerkkiRivi = "69,1,punainen,0,0,6,9,0";
-        Omistus oikea = new Omistus("69", 1, "punainen", new Kasakokoelma(esimerkkiRivi.split(",",9)));
-        assertTrue("ei toimi oikealla syötteellä\n" + oikea.toString() +"\n" +p.luoOmistus(esimerkkiRivi).toString(),
-                oikea.toString().equals(p.luoOmistus(esimerkkiRivi).toString()));
-    }
-    
-    @Test
     public void luoOikeanMaaranOmistuksiaAlustuksessa() {
         assertTrue("omistuspakkoja ei ole oikeaa määrää", p.getOmistuspakat().size() == 3);
         Omaisuus pakka1 = p.getOmistuspakat().get(0);
