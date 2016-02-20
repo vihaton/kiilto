@@ -220,11 +220,11 @@ public class Pelivelho {
 
     /**
      * Pelipöytä välittää käyttäjän graafisessa käyttöliittymässä antaman
-     * syötteen pelivelholle ja antaa luvan jatkaa.
+     * syötteen pelivelholle ja antaa luvan jatkaa peliä.
      *
      * @param syote kayttäjän antama syöte.
      */
-    public void jatketaan(String syote) {
+    public void tekstiSyotePelaajalta(String syote) {
         this.syote = syote;
         pysahdy = false;
     }

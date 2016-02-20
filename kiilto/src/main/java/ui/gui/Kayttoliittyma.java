@@ -36,14 +36,21 @@ public class Kayttoliittyma implements Runnable {
         GridLayout layout = new GridLayout(5, 0);
         container.setLayout(layout);
 
-        JLabel pelaajia = new JLabel("Kuinka monta pelaajaa?");
-        pelaajia.setHorizontalTextPosition(JLabel.CENTER);
+        JLabel pelaajia = new JLabel("Kuinka monen pelaajan pelin haluaisit pelata?");
+        pelaajia.setHorizontalAlignment(JLabel.CENTER);
 
         final JButton kaksiPelaa = new JButton("Kaksin aina kaunihimpi");
         final JButton kolmePelaa = new JButton("Kolmin selvästi kovempi");
-        final JButton neljaPelaa = new JButton("Nelistään saa eniten\n nautintoa pelistään");
+        final JButton neljaPelaa = new JButton("Nelistään, saa eniten nautintoa, pelistään");
         final JButton lopeta = new JButton("Lopeta sekoilu, kiitos!");
 
+        /*
+        WIP
+        
+        -mahdollisuus syöttää pelaajien nimet tekstikenttiin
+        */
+        
+        
         lisaaKuuntelijat(kaksiPelaa, kolmePelaa, neljaPelaa, lopeta);
 
         container.add(pelaajia);

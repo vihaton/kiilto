@@ -25,7 +25,8 @@ public class Tekstinsyotonkuuntelija implements ActionListener{
         if (syote == null) {
             syote = "";
         }
-        pelivelho.jatketaan(syote);
+        pelivelho.tekstiSyotePelaajalta(syote);
+        tekstikentta.setText("");
     }
 
 }

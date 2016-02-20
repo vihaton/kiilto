@@ -18,6 +18,7 @@ public class Pelipoyta extends JPanel implements Runnable {
 
     private Pelivelho pelivelho;
     private final JFrame ruutu;
+    private final JLabel infoTekstit;
     private int leveys;
     private int korkeus;
 
@@ -27,6 +28,8 @@ public class Pelipoyta extends JPanel implements Runnable {
         ruutu = new JFrame("Kiilto-the-Game");
         leveys = 1000;
         korkeus = 666;
+        infoTekstit = new JLabel("Tähän ilmestyvät pelin infotekstit", JLabel.CENTER);
+
     }
 
     @Override
@@ -48,12 +51,8 @@ public class Pelipoyta extends JPanel implements Runnable {
         //valikkoriviin voidaan lisätä tarvittavat toiminnallisuusnapit
         valikkorivi.add(luoTekstiIkkuna());
         
-        JLabel info = new JLabel("Tähän tulevat infotekstit", JLabel.CENTER);
-
         ruutu.add(valikkorivi, BorderLayout.SOUTH);
-        ruutu.add(info, BorderLayout.NORTH);
-
-        valikkorivi.setVisible(true);
+        ruutu.add(infoTekstit, BorderLayout.NORTH);
     }
 
     @Override
@@ -67,7 +66,9 @@ public class Pelipoyta extends JPanel implements Runnable {
         tekstinsyotto.setLayout(new GridLayout(2, 1));
 
         JTextField tekstiKentta = new JTextField();
-        JButton nappi = new JButton("Paina minnuu!");
+        tekstiKentta.setHorizontalAlignment(JTextField.CENTER);
+
+        JButton nappi = new JButton("Lähetä käsky! Paina minnuu!");
 
         nappi.addActionListener(new Tekstinsyotonkuuntelija(pelivelho, tekstiKentta));
 
