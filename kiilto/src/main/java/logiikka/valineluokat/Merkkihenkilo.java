@@ -103,19 +103,19 @@ public class Merkkihenkilo {
 
         //nimi
         graphics.setColor(Color.red);
-        graphics.drawString("nimi: " + nimi, x + 45, y + 14);
+        graphics.drawString("nimi: " + nimi, x + 42, y + 14);
 
         //arvovalta
         graphics.drawOval(x + 7, y + 7, 15, 15);
         graphics.drawString("" + arvovaltalisa, x + 11, y + 20);
         
-        piirraOmaisuusvaatimus(graphics, va, x + 10, y + 30);
+        piirraOmaisuusvaatimus(graphics, va, x + 10, y + 25);
     }
     
     private void piirraOmaisuusvaatimus(Graphics graphics, VarinAsettaja va, int x, int y) {
         for (int i = 1; i < 6; i++) {
             va.asetaVari(graphics, i);
-            graphics.drawString("" + omaisuusvaatimus[i], x, y + i * 13);
+            graphics.drawString("" + omaisuusvaatimus[i], x, y + i * 14);
         }
     }
 }

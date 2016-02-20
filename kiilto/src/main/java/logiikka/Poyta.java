@@ -263,26 +263,33 @@ public class Poyta {
     }
 
     void piirra(Graphics graphics, VarinAsettaja va) {
-//        piirraOmistuspakat(graphics);
-        piirraMerkkihenkilot(graphics, va);
-    }
-    
-    
-    private void piirraOmistuspakat(Graphics graphics) {
-        graphics.setColor(Color.blue);
-        graphics.fill3DRect(10, 120, 100, 100, true);
-        graphics.fill3DRect(10, 250, 100, 100, true);
-        graphics.fill3DRect(10, 380, 100, 100, true);
-    }
-
-    private void piirraMerkkihenkilot(Graphics graphics, VarinAsettaja va) {
         int x = 10;
         int y = 10;
+        piirraMerkkihenkilot(graphics, va, x, y);
+        y += 120;
+        piirraOmistuspakat(graphics, x, y);
+        x += 110;
+        piirraNakyvatOmistukset(graphics, va, x, y);
+    }
+
+    private void piirraOmistuspakat(Graphics graphics, int x, int y) {
+        graphics.setColor(Color.blue);
+        for (int i = 0; i < 3; i++) {
+            graphics.fill3DRect(x, y, 100, 125, true);
+            y += 135;
+        }
+    }
+
+    private void piirraMerkkihenkilot(Graphics graphics, VarinAsettaja va, int x, int y) {
         for (Merkkihenkilo mh : merkkihenkilot) {
             mh.piirra(graphics, va, x, y);
             x += 100;
         }
     }
 
-
+    private void piirraNakyvatOmistukset(Graphics graphics, VarinAsettaja va, int x, int y) {
+        for (int i = 2; i > -1; i--) {
+            omistuspakat.get(i).piirraNakyvatOmistukset(graphics, va, x, y);
+            y += 135;
+        }    }
 }
