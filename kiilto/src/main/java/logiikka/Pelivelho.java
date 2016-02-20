@@ -1,64 +1,81 @@
 package logiikka;
 
+import ui.gui.Pelipoyta;
+import java.awt.Graphics;
 import java.util.*;
 import ui.*;
-import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
 
 /**
  * Luokka vastaa pelin pyörittämisestä. Esimerkiksi pelin alustaminen, vuorojen
  * organisoiminen sekä UI.n ja logiikan rajapintana toimiminen ovat sen
  * tehtäviä.
- * 
+ *
+ * Tulevaisuudessa peliin tehdään tekoäly, minkä vuoksi testinomaisia text user
+ * interface -metodeita ja toimintoja säilytetään yhä kommenteissa.
+ *
  * @author xvixvi
  */
 public class Pelivelho {
 
     private TUI tui;
+    private Pelipoyta pelipoyta;
     private ArrayList<Pelaaja> pelaajat;
     private Poyta poyta;
     private int voittoValta;
     private int kierros = 0;
+    private boolean GUIPeli;
+    private boolean pysahdy;
+    private String syote;
 
     public Pelivelho() {
         tui = new TUI(new Scanner(System.in));
+        pelipoyta = new Pelipoyta(this);
+        GUIPeli = true;
+        pysahdy = false;
+        syote = "";
     }
 
     /**
      * Alustaa ja pelaa kiilto-pelin.
      */
     public void pelaa() {
+//        alustaTestiPeli(); //tui-peli
         alustaPeli();
-//        alustaTestiPeli();
 
-        while (eiVoittajaa()) {
-            pelaaKierros();
-        }
-    }
-
-    private void alustaTestiPeli() {
-        ArrayList<String> p = new ArrayList<>();
-        p.add("varakas");
-        p.add("homokaks");
-//        p.add("homo3");
-//        p.add("mr Gandalf");
-        luoPelaajat(p);
-        pelaajat.get(0).setKarkit(new int[]{3, 5, 5, 5, 5, 5});
-        voittoValta = 5;
-        poyta = new Poyta(pelaajat);
+//        while (eiVoittajaa()) {
+//            pelaaKierros();
+//        }
     }
 
     private void alustaPeli() {
         /*
-        tui kamaa
-        */
-//        int pm = tui.selvitaPelaajienMaara();
-//        ArrayList<String> nimet = tui.selvitaPelaajienNimet(pm);
-//        luoPelaajat(nimet);
+         tui kamaa
         
-        //voittoValta = tui.selvitaVoittoonTarvittavaValta();
-        voittoValta = 10;
+         int pm = tui.selvitaPelaajienMaara();
+         ArrayList<String> nimet = tui.selvitaPelaajienNimet(pm);
+         luoPelaajat(nimet);
+        
+         voittoValta = tui.selvitaVoittoonTarvittavaValta();
+         */
 
+        voittoValta = 15;
+
+        poyta = new Poyta(pelaajat);
+
+        pelipoyta.run();
+    }
+
+    private void alustaTestiPeli() {
+        GUIPeli = false;
+        ArrayList<String> p = new ArrayList<>();
+        p.add("varakas");
+        p.add("homokaks");
+        p.add("homo3");
+        p.add("mr Gandalf");
+        luoPelaajat(p);
+        pelaajat.get(0).setKarkit(new int[]{3, 5, 5, 5, 5, 5});
+        voittoValta = 5;
         poyta = new Poyta(pelaajat);
     }
 
@@ -76,21 +93,20 @@ public class Pelivelho {
 
     /**
      * Luo pelaaja-oliot oletusnimillä.
-     * 
+     *
      * @param pelaajia kuinka monta pelaajaa luodaan.
      */
     public void luoPelaajat(int pelaajia) {
         pelaajat = new ArrayList<>();
         for (int i = 0; i < pelaajia; i++) {
-            Pelaaja p = new Pelaaja("Pelaaja"+ (i+1));
+            Pelaaja p = new Pelaaja("Pelaaja" + (i + 1));
             pelaajat.add(p);
         }
     }
-    
+
     public ArrayList<Pelaaja> getPelaajat() {
         return pelaajat;
     }
-
 
     private boolean eiVoittajaa() {
         for (Pelaaja p : pelaajat) {
@@ -119,7 +135,11 @@ public class Pelivelho {
      */
     private void pelaaVuoro(Pelaaja pelaaja) {
         tui.tulostaVuoronAlkuinfot(pelaaja, poyta);
-        int valinta = tui.pelaajanToimi(pelaaja.getNimi());
+
+        int valinta = 0;
+//        valinta = tui.pelaajanToimi(pelaaja.getNimi());
+        valinta = pelipoyta.pelaajanToimi(pelaaja.getNimi());
+        
         if (valinta == 1) { // nostetaan nallekarkkeja
             nostaNallekarkkeja(pelaaja);
         } else if (valinta == 2) { // ostetaan omaisuutta
@@ -196,6 +216,21 @@ public class Pelivelho {
                 break;
             }
         }
+    }
+
+    /**
+     * Pelipöytä välittää käyttäjän graafisessa käyttöliittymässä antaman
+     * syötteen pelivelholle ja antaa luvan jatkaa.
+     *
+     * @param syote kayttäjän antama syöte.
+     */
+    public void jatketaan(String syote) {
+        this.syote = syote;
+        pysahdy = false;
+    }
+
+    public void piirra(Graphics graphics, int i, int i0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
