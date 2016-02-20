@@ -1,7 +1,9 @@
 package logiikka.valineluokat;
 
+import java.awt.Graphics;
 import java.util.*;
 import logiikka.valineluokat.*;
+import ui.gui.VarinAsettaja;
 
 /**
  *
@@ -100,5 +102,12 @@ public class Kasakokoelma {
             summa += kasa.getKoko();
         }
         return summa;
+    }
+
+    public void piirraIsosti(Graphics graphics, VarinAsettaja va, int x, int y) {
+        for (Nallekarkkikasa kasa : kasat) {
+            kasa.piirraIsosti(graphics, va, x, y);
+            y += 65;
+        }
     }
 }

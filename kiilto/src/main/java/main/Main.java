@@ -2,7 +2,6 @@ package main;
 
 import ui.gui.AlkuIkkuna;
 import javax.swing.SwingUtilities;
-import ui.*;
 
 /**
  * Pistetään peli pyörimään!

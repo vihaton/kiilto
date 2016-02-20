@@ -14,11 +14,11 @@ import ui.gui.VarinAsettaja;
  */
 public class Poyta {
 
-    private ArrayList<Pelaaja> pelaajat;
-    private Kasakokoelma karkkimarkkinat;
+    private final ArrayList<Pelaaja> pelaajat;
+    private final Kasakokoelma karkkimarkkinat;
     private ArrayList<Omaisuus> omistuspakat;
-    private Random arpoja = new Random();
-    private ArrayList<Merkkihenkilo> merkkihenkilot;
+    private final Random arpoja = new Random();
+    private final ArrayList<Merkkihenkilo> merkkihenkilot;
 
     Poyta(ArrayList<Pelaaja> pelaajat) {
         this.pelaajat = pelaajat;
@@ -83,7 +83,7 @@ public class Poyta {
         }
     }
 
-    public Omistus luoOmistus(String rivi) {
+    private Omistus luoOmistus(String rivi) {
         String[] palat = rivi.split(",", 9);
         Kasakokoelma hinta = new Kasakokoelma(palat);
         return new Omistus(palat[0], Integer.parseInt(palat[1]), palat[2], hinta);
@@ -93,13 +93,16 @@ public class Poyta {
         return omistuspakat;
     }
 
+    /**
+     * Sekoittaa omistuspakat.
+     */
     public void sekoitaOmistuspakat() {
         for (Omaisuus o : omistuspakat) {
             sekoitaOmistuspakka(o);
         }
     }
 
-    public void sekoitaOmistuspakka(Omaisuus op) {
+    private void sekoitaOmistuspakka(Omaisuus op) {
         op.sekoita(arpoja);
     }
 
@@ -157,7 +160,7 @@ public class Poyta {
         return s;
     }
 
-    Kasakokoelma getMarkkinat() {
+    public Kasakokoelma getMarkkinat() {
         return karkkimarkkinat;
     }
 
@@ -175,7 +178,7 @@ public class Poyta {
      * @param ostonNumero Joka ostetaan.
      * @return boolean Onnistuiko osto.
      */
-    boolean suoritaOsto(Pelaaja pelaaja, int ostonNumero) {
+    public boolean suoritaOsto(Pelaaja pelaaja, int ostonNumero) {
         Omaisuus omistuspakka;
         if (!this.getNakyvienNimet().contains("" + ostonNumero)) {
             return false;
@@ -222,7 +225,7 @@ public class Poyta {
      * @param varauksenNro varattavan varauksen numero (eli nimi).
      * @return boolean, onnistuiko varaaminen.
      */
-    boolean teeVaraus(Pelaaja pelaaja, int varauksenNro) {
+    public boolean teeVaraus(Pelaaja pelaaja, int varauksenNro) {
         if (pelaaja == null) {
             return false;
         }
@@ -262,7 +265,15 @@ public class Poyta {
         }
     }
 
-    void piirra(Graphics graphics, VarinAsettaja va) {
+    /**
+     * Piirtää pöydällä olevat asiat: merkkihenkilöt, omistuspakat, näkyvillä
+     * olevat omistukset ja karkkimarkkinat.
+     *
+     * @param graphics Grafiikat.
+     * @param va VarinAsettaja, hyödyllinen kaveri kun piirretään jotain
+     * karkkeihin liittyvää.
+     */
+    public void piirra(Graphics graphics, VarinAsettaja va) {
         int x = 10;
         int y = 10;
         piirraMerkkihenkilot(graphics, va, x, y);
@@ -270,6 +281,8 @@ public class Poyta {
         piirraOmistuspakat(graphics, x, y);
         x += 110;
         piirraNakyvatOmistukset(graphics, va, x, y);
+        x += 470;
+        karkkimarkkinat.piirraIsosti(graphics, va, x, y);        
     }
 
     private void piirraOmistuspakat(Graphics graphics, int x, int y) {
@@ -291,5 +304,6 @@ public class Poyta {
         for (int i = 2; i > -1; i--) {
             omistuspakat.get(i).piirraNakyvatOmistukset(graphics, va, x, y);
             y += 135;
-        }    }
+        }
+    }
 }

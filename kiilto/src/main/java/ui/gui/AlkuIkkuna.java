@@ -34,7 +34,7 @@ public class AlkuIkkuna implements Runnable {
         //manuaalisen testaamisen nopeuttamiseksi
         alkuvalikko.setVisible(false);
         alkuvalikko.dispose();
-        pelivelho.luoPelaajat(3);
+        pelivelho.luoPelaajat(4);
         pelivelho.pelaa();
     }
 

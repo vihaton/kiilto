@@ -1,5 +1,8 @@
 package logiikka.valineluokat;
 
+import java.awt.Graphics;
+import ui.gui.VarinAsettaja;
+
 /**
  *
  * @author xvixvi
@@ -50,5 +53,23 @@ public class Nallekarkkikasa {
     @Override
     public String toString() {
         return vari.toString().substring(0, 3).toLowerCase() + ":" + koko;
+    }
+
+    void piirraIsosti(Graphics graphics, VarinAsettaja va, int x, int y) {
+        int v = vari.ordinal();
+        int reunaVari = v != 5 ? 5 : 1;
+        
+        for (int i = 0; i < koko; i++) {
+            va.asetaVari(graphics,v);
+            graphics.fillOval(x, y, 42, 42);
+            
+            va.asetaVari(graphics, reunaVari);
+            graphics.drawOval(x, y, 42, 42);
+            
+            
+            x += 3;
+            y -= 3;
+        }
+        graphics.drawString("" + koko + "kpl", x + 5, y + 25);
     }
 }

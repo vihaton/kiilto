@@ -96,6 +96,14 @@ public class Merkkihenkilo {
                 + vaatimus + "'\n";
     }
     
+    /**
+     * Piirtää merkkihenkilön annettuihin koordinaatteihin.
+     * 
+     * @param graphics grafiikat.
+     * @param va varin asettaja auttaa helpottaa nallekarkkien värien asettamisessa.
+     * @param x
+     * @param y 
+     */
     public void piirra(Graphics graphics, VarinAsettaja va, int x, int y) {
         //pohja
         graphics.setColor(Color.black);
