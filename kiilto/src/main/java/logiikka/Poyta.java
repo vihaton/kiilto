@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.*;
 import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
-import ui.gui.VarinAsettaja;
+import ui.gui.PiirtoAvustaja;
 
 /**
  *
@@ -273,7 +273,7 @@ public class Poyta {
      * @param va VarinAsettaja, hyödyllinen kaveri kun piirretään jotain
      * karkkeihin liittyvää.
      */
-    public void piirra(Graphics graphics, VarinAsettaja va) {
+    public void piirra(Graphics graphics, PiirtoAvustaja va) {
         int x = 10;
         int y = 10;
         piirraMerkkihenkilot(graphics, va, x, y);
@@ -281,29 +281,41 @@ public class Poyta {
         piirraOmistuspakat(graphics, x, y);
         x += 110;
         piirraNakyvatOmistukset(graphics, va, x, y);
-        x += 470;
-        karkkimarkkinat.piirraIsosti(graphics, va, x, y);        
+        x += 450;
+        karkkimarkkinat.piirraIsosti(graphics, va, x, y);
+        y = 30;
+        x += 80;
+        piirraPelaajat(graphics, va, x, y);
     }
 
     private void piirraOmistuspakat(Graphics graphics, int x, int y) {
         graphics.setColor(Color.blue);
         for (int i = 0; i < 3; i++) {
-            graphics.fill3DRect(x, y, 100, 125, true);
-            y += 135;
+            if (omistuspakat.get(2-i).getKoko()>4) {
+                graphics.fill3DRect(x, y, 100, 125, true);
+                y += 135;
+            }
         }
     }
 
-    private void piirraMerkkihenkilot(Graphics graphics, VarinAsettaja va, int x, int y) {
+    private void piirraMerkkihenkilot(Graphics graphics, PiirtoAvustaja va, int x, int y) {
         for (Merkkihenkilo mh : merkkihenkilot) {
             mh.piirra(graphics, va, x, y);
             x += 100;
         }
     }
 
-    private void piirraNakyvatOmistukset(Graphics graphics, VarinAsettaja va, int x, int y) {
+    private void piirraNakyvatOmistukset(Graphics graphics, PiirtoAvustaja va, int x, int y) {
         for (int i = 2; i > -1; i--) {
             omistuspakat.get(i).piirraNakyvatOmistukset(graphics, va, x, y);
             y += 135;
         }
     }
+
+    private void piirraPelaajat(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+        for (Pelaaja pelaaja : pelaajat) {
+            pelaaja.piirra(graphics, pa, x, y);
+            y += 140;
+        }
+    } 
 }

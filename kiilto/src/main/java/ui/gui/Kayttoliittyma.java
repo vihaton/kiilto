@@ -7,7 +7,7 @@ import logiikka.Pelivelho;
 import ui.toiminnankuuntelijat.*;
 
 /**
- * Pyörittää pelin graafista esitystä. Hoitaa kaikkien pelin aikana tarvittavien
+ * Ylläpitää pelin graafista esitystä. Hoitaa kaikkien pelin aikana tarvittavien
  * valikkojen ym operoimisen. Delegoi peli-elementtien piirtämisen
  * piirtoalustalle. Keskustelee pelivelhon kanssa, joka hoitaa pelin
  * pyörittämisen.
@@ -57,6 +57,7 @@ public class Kayttoliittyma implements Runnable {
         ruutu.add(piirtoalusta);
         ruutu.add(valikkorivi, BorderLayout.SOUTH);
         ruutu.add(infoTekstit, BorderLayout.NORTH);
+        ruutu.add(new JButton("nappi"), BorderLayout.EAST);
     }
 
     private JPanel luoTekstiIkkuna() {

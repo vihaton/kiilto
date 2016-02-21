@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.*;
 import logiikka.valineluokat.*;
-import ui.gui.VarinAsettaja;
+import ui.gui.PiirtoAvustaja;
 
 /**
  *
@@ -76,24 +76,19 @@ public class Omistus {
         return this.nimi;
     }
 
-    void piirra(Graphics graphics, VarinAsettaja va, int x, int y) {
+    void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         graphics.setColor(Color.blue);
         graphics.drawRect(x, y, 100, 125);
         
-        //nimi
-        graphics.setColor(Color.red);
-        graphics.drawString("nimi: " + nimi, x + 42, y + 14);
-
-        //arvovalta
-        graphics.drawOval(x + 7, y + 7, 15, 15);
-        graphics.drawString("" + arvovalta, x + 11, y + 20);
+        pa.piirraNimi(graphics, nimi, x + 42, y + 14);
+        pa.piirraArvovalta(graphics, arvovalta, x + 7, y + 7);
         
-        piirraOmaisuusvaatimus(graphics, va, x + 10, y + 30);
+        piirraOmaisuusvaatimus(graphics, pa, x + 10, y + 30);
     }
     
-    private void piirraOmaisuusvaatimus(Graphics graphics, VarinAsettaja va, int x, int y) {
+    private void piirraOmaisuusvaatimus(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         for (int i = 1; i < 6; i++) {
-            va.asetaVari(graphics, i);
+            pa.asetaVari(graphics, i);
             graphics.drawString("" + getKasanKoko(i), x, y + i * 15);
         }
     }

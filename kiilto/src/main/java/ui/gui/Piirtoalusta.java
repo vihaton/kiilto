@@ -14,12 +14,12 @@ import logiikka.Pelivelho;
 public class Piirtoalusta extends JPanel {
 
     Pelivelho pelivelho;
-    VarinAsettaja varinAsettaja;
+    PiirtoAvustaja varinAsettaja;
     
     public Piirtoalusta(Pelivelho pv) {
         super.setBackground(Color.gray);
         pelivelho = pv;
-        varinAsettaja = new VarinAsettaja();
+        varinAsettaja = new PiirtoAvustaja();
     }
     
     @Override

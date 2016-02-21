@@ -1,8 +1,11 @@
 package logiikka;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.*;
 import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
+import ui.gui.PiirtoAvustaja;
 
 /**
  *
@@ -60,7 +63,11 @@ public class Pelaaja {
     }
 
     public boolean voittaja(int voittoraja) {
-        return omaisuus.getArvovalta() + getMerkkihenkiloidenArvo() >= voittoraja;
+        return getArvovalta() >= voittoraja;
+    }
+    
+    private int getArvovalta() {
+        return omaisuus.getArvovalta() + getMerkkihenkiloidenArvo();
     }
 
     /**
@@ -237,5 +244,13 @@ public class Pelaaja {
                 }
             }
         }
+    }
+
+    void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+        graphics.setColor(Color.black);
+        graphics.drawString(nimi, x, y);
+        
+        graphics.drawString("pelaajalla arvovaltaa", x, y + 15);
+        pa.piirraArvovalta(graphics, getArvovalta(), x + 135, y + 3);
     }
 }

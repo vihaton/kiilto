@@ -3,7 +3,7 @@ package logiikka.valineluokat;
 import java.awt.Graphics;
 import java.util.*;
 import logiikka.valineluokat.*;
-import ui.gui.VarinAsettaja;
+import ui.gui.PiirtoAvustaja;
 
 /**
  *
@@ -104,9 +104,9 @@ public class Kasakokoelma {
         return summa;
     }
 
-    public void piirraIsosti(Graphics graphics, VarinAsettaja va, int x, int y) {
+    public void piirraIsosti(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         for (Nallekarkkikasa kasa : kasat) {
-            kasa.piirraIsosti(graphics, va, x, y);
+            kasa.piirraIsosti(graphics, pa, x, y);
             y += 65;
         }
     }

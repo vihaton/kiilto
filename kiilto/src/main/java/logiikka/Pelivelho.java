@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import java.util.*;
 import ui.*;
 import logiikka.valineluokat.*;
-import ui.gui.VarinAsettaja;
+import ui.gui.PiirtoAvustaja;
 
 /**
  * Luokka vastaa pelin pyörittämisestä. Esimerkiksi pelin alustaminen, vuorojen
@@ -21,7 +21,7 @@ import ui.gui.VarinAsettaja;
 public class Pelivelho {
 
     private TUI tui;
-    private Kayttoliittyma pelipoyta;
+    private Kayttoliittyma kayttoliittyma;
     private ArrayList<Pelaaja> pelaajat;
     private Poyta poyta;
     private int voittoValta;
@@ -32,7 +32,7 @@ public class Pelivelho {
 
     public Pelivelho() {
         tui = new TUI(new Scanner(System.in));
-        pelipoyta = new Kayttoliittyma(this);
+        kayttoliittyma = new Kayttoliittyma(this);
         GUIPeli = true;
         pysahdy = false;
         syote = "";
@@ -49,7 +49,7 @@ public class Pelivelho {
         
         alustaGUIPeli();
 
-        pelipoyta.run();
+        kayttoliittyma.run();
         
     }
     
@@ -146,7 +146,7 @@ public class Pelivelho {
 
         int valinta = 0;
 //        valinta = tui.pelaajanToimi(pelaaja.getNimi());
-        valinta = pelipoyta.pelaajanToimi(pelaaja.getNimi());
+        valinta = kayttoliittyma.pelaajanToimi(pelaaja.getNimi());
         
         if (valinta == 1) { // nostetaan nallekarkkeja
             nostaNallekarkkeja(pelaaja);
@@ -237,8 +237,8 @@ public class Pelivelho {
         pysahdy = false;
     }
 
-    public void piirra(Graphics graphics, VarinAsettaja va) {
-        poyta.piirra(graphics, va);
+    public void piirra(Graphics graphics, PiirtoAvustaja pa) {
+        poyta.piirra(graphics, pa);
     }
 
 }

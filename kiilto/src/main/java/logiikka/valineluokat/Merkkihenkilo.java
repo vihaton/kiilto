@@ -3,7 +3,7 @@ package logiikka.valineluokat;
 import java.awt.Color;
 import java.awt.Graphics;
 import logiikka.omaisuusluokat.*;
-import ui.gui.VarinAsettaja;
+import ui.gui.PiirtoAvustaja;
 
 /**
  *
@@ -100,27 +100,26 @@ public class Merkkihenkilo {
      * Piirtää merkkihenkilön annettuihin koordinaatteihin.
      * 
      * @param graphics grafiikat.
-     * @param va varin asettaja auttaa helpottaa nallekarkkien värien asettamisessa.
+     * @param pa varin asettaja auttaa helpottaa nallekarkkien värien asettamisessa.
      * @param x
      * @param y 
      */
-    public void piirra(Graphics graphics, VarinAsettaja va, int x, int y) {
+    public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         //pohja
-        graphics.setColor(Color.black);
+        graphics.setColor(Color.yellow);
         graphics.draw3DRect(x, y, 90, 100, true);
 
         //nimi
-        graphics.setColor(Color.red);
-        graphics.drawString("nimi: " + nimi, x + 42, y + 14);
+        pa.piirraNimi(graphics, nimi, x + 40, y + 14);
 
         //arvovalta
-        graphics.drawOval(x + 7, y + 7, 15, 15);
+        graphics.drawOval(x + 7, y + 7, 16, 16);
         graphics.drawString("" + arvovaltalisa, x + 11, y + 20);
         
-        piirraOmaisuusvaatimus(graphics, va, x + 10, y + 25);
+        piirraOmaisuusvaatimus(graphics, pa, x + 10, y + 25);
     }
     
-    private void piirraOmaisuusvaatimus(Graphics graphics, VarinAsettaja va, int x, int y) {
+    private void piirraOmaisuusvaatimus(Graphics graphics, PiirtoAvustaja va, int x, int y) {
         for (int i = 1; i < 6; i++) {
             va.asetaVari(graphics, i);
             graphics.drawString("" + omaisuusvaatimus[i], x, y + i * 14);

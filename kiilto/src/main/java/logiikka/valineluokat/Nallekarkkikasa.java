@@ -1,7 +1,7 @@
 package logiikka.valineluokat;
 
 import java.awt.Graphics;
-import ui.gui.VarinAsettaja;
+import ui.gui.PiirtoAvustaja;
 
 /**
  *
@@ -55,15 +55,15 @@ public class Nallekarkkikasa {
         return vari.toString().substring(0, 3).toLowerCase() + ":" + koko;
     }
 
-    void piirraIsosti(Graphics graphics, VarinAsettaja va, int x, int y) {
+    void piirraIsosti(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         int v = vari.ordinal();
         int reunaVari = v != 5 ? 5 : 1;
         
         for (int i = 0; i < koko; i++) {
-            va.asetaVari(graphics,v);
+            pa.asetaVari(graphics,v);
             graphics.fillOval(x, y, 42, 42);
             
-            va.asetaVari(graphics, reunaVari);
+            pa.asetaVari(graphics, reunaVari);
             graphics.drawOval(x, y, 42, 42);
             
             
