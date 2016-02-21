@@ -70,6 +70,6 @@ public class Nallekarkkikasa {
             x += 3;
             y -= 3;
         }
-        graphics.drawString("" + koko + "kpl", x + 5, y + 25);
+        graphics.drawString("" + koko + "kpl", x + 5, y + 27);
     }
 }

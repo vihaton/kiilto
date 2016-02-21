@@ -109,13 +109,8 @@ public class Merkkihenkilo {
         graphics.setColor(Color.yellow);
         graphics.draw3DRect(x, y, 90, 100, true);
 
-        //nimi
         pa.piirraNimi(graphics, nimi, x + 40, y + 14);
-
-        //arvovalta
-        graphics.drawOval(x + 7, y + 7, 16, 16);
-        graphics.drawString("" + arvovaltalisa, x + 11, y + 20);
-        
+        pa.piirraArvovalta(graphics, arvovaltalisa, x + 5, y + 5);
         piirraOmaisuusvaatimus(graphics, pa, x + 10, y + 25);
     }
     

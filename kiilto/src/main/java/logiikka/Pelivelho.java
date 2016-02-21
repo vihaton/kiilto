@@ -48,6 +48,8 @@ public class Pelivelho {
 //        pelaaTUI();
         
         alustaGUIPeli();
+        
+        poyta.luoTestitilanneKeskipelista();
 
         kayttoliittyma.run();
         

@@ -250,7 +250,26 @@ public class Pelaaja {
         graphics.setColor(Color.black);
         graphics.drawString(nimi, x, y);
         
-        graphics.drawString("pelaajalla arvovaltaa", x, y + 15);
-        pa.piirraArvovalta(graphics, getArvovalta(), x + 135, y + 3);
+        graphics.drawString("pelaajalla arvovaltapisteitä " + getArvovalta(), x, y + 15);
+        
+        piirraOmaisuus(graphics, pa, x, y + 25);
+    }
+
+    private void piirraOmaisuus(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+        for (int i = 1; i < 6; i++) {
+            piirraYhdenVarisetOmistukset(graphics, pa, x, y, i);
+            x += 50;
+        }
+    }
+
+    private void piirraYhdenVarisetOmistukset(Graphics graphics, PiirtoAvustaja pa, int x, int y, int n) {
+        for (int i = 0; i < omaisuus.getKoko(); i++) {
+            Omistus omistus = omaisuus.getOmistusIndeksista(i);
+            if (omistus.getLisaKarkinVariNumerona() == n) {
+                omistus.piirraPelaajanOmistus(graphics, pa, x, y, n);
+                x += 3;
+                y += 15;
+            }
+        }
     }
 }

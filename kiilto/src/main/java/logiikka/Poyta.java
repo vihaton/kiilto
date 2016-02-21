@@ -274,10 +274,11 @@ public class Poyta {
      * karkkeihin liittyvää.
      */
     public void piirra(Graphics graphics, PiirtoAvustaja va) {
-        int x = 10;
+        int x = 20;
         int y = 10;
         piirraMerkkihenkilot(graphics, va, x, y);
         y += 120;
+        x -= 10;
         piirraOmistuspakat(graphics, x, y);
         x += 110;
         piirraNakyvatOmistukset(graphics, va, x, y);
@@ -289,9 +290,9 @@ public class Poyta {
     }
 
     private void piirraOmistuspakat(Graphics graphics, int x, int y) {
-        graphics.setColor(Color.blue);
+        graphics.setColor(Color.PINK);
         for (int i = 0; i < 3; i++) {
-            if (omistuspakat.get(2-i).getKoko()>4) {
+            if (omistuspakat.get(2 - i).getKoko() > 4) {
                 graphics.fill3DRect(x, y, 100, 125, true);
                 y += 135;
             }
@@ -317,5 +318,24 @@ public class Poyta {
             pelaaja.piirra(graphics, pa, x, y);
             y += 140;
         }
-    } 
+    }
+
+    void luoTestitilanneKeskipelista() {
+        for (Pelaaja pelaaja : pelaajat) {
+
+            for (int i = 0; i < 6; i++) {
+                karkkimarkkinat.siirraToiseenKasaan(pelaaja.getKarkit(), i, 2);
+            }
+
+            ArrayList<String> nakyvat = omistuspakat.get(2).getPaallimmaistenNimet();
+            for (String nakyva : nakyvat) {
+                teeVaraus(pelaaja, Integer.parseInt(nakyva));
+            }
+
+            nakyvat = omistuspakat.get(0).getPaallimmaistenNimet();
+            for (String nakyva : nakyvat) {
+                suoritaOsto(pelaaja, Integer.parseInt(nakyva));
+            }
+        }
+    }
 }

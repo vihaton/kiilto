@@ -30,7 +30,7 @@ public class Kayttoliittyma implements Runnable {
         this.pelivelho = pv;
         piirtoalusta = new Piirtoalusta(pv);
         ruutu = new JFrame("Kiilto-the-Game");
-        leveys = 1000;
+        leveys = 1200;
         korkeus = 666;
         infoTekstit = new JLabel("Tähän ilmestyvät pelin infotekstit", JLabel.CENTER);
         valikkorivi = new JPanel();

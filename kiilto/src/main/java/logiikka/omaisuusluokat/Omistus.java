@@ -52,13 +52,7 @@ public class Omistus {
     }
 
     public int getLisaKarkinVariNumerona() {
-        Vari[] varit = Vari.values();
-        for (int i = 0; i < varit.length; i++) {
-            if (varit[i] == lisaKarkinVari) {
-                return i;
-            }
-        }
-        return -1;
+        return lisaKarkinVari.ordinal();
     }
 
     public int getArvovalta() {
@@ -76,20 +70,34 @@ public class Omistus {
         return this.nimi;
     }
 
-    void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
-        graphics.setColor(Color.blue);
+    public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+        pa.asetaVari(graphics, getLisaKarkinVariNumerona());
+        graphics.fillRect(x, y, 100, 25);
+        graphics.setColor(Color.black);
         graphics.drawRect(x, y, 100, 125);
-        
-        pa.piirraNimi(graphics, nimi, x + 42, y + 14);
-        pa.piirraArvovalta(graphics, arvovalta, x + 7, y + 7);
-        
-        piirraOmaisuusvaatimus(graphics, pa, x + 10, y + 30);
+
+        pa.asetaReunavari(graphics, getLisaKarkinVariNumerona());
+        pa.piirraNimi(graphics, nimi, x + 42, y + 16);
+        pa.piirraArvovalta(graphics, arvovalta, x + 7, y + 5);
+
+        piirraHinta(graphics, pa, x + 10, y + 30);
     }
-    
-    private void piirraOmaisuusvaatimus(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+
+    private void piirraHinta(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         for (int i = 1; i < 6; i++) {
             pa.asetaVari(graphics, i);
             graphics.drawString("" + getKasanKoko(i), x, y + i * 15);
         }
+    }
+
+    public void piirraPelaajanOmistus(Graphics graphics, PiirtoAvustaja pa, int x, int y, int vari) {
+        graphics.setColor(Color.gray);
+        graphics.fillRect(x, y, 40, 50);
+        pa.asetaVari(graphics, vari);
+        graphics.fillRect(x, y, 40, 17);
+        graphics.setColor(Color.black);
+        graphics.drawRect(x, y, 40, 50);
+        pa.asetaReunavari(graphics, vari);
+        pa.piirraArvovaltaPieni(graphics, arvovalta, x + 4, y + 3);
     }
 }

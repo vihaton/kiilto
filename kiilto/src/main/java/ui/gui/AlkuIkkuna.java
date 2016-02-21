@@ -25,20 +25,21 @@ public class AlkuIkkuna implements Runnable {
         alkuvalikko = new JFrame();
         alkuvalikko.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         alkuvalikko.setPreferredSize(new Dimension(350, 400));
+        alkuvalikko.setLocation(500,200);
 
-        luoAlkuvalikko(alkuvalikko);
+        luoSisalto(alkuvalikko);
 
         alkuvalikko.pack();
         alkuvalikko.setVisible(true);
         
-        //manuaalisen testaamisen nopeuttamiseksi
+        //käyttöliittymän manuaalisen testaamisen nopeuttamiseksi
         alkuvalikko.setVisible(false);
         alkuvalikko.dispose();
         pelivelho.luoPelaajat(4);
         pelivelho.pelaa();
     }
 
-    private void luoAlkuvalikko(Container container) {
+    private void luoSisalto(Container container) {
         GridLayout layout = new GridLayout(5, 0);
         container.setLayout(layout);
         

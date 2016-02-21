@@ -36,14 +36,23 @@ public class PiirtoAvustaja {
             g.setColor(Color.black);
         }
     }
+    
+    public void asetaReunavari(Graphics g, int i) {
+        int reunaVari = i != 5 ? 5 : 1;
+        asetaVari(g, reunaVari);
+    }
 
     public void piirraNimi(Graphics graphics, String nimi, int x, int y) {
-        graphics.setColor(Color.black);
         graphics.drawString("nimi: " + nimi, x, y);
     }
 
     public void piirraArvovalta(Graphics graphics, int arvovalta, int x, int y) {
-        graphics.drawOval(x, y, 16, 16);
-        graphics.drawString("" + arvovalta, x + 4, y + 13);
+        graphics.drawOval(x, y, 17, 16);
+        graphics.drawString("" + arvovalta, x + 5, y + 13);
+    }
+
+    public void piirraArvovaltaPieni(Graphics graphics, int arvovalta, int x, int y) {
+        graphics.drawOval(x, y, 13, 12);
+        graphics.drawString("" + arvovalta, x + 3, y + 11);
     }
 }
