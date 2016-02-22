@@ -13,17 +13,17 @@ import logiikka.Pelivelho;
 public class Piirtoalusta extends JPanel {
 
     Pelivelho pelivelho;
-    PiirtoAvustaja varinAsettaja;
+    PiirtoAvustaja piirtoAvustaja;
 
-    public Piirtoalusta(Pelivelho pv) {
+    public Piirtoalusta(Pelivelho pv, PiirtoAvustaja pa) {
         super.setBackground(Color.lightGray);
         pelivelho = pv;
-        varinAsettaja = new PiirtoAvustaja();
+        piirtoAvustaja = pa;
     }
 
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-        pelivelho.piirra(graphics, varinAsettaja);
+        pelivelho.piirra(graphics, piirtoAvustaja);
     }
 }

@@ -290,10 +290,13 @@ public class Poyta {
     }
 
     private void piirraOmistuspakat(Graphics graphics, int x, int y) {
-        graphics.setColor(Color.PINK);
         for (int i = 0; i < 3; i++) {
             if (omistuspakat.get(2 - i).getKoko() > 4) {
+                graphics.setColor(Color.gray);
                 graphics.fill3DRect(x, y, 100, 125, true);
+                graphics.setColor(Color.black);
+                graphics.drawString("KIILTO", x + 33, y + 66);
+                graphics.drawOval(x + 22, y + 48, 55, 25);
                 y += 135;
             }
         }

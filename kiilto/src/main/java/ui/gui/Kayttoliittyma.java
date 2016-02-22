@@ -23,15 +23,17 @@ public class Kayttoliittyma implements Runnable {
     private final JLabel infoTekstit;
     private final JPanel valikkorivi;
     private final Piirtoalusta piirtoalusta;
+    private final PiirtoAvustaja piirtoAvustaja;
     private final int leveys;
     private final int korkeus;
 
     public Kayttoliittyma(Pelivelho pv) {
         this.pelivelho = pv;
-        piirtoalusta = new Piirtoalusta(pv);
+        piirtoAvustaja = new PiirtoAvustaja();
+        piirtoalusta = new Piirtoalusta(pv, piirtoAvustaja);
         ruutu = new JFrame("Kiilto-the-Game");
         leveys = 1210;
-        korkeus = 700;
+        korkeus = 725;
         infoTekstit = new JLabel("Tähän ilmestyvät pelin infotekstit", JLabel.CENTER);
         valikkorivi = new JPanel();
     }
@@ -40,6 +42,7 @@ public class Kayttoliittyma implements Runnable {
     public void run() {
         ruutu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         ruutu.setPreferredSize(new Dimension(leveys, korkeus));
+        ruutu.setLocation(0, 0);
 
         luoKomponentit();
 
@@ -59,7 +62,83 @@ public class Kayttoliittyma implements Runnable {
         ruutu.add(valikkorivi, BorderLayout.SOUTH);
         ruutu.add(infoTekstit, BorderLayout.NORTH);
     }
+    
+    private JPanel luoPelaajanToimintanapit() {
+        JPanel toimiNapit = new JPanel(new GridLayout(1, 3));
 
+        JButton nosta = new JButton("Nostan nallekarkkeja");
+        JButton osta = new JButton("Ostan omaisuutta");
+        JButton varaa = new JButton("Varaan omaisuutta");
+
+        toimiNapit.add(nosta);
+        toimiNapit.add(osta);
+        toimiNapit.add(varaa);
+
+        return toimiNapit;
+    }
+
+    private JPanel luoValintavalineet() {
+        JPanel valinnat = new JPanel(new GridLayout(1, 0));
+        
+        valinnat.add(luoKarkinvalitsemisnappulat());
+        valinnat.add(luoValintanapit());
+        
+        return valinnat;
+    }
+    
+    private JPanel luoKarkinvalitsemisnappulat() {
+        JPanel kaikkiNappulat = new JPanel(new GridLayout(1, 5));
+        
+        for (int i = 1; i < 6; i++) {
+            JPanel nappulat = new JPanel(new GridLayout(3, 1));
+            
+            JLabel kentta = new JLabel("0");
+            kentta.setHorizontalAlignment(SwingConstants.CENTER);
+            piirtoAvustaja.asetaNappulanVari(kentta, i);
+            
+            JButton plus = new JButton("+");
+            piirtoAvustaja.asetaNappulanVari(plus, i);
+            
+            JButton miinus = new JButton("-");
+            piirtoAvustaja.asetaNappulanVari(miinus, i);
+            
+            //kuuntelijat
+            
+            nappulat.add(kentta);
+            nappulat.add(plus);
+            nappulat.add(miinus);
+            kaikkiNappulat.add(nappulat);
+        }
+        
+        return kaikkiNappulat;
+    }
+    
+    private JPanel luoValintanapit() {
+        JPanel kaikkiNapit = new JPanel(new GridLayout(1, 0));        
+        JPanel valintanapit = new JPanel(new GridLayout(2, 3));
+        
+        JLabel valitsin = new JLabel("");
+        JButton valitse = new JButton("tämä!");
+        JButton vasen = new JButton("<--");
+        JButton oikea = new JButton("-->");
+        
+        //kuuntelijat
+                
+        valintanapit.add(valitsin);
+        valintanapit.add(valitse);
+        valintanapit.add(vasen);
+        valintanapit.add(oikea);
+        
+        kaikkiNapit.add(valintanapit);
+        
+        JButton takaisin = new JButton("takaisin");
+        //kuuntelija
+        
+        kaikkiNapit.add(takaisin);
+        
+        return kaikkiNapit;
+    }
+    
     private JPanel luoTekstinsyotto() {
         JPanel tekstinsyotto = new JPanel();
         tekstinsyotto.setLayout(new GridLayout(2, 1));
@@ -90,47 +169,5 @@ public class Kayttoliittyma implements Runnable {
         valikkorivi.add(luoPelaajanToimintanapit());
 
         return 1;
-    }
-
-    private JPanel luoPelaajanToimintanapit() {
-        JPanel toimiNapit = new JPanel(new GridLayout(1, 3));
-
-        JButton nosta = new JButton("Nostan nallekarkkeja");
-        JButton osta = new JButton("Ostan omaisuutta");
-        JButton varaa = new JButton("Varaan omaisuutta");
-
-        toimiNapit.add(nosta);
-        toimiNapit.add(osta);
-        toimiNapit.add(varaa);
-        
-        return toimiNapit;
-    }
-
-    private JPanel luoValintanapit() {
-        JPanel valintanapit = new JPanel(new GridLayout(2, 3));
-        
-        JButton plus = new JButton("+");
-        JButton miinus = new JButton("-");
-        JLabel valitsin = new JLabel("");
-        JButton valitse = new JButton("valitse");
-        
-        valintanapit.add(plus);
-        valintanapit.add(valitsin);
-        valintanapit.add(miinus);
-        valintanapit.add(valitse);
-        
-        
-
-        
-        return valintanapit;
-    }
-
-    private JPanel luoValintavalineet() {
-        JPanel valinnat = new JPanel(new GridLayout(1, 0));
-        
-        valinnat.add(luoValintanapit());
-        valinnat.add(luoTekstinsyotto());
-        
-        return valinnat;
     }
 }
