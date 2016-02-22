@@ -9,7 +9,7 @@ import ui.toiminnankuuntelijat.*;
 /**
  * Ylläpitää pelin graafista esitystä. Hoitaa kaikkien pelin aikana tarvittavien
  * valikkojen ym operoimisen. Delegoi peli-elementtien piirtämisen
- * piirtoalustalle. Keskustelee pelivelhon kanssa, joka hoitaa pelin
+ * piirtoalustalle. Keskustelee pelivelhon kanssa, joka hoitaa pelin logiikan
  * pyörittämisen.
  *
  * @see logiikka.Pelivelho
@@ -52,8 +52,8 @@ public class Kayttoliittyma implements Runnable {
         valikkorivi.setLayout(new GridLayout(1, 0));
 
         //valikkoriviin voidaan lisätä tarvittavat toiminnallisuusnapit
-        valikkorivi.add(luoPelaajanToimiNapit());
-        valikkorivi.add(luoTekstinsyotto());
+        valikkorivi.add(luoPelaajanToimintanapit());
+        valikkorivi.add(luoValintavalineet());
 
         ruutu.add(piirtoalusta);
         ruutu.add(valikkorivi, BorderLayout.SOUTH);
@@ -87,24 +87,50 @@ public class Kayttoliittyma implements Runnable {
     public int pelaajanToimi(String nimi) {
         infoTekstit.setText("Mitä haluat tehdä " + nimi + "? Valitse vuoron toiminto!");
 
-        valikkorivi.add(luoPelaajanToimiNapit());
+        valikkorivi.add(luoPelaajanToimintanapit());
 
         return 1;
     }
 
-    private JPanel luoPelaajanToimiNapit() {
+    private JPanel luoPelaajanToimintanapit() {
         JPanel toimiNapit = new JPanel(new GridLayout(1, 3));
 
         JButton nosta = new JButton("Nostan nallekarkkeja");
-        JButton osta = new JButton("Ostetan omaisuutta");
+        JButton osta = new JButton("Ostan omaisuutta");
         JButton varaa = new JButton("Varaan omaisuutta");
 
         toimiNapit.add(nosta);
         toimiNapit.add(osta);
         toimiNapit.add(varaa);
-
-        toimiNapit.setVisible(false);
-
+        
         return toimiNapit;
+    }
+
+    private JPanel luoValintanapit() {
+        JPanel valintanapit = new JPanel(new GridLayout(2, 3));
+        
+        JButton plus = new JButton("+");
+        JButton miinus = new JButton("-");
+        JLabel valitsin = new JLabel("");
+        JButton valitse = new JButton("valitse");
+        
+        valintanapit.add(plus);
+        valintanapit.add(valitsin);
+        valintanapit.add(miinus);
+        valintanapit.add(valitse);
+        
+        
+
+        
+        return valintanapit;
+    }
+
+    private JPanel luoValintavalineet() {
+        JPanel valinnat = new JPanel(new GridLayout(1, 0));
+        
+        valinnat.add(luoValintanapit());
+        valinnat.add(luoTekstinsyotto());
+        
+        return valinnat;
     }
 }

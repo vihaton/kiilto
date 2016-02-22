@@ -264,7 +264,7 @@ public class Pelaaja {
         piirraOmaisuus(graphics, pa, x, y);
         x += 275;
         piirraVaraukset(graphics, pa, x, y);
-        y -= 25;
+        y -= 28;
         karkit.piirraPelaajanKarkit(graphics, pa, x, y);
     }
 
