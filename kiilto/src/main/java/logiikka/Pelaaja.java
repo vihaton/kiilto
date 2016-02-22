@@ -252,24 +252,40 @@ public class Pelaaja {
         
         graphics.drawString("pelaajalla arvovaltapisteitä " + getArvovalta(), x, y + 15);
         
-        piirraOmaisuus(graphics, pa, x, y + 25);
+        y += 25;
+        piirraOmaisuus(graphics, pa, x, y);
+        x += 275;
+        piirraVaraukset(graphics, pa, x, y);
+        y -= 25;
+        karkit.piirraPelaajanKarkit(graphics, pa, x, y);
     }
 
     private void piirraOmaisuus(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         for (int i = 1; i < 6; i++) {
-            piirraYhdenVarisetOmistukset(graphics, pa, x, y, i);
-            x += 50;
+            if (piirraYhdenVarisetOmistukset(graphics, pa, x, y, i)) {
+                x += 50;
+            }
         }
     }
 
-    private void piirraYhdenVarisetOmistukset(Graphics graphics, PiirtoAvustaja pa, int x, int y, int n) {
+    private boolean piirraYhdenVarisetOmistukset(Graphics graphics, PiirtoAvustaja pa, int x, int y, int n) {
+        boolean kyllaLoytyy = false;
         for (int i = 0; i < omaisuus.getKoko(); i++) {
             Omistus omistus = omaisuus.getOmistusIndeksista(i);
             if (omistus.getLisaKarkinVariNumerona() == n) {
+                kyllaLoytyy = true;
                 omistus.piirraPelaajanOmistus(graphics, pa, x, y, n);
                 x += 3;
                 y += 15;
             }
+        }
+        return kyllaLoytyy;
+    }
+
+    private void piirraVaraukset(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+        for (Varaus varaus : varaukset) {
+            varaus.piirra(graphics, pa, x, y);
+            x += 90;
         }
     }
 }

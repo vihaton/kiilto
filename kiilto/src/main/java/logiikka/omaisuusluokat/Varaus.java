@@ -1,6 +1,8 @@
 package logiikka.omaisuusluokat;
 
+import java.awt.Graphics;
 import logiikka.valineluokat.Kasakokoelma;
+import ui.gui.PiirtoAvustaja;
 
 /**
  *
@@ -10,7 +12,7 @@ import logiikka.valineluokat.Kasakokoelma;
  */
 public class Varaus {
 
-    private Omistus omistus;
+    private final Omistus omistus;
 
     public Varaus(Omistus o) {
         omistus = o;
@@ -27,5 +29,17 @@ public class Varaus {
     @Override
     public String toString() {
         return "**varaus**\n" + omistus.toString() + "\n**********";
+    }
+
+    /**
+     * Piirtää pelaajan varauksen.
+     * 
+     * @param graphics
+     * @param pa piirtoavustaja.
+     * @param x
+     * @param y 
+     */
+    public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+        omistus.piirra(graphics, pa, x, y, false);
     }
 }

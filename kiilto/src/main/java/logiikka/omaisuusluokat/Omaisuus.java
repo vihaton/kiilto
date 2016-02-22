@@ -148,7 +148,7 @@ public class Omaisuus {
         ArrayList<Omistus> paallimmaiset = getPaallimmaiset();
         
         for (Omistus omistus : paallimmaiset) {
-            omistus.piirra(graphics, pa, x, y);
+            omistus.piirra(graphics, pa, x, y, true);
             x += 110;
         }
     }

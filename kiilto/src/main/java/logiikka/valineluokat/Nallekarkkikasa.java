@@ -54,22 +54,48 @@ public class Nallekarkkikasa {
     public String toString() {
         return vari.toString().substring(0, 3).toLowerCase() + ":" + koko;
     }
-
-    void piirraIsosti(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+    
+    
+    /**
+     * Piirtää nallekarkkikasan.
+     * 
+     * @param graphics
+     * @param pa piirtoavustaja.
+     * @param x
+     * @param y
+     * @param iso piirretäänkö isoja karkkeja?
+     */
+    public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y, boolean iso) {
+        int d = 22;
+        if (iso) {
+            d = 42;
+        }
+        int kerrosSiirtyma = 2;
+        if (iso) {
+            kerrosSiirtyma++;
+        }
         int v = vari.ordinal();
         int reunaVari = v != 5 ? 5 : 1;
         
         for (int i = 0; i < koko; i++) {
             pa.asetaVari(graphics,v);
-            graphics.fillOval(x, y, 42, 42);
+            graphics.fillOval(x, y, d, d);
             
             pa.asetaVari(graphics, reunaVari);
-            graphics.drawOval(x, y, 42, 42);
+            graphics.drawOval(x, y, d, d);
             
             
-            x += 3;
-            y -= 3;
+            x += kerrosSiirtyma;
+            y -= kerrosSiirtyma;
         }
-        graphics.drawString("" + koko + "kpl", x + 5, y + 27);
+        if (koko == 0) {
+            return;
+        }
+        
+        if (iso) {
+            graphics.drawString("" + koko + "kpl", x + d / 8, y + 2 * d / 3);
+        } else {
+            graphics.drawString("" + koko, x + d / 4, y + 4 * d / 5);
+        }
     }
 }

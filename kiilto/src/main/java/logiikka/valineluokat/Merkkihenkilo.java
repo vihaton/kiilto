@@ -105,7 +105,8 @@ public class Merkkihenkilo {
      * @param y 
      */
     public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
-        //pohja
+        graphics.setColor(Color.darkGray);
+        graphics.fill3DRect(x, y, 90, 100, true);
         graphics.setColor(Color.yellow);
         graphics.draw3DRect(x, y, 90, 100, true);
 

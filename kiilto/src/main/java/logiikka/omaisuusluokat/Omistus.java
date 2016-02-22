@@ -70,17 +70,35 @@ public class Omistus {
         return this.nimi;
     }
 
-    public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+    /**
+     * Piirtää pöydällä näkyvillä olevan, pelaajille kuulumattoman omistuksen.
+     * 
+     * @param graphics
+     * @param pa piirtoavustaja.
+     * @param x
+     * @param y 
+     * @param iso piirretäänkö iso vai pieni omistus.
+     */
+    public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y, boolean iso) {
+        int leveys = 100;
+        int korkeus = 125;
+        if (!iso) {
+            leveys = 80;
+            korkeus = 100;
+        }
+        
+        graphics.setColor(Color.gray);
+        graphics.fillRect(x, y, leveys, korkeus);
         pa.asetaVari(graphics, getLisaKarkinVariNumerona());
-        graphics.fillRect(x, y, 100, 25);
+        graphics.fillRect(x, y, leveys, korkeus/5);
         graphics.setColor(Color.black);
-        graphics.drawRect(x, y, 100, 125);
+        graphics.drawRect(x, y, leveys, korkeus);
 
         pa.asetaReunavari(graphics, getLisaKarkinVariNumerona());
-        pa.piirraNimi(graphics, nimi, x + 42, y + 16);
-        pa.piirraArvovalta(graphics, arvovalta, x + 7, y + 5);
+        pa.piirraNimi(graphics, nimi, x + leveys / 3, y + korkeus / 7);
+        pa.piirraArvovalta(graphics, arvovalta, x + korkeus / 17, y + korkeus / 26);
 
-        piirraHinta(graphics, pa, x + 10, y + 30);
+        piirraHinta(graphics, pa, x + leveys / 10, y + korkeus / 5);
     }
 
     private void piirraHinta(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
@@ -90,6 +108,16 @@ public class Omistus {
         }
     }
 
+    /**
+     * Piirtää pelaajan omistaman omistuksen.
+     * 
+     * @param graphics
+     * @param pa piirtoavustaja.
+     * @see ui.gui.PiirtoAvustaja
+     * @param x
+     * @param y
+     * @param vari Minkä värinen omistus piirretään.
+     */
     public void piirraPelaajanOmistus(Graphics graphics, PiirtoAvustaja pa, int x, int y, int vari) {
         graphics.setColor(Color.gray);
         graphics.fillRect(x, y, 40, 50);

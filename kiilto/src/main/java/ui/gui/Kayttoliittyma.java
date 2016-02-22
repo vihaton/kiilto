@@ -18,20 +18,20 @@ import ui.toiminnankuuntelijat.*;
  */
 public class Kayttoliittyma implements Runnable {
 
-    private Pelivelho pelivelho;
+    private final Pelivelho pelivelho;
     private final JFrame ruutu;
     private final JLabel infoTekstit;
     private final JPanel valikkorivi;
     private final Piirtoalusta piirtoalusta;
-    private int leveys;
-    private int korkeus;
+    private final int leveys;
+    private final int korkeus;
 
     public Kayttoliittyma(Pelivelho pv) {
         this.pelivelho = pv;
         piirtoalusta = new Piirtoalusta(pv);
         ruutu = new JFrame("Kiilto-the-Game");
-        leveys = 1200;
-        korkeus = 666;
+        leveys = 1210;
+        korkeus = 700;
         infoTekstit = new JLabel("Tähän ilmestyvät pelin infotekstit", JLabel.CENTER);
         valikkorivi = new JPanel();
     }
@@ -52,27 +52,27 @@ public class Kayttoliittyma implements Runnable {
         valikkorivi.setLayout(new GridLayout(1, 0));
 
         //valikkoriviin voidaan lisätä tarvittavat toiminnallisuusnapit
-        valikkorivi.add(luoTekstiIkkuna());
+        valikkorivi.add(luoPelaajanToimiNapit());
+        valikkorivi.add(luoTekstinsyotto());
 
         ruutu.add(piirtoalusta);
         ruutu.add(valikkorivi, BorderLayout.SOUTH);
         ruutu.add(infoTekstit, BorderLayout.NORTH);
-        ruutu.add(new JButton("nappi"), BorderLayout.EAST);
     }
 
-    private JPanel luoTekstiIkkuna() {
+    private JPanel luoTekstinsyotto() {
         JPanel tekstinsyotto = new JPanel();
         tekstinsyotto.setLayout(new GridLayout(2, 1));
 
         JTextField tekstiKentta = new JTextField();
         tekstiKentta.setHorizontalAlignment(JTextField.CENTER);
 
-        JButton nappi = new JButton("Lähetä käsky! Paina minnuu!");
+        JButton lahetysNappi = new JButton("Lähetä käsky! Paina minnuu!");
 
-        nappi.addActionListener(new Tekstinsyotonkuuntelija(pelivelho, tekstiKentta));
+        lahetysNappi.addActionListener(new Tekstinsyotonkuuntelija(pelivelho, tekstiKentta));
 
         tekstinsyotto.add(tekstiKentta);
-        tekstinsyotto.add(nappi);
+        tekstinsyotto.add(lahetysNappi);
 
         return tekstinsyotto;
     }
@@ -93,15 +93,17 @@ public class Kayttoliittyma implements Runnable {
     }
 
     private JPanel luoPelaajanToimiNapit() {
-        JPanel toimiNapit = new JPanel(new GridLayout(3, 1));
+        JPanel toimiNapit = new JPanel(new GridLayout(1, 3));
 
-        JButton nosta = new JButton("Nostan nallekarkkeja markkinoilta");
+        JButton nosta = new JButton("Nostan nallekarkkeja");
         JButton osta = new JButton("Ostetan omaisuutta");
         JButton varaa = new JButton("Varaan omaisuutta");
 
         toimiNapit.add(nosta);
         toimiNapit.add(osta);
         toimiNapit.add(varaa);
+        
+        toimiNapit.setVisible(false);
 
         return toimiNapit;
     }

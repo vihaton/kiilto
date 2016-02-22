@@ -104,10 +104,35 @@ public class Kasakokoelma {
         return summa;
     }
 
+    /**
+     * Piirtää karkkimarkkinat.
+     * 
+     * @param graphics
+     * @param pa piirtoavustaja.
+     * @param x
+     * @param y 
+     */
     public void piirraIsosti(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         for (Nallekarkkikasa kasa : kasat) {
-            kasa.piirraIsosti(graphics, pa, x, y);
+            kasa.piirra(graphics, pa, x, y, true);
             y += 65;
+        }
+    }
+
+    /**
+     * Piirtää pelaajalla olevat karkit.
+     * 
+     * @param graphics
+     * @param pa piirtoavustaja.
+     * @param x
+     * @param y 
+     */
+    public void piirraPelaajanKarkit(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+        for (Nallekarkkikasa kasa : kasat) {
+            if (!kasa.onTyhja()) {
+                kasa.piirra(graphics, pa, x, y, false);
+                x += 27;
+            }
         }
     }
 }

@@ -284,7 +284,7 @@ public class Poyta {
         piirraNakyvatOmistukset(graphics, va, x, y);
         x += 450;
         karkkimarkkinat.piirraIsosti(graphics, va, x, y);
-        y = 30;
+        y = 20;
         x += 80;
         piirraPelaajat(graphics, va, x, y);
     }
@@ -316,7 +316,7 @@ public class Poyta {
     private void piirraPelaajat(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         for (Pelaaja pelaaja : pelaajat) {
             pelaaja.piirra(graphics, pa, x, y);
-            y += 140;
+            y += 150;
         }
     }
 

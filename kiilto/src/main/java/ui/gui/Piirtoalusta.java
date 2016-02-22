@@ -17,7 +17,7 @@ public class Piirtoalusta extends JPanel {
     PiirtoAvustaja varinAsettaja;
     
     public Piirtoalusta(Pelivelho pv) {
-        super.setBackground(Color.gray);
+        super.setBackground(Color.lightGray);
         pelivelho = pv;
         varinAsettaja = new PiirtoAvustaja();
     }
