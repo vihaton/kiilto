@@ -102,7 +102,7 @@ public class Kayttoliittyma implements Runnable {
         toimiNapit.add(nosta);
         toimiNapit.add(osta);
         toimiNapit.add(varaa);
-        
+
         toimiNapit.setVisible(false);
 
         return toimiNapit;

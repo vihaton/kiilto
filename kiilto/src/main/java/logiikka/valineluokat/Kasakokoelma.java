@@ -12,7 +12,6 @@ import ui.gui.PiirtoAvustaja;
 public class Kasakokoelma {
 
     //0-kul, 1-val, 2-sin, 3-vih, 4-pun, 5-mus
-
     private Nallekarkkikasa[] kasat = new Nallekarkkikasa[6];
 
     //konstruktori pelaajien karkeille ja pöydän karkkimarkkinoille
@@ -106,11 +105,11 @@ public class Kasakokoelma {
 
     /**
      * Piirtää karkkimarkkinat.
-     * 
+     *
      * @param graphics
      * @param pa piirtoavustaja.
      * @param x
-     * @param y 
+     * @param y
      */
     public void piirraIsosti(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         for (Nallekarkkikasa kasa : kasat) {
@@ -121,11 +120,11 @@ public class Kasakokoelma {
 
     /**
      * Piirtää pelaajalla olevat karkit.
-     * 
+     *
      * @param graphics
      * @param pa piirtoavustaja.
      * @param x
-     * @param y 
+     * @param y
      */
     public void piirraPelaajanKarkit(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         for (Nallekarkkikasa kasa : kasat) {

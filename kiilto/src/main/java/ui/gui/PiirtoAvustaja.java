@@ -36,7 +36,7 @@ public class PiirtoAvustaja {
             g.setColor(Color.black);
         }
     }
-    
+
     public void asetaReunavari(Graphics g, int i) {
         int reunaVari = i != 5 ? 5 : 1;
         asetaVari(g, reunaVari);

@@ -95,21 +95,22 @@ public class Merkkihenkilo {
         return "'olen " + nimi + ", arvovallaltani " + arvovaltalisa + " ja vaadin kauppiaalta omaisuutta mallia\n"
                 + vaatimus + "'\n";
     }
-    
+
     /**
      * Piirtää merkkihenkilön annettuihin koordinaatteihin.
-     * 
+     *
      * @param graphics grafiikat.
-     * @param pa varin asettaja auttaa helpottaa nallekarkkien värien asettamisessa.
+     * @param pa varin asettaja auttaa helpottaa nallekarkkien värien
+     * asettamisessa.
      * @param x
-     * @param y 
+     * @param y
      */
     public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         graphics.setColor(Color.darkGray);
         graphics.fill3DRect(x, y, 90, 100, true);
         graphics.setColor(Color.yellow);
         graphics.draw3DRect(x, y, 90, 100, true);
-
+        
         pa.piirraNimi(graphics, nimi, x + 40, y + 14);
         pa.piirraArvovalta(graphics, arvovaltalisa, x + 5, y + 5);
         piirraOmaisuusvaatimus(graphics, pa, x + 10, y + 25);

@@ -223,7 +223,7 @@ public class TUI {
         }
         return nro;
     }
-    
+
     public void tulostaKierroksenVaihto(int kierros, int voittoValta) {
         System.out.println("*******************");
         System.out.println("Kierros numero " + kierros + ", voittamiseen tarvitaan " + voittoValta + " arvovaltapistettä.");

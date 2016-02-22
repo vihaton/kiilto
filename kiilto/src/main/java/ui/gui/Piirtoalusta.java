@@ -1,4 +1,3 @@
-
 package ui.gui;
 
 import java.awt.Color;
@@ -15,13 +14,13 @@ public class Piirtoalusta extends JPanel {
 
     Pelivelho pelivelho;
     PiirtoAvustaja varinAsettaja;
-    
+
     public Piirtoalusta(Pelivelho pv) {
         super.setBackground(Color.lightGray);
         pelivelho = pv;
         varinAsettaja = new PiirtoAvustaja();
     }
-    
+
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);

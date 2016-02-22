@@ -146,7 +146,7 @@ public class Omaisuus {
 
     public void piirraNakyvatOmistukset(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         ArrayList<Omistus> paallimmaiset = getPaallimmaiset();
-        
+
         for (Omistus omistus : paallimmaiset) {
             omistus.piirra(graphics, pa, x, y, true);
             x += 110;

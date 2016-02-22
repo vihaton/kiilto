@@ -5,7 +5,7 @@ import javax.swing.SwingUtilities;
 
 /**
  * Pistetään peli pyörimään!
- * 
+ *
  * @author xvixvi
  */
 public class Main {

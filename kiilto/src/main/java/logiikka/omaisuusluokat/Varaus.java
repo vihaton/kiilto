@@ -33,11 +33,11 @@ public class Varaus {
 
     /**
      * Piirtää pelaajan varauksen.
-     * 
+     *
      * @param graphics
      * @param pa piirtoavustaja.
      * @param x
-     * @param y 
+     * @param y
      */
     public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         omistus.piirra(graphics, pa, x, y, false);

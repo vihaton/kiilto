@@ -44,17 +44,16 @@ public class Pelivelho {
     public void pelaa() {
 //        alustaTestiTUIPeli(); //tui-peli
 //        alustaTUIPeli();
-        
+
 //        pelaaTUI();
-        
         alustaGUIPeli();
-        
+
         poyta.luoTestitilanneKeskipelista();
 
         kayttoliittyma.run();
-        
+
     }
-    
+
     private void pelaaTUI() {
         while (eiVoittajaa()) {
             pelaaKierros();
@@ -66,14 +65,14 @@ public class Pelivelho {
 
         poyta = new Poyta(pelaajat);
     }
-    
+
     private void alustaTUIPeli() {
         int pm = tui.selvitaPelaajienMaara();
         ArrayList<String> nimet = tui.selvitaPelaajienNimet(pm);
         luoPelaajat(nimet);
-        
+
         voittoValta = tui.selvitaVoittoonTarvittavaValta();
-         
+
     }
 
     private void alustaTestiTUIPeli() {
@@ -149,7 +148,7 @@ public class Pelivelho {
         int valinta = 0;
 //        valinta = tui.pelaajanToimi(pelaaja.getNimi());
         valinta = kayttoliittyma.pelaajanToimi(pelaaja.getNimi());
-        
+
         if (valinta == 1) { // nostetaan nallekarkkeja
             nostaNallekarkkeja(pelaaja);
         } else if (valinta == 2) { // ostetaan omaisuutta

@@ -65,7 +65,7 @@ public class Pelaaja {
     public boolean voittaja(int voittoraja) {
         return getArvovalta() >= voittoraja;
     }
-    
+
     private int getArvovalta() {
         return omaisuus.getArvovalta() + getMerkkihenkiloidenArvo();
     }
@@ -246,12 +246,20 @@ public class Pelaaja {
         }
     }
 
-    void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+    /**
+     * Piirtää pelaajan nimen, arvovallan, omistukset, karkit ja varaukset.
+     *
+     * @param graphics
+     * @param pa piirtoavustaja.
+     * @param x
+     * @param y
+     */
+    public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
         graphics.setColor(Color.black);
         graphics.drawString(nimi, x, y);
-        
+
         graphics.drawString("pelaajalla arvovaltapisteitä " + getArvovalta(), x, y + 15);
-        
+
         y += 25;
         piirraOmaisuus(graphics, pa, x, y);
         x += 275;

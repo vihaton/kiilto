@@ -1,4 +1,3 @@
-
 package ui.toiminnankuuntelijat;
 
 import java.awt.event.*;
@@ -9,8 +8,8 @@ import logiikka.Pelivelho;
  *
  * @author xvixvi
  */
-public class Tekstinsyotonkuuntelija implements ActionListener{
-    
+public class Tekstinsyotonkuuntelija implements ActionListener {
+
     private Pelivelho pelivelho;
     private JTextField tekstikentta;
 
@@ -18,7 +17,7 @@ public class Tekstinsyotonkuuntelija implements ActionListener{
         pelivelho = pv;
         tekstikentta = jtf;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String syote = tekstikentta.getText();

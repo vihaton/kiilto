@@ -25,13 +25,13 @@ public class AlkuIkkuna implements Runnable {
         alkuvalikko = new JFrame();
         alkuvalikko.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         alkuvalikko.setPreferredSize(new Dimension(350, 400));
-        alkuvalikko.setLocation(500,200);
+        alkuvalikko.setLocation(500, 200);
 
         luoSisalto(alkuvalikko);
 
         alkuvalikko.pack();
         alkuvalikko.setVisible(true);
-        
+
         //käyttöliittymän manuaalisen testaamisen nopeuttamiseksi
         alkuvalikko.setVisible(false);
         alkuvalikko.dispose();
@@ -42,7 +42,7 @@ public class AlkuIkkuna implements Runnable {
     private void luoSisalto(Container container) {
         GridLayout layout = new GridLayout(5, 0);
         container.setLayout(layout);
-        
+
         JLabel pelaajia = new JLabel("Kuinka monen pelaajan pelin haluaisit pelata?");
         pelaajia.setHorizontalAlignment(JLabel.CENTER);
 
@@ -52,12 +52,10 @@ public class AlkuIkkuna implements Runnable {
         final JButton lopeta = new JButton("Lopeta sekoilu, kiitos!");
 
         /*
-        WIP
+         WIP
         
-        -mahdollisuus syöttää pelaajien nimet tekstikenttiin
-        */
-        
-        
+         -mahdollisuus syöttää pelaajien nimet tekstikenttiin
+         */
         lisaaKuuntelijat(kaksiPelaa, kolmePelaa, neljaPelaa, lopeta);
 
         container.add(pelaajia);

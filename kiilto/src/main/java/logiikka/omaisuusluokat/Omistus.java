@@ -72,11 +72,11 @@ public class Omistus {
 
     /**
      * Piirtää pöydällä näkyvillä olevan, pelaajille kuulumattoman omistuksen.
-     * 
+     *
      * @param graphics
      * @param pa piirtoavustaja.
      * @param x
-     * @param y 
+     * @param y
      * @param iso piirretäänkö iso vai pieni omistus.
      */
     public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y, boolean iso) {
@@ -86,11 +86,11 @@ public class Omistus {
             leveys = 80;
             korkeus = 100;
         }
-        
+
         graphics.setColor(Color.gray);
         graphics.fillRect(x, y, leveys, korkeus);
         pa.asetaVari(graphics, getLisaKarkinVariNumerona());
-        graphics.fillRect(x, y, leveys, korkeus/5);
+        graphics.fillRect(x, y, leveys, korkeus / 5);
         graphics.setColor(Color.black);
         graphics.drawRect(x, y, leveys, korkeus);
 
@@ -110,7 +110,7 @@ public class Omistus {
 
     /**
      * Piirtää pelaajan omistaman omistuksen.
-     * 
+     *
      * @param graphics
      * @param pa piirtoavustaja.
      * @see ui.gui.PiirtoAvustaja
