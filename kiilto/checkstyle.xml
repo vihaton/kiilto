@@ -17,6 +17,11 @@
 			<property name="scope" value="public"/>
 			<property name="checkEmptyJavadoc" value="true"/>
 		</module>
+		
+		<module name="JavadocMethod">
+			<property name="ignoreMethodNamesRegex" value="^set.*$"/>
+			<property name="ignoreMethodNamesRegex" value="^get.*$"/>
+		</module>
 
         <property name='tabWidth' value='4' />
 
