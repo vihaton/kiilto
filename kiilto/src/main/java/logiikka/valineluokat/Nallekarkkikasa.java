@@ -1,7 +1,7 @@
 package logiikka.valineluokat;
 
 import java.awt.Graphics;
-import ui.gui.PiirtoAvustaja;
+import ui.gui.Piirtoavustaja;
 
 /**
  *
@@ -64,7 +64,7 @@ public class Nallekarkkikasa {
      * @param y
      * @param iso piirretäänkö isoja karkkeja?
      */
-    public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y, boolean iso) {
+    public void piirra(Graphics graphics, Piirtoavustaja pa, int x, int y, boolean iso) {
         int d = 22;
         if (iso) {
             d = 42;
@@ -76,7 +76,7 @@ public class Nallekarkkikasa {
         int v = vari.ordinal();
         int reunaVari = v != 5 ? 5 : 1;
 
-        for (int i = 0; i < koko; i++) {
+        for (int i = 0; i <= koko; i++) {
             pa.asetaVari(graphics, v);
             graphics.fillOval(x, y, d, d);
 

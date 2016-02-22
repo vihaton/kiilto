@@ -1,10 +1,11 @@
 package ui.gui;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 import logiikka.Pelivelho;
-import ui.toiminnankuuntelijat.*;
+import ui.gui.toiminnankuuntelijat.ToimintonapinKuuntelija;
+import ui.gui.toiminnankuuntelijat.MaaranappienKuuntelija;
+import ui.gui.toiminnankuuntelijat.NallekarkkivalitsimenKuuntelija;
 
 /**
  * Ylläpitää pelin graafista esitystä. Hoitaa kaikkien pelin aikana tarvittavien
@@ -20,22 +21,22 @@ public class Kayttoliittyma implements Runnable {
 
     private final Pelivelho pelivelho;
     private final JFrame ruutu;
+    private final JComponent[] nappulat;
     private final JLabel infoTekstit;
-    private final JPanel valikkorivi;
     private final Piirtoalusta piirtoalusta;
-    private final PiirtoAvustaja piirtoAvustaja;
+    private final Piirtoavustaja piirtoavustaja;
     private final int leveys;
     private final int korkeus;
 
     public Kayttoliittyma(Pelivelho pv) {
         this.pelivelho = pv;
-        piirtoAvustaja = new PiirtoAvustaja();
-        piirtoalusta = new Piirtoalusta(pv, piirtoAvustaja);
+        piirtoavustaja = new Piirtoavustaja();
+        piirtoalusta = new Piirtoalusta(pv, piirtoavustaja);
         ruutu = new JFrame("Kiilto-the-Game");
         leveys = 1210;
         korkeus = 725;
+        nappulat = new JComponent[4];
         infoTekstit = new JLabel("Tähän ilmestyvät pelin infotekstit", JLabel.CENTER);
-        valikkorivi = new JPanel();
     }
 
     @Override
@@ -45,6 +46,12 @@ public class Kayttoliittyma implements Runnable {
         ruutu.setLocation(0, 0);
 
         luoKomponentit();
+        
+        for (int i = 1; i < 4; i++) {
+            nappulat[i].setVisible(false);
+        }
+
+        infoTekstit.setText("Pelaajan " + pelivelho.getVuorossaOleva() + " vuoro kierroksella " + pelivelho.getKierros());
 
         ruutu.pack();
         ruutu.setVisible(true);
@@ -52,10 +59,12 @@ public class Kayttoliittyma implements Runnable {
 
     private void luoKomponentit() {
         ruutu.setLayout(new BorderLayout()); //turha, mutta muistuttaa asian tilasta
+        JPanel valikkorivi = new JPanel();
         valikkorivi.setLayout(new GridLayout(1, 0));
+        valikkorivi.setBackground(Color.lightGray);
 
         //valikkoriviin voidaan lisätä tarvittavat toiminnallisuusnapit
-        valikkorivi.add(luoPelaajanToimintanapit());
+        valikkorivi.add(luoPelaajanToimintonapit());
         valikkorivi.add(luoValintavalineet());
 
         ruutu.add(piirtoalusta);
@@ -63,22 +72,28 @@ public class Kayttoliittyma implements Runnable {
         ruutu.add(infoTekstit, BorderLayout.NORTH);
     }
     
-    private JPanel luoPelaajanToimintanapit() {
+    private JPanel luoPelaajanToimintonapit() {
         JPanel toimiNapit = new JPanel(new GridLayout(1, 3));
 
         JButton nosta = new JButton("Nostan nallekarkkeja");
+        nosta.addActionListener(new ToimintonapinKuuntelija(nosta, nappulat));
         JButton osta = new JButton("Ostan omaisuutta");
+        osta.addActionListener(new ToimintonapinKuuntelija(osta, nappulat));
         JButton varaa = new JButton("Varaan omaisuutta");
+        varaa.addActionListener(new ToimintonapinKuuntelija(osta, nappulat));
 
         toimiNapit.add(nosta);
         toimiNapit.add(osta);
         toimiNapit.add(varaa);
+        
+        nappulat[0] = toimiNapit;
 
         return toimiNapit;
     }
 
     private JPanel luoValintavalineet() {
         JPanel valinnat = new JPanel(new GridLayout(1, 0));
+        valinnat.setBackground(Color.lightGray);
         
         valinnat.add(luoKarkinvalitsemisnappulat());
         valinnat.add(luoValintanapit());
@@ -87,40 +102,51 @@ public class Kayttoliittyma implements Runnable {
     }
     
     private JPanel luoKarkinvalitsemisnappulat() {
-        JPanel kaikkiNappulat = new JPanel(new GridLayout(1, 5));
-        
+        JPanel karkinvalitsemisnappulat = new JPanel(new GridLayout(1, 6));
+        JLabel[] nallekarkkikentat = new JLabel[5];
+
         for (int i = 1; i < 6; i++) {
             JPanel nappulat = new JPanel(new GridLayout(3, 1));
             
             JLabel kentta = new JLabel("0");
             kentta.setHorizontalAlignment(SwingConstants.CENTER);
-            piirtoAvustaja.asetaNappulanVari(kentta, i);
+            nallekarkkikentat[i-1] = kentta;
             
             JButton plus = new JButton("+");
-            piirtoAvustaja.asetaNappulanVari(plus, i);
+            piirtoavustaja.asetaNappulanVari(plus, i);
+            plus.addActionListener(new MaaranappienKuuntelija(kentta, true));
             
             JButton miinus = new JButton("-");
-            piirtoAvustaja.asetaNappulanVari(miinus, i);
-            
-            //kuuntelijat
-            
+            piirtoavustaja.asetaNappulanVari(miinus, i);
+            miinus.addActionListener(new MaaranappienKuuntelija(kentta, false));
+                        
             nappulat.add(kentta);
             nappulat.add(plus);
             nappulat.add(miinus);
-            kaikkiNappulat.add(nappulat);
+            karkinvalitsemisnappulat.add(nappulat);
         }
         
-        return kaikkiNappulat;
+        JButton nosta = new JButton(">");
+        nosta.addActionListener(new NallekarkkivalitsimenKuuntelija(pelivelho, infoTekstit, nallekarkkikentat, piirtoalusta, nappulat));
+        
+        karkinvalitsemisnappulat.add(nosta);
+        
+        nappulat[1] = karkinvalitsemisnappulat;
+        
+        return karkinvalitsemisnappulat;
     }
     
     private JPanel luoValintanapit() {
-        JPanel kaikkiNapit = new JPanel(new GridLayout(1, 0));        
+        JPanel kaikkiNapit = new JPanel(new GridLayout(1, 0)); 
+        kaikkiNapit.setBackground(Color.lightGray);
         JPanel valintanapit = new JPanel(new GridLayout(2, 3));
         
         JLabel valitsin = new JLabel("");
         JButton valitse = new JButton("tämä!");
         JButton vasen = new JButton("<--");
         JButton oikea = new JButton("-->");
+        JButton takaisin = new JButton("takaisin");
+        takaisin.addActionListener(new ToimintonapinKuuntelija(takaisin, nappulat));
         
         //kuuntelijat
                 
@@ -128,46 +154,27 @@ public class Kayttoliittyma implements Runnable {
         valintanapit.add(valitse);
         valintanapit.add(vasen);
         valintanapit.add(oikea);
-        
+                
         kaikkiNapit.add(valintanapit);
-        
-        JButton takaisin = new JButton("takaisin");
-        //kuuntelija
-        
         kaikkiNapit.add(takaisin);
         
+        nappulat[2] = valintanapit;
+        nappulat[3] = takaisin;
+                
         return kaikkiNapit;
     }
-    
-    private JPanel luoTekstinsyotto() {
-        JPanel tekstinsyotto = new JPanel();
-        tekstinsyotto.setLayout(new GridLayout(2, 1));
 
-        JTextField tekstiKentta = new JTextField();
-        tekstiKentta.setHorizontalAlignment(JTextField.CENTER);
-
-        JButton lahetysNappi = new JButton("Lähetä käsky! Paina minnuu!");
-
-        lahetysNappi.addActionListener(new Tekstinsyotonkuuntelija(pelivelho, tekstiKentta));
-
-        tekstinsyotto.add(tekstiKentta);
-        tekstinsyotto.add(lahetysNappi);
-
-        return tekstinsyotto;
+    public void julistaVoittaja(String voittaja, String voittovalta, String kierros) {
+        for (int i = 0; i < 4; i++) {
+            nappulat[i].setVisible(false);
+        }
+        
+        Loppuikkuna loppuikkuna = new Loppuikkuna(voittaja, voittovalta, kierros, this);
+        loppuikkuna.run();
     }
-
-    /**
-     * Mitä pelaaja päättää vuorollaan tehdä?
-     *
-     * @param nimi vuorossa olevan pelaajan nimi.
-     * @return int toimi, 1 == nostetaan nallekarkkeja, 2 == ostetaan
-     * omaisuutta, 3 == tehdään varaus.
-     */
-    public int pelaajanToimi(String nimi) {
-        infoTekstit.setText("Mitä haluat tehdä " + nimi + "? Valitse vuoron toiminto!");
-
-        valikkorivi.add(luoPelaajanToimintanapit());
-
-        return 1;
+    
+    public void tuhoa() {
+        ruutu.setVisible(false);
+        ruutu.dispose();
     }
 }

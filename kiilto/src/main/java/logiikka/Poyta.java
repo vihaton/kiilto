@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.*;
 import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
-import ui.gui.PiirtoAvustaja;
+import ui.gui.Piirtoavustaja;
 
 /**
  *
@@ -273,7 +273,7 @@ public class Poyta {
      * @param va VarinAsettaja, hyödyllinen kaveri kun piirretään jotain
      * karkkeihin liittyvää.
      */
-    public void piirra(Graphics graphics, PiirtoAvustaja va) {
+    public void piirra(Graphics graphics, Piirtoavustaja va) {
         int x = 20;
         int y = 10;
         piirraMerkkihenkilot(graphics, va, x, y);
@@ -302,21 +302,21 @@ public class Poyta {
         }
     }
 
-    private void piirraMerkkihenkilot(Graphics graphics, PiirtoAvustaja va, int x, int y) {
+    private void piirraMerkkihenkilot(Graphics graphics, Piirtoavustaja va, int x, int y) {
         for (Merkkihenkilo mh : merkkihenkilot) {
             mh.piirra(graphics, va, x, y);
             x += 100;
         }
     }
 
-    private void piirraNakyvatOmistukset(Graphics graphics, PiirtoAvustaja va, int x, int y) {
+    private void piirraNakyvatOmistukset(Graphics graphics, Piirtoavustaja va, int x, int y) {
         for (int i = 2; i > -1; i--) {
             omistuspakat.get(i).piirraNakyvatOmistukset(graphics, va, x, y);
             y += 135;
         }
     }
 
-    private void piirraPelaajat(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+    private void piirraPelaajat(Graphics graphics, Piirtoavustaja pa, int x, int y) {
         for (Pelaaja pelaaja : pelaajat) {
             pelaaja.piirra(graphics, pa, x, y);
             y += 150;

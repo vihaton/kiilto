@@ -3,7 +3,7 @@ package logiikka.valineluokat;
 import java.awt.Graphics;
 import java.util.*;
 import logiikka.valineluokat.*;
-import ui.gui.PiirtoAvustaja;
+import ui.gui.Piirtoavustaja;
 
 /**
  *
@@ -111,9 +111,11 @@ public class Kasakokoelma {
      * @param x
      * @param y
      */
-    public void piirraIsosti(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+    public void piirraIsosti(Graphics graphics, Piirtoavustaja pa, int x, int y) {
         for (Nallekarkkikasa kasa : kasat) {
-            kasa.piirra(graphics, pa, x, y, true);
+            if (!kasa.onTyhja()) {
+                kasa.piirra(graphics, pa, x, y, true);
+            }
             y += 65;
         }
     }
@@ -126,7 +128,7 @@ public class Kasakokoelma {
      * @param x
      * @param y
      */
-    public void piirraPelaajanKarkit(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+    public void piirraPelaajanKarkit(Graphics graphics, Piirtoavustaja pa, int x, int y) {
         for (Nallekarkkikasa kasa : kasat) {
             if (!kasa.onTyhja()) {
                 kasa.piirra(graphics, pa, x, y, false);

@@ -8,7 +8,7 @@ import javax.swing.JComponent;
  *
  * @author xvixvi
  */
-public class PiirtoAvustaja {
+public class Piirtoavustaja {
 
     /**
      * Asettaa grafiikkojen värin karkkikasan mukaiseksi. 0 kultainen, 1

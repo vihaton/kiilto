@@ -13,9 +13,9 @@ import logiikka.Pelivelho;
 public class Piirtoalusta extends JPanel {
 
     Pelivelho pelivelho;
-    PiirtoAvustaja piirtoAvustaja;
+    Piirtoavustaja piirtoAvustaja;
 
-    public Piirtoalusta(Pelivelho pv, PiirtoAvustaja pa) {
+    public Piirtoalusta(Pelivelho pv, Piirtoavustaja pa) {
         super.setBackground(Color.lightGray);
         pelivelho = pv;
         piirtoAvustaja = pa;
@@ -25,5 +25,10 @@ public class Piirtoalusta extends JPanel {
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         pelivelho.piirra(graphics, piirtoAvustaja);
+    }
+    
+    @Override
+    public void repaint() {
+        super.repaint();
     }
 }

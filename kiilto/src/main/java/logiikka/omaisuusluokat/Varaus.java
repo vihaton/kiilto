@@ -2,7 +2,7 @@ package logiikka.omaisuusluokat;
 
 import java.awt.Graphics;
 import logiikka.valineluokat.Kasakokoelma;
-import ui.gui.PiirtoAvustaja;
+import ui.gui.Piirtoavustaja;
 
 /**
  *
@@ -39,7 +39,7 @@ public class Varaus {
      * @param x
      * @param y
      */
-    public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+    public void piirra(Graphics graphics, Piirtoavustaja pa, int x, int y) {
         omistus.piirra(graphics, pa, x, y, false);
     }
 }

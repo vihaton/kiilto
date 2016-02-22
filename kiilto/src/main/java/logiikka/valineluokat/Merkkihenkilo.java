@@ -3,7 +3,7 @@ package logiikka.valineluokat;
 import java.awt.Color;
 import java.awt.Graphics;
 import logiikka.omaisuusluokat.*;
-import ui.gui.PiirtoAvustaja;
+import ui.gui.Piirtoavustaja;
 
 /**
  *
@@ -105,7 +105,7 @@ public class Merkkihenkilo {
      * @param x
      * @param y
      */
-    public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+    public void piirra(Graphics graphics, Piirtoavustaja pa, int x, int y) {
         graphics.setColor(Color.darkGray);
         graphics.fill3DRect(x, y, 90, 100, true);
         graphics.setColor(Color.yellow);
@@ -116,7 +116,7 @@ public class Merkkihenkilo {
         piirraOmaisuusvaatimus(graphics, pa, x + 10, y + 25);
     }
     
-    private void piirraOmaisuusvaatimus(Graphics graphics, PiirtoAvustaja va, int x, int y) {
+    private void piirraOmaisuusvaatimus(Graphics graphics, Piirtoavustaja va, int x, int y) {
         for (int i = 1; i < 6; i++) {
             va.asetaVari(graphics, i);
             graphics.drawString("" + omaisuusvaatimus[i], x, y + i * 14);

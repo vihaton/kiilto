@@ -3,7 +3,7 @@ package logiikka.omaisuusluokat;
 import java.awt.Graphics;
 import java.util.*;
 import logiikka.valineluokat.*;
-import ui.gui.PiirtoAvustaja;
+import ui.gui.Piirtoavustaja;
 
 /**
  *
@@ -144,7 +144,7 @@ public class Omaisuus {
         return omistukset.remove(o);
     }
 
-    public void piirraNakyvatOmistukset(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+    public void piirraNakyvatOmistukset(Graphics graphics, Piirtoavustaja pa, int x, int y) {
         ArrayList<Omistus> paallimmaiset = getPaallimmaiset();
 
         for (Omistus omistus : paallimmaiset) {

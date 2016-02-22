@@ -11,12 +11,12 @@ import logiikka.*;
  *
  * @author xvixvi
  */
-public class AlkuIkkuna implements Runnable {
+public class Alkuikkuna implements Runnable {
 
     private JFrame alkuvalikko;
     private final Pelivelho pelivelho;
 
-    public AlkuIkkuna() {
+    public Alkuikkuna() {
         pelivelho = new Pelivelho();
     }
 
@@ -33,8 +33,7 @@ public class AlkuIkkuna implements Runnable {
         alkuvalikko.setVisible(true);
 
         //käyttöliittymän manuaalisen testaamisen nopeuttamiseksi
-        alkuvalikko.setVisible(false);
-        alkuvalikko.dispose();
+        tuhoa();
         pelivelho.luoPelaajat(4);
         pelivelho.pelaa();
     }
@@ -110,4 +109,8 @@ public class AlkuIkkuna implements Runnable {
         });
     }
 
+    public void tuhoa() {
+        alkuvalikko.setVisible(false);
+        alkuvalikko.dispose();
+    }
 }

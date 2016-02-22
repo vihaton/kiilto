@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.*;
 import logiikka.valineluokat.*;
-import ui.gui.PiirtoAvustaja;
+import ui.gui.Piirtoavustaja;
 
 /**
  *
@@ -79,7 +79,7 @@ public class Omistus {
      * @param y
      * @param iso piirretäänkö iso vai pieni omistus.
      */
-    public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y, boolean iso) {
+    public void piirra(Graphics graphics, Piirtoavustaja pa, int x, int y, boolean iso) {
         int leveys = 100;
         int korkeus = 125;
         if (!iso) {
@@ -101,7 +101,7 @@ public class Omistus {
         piirraHinta(graphics, pa, x + leveys / 10, y + korkeus / 5);
     }
 
-    private void piirraHinta(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+    private void piirraHinta(Graphics graphics, Piirtoavustaja pa, int x, int y) {
         for (int i = 1; i < 6; i++) {
             pa.asetaVari(graphics, i);
             graphics.drawString("" + getKasanKoko(i), x, y + i * 15);
@@ -113,12 +113,12 @@ public class Omistus {
      *
      * @param graphics
      * @param pa piirtoavustaja.
-     * @see ui.gui.PiirtoAvustaja
+     * @see ui.gui.Piirtoavustaja
      * @param x
      * @param y
      * @param vari Minkä värinen omistus piirretään.
      */
-    public void piirraPelaajanOmistus(Graphics graphics, PiirtoAvustaja pa, int x, int y, int vari) {
+    public void piirraPelaajanOmistus(Graphics graphics, Piirtoavustaja pa, int x, int y, int vari) {
         graphics.setColor(Color.gray);
         graphics.fillRect(x, y, 40, 50);
         pa.asetaVari(graphics, vari);

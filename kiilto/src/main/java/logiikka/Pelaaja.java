@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.util.*;
 import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
-import ui.gui.PiirtoAvustaja;
+import ui.gui.Piirtoavustaja;
 
 /**
  *
@@ -66,7 +66,11 @@ public class Pelaaja {
         return getArvovalta() >= voittoraja;
     }
 
-    private int getArvovalta() {
+    public int getOmaisuudenKoko() {
+        return omaisuus.getKoko();
+    }
+
+    public int getArvovalta() {
         return omaisuus.getArvovalta() + getMerkkihenkiloidenArvo();
     }
 
@@ -254,7 +258,7 @@ public class Pelaaja {
      * @param x
      * @param y
      */
-    public void piirra(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+    public void piirra(Graphics graphics, Piirtoavustaja pa, int x, int y) {
         graphics.setColor(Color.black);
         graphics.drawString(nimi, x, y);
 
@@ -268,7 +272,7 @@ public class Pelaaja {
         karkit.piirraPelaajanKarkit(graphics, pa, x, y);
     }
 
-    private void piirraOmaisuus(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+    private void piirraOmaisuus(Graphics graphics, Piirtoavustaja pa, int x, int y) {
         for (int i = 1; i < 6; i++) {
             if (piirraYhdenVarisetOmistukset(graphics, pa, x, y, i)) {
                 x += 50;
@@ -276,7 +280,7 @@ public class Pelaaja {
         }
     }
 
-    private boolean piirraYhdenVarisetOmistukset(Graphics graphics, PiirtoAvustaja pa, int x, int y, int n) {
+    private boolean piirraYhdenVarisetOmistukset(Graphics graphics, Piirtoavustaja pa, int x, int y, int n) {
         boolean kyllaLoytyy = false;
         for (int i = 0; i < omaisuus.getKoko(); i++) {
             Omistus omistus = omaisuus.getOmistusIndeksista(i);
@@ -290,7 +294,7 @@ public class Pelaaja {
         return kyllaLoytyy;
     }
 
-    private void piirraVaraukset(Graphics graphics, PiirtoAvustaja pa, int x, int y) {
+    private void piirraVaraukset(Graphics graphics, Piirtoavustaja pa, int x, int y) {
         for (Varaus varaus : varaukset) {
             varaus.piirra(graphics, pa, x, y);
             x += 90;
