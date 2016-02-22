@@ -38,6 +38,12 @@ Omaisuutta voi ostaa nallekarkeilla, joita pelaaja voi vuorollaan (tiettyjen sä
 
 ![Teksti](https://raw.githubusercontent.com/xvixvi/kiilto/master/dokumentointi/luokkakaavio2-0.jpg "luokkakaavio 2-0")
 
+###sekvenssikaavio: Pelin aloitus ja alkuikkunan luominen
 
+![](https://raw.githubusercontent.com/xvixvi/kiilto/master/dokumentointi/sekvenssikaavio:Alkuikkuna.png "alkuikkunan luominen")
+
+###sekvenssikaavio: Pelivelhon luominen ja käyttöliittymän käynnistäminen
+
+![]((https://raw.githubusercontent.com/xvixvi/kiilto/master/dokumentointi/sekvenssikaavio:PelivelhonLuominen.png "pelivelhon luominen")
 
 
