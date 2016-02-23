@@ -31,7 +31,7 @@ public class Pelivelho {
         tui = new TUI(new Scanner(System.in));
         kayttoliittyma = new Kayttoliittyma(this);
         pelaajat = new ArrayList<>();
-        voittoValta = 15;
+        voittoValta = 1;
         kierros = 1;
         vuorossaOleva = null;
     }
@@ -54,7 +54,9 @@ public class Pelivelho {
     }
 
     /*
+     ********************************************
      TEXT USER INTERFACE -METODIT ALKAVAT
+     ********************************************
      */
     private void pelaaTUI() {
         while (onkoVoittaja()) {
@@ -170,9 +172,10 @@ public class Pelivelho {
     }
 
     /*
+     *******************************************
      TEXT USER INTERFACE -METODIT LOPPUVAT
+     *******************************************
      */
-    
     public ArrayList<Pelaaja> getPelaajat() {
         return pelaajat;
     }
@@ -231,17 +234,25 @@ public class Pelivelho {
         return pelaajat.get(pelaajat.size() - 1) == vuorossaOleva;
     }
 
+    /**
+     * Metodi siirtää vuoron seuraavalle pelaajalle. Jos joku pelaajista on
+     * voittaja, ja kierros on lopussa, peli päättyy. Jos vuorossa oleva pelaaja
+     * on kierroksen viimeinen, kierrosluku kasvaa ja vuoro siirtyy
+     * ensimmäiselle pelaajalle.
+     */
     public void seuraavaPelaajanVuoro() {
         if (kierroksenViimeinen() && onkoVoittaja()) {
             julistaVoittaja();
+            return;
         }
-        
+
         if (kierroksenViimeinen()) {
             kierros++;
             vuorossaOleva = pelaajat.get(0);
+            return;
         }
 
-        Pelaaja seuraava = pelaajat.get(pelaajat.size()-1);
+        Pelaaja seuraava = pelaajat.get(pelaajat.size() - 1);
         for (int i = pelaajat.size() - 2; i > -1; i--) {
             Pelaaja p = pelaajat.get(i);
 
