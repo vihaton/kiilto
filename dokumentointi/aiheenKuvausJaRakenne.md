@@ -6,14 +6,13 @@
 
 Omaisuutta voi ostaa nallekarkeilla, joita pelaaja voi vuorollaan (tiettyjen sääntöjen rajoissa) ottaa. Omaisuutta voi myös varata ostamatta sitä. Ostettu omaisuus tuottaa pelaajalle nallekarkkeja, mikä helpottaa tulevia ostoja. Tarpeeksi suuri ja monipuolinen omaisuus viettelee merkkihenkilön, joka antaa pelaajalle (yö)vierailullaan lisää pisteitä.
 
-**Käyttäjät:** Pelaaja
+**Käyttäjät:** Pelaaja(t)
 
 **Pelaajan toiminnot:**
 
 * Alustaa pelin
   * valitsee pelaajien määrän
-  * syöttää pelaajien nimet
-  * valitsee, pelaako ihmisiä (hot seat) vai AI.tä *(JohTek ja/tai TiRan harjoitustyö?)* vastaan
+  * syöttää pelaajien nimet //wip
   * aloittaa pelin
 
 * Pelaa vuoronsa, eli joko
@@ -21,15 +20,15 @@ Omaisuutta voi ostaa nallekarkeilla, joita pelaaja voi vuorollaan (tiettyjen sä
     1. kaksi samanväristä
       * vain jos väriä on tarjolla >= 4kpl
     2. kolme keskenään eriväristä
-      * pelaajalla saa olla max 10 nallekarkkia
   2. ostaa omaisuutta
     1. pöydästä
+      * jos karkit ja omaisuus riittävät
     2. varauksistaan
       * jos varauksia on
+      * jos karkit ja omaisuus riittävät
   3. varaa omaisuutta pöydästä ja saa yhden kultaisen nallekarkin
     * max kolme yhtäaikaista varausta per pelaaja
     * saa kultaisen nallekarkin vain, jos niitä on tarjolla
-    * pelaajalla saa olla max 10 nallekarkkia
 
 
 ##Luokkakaaviot
