@@ -1,4 +1,3 @@
-
 package ui.gui.toiminnankuuntelijat;
 
 import java.awt.event.ActionEvent;
@@ -14,7 +13,7 @@ public class UusintanapinKuuntelija implements ActionListener {
     private final Alkuikkuna alkuikkuna;
     private final Kayttoliittyma kayttoliittyma;
     private final Loppuikkuna loppuikkuna;
-    
+
     public UusintanapinKuuntelija(Kayttoliittyma kayttis, Loppuikkuna loppis) {
         alkuikkuna = new Alkuikkuna();
         kayttoliittyma = kayttis;
@@ -25,7 +24,7 @@ public class UusintanapinKuuntelija implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         kayttoliittyma.tuhoa();
         loppuikkuna.tuhoa();
-        
+
         alkuikkuna.run();
     }
 

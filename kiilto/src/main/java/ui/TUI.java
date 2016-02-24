@@ -201,7 +201,7 @@ public class TUI {
     public int ostettavanVarauksenNro(Pelaaja pelaaja) {
         int nro = 0;
 
-        while (nro == 0) {   
+        while (nro == 0) {
             System.out.println("Minkä nimisen (numeroisen) varauksesi haluasit ostaa? 'e' vie takaisin\n"
                     + "Varauksesi:");
             System.out.println(pelaaja.varauksetToString());
@@ -216,7 +216,7 @@ public class TUI {
                 System.out.println("Huono syöte, yritäppä uudestaan tahmanäppi!");
                 continue;
             }
-            
+
             nro = Integer.parseInt(syote);
         }
 

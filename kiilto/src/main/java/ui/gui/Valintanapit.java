@@ -43,7 +43,7 @@ public class Valintanapit extends JPanel {
         JButton valitse = new JButton("tämä!");
         valintanapinkuuntelija = new ValintanapinKuuntelija(this, pelivelho, nappulat, pa, infokentta);
         valitse.addActionListener(valintanapinkuuntelija);
-        
+
         JButton vasen = new JButton("<--");
         vasen.addActionListener(new SelausnapinKuuntelija(true, this));
         JButton oikea = new JButton("-->");
@@ -80,7 +80,7 @@ public class Valintanapit extends JPanel {
         }
         valitsin.setText(nakyvienNimet.get(indeksi));
     }
-    
+
     public void valitse() {
         if (osta) {
             if (pelivelho.osta(nakyvienNimet.get(indeksi))) {

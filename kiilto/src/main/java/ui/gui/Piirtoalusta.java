@@ -26,7 +26,7 @@ public class Piirtoalusta extends JPanel {
         super.paintComponent(graphics);
         pelivelho.piirra(graphics, piirtoAvustaja);
     }
-    
+
     @Override
     public void repaint() {
         super.repaint();

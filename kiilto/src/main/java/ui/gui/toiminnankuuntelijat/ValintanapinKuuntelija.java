@@ -1,4 +1,3 @@
-
 package ui.gui.toiminnankuuntelijat;
 
 import java.awt.event.ActionEvent;
@@ -16,7 +15,7 @@ import ui.gui.Valintanapit;
 public class ValintanapinKuuntelija extends VuoronPaattavaKuuntelija implements ActionListener {
 
     private final Valintanapit valintanapit;
-    
+
     public ValintanapinKuuntelija(Valintanapit valintanapit, Pelivelho pelivelho, JComponent[] napit, Piirtoalusta pa, JLabel infokentta) {
         super(pelivelho, napit, pa, infokentta);
         this.valintanapit = valintanapit;

@@ -49,7 +49,7 @@ public class Pelivelho {
 
         poyta = new Poyta(pelaajat);
 
-//        poyta.luoTestitilanneKeskipelista();
+        poyta.luoTestitilanneKeskipelista();
         vuorossaOleva = pelaajat.get(0);
 
         kayttoliittyma.run();

@@ -26,7 +26,7 @@ public class Pelaaja {
     public void lisaaOmistus(Omistus omistus) {
         omaisuus.lisaaOmistus(omistus);
     }
-    
+
     public Omaisuus getOmaisuus() {
         return omaisuus;
     }
@@ -270,6 +270,7 @@ public class Pelaaja {
 
         y += 25;
         piirraOmaisuus(graphics, pa, x, y);
+        piirraVietellytMerkkihenkilot(graphics, pa, x + 195, y - 25);
         x += 275;
         piirraVaraukset(graphics, pa, x, y);
         y -= 28;
@@ -302,6 +303,17 @@ public class Pelaaja {
         for (Varaus varaus : varaukset) {
             varaus.piirra(graphics, pa, x, y);
             x += 90;
+        }
+    }
+
+    private void piirraVietellytMerkkihenkilot(Graphics graphics, Piirtoavustaja pa, int x, int y) {
+        for (int i = 0; i < merkkihenkilot.size(); i++) {
+            graphics.setColor(Color.darkGray);
+            graphics.fill3DRect(x - 2, y - 2, 22, 21, true);
+            graphics.setColor(Color.yellow);
+            graphics.draw3DRect(x - 2, y - 2, 22, 21, true);
+            pa.piirraArvovalta(graphics, 3, x, y);
+            x += 26;
         }
     }
 }

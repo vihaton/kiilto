@@ -139,13 +139,13 @@ public class Kayttoliittyma implements Runnable {
     private JPanel luoValintanapit() {
         JPanel kaikkiNapit = new JPanel(new GridLayout(1, 0));
         kaikkiNapit.setBackground(Color.lightGray);
-        
+
         Valintanapit valintanapit = new Valintanapit(pelivelho, nappulat, piirtoalusta, infokentta);
         pelivelho.setValintanapit(valintanapit);
-        
+
         JButton takaisin = new JButton("takaisin");
         takaisin.addActionListener(new ToimintonapinKuuntelija(pelivelho, takaisin, nappulat));
-        
+
         kaikkiNapit.add(valintanapit);
         kaikkiNapit.add(takaisin);
 

@@ -20,10 +20,10 @@ public class Piirtoavustaja {
     public void asetaVari(Graphics g, int i) {
         g.setColor(getVari(i));
     }
-    
+
     void asetaNappulanVari(JComponent komponentti, int i) {
         komponentti.setBackground(getVari(i));
-    }    
+    }
 
     public void asetaReunavari(Graphics g, int i) {
         int reunaVari = i != 5 ? 5 : 1;

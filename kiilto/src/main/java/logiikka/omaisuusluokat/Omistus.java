@@ -2,7 +2,6 @@ package logiikka.omaisuusluokat;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.*;
 import logiikka.valineluokat.*;
 import ui.gui.Piirtoavustaja;
 

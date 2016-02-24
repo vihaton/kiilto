@@ -1,4 +1,3 @@
-
 package ui.gui.toiminnankuuntelijat;
 
 import javax.swing.*;
@@ -10,7 +9,7 @@ import ui.gui.Piirtoalusta;
  * @author xvixvi
  */
 class VuoronPaattavaKuuntelija {
-    
+
     private final Pelivelho pelivelho;
     private final JComponent[] nappulat;
     private final Piirtoalusta piirtoalusta;
@@ -22,7 +21,7 @@ class VuoronPaattavaKuuntelija {
         piirtoalusta = pa;
         this.infokentta = infokentta;
     }
-    
+
     public void lopetaVuoro() {
         pelivelho.seuraavaPelaajanVuoro();
         piirtoalusta.repaint();
@@ -32,6 +31,5 @@ class VuoronPaattavaKuuntelija {
         }
         infokentta.setText("Pelaajan " + pelivelho.getVuorossaOleva() + " vuoro kierroksella " + pelivelho.getKierros());
     }
-    
-    
+
 }

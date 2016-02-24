@@ -1,11 +1,7 @@
-
 package ui.gui.toiminnankuuntelijat;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import javax.swing.JButton;
-import logiikka.Pelivelho;
 import ui.gui.Valintanapit;
 
 /**
@@ -21,7 +17,7 @@ public class SelausnapinKuuntelija implements ActionListener {
         this.vasen = vasen;
         valintanapit = vn;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (vasen) {
@@ -31,5 +27,4 @@ public class SelausnapinKuuntelija implements ActionListener {
         }
     }
 
-    
 }

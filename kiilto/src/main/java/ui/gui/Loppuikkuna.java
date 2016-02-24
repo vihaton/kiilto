@@ -29,7 +29,7 @@ public class Loppuikkuna implements Runnable {
         ruutu.setLayout(new GridLayout(0, 1));
         ruutu.setPreferredSize(new Dimension(450, 300));
         ruutu.setLocation(200, 200);
-        
+
         luoKomponentit();
 
         ruutu.pack();
@@ -40,11 +40,11 @@ public class Loppuikkuna implements Runnable {
         JLabel tekstikentta1 = new JLabel("Pelin voitti pelaaja " + voittaja + " kierroksella " + kierros + "!");
         JLabel tekstikentta2 = new JLabel("Tuomari lähettää erityiskiitoksensa voittajalle:");
         JLabel tekstikentta3 = new JLabel("'Näiden lahjusten turvin ensi perjantaina minä tarjoan!'");
-        
+
         tekstikentta1.setHorizontalAlignment(JLabel.CENTER);
         tekstikentta2.setHorizontalAlignment(JLabel.CENTER);
         tekstikentta3.setHorizontalAlignment(JLabel.CENTER);
-        
+
         JButton uudestaan = new JButton("Haluan revanssin!");
         uudestaan.addActionListener(new UusintanapinKuuntelija(kayttoliittyma, this));
         JButton lopeta = new JButton("Ei ikinä enää, lopeta, LOPETA!");
