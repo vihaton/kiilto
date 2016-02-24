@@ -25,9 +25,9 @@ public class Poyta {
         karkkimarkkinat = new Kasakokoelma(pelaajat.size());
         merkkihenkilot = new ArrayList<>();
         alustaOmistuspakat();
-        luoOmistukset(luoLukija("/home/xvixvi/kiilto/kiilto/src/aputiedostoja/omistustentiedot.csv"));
+        luoOmistukset(luoLukija("src/aputiedostoja/omistustentiedot.csv"));
         sekoitaOmistuspakat();
-        luoMerkkihenkilot(luoLukija("/home/xvixvi/kiilto/kiilto/src/aputiedostoja/merkkihenkilot.csv"));
+        luoMerkkihenkilot(luoLukija("src/aputiedostoja/merkkihenkilot.csv"));
         valitsePelinMerkkihenkilot();
     }
 
@@ -41,7 +41,7 @@ public class Poyta {
     /**
      * Yrittää luoda lukijan annetusta tiedostopolusta.
      *
-     * @param String filePath.
+     * @param filePath (suhteellinen)tiedostopolku.
      * @return Scanner lukija, joka lukee parametrina annetusta tiedostosta.
      */
     public Scanner luoLukija(String filePath) {
