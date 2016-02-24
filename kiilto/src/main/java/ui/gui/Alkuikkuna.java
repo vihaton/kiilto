@@ -33,9 +33,9 @@ public class Alkuikkuna implements Runnable {
         alkuvalikko.setVisible(true);
 
         //käyttöliittymän manuaalisen testaamisen nopeuttamiseksi
-        tuhoa();
-        pelivelho.luoPelaajat(4);
-        pelivelho.pelaa();
+//        tuhoa();
+//        pelivelho.luoPelaajat(3);
+//        pelivelho.pelaa();
     }
 
     private void luoSisalto(Container container) {

@@ -3,6 +3,7 @@ package ui.gui.toiminnankuuntelijat;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import logiikka.Pelivelho;
 
 /**
  *
@@ -10,12 +11,12 @@ import javax.swing.*;
  */
 public class ToimintonapinKuuntelija implements ActionListener {
 
-    private final JButton nappi;
+    private final Pelivelho pelivelho;
     private final JComponent[] napit;
     private final String teksti;
 
-    public ToimintonapinKuuntelija(JButton n, JComponent[] napit) {
-        nappi = n;
+    public ToimintonapinKuuntelija(Pelivelho pelivelho, JButton n, JComponent[] napit) {
+        this.pelivelho = pelivelho;
         this.napit = napit;
         teksti = n.getText();
     }
@@ -31,13 +32,16 @@ public class ToimintonapinKuuntelija implements ActionListener {
             for (int i = 1; i < 4; i++) {
                 napit[i].setVisible(false);
             }
-        } else {
+        } else if (teksti.contains("Ostan")) {
             napit[2].setVisible(true);
             napit[3].setVisible(true);
             napit[0].setVisible(false);
+            pelivelho.vieVarauksetJaNakyvatOmistuksetValitsimelle();
+        } else if (teksti.contains("Varaan")) {
+            napit[2].setVisible(true);
+            napit[3].setVisible(true);
+            napit[0].setVisible(false);
+            pelivelho.vieNakyvatOmistuksetValitsimelle();
         }
-
-
     }
-
 }

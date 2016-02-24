@@ -23,7 +23,7 @@ class VuoronPaattavaKuuntelija {
         this.infokentta = infokentta;
     }
     
-    void lopetaVuoro() {
+    public void lopetaVuoro() {
         pelivelho.seuraavaPelaajanVuoro();
         piirtoalusta.repaint();
         nappulat[0].setVisible(true);

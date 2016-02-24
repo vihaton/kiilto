@@ -137,6 +137,19 @@ public class Poyta {
         }
     }
 
+    public void vaikuttikoPelaajaMerkkihenkilon(Pelaaja vuorossaOleva) {
+        ArrayList<Merkkihenkilo> vaikuttuneet = new ArrayList<>();
+        for (Merkkihenkilo mh : merkkihenkilot) {
+            if (mh.vaikuttuukoOmaisuudesta(vuorossaOleva.getOmaisuus())) {
+                vaikuttuneet.add(mh);
+            }
+        }
+
+        while (!vaikuttuneet.isEmpty()) {
+            vuorossaOleva.merkkihenkiloVierailee(vaikuttuneet.remove(0));
+        }
+    }
+
     @Override
     public String toString() {
         String s = "Pöydässä pelaajat:\n";
@@ -208,7 +221,7 @@ public class Poyta {
      * @return Boolean onnistuiko yritys.
      */
     public boolean suoritaOstoVarauksista(Pelaaja pelaaja, int varauksenNumero) {
-        if (!pelaaja.getVaraustenNumerot().contains("" + varauksenNumero)) {
+        if (!pelaaja.getVaraustenNimet().contains("" + varauksenNumero)) {
             return false;
         }
 

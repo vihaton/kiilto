@@ -28,7 +28,7 @@ public class Loppuikkuna implements Runnable {
     public void run() {
         ruutu.setLayout(new GridLayout(0, 1));
         ruutu.setPreferredSize(new Dimension(450, 300));
-        ruutu.setLocation(500, 200);
+        ruutu.setLocation(200, 200);
         
         luoKomponentit();
 

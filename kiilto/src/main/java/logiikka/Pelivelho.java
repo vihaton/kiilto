@@ -6,6 +6,7 @@ import java.util.*;
 import ui.*;
 import logiikka.valineluokat.*;
 import ui.gui.Piirtoavustaja;
+import ui.gui.Valintanapit;
 
 /**
  * Luokka vastaa pelin pyörittämisestä. Esimerkiksi pelin alustaminen, vuorojen
@@ -22,6 +23,7 @@ public class Pelivelho {
     private final TUI tui;
     private final Kayttoliittyma kayttoliittyma;
     private final ArrayList<Pelaaja> pelaajat;
+    private Valintanapit valintanapit;
     private Poyta poyta;
     private int voittoValta;
     private int kierros;
@@ -31,9 +33,10 @@ public class Pelivelho {
         tui = new TUI(new Scanner(System.in));
         kayttoliittyma = new Kayttoliittyma(this);
         pelaajat = new ArrayList<>();
-        voittoValta = 1;
+        voittoValta = 5;
         kierros = 1;
         vuorossaOleva = null;
+        valintanapit = null;
     }
 
     /**
@@ -46,8 +49,7 @@ public class Pelivelho {
 
         poyta = new Poyta(pelaajat);
 
-        poyta.luoTestitilanneKeskipelista();
-
+//        poyta.luoTestitilanneKeskipelista();
         vuorossaOleva = pelaajat.get(0);
 
         kayttoliittyma.run();
@@ -235,12 +237,15 @@ public class Pelivelho {
     }
 
     /**
-     * Metodi siirtää vuoron seuraavalle pelaajalle. Jos joku pelaajista on
-     * voittaja, ja kierros on lopussa, peli päättyy. Jos vuorossa oleva pelaaja
-     * on kierroksen viimeinen, kierrosluku kasvaa ja vuoro siirtyy
-     * ensimmäiselle pelaajalle.
+     * Metodi siirtää vuoron seuraavalle pelaajalle. Jos joku merkkihenkilö on
+     * vaikuttunut pelaajan omaisuudesta, siirretään merkkihenkilö vierailemaan
+     * pelaajalle. Jos joku pelaajista on voittaja, ja kierros on lopussa, peli
+     * päättyy. Jos vuorossa oleva pelaaja on kierroksen viimeinen, kierrosluku
+     * kasvaa ja vuoro siirtyy ensimmäiselle pelaajalle.
      */
     public void seuraavaPelaajanVuoro() {
+        poyta.vaikuttikoPelaajaMerkkihenkilon(vuorossaOleva);
+
         if (kierroksenViimeinen() && onkoVoittaja()) {
             julistaVoittaja();
             return;
@@ -304,6 +309,37 @@ public class Pelivelho {
                 poyta.getMarkkinat().siirraToiseenKasaan(karkit, i + 1, m);
             }
         }
+    }
+
+    public void vieVarauksetJaNakyvatOmistuksetValitsimelle() {
+        ArrayList<String> nimet = poyta.getNakyvienNimet();
+        nimet.addAll(vuorossaOleva.getVaraustenNimet());
+        valintanapit.setNakyvienNimet(nimet, true);
+    }
+
+    public void vieNakyvatOmistuksetValitsimelle() {
+        valintanapit.setNakyvienNimet(poyta.getNakyvienNimet(), false);
+    }
+
+    /**
+     * Asettaa pelivelhon Valintanapeiksi parametrina annetut valintanapit.
+     *
+     * @param vn Valintanapit.
+     */
+    public void setValintanapit(Valintanapit vn) {
+        valintanapit = vn;
+    }
+
+    public boolean osta(String ostettavanNimi) {
+        if (poyta.getNakyvienNimet().contains(ostettavanNimi)) {
+            return poyta.suoritaOsto(vuorossaOleva, Integer.parseInt(ostettavanNimi));
+        } else {
+            return poyta.suoritaOstoVarauksista(vuorossaOleva, Integer.parseInt(ostettavanNimi));
+        }
+    }
+
+    public boolean varaa(String varattavanNimi) {
+        return poyta.teeVaraus(vuorossaOleva, Integer.parseInt(varattavanNimi));
     }
 
 }

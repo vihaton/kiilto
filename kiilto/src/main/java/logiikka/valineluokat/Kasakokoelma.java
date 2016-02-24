@@ -1,8 +1,6 @@
 package logiikka.valineluokat;
 
 import java.awt.Graphics;
-import java.util.*;
-import logiikka.valineluokat.*;
 import ui.gui.Piirtoavustaja;
 
 /**
@@ -132,7 +130,7 @@ public class Kasakokoelma {
         for (Nallekarkkikasa kasa : kasat) {
             if (!kasa.onTyhja()) {
                 kasa.piirra(graphics, pa, x, y, false);
-                x += 27;
+                x += 32;
             }
         }
     }

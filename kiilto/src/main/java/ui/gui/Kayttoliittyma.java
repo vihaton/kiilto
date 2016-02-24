@@ -22,7 +22,7 @@ public class Kayttoliittyma implements Runnable {
     private final Pelivelho pelivelho;
     private final JFrame ruutu;
     private final JComponent[] nappulat;
-    private final JLabel infoTekstit;
+    private final JLabel infokentta;
     private final Piirtoalusta piirtoalusta;
     private final Piirtoavustaja piirtoavustaja;
     private final int leveys;
@@ -36,7 +36,7 @@ public class Kayttoliittyma implements Runnable {
         leveys = 1210;
         korkeus = 725;
         nappulat = new JComponent[4];
-        infoTekstit = new JLabel("Tähän ilmestyvät pelin infotekstit", JLabel.CENTER);
+        infokentta = new JLabel("Tähän ilmestyvät pelin infotekstit", JLabel.CENTER);
     }
 
     @Override
@@ -46,12 +46,12 @@ public class Kayttoliittyma implements Runnable {
         ruutu.setLocation(0, 0);
 
         luoKomponentit();
-        
+
         for (int i = 1; i < 4; i++) {
             nappulat[i].setVisible(false);
         }
 
-        infoTekstit.setText("Pelaajan " + pelivelho.getVuorossaOleva() + " vuoro kierroksella " + pelivelho.getKierros());
+        infokentta.setText("Pelaajan " + pelivelho.getVuorossaOleva() + " vuoro kierroksella " + pelivelho.getKierros());
 
         ruutu.pack();
         ruutu.setVisible(true);
@@ -69,23 +69,23 @@ public class Kayttoliittyma implements Runnable {
 
         ruutu.add(piirtoalusta);
         ruutu.add(valikkorivi, BorderLayout.SOUTH);
-        ruutu.add(infoTekstit, BorderLayout.NORTH);
+        ruutu.add(infokentta, BorderLayout.NORTH);
     }
-    
+
     private JPanel luoPelaajanToimintonapit() {
         JPanel toimiNapit = new JPanel(new GridLayout(1, 3));
 
         JButton nosta = new JButton("Nostan nallekarkkeja");
-        nosta.addActionListener(new ToimintonapinKuuntelija(nosta, nappulat));
+        nosta.addActionListener(new ToimintonapinKuuntelija(pelivelho, nosta, nappulat));
         JButton osta = new JButton("Ostan omaisuutta");
-        osta.addActionListener(new ToimintonapinKuuntelija(osta, nappulat));
+        osta.addActionListener(new ToimintonapinKuuntelija(pelivelho, osta, nappulat));
         JButton varaa = new JButton("Varaan omaisuutta");
-        varaa.addActionListener(new ToimintonapinKuuntelija(osta, nappulat));
+        varaa.addActionListener(new ToimintonapinKuuntelija(pelivelho, varaa, nappulat));
 
         toimiNapit.add(nosta);
         toimiNapit.add(osta);
         toimiNapit.add(varaa);
-        
+
         nappulat[0] = toimiNapit;
 
         return toimiNapit;
@@ -94,73 +94,64 @@ public class Kayttoliittyma implements Runnable {
     private JPanel luoValintavalineet() {
         JPanel valinnat = new JPanel(new GridLayout(1, 0));
         valinnat.setBackground(Color.lightGray);
-        
+
         valinnat.add(luoKarkinvalitsemisnappulat());
         valinnat.add(luoValintanapit());
-        
+
         return valinnat;
     }
-    
+
     private JPanel luoKarkinvalitsemisnappulat() {
         JPanel karkinvalitsemisnappulat = new JPanel(new GridLayout(1, 6));
         JLabel[] nallekarkkikentat = new JLabel[5];
 
         for (int i = 1; i < 6; i++) {
             JPanel nappulat = new JPanel(new GridLayout(3, 1));
-            
+
             JLabel kentta = new JLabel("0");
             kentta.setHorizontalAlignment(SwingConstants.CENTER);
-            nallekarkkikentat[i-1] = kentta;
-            
+            nallekarkkikentat[i - 1] = kentta;
+
             JButton plus = new JButton("+");
             piirtoavustaja.asetaNappulanVari(plus, i);
             plus.addActionListener(new MaaranappienKuuntelija(kentta, true));
-            
+
             JButton miinus = new JButton("-");
             piirtoavustaja.asetaNappulanVari(miinus, i);
             miinus.addActionListener(new MaaranappienKuuntelija(kentta, false));
-                        
+
             nappulat.add(kentta);
             nappulat.add(plus);
             nappulat.add(miinus);
             karkinvalitsemisnappulat.add(nappulat);
         }
-        
+
         JButton nosta = new JButton(">");
-        nosta.addActionListener(new NallekarkkivalitsimenKuuntelija(pelivelho, infoTekstit, nallekarkkikentat, piirtoalusta, nappulat));
-        
+        nosta.addActionListener(new NallekarkkivalitsimenKuuntelija(pelivelho, infokentta, nallekarkkikentat, piirtoalusta, nappulat));
+
         karkinvalitsemisnappulat.add(nosta);
-        
+
         nappulat[1] = karkinvalitsemisnappulat;
-        
+
         return karkinvalitsemisnappulat;
     }
-    
+
     private JPanel luoValintanapit() {
-        JPanel kaikkiNapit = new JPanel(new GridLayout(1, 0)); 
+        JPanel kaikkiNapit = new JPanel(new GridLayout(1, 0));
         kaikkiNapit.setBackground(Color.lightGray);
-        JPanel valintanapit = new JPanel(new GridLayout(2, 3));
         
-        JLabel valitsin = new JLabel("");
-        JButton valitse = new JButton("tämä!");
-        JButton vasen = new JButton("<--");
-        JButton oikea = new JButton("-->");
+        Valintanapit valintanapit = new Valintanapit(pelivelho, nappulat, piirtoalusta, infokentta);
+        pelivelho.setValintanapit(valintanapit);
+        
         JButton takaisin = new JButton("takaisin");
-        takaisin.addActionListener(new ToimintonapinKuuntelija(takaisin, nappulat));
+        takaisin.addActionListener(new ToimintonapinKuuntelija(pelivelho, takaisin, nappulat));
         
-        //kuuntelijat
-                
-        valintanapit.add(valitsin);
-        valintanapit.add(valitse);
-        valintanapit.add(vasen);
-        valintanapit.add(oikea);
-                
         kaikkiNapit.add(valintanapit);
         kaikkiNapit.add(takaisin);
-        
+
         nappulat[2] = valintanapit;
         nappulat[3] = takaisin;
-                
+
         return kaikkiNapit;
     }
 
@@ -168,11 +159,11 @@ public class Kayttoliittyma implements Runnable {
         for (int i = 0; i < 4; i++) {
             nappulat[i].setVisible(false);
         }
-        
+
         Loppuikkuna loppuikkuna = new Loppuikkuna(voittaja, voittovalta, kierros, this);
         loppuikkuna.run();
     }
-    
+
     public void tuhoa() {
         ruutu.setVisible(false);
         ruutu.dispose();

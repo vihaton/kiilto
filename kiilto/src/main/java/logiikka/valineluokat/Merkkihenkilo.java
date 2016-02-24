@@ -2,6 +2,7 @@ package logiikka.valineluokat;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import logiikka.Pelaaja;
 import logiikka.omaisuusluokat.*;
 import ui.gui.Piirtoavustaja;
 
@@ -14,7 +15,7 @@ import ui.gui.Piirtoavustaja;
  * arvovaltaa, ja ehkä kupan.
  */
 public class Merkkihenkilo {
-    
+
     private String nimi;
     private int[] omaisuusvaatimus;
     private int arvovaltalisa;
@@ -23,6 +24,7 @@ public class Merkkihenkilo {
      *
      * @param ov int[] jossa omaisuusvaatimus (kul,val,sin,vih,pun,mus).
      * @param arvo Merkkihenkilön vierailun pelaajalle antama lisäarvovalta.
+     * @param nimi nimi.
      */
     public Merkkihenkilo(String nimi, int[] ov, int arvo) {
         if (ov.length != 6) {
@@ -36,20 +38,21 @@ public class Merkkihenkilo {
     /**
      * Konstruktori, joka luo arvovaltalisäykseltään 3 arvoisen merkkihenkilön.
      *
+     * @param nimi nimi.
      * @param omaisuusvaatimus kuuden kokoisessa taulukossa.
      */
     public Merkkihenkilo(String nimi, int[] ov) {
         this(nimi, ov, 3);
     }
-    
+
     public Merkkihenkilo(int[] ov) {
         this("homo", ov, 3);
     }
-    
+
     public int getArvo() {
         return arvovaltalisa;
     }
-    
+
     public String getNimi() {
         return nimi;
     }
@@ -76,7 +79,7 @@ public class Merkkihenkilo {
      */
     public boolean vaikuttuukoOmaisuudesta(Omaisuus o) {
         int[] omaisuusBonukset = o.getOmaisuudestaTulevatBonusKarkit();
-        
+
         for (int i = 0; i < omaisuusBonukset.length; i++) {
             if (omaisuusBonukset[i] < omaisuusvaatimus[i]) {
                 return false;
@@ -84,7 +87,7 @@ public class Merkkihenkilo {
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
         String vaatimus = "";
@@ -110,12 +113,12 @@ public class Merkkihenkilo {
         graphics.fill3DRect(x, y, 90, 100, true);
         graphics.setColor(Color.yellow);
         graphics.draw3DRect(x, y, 90, 100, true);
-        
+
         pa.piirraNimi(graphics, nimi, x + 40, y + 14);
         pa.piirraArvovalta(graphics, arvovaltalisa, x + 5, y + 5);
         piirraOmaisuusvaatimus(graphics, pa, x + 10, y + 25);
     }
-    
+
     private void piirraOmaisuusvaatimus(Graphics graphics, Piirtoavustaja va, int x, int y) {
         for (int i = 1; i < 6; i++) {
             va.asetaVari(graphics, i);

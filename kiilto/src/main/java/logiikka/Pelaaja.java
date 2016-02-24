@@ -26,6 +26,10 @@ public class Pelaaja {
     public void lisaaOmistus(Omistus omistus) {
         omaisuus.lisaaOmistus(omistus);
     }
+    
+    public Omaisuus getOmaisuus() {
+        return omaisuus;
+    }
 
     public boolean liikaaKarkkeja() {
         return karkit.getKarkkienMaara() > 10;
@@ -162,7 +166,7 @@ public class Pelaaja {
         return varaukset.size();
     }
 
-    public ArrayList<String> getVaraustenNumerot() {
+    public ArrayList<String> getVaraustenNimet() {
         ArrayList<String> varaustenNrot = new ArrayList<>();
         for (int i = 0; i < varaukset.size(); i++) {
             varaustenNrot.add(varaukset.get(i).getOmistus().getNimi());

@@ -201,7 +201,7 @@ public class TUI {
     public int ostettavanVarauksenNro(Pelaaja pelaaja) {
         int nro = 0;
 
-        while (nro == 0) {
+        while (nro == 0) {   
             System.out.println("Minkä nimisen (numeroisen) varauksesi haluasit ostaa? 'e' vie takaisin\n"
                     + "Varauksesi:");
             System.out.println(pelaaja.varauksetToString());
@@ -211,16 +211,15 @@ public class TUI {
                 return -1;
             }
 
-            try {
-                if (!pelaaja.getVaraustenNumerot().contains(syote.trim())) {
-                    throw new IllegalArgumentException();
-                }
-                nro = Integer.parseInt(syote);
-            } catch (Exception e) {
+            if (!pelaaja.getVaraustenNimet().contains(syote.trim())) {
                 nro = 0;
                 System.out.println("Huono syöte, yritäppä uudestaan tahmanäppi!");
+                continue;
             }
+            
+            nro = Integer.parseInt(syote);
         }
+
         return nro;
     }
 
