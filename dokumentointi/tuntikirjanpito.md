@@ -78,16 +78,24 @@ Viimeiset (toivottavasti) logiikat: varaukset ja merkkihenkilöt näyttäisivät
 
 Pyydettyjä raportteja (checkstyle ym), koodikatselmoinnit, tuskastuttava (ja hävitty) vääntö tiedoston lukemiseksi toisesta pakkauksesta (2h), GUI alkuun.
 
-##Viikko 6 : *23h*
+##Viikko 6 : *32h*
 
 **20.2 5,5h**
 
 Käyttöliittymä ja piirtäminen
 
-**21.2 3.5h**
+**21.2 3,5h**
 
-Käyttöliittymä ja piirtäminen
+Käyttöliittymä, piirtäminen ja sekvenssikaaviot
 
 **22.2 14h**
 
 Piirtäminen valmistuu, käyttöliittymään nappeja ja napeille kuuntelijoita, loppuvalikko
+
+**23.2 7h**
+
+Käyttöliittymään toiminnallisuutta, piirtämisen täydentämistä, ensimmäisen toimivan GUI version testipelaamista
+
+**24.2 2h**
+
+Tiedostopolkujen muuttamista suhteellisiksi
