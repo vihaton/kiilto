@@ -3,7 +3,7 @@ package logiikka.omaisuusluokat;
 import java.awt.Color;
 import java.awt.Graphics;
 import logiikka.valineluokat.*;
-import ui.gui.Piirtoavustaja;
+import ui.gui.piirtaminen.Piirtoavustaja;
 
 /**
  *
@@ -112,7 +112,7 @@ public class Omistus {
      *
      * @param graphics
      * @param pa piirtoavustaja.
-     * @see ui.gui.Piirtoavustaja
+     * @see ui.gui.piirtaminen.Piirtoavustaja
      * @param x
      * @param y
      * @param vari Minkä värinen omistus piirretään.

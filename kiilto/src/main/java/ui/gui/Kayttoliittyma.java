@@ -1,5 +1,7 @@
 package ui.gui;
 
+import ui.gui.piirtaminen.Piirtoalusta;
+import ui.gui.piirtaminen.Piirtoavustaja;
 import java.awt.*;
 import javax.swing.*;
 import logiikka.Pelivelho;

@@ -1,5 +1,6 @@
-package ui.gui;
+package ui.gui.piirtaminen;
 
+import ui.gui.piirtaminen.Piirtoavustaja;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -15,6 +16,12 @@ public class Piirtoalusta extends JPanel {
     Pelivelho pelivelho;
     Piirtoavustaja piirtoAvustaja;
 
+    /**
+     * Luo piirtoalusta, joka muistaa pelivelhon ja piirtoavustajan.
+     * 
+     * @param pv pelivelho.
+     * @param pa piirtoavustaja.
+     */
     public Piirtoalusta(Pelivelho pv, Piirtoavustaja pa) {
         super.setBackground(Color.lightGray);
         pelivelho = pv;

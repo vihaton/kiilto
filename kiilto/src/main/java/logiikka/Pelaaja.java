@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.util.*;
 import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
-import ui.gui.Piirtoavustaja;
+import ui.gui.piirtaminen.Piirtoavustaja;
 
 /**
  *
@@ -19,7 +19,7 @@ public class Pelaaja {
     private final ArrayList<Varaus> varaukset = new ArrayList<>();
     private final ArrayList<Merkkihenkilo> merkkihenkilot = new ArrayList<>();
 
-    Pelaaja(String nimi) {
+    public Pelaaja(String nimi) {
         this.nimi = nimi;
     }
 

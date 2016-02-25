@@ -235,4 +235,8 @@ public class TUI {
         System.out.println(pelaaja);
     }
 
+    public int[] mitaKarkkejaPoistetaa(Pelaaja vuorossaOleva) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -1,5 +1,6 @@
 package ui.gui;
 
+import ui.gui.piirtaminen.Piirtoalusta;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;

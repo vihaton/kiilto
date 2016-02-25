@@ -2,7 +2,7 @@ package ui.gui.toiminnankuuntelijat;
 
 import javax.swing.*;
 import logiikka.Pelivelho;
-import ui.gui.Piirtoalusta;
+import ui.gui.piirtaminen.Piirtoalusta;
 
 /**
  *

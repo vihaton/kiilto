@@ -1,7 +1,8 @@
 package logiikka.valineluokat;
 
 /**
- *
+ * Enum luokka pelissä käytettäville kuudelle värille.
+ * 
  * @author xvixvi
  */
 public enum Vari {

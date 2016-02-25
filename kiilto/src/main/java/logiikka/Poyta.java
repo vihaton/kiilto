@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.*;
 import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
-import ui.gui.Piirtoavustaja;
+import ui.gui.piirtaminen.Piirtoavustaja;
 
 /**
  *
@@ -20,7 +20,7 @@ public class Poyta {
     private final Random arpoja = new Random();
     private final ArrayList<Merkkihenkilo> merkkihenkilot;
 
-    Poyta(ArrayList<Pelaaja> pelaajat) {
+    public Poyta(ArrayList<Pelaaja> pelaajat) {
         this.pelaajat = pelaajat;
         karkkimarkkinat = new Kasakokoelma(pelaajat.size());
         merkkihenkilot = new ArrayList<>();

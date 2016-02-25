@@ -11,12 +11,18 @@
 			<property name="allowMissingThrowsTags" value="false"/>
 			<property name="allowMissingReturnTag" value="false"/>
 			<property name="allowThrowsTagsForSubclasses" value="true"/>
+			
+			<property name="ignoreMethodNamesRegex" value="^set.*$"/>
+			<property name="ignoreMethodNamesRegex" value="^get.*$"/>
+
 		</module>
 
 		<module name="JavadocStyle">
 			<property name="scope" value="public"/>
 			<property name="checkEmptyJavadoc" value="true"/>
 		</module>
+		
+
 
         <property name='tabWidth' value='4' />
 
@@ -90,7 +96,7 @@
     <!-- File Length -->
 
     <module name='FileLength'>
-        <property name='max' value='269' />
+        <property name='max' value='400' />
     </module>
 
     <module name="SuppressionFilter">

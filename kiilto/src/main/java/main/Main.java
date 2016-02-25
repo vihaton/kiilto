@@ -2,6 +2,7 @@ package main;
 
 import ui.gui.Alkuikkuna;
 import javax.swing.SwingUtilities;
+import tuilogiikka.TUIPelivelho;
 
 /**
  * Pistetään peli pyörimään!
@@ -16,6 +17,9 @@ public class Main {
     public static void main(String[] args) {
         Alkuikkuna k = new Alkuikkuna();
         SwingUtilities.invokeLater(k);
+        
+        //TUI peli
+//        new TUIPelivelho().pelaaTUI();
     }
 
 }

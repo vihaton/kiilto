@@ -1,10 +1,11 @@
 package logiikka.valineluokat;
 
 import java.awt.Graphics;
-import ui.gui.Piirtoavustaja;
+import ui.gui.piirtaminen.Piirtoavustaja;
 
 /**
- *
+ * Pelissä liikuteltavan valuutan talletusmuoto.
+ * 
  * @author xvixvi
  */
 public class Nallekarkkikasa {
@@ -12,11 +13,22 @@ public class Nallekarkkikasa {
     private Vari vari;
     private int koko;
 
+    /**
+     * Luo tyhjän kasan väriä i.
+     * 
+     * @param vari 
+     */
     public Nallekarkkikasa(int vari) {
         this.koko = 0;
         this.vari = Vari.values()[vari];
     }
 
+    /**
+     * Luo kasan kokoa 'koko' värillä 'vari'.
+     * 
+     * @param vari the vari.
+     * @param koko the koko.
+     */
     public Nallekarkkikasa(int vari, int koko) {
         this.koko = koko;
         this.vari = Vari.values()[vari];
@@ -38,14 +50,11 @@ public class Nallekarkkikasa {
         this.koko += maara;
     }
 
-    public void kasvataYhdella() {
-        this.koko += 1;
-    }
-
-    public void pienennaYhdella() {
-        this.koko -= 1;
-    }
-
+    /**
+     * Onko kasa tyhjä vai ei.
+     * 
+     * @return onko kasa tyhjä.
+     */
     public boolean onTyhja() {
         return this.koko < 1;
     }
@@ -58,10 +67,10 @@ public class Nallekarkkikasa {
     /**
      * Piirtää nallekarkkikasan.
      *
-     * @param graphics
+     * @param graphics grafiikat.
      * @param pa piirtoavustaja.
-     * @param x
-     * @param y
+     * @param x -koordinaatti
+     * @param y -koordinaatti
      * @param iso piirretäänkö isoja karkkeja?
      */
     public void piirra(Graphics graphics, Piirtoavustaja pa, int x, int y, boolean iso) {

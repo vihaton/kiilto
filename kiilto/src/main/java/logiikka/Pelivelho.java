@@ -5,7 +5,7 @@ import ui.gui.Kayttoliittyma;
 import java.awt.Graphics;
 import java.util.*;
 import logiikka.valineluokat.*;
-import ui.gui.Piirtoavustaja;
+import ui.gui.piirtaminen.Piirtoavustaja;
 import ui.gui.Valintanapit;
 
 /**
@@ -25,10 +25,13 @@ public class Pelivelho {
     private final ArrayList<Pelaaja> pelaajat;
     private Valintanapit valintanapit;
     private Poyta poyta;
-    private int voittoValta;
+    private final int voittoValta;
     private int kierros;
     private Pelaaja vuorossaOleva;
 
+    /**
+     * Luo pelivelhon.
+     */
     public Pelivelho() {
         tui = new TUI(new Scanner(System.in));
         kayttoliittyma = new Kayttoliittyma(this);
@@ -40,145 +43,18 @@ public class Pelivelho {
     }
 
     /**
-     * Alustaa ja pelaa kiilto-pelin.
+     * Alustaa ja pelaa kiilto-pelin graafisella käyttöliittymällä.
      */
     public void pelaa() {
-//        alustaTestiTUIPeli(); //tui-peli
-//        alustaTUIPeli();
-//        pelaaTUI();
-
         poyta = new Poyta(pelaajat);
 
         poyta.luoTestattavaPelitilanne(3);
-        
+
         vuorossaOleva = pelaajat.get(0);
 
         kayttoliittyma.run();
     }
 
-    /*
-     ********************************************
-     TEXT USER INTERFACE -METODIT ALKAVAT
-     ********************************************
-     */
-    private void pelaaTUI() {
-        while (onkoVoittaja()) {
-            pelaaKierros();
-        }
-    }
-
-    private void alustaTUIPeli() {
-        int pm = tui.selvitaPelaajienMaara();
-        ArrayList<String> nimet = tui.selvitaPelaajienNimet(pm);
-        luoPelaajat(nimet);
-
-        voittoValta = tui.selvitaVoittoonTarvittavaValta();
-    }
-
-    private void alustaTestiTUIPeli() {
-        ArrayList<String> p = new ArrayList<>();
-        p.add("varakas");
-        p.add("homokaks");
-        p.add("homo3");
-        p.add("mr Gandalf");
-        luoPelaajat(p);
-        pelaajat.get(0).setKarkit(new int[]{3, 5, 5, 5, 5, 5});
-        voittoValta = 5;
-        poyta = new Poyta(pelaajat);
-    }
-
-    private void pelaaKierros() {
-        kierros++;
-        tui.tulostaKierroksenVaihto(kierros, voittoValta);
-        for (Pelaaja p : pelaajat) {
-            pelaaVuoro(p);
-        }
-    }
-
-    private void pelaaVuoro(Pelaaja pelaaja) {
-        vuorossaOleva = pelaaja;
-        tui.tulostaVuoronAlkuinfot(vuorossaOleva, poyta);
-
-        int valinta = 0;
-        valinta = tui.pelaajanToimi(vuorossaOleva.getNimi());
-
-        if (valinta == 1) { // nostetaan nallekarkkeja
-            nostaNallekarkkeja();
-        } else if (valinta == 2) { // ostetaan omaisuutta
-            ostaOmaisuutta();
-        } else if (valinta == 3) { // tehdään varaus pöydästä
-            teeVaraus();
-        }
-
-        if (vuorossaOleva.liikaaKarkkeja()) {
-            //wip
-        }
-    }
-
-    private void nostaNallekarkkeja() {
-        int[] maarat = tui.mitaKarkkejaNostetaan(poyta.getMarkkinat());
-        //testataan, halusiko pelaaja tehdä toisen toiminnon
-        if (maarat == null) {
-            pelaaVuoro(vuorossaOleva);
-            return;
-        }
-
-        nostaNallekarkkeja(maarat);
-    }
-
-    private void ostaOmaisuutta() {
-        while (true) {
-            int ostonNumero = tui.mikaOmistusOstetaan(poyta.getNakyvienNimet());
-
-            if (ostonNumero == -1) {
-                pelaaVuoro(vuorossaOleva);
-                return;
-            }
-
-            if (ostonNumero == 0) {
-                ostaVaraus();
-                return;
-            } else if (poyta.suoritaOsto(vuorossaOleva, ostonNumero)) {
-                break;
-            }
-        }
-    }
-
-    private void ostaVaraus() {
-        while (true) {
-            int ostettava = tui.ostettavanVarauksenNro(vuorossaOleva);
-
-            if (ostettava == -1) {
-                pelaaVuoro(vuorossaOleva);
-                return;
-            }
-
-            if (poyta.suoritaOstoVarauksista(vuorossaOleva, ostettava)) {
-                break;
-            }
-        }
-    }
-
-    private void teeVaraus() {
-        while (true) {
-            int varauksenNro = tui.mikaOmistusVarataan(poyta.getNakyvienNimet());
-
-            if (varauksenNro == -1) {
-                pelaaVuoro(vuorossaOleva);
-                return;
-            }
-
-            if (poyta.teeVaraus(vuorossaOleva, varauksenNro)) {
-                break;
-            }
-        }
-    }
-
-    /*
-     *******************************************
-     TEXT USER INTERFACE -METODIT LOPPUVAT
-     *******************************************
-     */
     public ArrayList<Pelaaja> getPelaajat() {
         return pelaajat;
     }
@@ -233,6 +109,11 @@ public class Pelivelho {
         }
     }
 
+    /**
+     * Onko vuorossa oleva pelaaja kierroksen viimeinen.
+     *
+     * @return -:-
+     */
     public boolean kierroksenViimeinen() {
         return pelaajat.get(pelaajat.size() - 1) == vuorossaOleva;
     }
@@ -302,6 +183,12 @@ public class Pelivelho {
         return poyta.getMarkkinat().getKasanKoko(vari) > 3;
     }
 
+    /**
+     * Nostaa vuorossa olevalle pelaajalle nallekarkkeja annettujen määrien
+     * mukaan. Metodi luottaa, että syöte on tarkastettu hyväksi.
+     *
+     * @param maarat nostettavien nallekarkkien määrät.
+     */
     public void nostaNallekarkkeja(int[] maarat) {
         Kasakokoelma karkit = vuorossaOleva.getKarkit();
         for (int i = 0; i < maarat.length; i++) {
@@ -312,12 +199,19 @@ public class Pelivelho {
         }
     }
 
+    /**
+     * Vie valitsinnapistolle vuorossa olevan pelaajan varaukset ja pelipöydän
+     * näkyvät omistukset ostamista varten.
+     */
     public void vieVarauksetJaNakyvatOmistuksetValitsimelle() {
         ArrayList<String> nimet = poyta.getNakyvienNimet();
         nimet.addAll(vuorossaOleva.getVaraustenNimet());
         valintanapit.setNakyvienNimet(nimet, true);
     }
 
+    /**
+     * Vie valitsinnapistolle varattavissa olevat omistukset.
+     */
     public void vieNakyvatOmistuksetValitsimelle() {
         valintanapit.setNakyvienNimet(poyta.getNakyvienNimet(), false);
     }
@@ -331,6 +225,14 @@ public class Pelivelho {
         valintanapit = vn;
     }
 
+    /**
+     * Suorittaa oston, kohteesta riippuen pöydästä tai vuorossa olevan pelaajan
+     * varauksista. Metodi luottaa saavansa hyvän syötteen.
+     *
+     * @param ostettavanNimi ostettavan omistuksen nimi.
+     * @return suoritettiinko osto, eli käytännössä: jos pelaajalla ei ole varaa
+     * niin false, muuten true.
+     */
     public boolean osta(String ostettavanNimi) {
         if (poyta.getNakyvienNimet().contains(ostettavanNimi)) {
             return poyta.suoritaOsto(vuorossaOleva, Integer.parseInt(ostettavanNimi));
@@ -339,6 +241,13 @@ public class Pelivelho {
         }
     }
 
+    /**
+     * Tekee varauksen vuorossa olevalle pelaajalle. Metodi luottaa syötteen
+     * olevan hyvä.
+     *
+     * @param varattavanNimi varattavan omistuksen nimi.
+     * @return suoritettiinko varaus.
+     */
     public boolean varaa(String varattavanNimi) {
         return poyta.teeVaraus(vuorossaOleva, Integer.parseInt(varattavanNimi));
     }

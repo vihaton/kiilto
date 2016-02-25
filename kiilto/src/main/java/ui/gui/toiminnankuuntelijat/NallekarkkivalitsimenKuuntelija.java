@@ -3,7 +3,7 @@ package ui.gui.toiminnankuuntelijat;
 import java.awt.event.*;
 import javax.swing.*;
 import logiikka.Pelivelho;
-import ui.gui.Piirtoalusta;
+import ui.gui.piirtaminen.Piirtoalusta;
 
 /**
  *

@@ -1,4 +1,4 @@
-package ui.gui;
+package ui.gui.piirtaminen;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -21,7 +21,7 @@ public class Piirtoavustaja {
         g.setColor(getVari(i));
     }
 
-    void asetaNappulanVari(JComponent komponentti, int i) {
+    public void asetaNappulanVari(JComponent komponentti, int i) {
         komponentti.setBackground(getVari(i));
     }
 

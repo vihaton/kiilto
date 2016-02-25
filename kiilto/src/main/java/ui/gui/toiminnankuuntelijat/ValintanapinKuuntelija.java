@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import logiikka.Pelivelho;
-import ui.gui.Piirtoalusta;
+import ui.gui.piirtaminen.Piirtoalusta;
 import ui.gui.Valintanapit;
 
 /**

@@ -2,7 +2,7 @@ package logiikka.omaisuusluokat;
 
 import java.awt.Graphics;
 import java.util.*;
-import ui.gui.Piirtoavustaja;
+import ui.gui.piirtaminen.Piirtoavustaja;
 
 /**
  *
