@@ -1,6 +1,6 @@
 package ui.gui.piirtaminen;
 
-import ui.gui.piirtaminen.Piirtoavustaja;
+import ui.gui.piirtaminen.piirtajat.PoydanPiirtaja;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -13,25 +13,23 @@ import logiikka.Pelivelho;
  */
 public class Piirtoalusta extends JPanel {
 
-    Pelivelho pelivelho;
-    Piirtoavustaja piirtoAvustaja;
+    private final PoydanPiirtaja poydanpiirtaja;
 
     /**
-     * Luo piirtoalusta, joka muistaa pelivelhon ja piirtoavustajan.
-     * 
-     * @param pv pelivelho.
+     * Luo piirtoalustan, joka muistaa annetun piirtoavustajan.
+     *
+     * @param pelivelho jolta saadaan pöydän piirtämiseen pöytä.
      * @param pa piirtoavustaja.
      */
-    public Piirtoalusta(Pelivelho pv, Piirtoavustaja pa) {
+    public Piirtoalusta(Pelivelho pelivelho, Piirtoavustaja pa) {
         super.setBackground(Color.lightGray);
-        pelivelho = pv;
-        piirtoAvustaja = pa;
+        this.poydanpiirtaja = new PoydanPiirtaja(pa, pelivelho.getPoyta());
     }
 
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-        pelivelho.piirra(graphics, piirtoAvustaja);
+        poydanpiirtaja.piirra(graphics);
     }
 
     @Override

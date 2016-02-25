@@ -1,27 +1,20 @@
 package logiikka;
 
-import ui.tui.TUI;
 import ui.gui.Kayttoliittyma;
-import java.awt.Graphics;
 import java.util.*;
 import logiikka.valineluokat.*;
-import ui.gui.piirtaminen.Piirtoavustaja;
 import ui.gui.Valintanapit;
 
 /**
  * Luokka vastaa pelin pyörittämisestä. Esimerkiksi pelin alustaminen, vuorojen
  * organisoiminen sekä UI.n ja logiikan rajapintana toimiminen ovat sen
  * tehtäviä.
- *
- * Tulevaisuudessa peliin tehdään tekoäly, minkä vuoksi testinomaisia text user
- * interface -metodeita ja toimintoja säilytetään yhä kommenteissa.
- *
+ * 
  * @author xvixvi
  */
 public class Pelivelho {
 
-    private final TUI tui;
-    private final Kayttoliittyma kayttoliittyma;
+    private Kayttoliittyma kayttoliittyma;
     private final ArrayList<Pelaaja> pelaajat;
     private Valintanapit valintanapit;
     private Poyta poyta;
@@ -33,8 +26,6 @@ public class Pelivelho {
      * Luo pelivelhon.
      */
     public Pelivelho() {
-        tui = new TUI(new Scanner(System.in));
-        kayttoliittyma = new Kayttoliittyma(this);
         pelaajat = new ArrayList<>();
         voittoValta = 15;
         kierros = 1;
@@ -48,11 +39,16 @@ public class Pelivelho {
     public void pelaa() {
         poyta = new Poyta(pelaajat);
 
-        poyta.luoTestattavaPelitilanne(3);
-
         vuorossaOleva = pelaajat.get(0);
-
+        
+        poyta.luoTestattavaPelitilanne(5);
+        
+        kayttoliittyma = new Kayttoliittyma(this);
         kayttoliittyma.run();
+    }
+    
+    public Poyta getPoyta() {
+        return poyta;
     }
 
     public ArrayList<Pelaaja> getPelaajat() {
@@ -74,16 +70,6 @@ public class Pelivelho {
             }
         }
         return false;
-    }
-
-    /**
-     * Metodi piirtää pöydän koko komeudessaan.
-     *
-     * @param graphics
-     * @param pa
-     */
-    public void piirra(Graphics graphics, Piirtoavustaja pa) {
-        poyta.piirra(graphics, pa);
     }
 
     /**
@@ -177,7 +163,7 @@ public class Pelivelho {
      * Jos nimi ei kerro mistä on kyse, et puhu suomea.
      *
      * @param vari 1=val, 2=sin, 3=vih, 4=pun ja 5=mus
-     * @return
+     * @return oliko kasassa vähintään neljä karkkia.
      */
     public boolean vahintaanNeljaKarkkia(int vari) {
         return poyta.getMarkkinat().getKasanKoko(vari) > 3;
@@ -251,5 +237,4 @@ public class Pelivelho {
     public boolean varaa(String varattavanNimi) {
         return poyta.teeVaraus(vuorossaOleva, Integer.parseInt(varattavanNimi));
     }
-
 }

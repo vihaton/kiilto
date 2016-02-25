@@ -48,7 +48,7 @@ public class MerkkihenkiloTest {
         m = new Merkkihenkilo("homo", new int[]{0,3,3,3,0,0});
         assertTrue(m.getNimi().equals("homo"));
         m = new Merkkihenkilo("h", new int[]{0,3,3,3,0,0}, 100);
-        assertTrue(m.getArvo()==100);
+        assertTrue(m.getArvovaltalisa()==100);
     }
     
     @Test
@@ -69,9 +69,9 @@ public class MerkkihenkiloTest {
     
     @Test
     public void getVaatimusToimiiHuonollaSyotteella() {
-        assertTrue(m.getVaatimus(1)==3);
-        assertTrue(m.getVaatimus(0)==0);
-        assertTrue(m.getVaatimus(100)==0);
-        assertTrue(m.getVaatimus(-5)==0);
+        assertTrue(m.getOmaisuusvaatimusVarilla(1)==3);
+        assertTrue(m.getOmaisuusvaatimusVarilla(0)==0);
+        assertTrue(m.getOmaisuusvaatimusVarilla(100)==0);
+        assertTrue(m.getOmaisuusvaatimusVarilla(-5)==0);
     }
 }

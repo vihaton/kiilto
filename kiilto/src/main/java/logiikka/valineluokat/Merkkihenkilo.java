@@ -48,7 +48,7 @@ public class Merkkihenkilo {
         this("homo", ov, 3);
     }
 
-    public int getArvo() {
+    public int getArvovaltalisa() {
         return arvovaltalisa;
     }
 
@@ -57,13 +57,13 @@ public class Merkkihenkilo {
     }
 
     /**
-     *
+     * Tietynvärisen omaisuusvaatimuksen hakemiseksi.
      *
      * @param i indeksi, mitä vaatimusta halutaan (kul, val, sin, vih, pun,
      * mus).
      * @return vaatimus.
      */
-    public int getVaatimus(int i) {
+    public int getOmaisuusvaatimusVarilla(int i) {
         if (i < 0 || i > 5) {
             return 0;
         }
@@ -96,32 +96,5 @@ public class Merkkihenkilo {
         vaatimus += "" + omaisuusvaatimus[5];
         return "'olen " + nimi + ", arvovallaltani " + arvovaltalisa + " ja vaadin kauppiaalta omaisuutta mallia\n"
                 + vaatimus + "'\n";
-    }
-
-    /**
-     * Piirtää merkkihenkilön annettuihin koordinaatteihin.
-     *
-     * @param graphics grafiikat.
-     * @param pa varin asettaja auttaa helpottaa nallekarkkien värien
-     * asettamisessa.
-     * @param x
-     * @param y
-     */
-    public void piirra(Graphics graphics, Piirtoavustaja pa, int x, int y) {
-        graphics.setColor(Color.darkGray);
-        graphics.fill3DRect(x, y, 90, 100, true);
-        graphics.setColor(Color.yellow);
-        graphics.draw3DRect(x, y, 90, 100, true);
-
-        pa.piirraNimi(graphics, nimi, x + 40, y + 14);
-        pa.piirraArvovalta(graphics, arvovaltalisa, x + 5, y + 5);
-        piirraOmaisuusvaatimus(graphics, pa, x + 10, y + 25);
-    }
-
-    private void piirraOmaisuusvaatimus(Graphics graphics, Piirtoavustaja va, int x, int y) {
-        for (int i = 1; i < 6; i++) {
-            va.asetaVari(graphics, i);
-            graphics.drawString("" + omaisuusvaatimus[i], x, y + i * 14);
-        }
     }
 }

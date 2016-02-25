@@ -14,6 +14,7 @@
 			
 			<property name="ignoreMethodNamesRegex" value="^set.*$"/>
 			<property name="ignoreMethodNamesRegex" value="^get.*$"/>
+			<property name="ignoreMethodNamesRegex" value="^piirra.*$"/>
 
 		</module>
 

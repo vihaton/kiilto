@@ -1,11 +1,8 @@
 package logiikka;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.util.*;
 import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
-import ui.gui.piirtaminen.Piirtoavustaja;
 
 /**
  *
@@ -149,9 +146,13 @@ public class Pelaaja {
     public int getMerkkihenkiloidenArvo() {
         int summa = 0;
         for (Merkkihenkilo mh : merkkihenkilot) {
-            summa += mh.getArvo();
+            summa += mh.getArvovaltalisa();
         }
         return summa;
+    }
+    
+    public int getMerkkihenkiloidenMaara() {
+        return merkkihenkilot.size();
     }
 
     public String varauksetToString() {
@@ -161,8 +162,12 @@ public class Pelaaja {
         }
         return s;
     }
+    
+    public ArrayList<Varaus> getVaraukset() {
+        return varaukset;
+    }
 
-    int getVarauksienMaara() {
+    public int getVarauksienMaara() {
         return varaukset.size();
     }
 
@@ -253,67 +258,5 @@ public class Pelaaja {
             }
         }
     }
-
-    /**
-     * Piirtää pelaajan nimen, arvovallan, omistukset, karkit ja varaukset.
-     *
-     * @param graphics
-     * @param pa piirtoavustaja.
-     * @param x
-     * @param y
-     */
-    public void piirra(Graphics graphics, Piirtoavustaja pa, int x, int y) {
-        graphics.setColor(Color.black);
-        graphics.drawString(nimi, x, y);
-
-        graphics.drawString("pelaajalla arvovaltapisteitä " + getArvovalta(), x, y + 15);
-
-        y += 25;
-        piirraOmaisuus(graphics, pa, x, y);
-        piirraVietellytMerkkihenkilot(graphics, pa, x + 195, y - 25);
-        x += 275;
-        piirraVaraukset(graphics, pa, x, y);
-        y -= 28;
-        karkit.piirraPelaajanKarkit(graphics, pa, x, y);
-    }
-
-    private void piirraOmaisuus(Graphics graphics, Piirtoavustaja pa, int x, int y) {
-        for (int i = 1; i < 6; i++) {
-            if (piirraYhdenVarisetOmistukset(graphics, pa, x, y, i)) {
-                x += 50;
-            }
-        }
-    }
-
-    private boolean piirraYhdenVarisetOmistukset(Graphics graphics, Piirtoavustaja pa, int x, int y, int n) {
-        boolean kyllaLoytyy = false;
-        for (int i = 0; i < omaisuus.getKoko(); i++) {
-            Omistus omistus = omaisuus.getOmistusIndeksista(i);
-            if (omistus.getLisaKarkinVariNumerona() == n) {
-                kyllaLoytyy = true;
-                omistus.piirraPelaajanOmistus(graphics, pa, x, y, n);
-                x += 3;
-                y += 15;
-            }
-        }
-        return kyllaLoytyy;
-    }
-
-    private void piirraVaraukset(Graphics graphics, Piirtoavustaja pa, int x, int y) {
-        for (Varaus varaus : varaukset) {
-            varaus.piirra(graphics, pa, x, y);
-            x += 90;
-        }
-    }
-
-    private void piirraVietellytMerkkihenkilot(Graphics graphics, Piirtoavustaja pa, int x, int y) {
-        for (int i = 0; i < merkkihenkilot.size(); i++) {
-            graphics.setColor(Color.darkGray);
-            graphics.fill3DRect(x - 2, y - 2, 22, 21, true);
-            graphics.setColor(Color.yellow);
-            graphics.draw3DRect(x - 2, y - 2, 22, 21, true);
-            pa.piirraArvovalta(graphics, 3, x, y);
-            x += 26;
-        }
-    }
+    
 }

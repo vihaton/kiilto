@@ -30,16 +30,4 @@ public class Varaus {
     public String toString() {
         return "**varaus**\n" + omistus.toString() + "\n**********";
     }
-
-    /**
-     * Piirtää pelaajan varauksen.
-     *
-     * @param graphics
-     * @param pa piirtoavustaja.
-     * @param x
-     * @param y
-     */
-    public void piirra(Graphics graphics, Piirtoavustaja pa, int x, int y) {
-        omistus.piirra(graphics, pa, x, y, false);
-    }
 }

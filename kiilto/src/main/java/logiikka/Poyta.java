@@ -1,12 +1,9 @@
 package logiikka;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.io.File;
 import java.util.*;
 import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
-import ui.gui.piirtaminen.Piirtoavustaja;
 
 /**
  *
@@ -29,6 +26,10 @@ public class Poyta {
         sekoitaOmistuspakat();
         luoMerkkihenkilot(luoLukija("src/aputiedostoja/merkkihenkilot.csv"));
         valitsePelinMerkkihenkilot();
+    }
+    
+    public Iterable<Pelaaja> getPelaajat() {
+        return pelaajat;
     }
 
     private void alustaOmistuspakat() {
@@ -104,6 +105,10 @@ public class Poyta {
 
     private void sekoitaOmistuspakka(Omaisuus op) {
         op.sekoita(arpoja);
+    }
+    
+    public Iterable<Merkkihenkilo> getMerkkihenkilot() {
+        return merkkihenkilot;
     }
 
     private void luoMerkkihenkilot(Scanner lukija) {
@@ -277,64 +282,6 @@ public class Poyta {
     private void annaPelaajalleKulta(Pelaaja pelaaja) {
         if (karkkimarkkinat.getKasanKoko(0) > 0) {
             karkkimarkkinat.siirraToiseenKasaan(pelaaja.getKarkit(), 0, 1);
-        }
-    }
-
-    /**
-     * Piirtää pöydällä olevat asiat: merkkihenkilöt, omistuspakat, näkyvillä
-     * olevat omistukset ja karkkimarkkinat.
-     *
-     * @param graphics Grafiikat.
-     * @param va VarinAsettaja, hyödyllinen kaveri kun piirretään jotain
-     * karkkeihin liittyvää.
-     */
-    public void piirra(Graphics graphics, Piirtoavustaja va) {
-        int x = 20;
-        int y = 10;
-        piirraMerkkihenkilot(graphics, va, x, y);
-        y += 120;
-        x -= 10;
-        piirraOmistuspakat(graphics, x, y);
-        x += 110;
-        piirraNakyvatOmistukset(graphics, va, x, y);
-        x += 450;
-        karkkimarkkinat.piirraIsosti(graphics, va, x, y);
-        y = 20;
-        x += 80;
-        piirraPelaajat(graphics, va, x, y);
-    }
-
-    private void piirraOmistuspakat(Graphics graphics, int x, int y) {
-        for (int i = 0; i < 3; i++) {
-            if (omistuspakat.get(2 - i).getKoko() > 4) {
-                graphics.setColor(Color.gray);
-                graphics.fill3DRect(x, y, 100, 125, true);
-                graphics.setColor(Color.black);
-                graphics.drawString("KIILTO", x + 33, y + 66);
-                graphics.drawOval(x + 22, y + 48, 55, 25);
-                y += 135;
-            }
-        }
-    }
-
-    private void piirraMerkkihenkilot(Graphics graphics, Piirtoavustaja va, int x, int y) {
-        for (Merkkihenkilo mh : merkkihenkilot) {
-            mh.piirra(graphics, va, x, y);
-            x += 100;
-        }
-    }
-
-    private void piirraNakyvatOmistukset(Graphics graphics, Piirtoavustaja va, int x, int y) {
-        for (int i = 2; i > -1; i--) {
-            omistuspakat.get(i).piirraNakyvatOmistukset(graphics, va, x, y);
-            y += 135;
-        }
-    }
-
-    private void piirraPelaajat(Graphics graphics, Piirtoavustaja pa, int x, int y) {
-        for (Pelaaja pelaaja : pelaajat) {
-            pelaaja.piirra(graphics, pa, x, y);
-            y += 150;
         }
     }
 

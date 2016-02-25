@@ -142,13 +142,4 @@ public class Omaisuus {
         }
         return omistukset.remove(o);
     }
-
-    public void piirraNakyvatOmistukset(Graphics graphics, Piirtoavustaja pa, int x, int y) {
-        ArrayList<Omistus> paallimmaiset = getPaallimmaiset();
-
-        for (Omistus omistus : paallimmaiset) {
-            omistus.piirra(graphics, pa, x, y, true);
-            x += 110;
-        }
-    }
 }

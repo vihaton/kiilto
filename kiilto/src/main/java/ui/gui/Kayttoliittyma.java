@@ -30,6 +30,11 @@ public class Kayttoliittyma implements Runnable {
     private final int leveys;
     private final int korkeus;
 
+    /**
+     * Luo ikkunan, jossa peliä pelataan.
+     *
+     * @param pv pelivelho, joka pyörittää pelilogiikkaa.
+     */
     public Kayttoliittyma(Pelivelho pv) {
         this.pelivelho = pv;
         piirtoavustaja = new Piirtoavustaja();
@@ -157,6 +162,13 @@ public class Kayttoliittyma implements Runnable {
         return kaikkiNapit;
     }
 
+    /**
+     * Luo loppuikkunan ja sulkee pelin.
+     *
+     * @param voittaja pelin voittajan nimi.
+     * @param voittovalta voittajan valta lopussa.
+     * @param kierros millä kierroksella pelaaja voitti.
+     */
     public void julistaVoittaja(String voittaja, String voittovalta, String kierros) {
         for (int i = 0; i < 4; i++) {
             nappulat[i].setVisible(false);
@@ -166,6 +178,9 @@ public class Kayttoliittyma implements Runnable {
         loppuikkuna.run();
     }
 
+    /**
+     * piilottaa ja "disposaa" pelin ruudun.
+     */
     public void tuhoa() {
         ruutu.setVisible(false);
         ruutu.dispose();
