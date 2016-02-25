@@ -27,7 +27,7 @@ public class Poyta {
         luoMerkkihenkilot(luoLukija("src/aputiedostoja/merkkihenkilot.csv"));
         valitsePelinMerkkihenkilot();
     }
-    
+
     public Iterable<Pelaaja> getPelaajat() {
         return pelaajat;
     }
@@ -106,7 +106,7 @@ public class Poyta {
     private void sekoitaOmistuspakka(Omaisuus op) {
         op.sekoita(arpoja);
     }
-    
+
     public Iterable<Merkkihenkilo> getMerkkihenkilot() {
         return merkkihenkilot;
     }
@@ -292,27 +292,31 @@ public class Poyta {
      * @param n mitä isompi n, sitä pidemmällä peli on. Ykkönen(1) on pienin
      * mahdollinen syöte, ja se antaa jo suht hyvän startin. Viitosella(5)
      * omistukset saattavat loppua kesken.
+     * @return kuinka monta kierrosta simulaatio suurin piirtein vastaa.
      */
-    public void luoTestattavaPelitilanne(int n) {
+    public int luoTestattavaPelitilanne(int n) {
+        int kierros = 0;
         for (int j = 0; j < n; j++) {
-
+            kierros += 6;
             for (Pelaaja pelaaja : pelaajat) {
 
                 for (int i = 0; i < 6; i++) {
-                    karkkimarkkinat.siirraToiseenKasaan(pelaaja.getKarkit(), i, 2);
+                    karkkimarkkinat.siirraToiseenKasaan(pelaaja.getKarkit(), i, 1);
                 }
 
-                ArrayList<String> nakyvat = omistuspakat.get(2).getPaallimmaistenNimet();
-                for (String nakyva : nakyvat) {
-                    teeVaraus(pelaaja, Integer.parseInt(nakyva));
+                ArrayList<String> nakyvat = omistuspakat.get(1).getPaallimmaistenNimet();
+                for (int i = 1; i < 2; i++) {
+                    teeVaraus(pelaaja, Integer.parseInt(nakyvat.get(i)));
                 }
-
-                nakyvat = omistuspakat.get(0).getPaallimmaistenNimet();
+                
+                nakyvat = pelaaja.getVaraustenNimet();
+                nakyvat.addAll(omistuspakat.get(0).getPaallimmaistenNimet());
                 for (String nakyva : nakyvat) {
                     suoritaOsto(pelaaja, Integer.parseInt(nakyva));
                 }
                 vaikuttikoPelaajaMerkkihenkilon(pelaaja);
             }
         }
+        return kierros;
     }
 }

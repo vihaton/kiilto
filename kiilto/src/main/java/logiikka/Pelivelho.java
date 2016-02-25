@@ -41,7 +41,7 @@ public class Pelivelho {
 
         vuorossaOleva = pelaajat.get(0);
         
-        poyta.luoTestattavaPelitilanne(5);
+        kierros = poyta.luoTestattavaPelitilanne(5);
         
         kayttoliittyma = new Kayttoliittyma(this);
         kayttoliittyma.run();
