@@ -146,7 +146,9 @@ public class Poyta {
         }
 
         while (!vaikuttuneet.isEmpty()) {
-            vuorossaOleva.merkkihenkiloVierailee(vaikuttuneet.remove(0));
+            Merkkihenkilo mh = vaikuttuneet.remove(0);
+            merkkihenkilot.remove(mh);
+            vuorossaOleva.merkkihenkiloVierailee(mh);
         }
     }
 
@@ -336,21 +338,33 @@ public class Poyta {
         }
     }
 
-    void luoTestitilanneKeskipelista() {
-        for (Pelaaja pelaaja : pelaajat) {
+    /**
+     * Luo pelin testausta varten pelitilanteen, jossa pelaajilla on omaisuutta,
+     * varauksia ym.
+     *
+     * @param n mitä isompi n, sitä pidemmällä peli on. Ykkönen(1) on pienin
+     * mahdollinen syöte, ja se antaa jo suht hyvän startin. Viitosella(5)
+     * omistukset saattavat loppua kesken.
+     */
+    public void luoTestattavaPelitilanne(int n) {
+        for (int j = 0; j < n; j++) {
 
-            for (int i = 0; i < 6; i++) {
-                karkkimarkkinat.siirraToiseenKasaan(pelaaja.getKarkit(), i, 2);
-            }
+            for (Pelaaja pelaaja : pelaajat) {
 
-            ArrayList<String> nakyvat = omistuspakat.get(2).getPaallimmaistenNimet();
-            for (String nakyva : nakyvat) {
-                teeVaraus(pelaaja, Integer.parseInt(nakyva));
-            }
+                for (int i = 0; i < 6; i++) {
+                    karkkimarkkinat.siirraToiseenKasaan(pelaaja.getKarkit(), i, 2);
+                }
 
-            nakyvat = omistuspakat.get(0).getPaallimmaistenNimet();
-            for (String nakyva : nakyvat) {
-                suoritaOsto(pelaaja, Integer.parseInt(nakyva));
+                ArrayList<String> nakyvat = omistuspakat.get(2).getPaallimmaistenNimet();
+                for (String nakyva : nakyvat) {
+                    teeVaraus(pelaaja, Integer.parseInt(nakyva));
+                }
+
+                nakyvat = omistuspakat.get(0).getPaallimmaistenNimet();
+                for (String nakyva : nakyvat) {
+                    suoritaOsto(pelaaja, Integer.parseInt(nakyva));
+                }
+                vaikuttikoPelaajaMerkkihenkilon(pelaaja);
             }
         }
     }

@@ -33,7 +33,7 @@ public class Pelivelho {
         tui = new TUI(new Scanner(System.in));
         kayttoliittyma = new Kayttoliittyma(this);
         pelaajat = new ArrayList<>();
-        voittoValta = 5;
+        voittoValta = 15;
         kierros = 1;
         vuorossaOleva = null;
         valintanapit = null;
@@ -49,7 +49,8 @@ public class Pelivelho {
 
         poyta = new Poyta(pelaajat);
 
-        poyta.luoTestitilanneKeskipelista();
+        poyta.luoTestattavaPelitilanne(3);
+        
         vuorossaOleva = pelaajat.get(0);
 
         kayttoliittyma.run();
