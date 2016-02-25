@@ -1,4 +1,4 @@
-package ui;
+package ui.tui;
 
 import java.util.*;
 import logiikka.*;

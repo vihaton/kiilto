@@ -1,9 +1,9 @@
 package logiikka;
 
+import ui.tui.TUI;
 import ui.gui.Kayttoliittyma;
 import java.awt.Graphics;
 import java.util.*;
-import ui.*;
 import logiikka.valineluokat.*;
 import ui.gui.Piirtoavustaja;
 import ui.gui.Valintanapit;
