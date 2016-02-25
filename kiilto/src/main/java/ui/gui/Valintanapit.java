@@ -12,6 +12,7 @@ import logiikka.Pelivelho;
 import ui.gui.toiminnankuuntelijat.*;
 
 /**
+ * Luokka omistusten ja varausten selaamiseen. Sisältyy käyttöliittymään.
  *
  * @author xvixvi
  */
@@ -25,6 +26,14 @@ public class Valintanapit extends JPanel {
     private ValintanapinKuuntelija valintanapinkuuntelija;
     private final JLabel infokentta;
 
+    /**
+     * Luo valintanapit.
+     *
+     * @param pv pelivelho, jonka kanssa keskustellaan.
+     * @param nappulat valikko, jonka näkyvyyttä säädellään.
+     * @param pa piirtoalusta, jota pitää välillä pyytää päivittämään näkymä.
+     * @param infokentta johon pitää pistää ohjetekstejä, kun käyttäjä töhöilee.
+     */
     public Valintanapit(Pelivelho pv, JComponent[] nappulat, Piirtoalusta pa, JLabel infokentta) {
         super(new GridLayout(2, 2));
         pelivelho = pv;
@@ -56,7 +65,12 @@ public class Valintanapit extends JPanel {
         this.add(oikea);
 
     }
-
+    
+    /**
+     * Veikkaapa.
+     * @param nakyvienNimet Veikkaapa.
+     * @param osta Veikkaapa.
+     */
     public void setNakyvienNimet(ArrayList<String> nakyvienNimet, boolean osta) {
         this.nakyvienNimet = nakyvienNimet;
         indeksi = 0;
@@ -64,6 +78,9 @@ public class Valintanapit extends JPanel {
         this.osta = osta;
     }
 
+    /**
+     * siirtää valitsinta "yhden oikealle".
+     */
     public void kasvataIndeksia() {
         if (indeksi == nakyvienNimet.size() - 1) {
             indeksi = 0;
@@ -73,6 +90,9 @@ public class Valintanapit extends JPanel {
         valitsin.setText(nakyvienNimet.get(indeksi));
     }
 
+    /**
+     * Siirtää valitsinta "yhden vasemmalle".
+     */
     public void pienennaIndeksia() {
         if (indeksi == 0) {
             indeksi = nakyvienNimet.size() - 1;
@@ -82,6 +102,9 @@ public class Valintanapit extends JPanel {
         valitsin.setText(nakyvienNimet.get(indeksi));
     }
 
+    /**
+     * Valitsee tarkastelussa olevan omistuksen / varauksen.
+     */
     public void valitse() {
         if (osta) {
             if (pelivelho.osta(nakyvienNimet.get(indeksi))) {

@@ -1,19 +1,21 @@
 package logiikka.omaisuusluokat;
 
-import java.awt.Graphics;
 import logiikka.valineluokat.Kasakokoelma;
-import ui.gui.piirtaminen.Piirtoavustaja;
 
 /**
- *
+ * Kuvaa pelaajan varaamaa omistusta.
+ * 
  * @author xvixvi
- *
- * Luokka kuvaa omistusta, jonka pelaaja on varannut ostamista varten
  */
 public class Varaus {
 
     private final Omistus omistus;
 
+    /**
+     * Luo varauksen omistuksesta.
+     * 
+     * @param o omistus.
+     */
     public Varaus(Omistus o) {
         omistus = o;
     }

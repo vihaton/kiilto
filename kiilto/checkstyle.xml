@@ -12,7 +12,7 @@
 			<property name="allowMissingReturnTag" value="false"/>
 			<property name="allowThrowsTagsForSubclasses" value="true"/>
 			
-			<property name="ignoreMethodNamesRegex" value="^set.*$"/>
+			<property name="ignoreMethodNamesRegex" value="set.*"/>
 			<property name="ignoreMethodNamesRegex" value="^get.*$"/>
 			<property name="ignoreMethodNamesRegex" value="^piirra.*$"/>
 

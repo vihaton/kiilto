@@ -1,11 +1,9 @@
 package logiikka.omaisuusluokat;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import logiikka.valineluokat.*;
-import ui.gui.piirtaminen.Piirtoavustaja;
 
 /**
+ * Kuvaa pelin omistuskorttia.
  *
  * @author xvixvi
  */
@@ -16,6 +14,14 @@ public class Omistus {
     private Vari lisaKarkinVari;
     private int arvovalta;
 
+    /**
+     * Luo omistuksen.
+     *
+     * @param n nimi.
+     * @param arvo paljonko arvovaltaa antaa.
+     * @param vari väri.
+     * @param h hinta.
+     */
     public Omistus(String n, int arvo, Vari vari, Kasakokoelma h) {
         this.nimi = n;
         this.hinta = h;
@@ -23,14 +29,38 @@ public class Omistus {
         arvovalta = arvo;
     }
 
+    /**
+     * Luo omistuksen.
+     *
+     * @param n nimi.
+     * @param arvo arvovalta.
+     * @param vari vari.
+     * @param h hinta.
+     */
     public Omistus(String n, int arvo, String vari, Kasakokoelma h) {
         this(n, arvo, Vari.valueOf(vari.toUpperCase()), h);
     }
 
+    /**
+     * Luo omistuksen.
+     *
+     * @param n nimi.
+     * @param arvo arvovalta.
+     * @param vari vari.
+     * @param h hinta.
+     */
     public Omistus(String n, int arvo, int vari, Kasakokoelma h) {
         this(n, arvo, Vari.values()[vari], h);
     }
 
+    /**
+     * Luo omistuksen.
+     *
+     * @param n nimi.
+     * @param arvo arvovalta.
+     * @param vari vari.
+     * @param karkkeja hinta.
+     */
     public Omistus(String n, int arvo, int vari, int[] karkkeja) {
         this(n, arvo, vari, new Kasakokoelma(karkkeja));
     }
@@ -39,6 +69,12 @@ public class Omistus {
         return hinta;
     }
 
+    /**
+     * Veikkaapa.
+     *
+     * @param n Veikkaapa.
+     * @return Veikkaapa.
+     */
     public int getKasanKoko(int n) {
         if (n < 1 || n > 5) {
             return 0;

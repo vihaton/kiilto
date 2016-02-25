@@ -1,25 +1,37 @@
 package logiikka.omaisuusluokat;
 
-import java.awt.Graphics;
 import java.util.*;
-import ui.gui.piirtaminen.Piirtoavustaja;
 
 /**
+ * Kuvaa omistusten joukkoa, joka kuuluu jollekin taholle.
  *
  * @author xvixvi
  */
 public class Omaisuus {
 
-    private ArrayList<Omistus> omistukset;
+    private final ArrayList<Omistus> omistukset;
 
+    /**
+     * Luo tyhjän omaisuuden.
+     */
     public Omaisuus() {
         omistukset = new ArrayList<>();
     }
 
+    /**
+     * Lisää omistuksen omaisuuteen.
+     *
+     * @param o omistus.
+     */
     public void lisaaOmistus(Omistus o) {
         omistukset.add(o);
     }
 
+    /**
+     * Veikkaapa.
+     *
+     * @return Veikkaapa.
+     */
     public int getArvovalta() {
         int arvovalta = 0;
         for (Omistus o : omistukset) {
@@ -46,10 +58,22 @@ public class Omaisuus {
         return omistukset.size();
     }
 
+    /**
+     * Veikkaapa.
+     *
+     * @param i Veikkaapa.
+     * @return Veikkaapa.
+     */
     public Omistus getOmistusIndeksista(int i) {
         return omistukset.get(i);
     }
 
+    /**
+     * Veikkaapa.
+     *
+     * @param i Veikkaapa.
+     * @return Veikkaapa.
+     */
     public String getOmistuksenNimiIndeksista(int i) {
         return omistukset.get(i).getNimi();
     }
@@ -66,6 +90,11 @@ public class Omaisuus {
         return omistukset.size();
     }
 
+    /**
+     * Onko omaisuudessa yhtään omistusta.
+     *
+     * @return onko persaukinen kommunistiluuseri.
+     */
     public boolean onkoPA() {
         return omistukset.isEmpty();
     }
@@ -83,6 +112,11 @@ public class Omaisuus {
         return s;
     }
 
+    /**
+     * Sekoittaa omaisuuden suht' satunnaiseen järjestykseen.
+     *
+     * @param arpoja tuo satunnaisuuden.
+     */
     public void sekoita(Random arpoja) {
         for (int i = 0; i < omistukset.size(); i++) {
             for (int j = omistukset.size(); j > 0; j--) {
@@ -94,6 +128,11 @@ public class Omaisuus {
         }
     }
 
+    /**
+     * Palauttaa näkyvien omistusten tekstiesityksen.
+     *
+     * @return no ne omistukset.
+     */
     public String paallimmaisetToString() {
         String s = "";
         int raja = omistukset.size() < 4 ? omistukset.size() : 4;
@@ -103,6 +142,11 @@ public class Omaisuus {
         return s;
     }
 
+    /**
+     * Veikkaapa.
+     *
+     * @return Veikkaapa.
+     */
     public ArrayList<String> getPaallimmaistenNimet() {
         ArrayList<String> nimet = new ArrayList<>();
         int raja = omistukset.size() < 4 ? omistukset.size() : 4;
@@ -112,6 +156,11 @@ public class Omaisuus {
         return nimet;
     }
 
+    /**
+     * Veikkaapa.
+     *
+     * @return Veikkaapa.
+     */
     public ArrayList<Omistus> getPaallimmaiset() {
         ArrayList<Omistus> paallimmaiset = new ArrayList<>();
         int raja = omistukset.size() < 4 ? omistukset.size() : 4;
@@ -121,6 +170,12 @@ public class Omaisuus {
         return paallimmaiset;
     }
 
+    /**
+     * Veikkaapa.
+     *
+     * @param numero Veikkaapa.
+     * @return Veikkaapa.
+     */
     public Omistus getNakyvaOmistus(int numero) {
         ArrayList<Omistus> nakyvat = this.getPaallimmaiset();
         for (Omistus o : nakyvat) {
@@ -131,11 +186,23 @@ public class Omaisuus {
         return null;
     }
 
+    /**
+     * Siirtää omistuksen tästä omaisuudesta annettuun omaisuuteen.
+     *
+     * @param kohdeOmaisuus minne siirretään.
+     * @param o mikä siirretään.
+     */
     public void siirraOmistus(Omaisuus kohdeOmaisuus, Omistus o) {
         omistukset.remove(o);
         kohdeOmaisuus.lisaaOmistus(o);
     }
 
+    /**
+     * Poistaa annetun omistuksen tästä omaisuudesta.
+     *
+     * @param o omistus.
+     * @return onnistuiko.
+     */
     public boolean poistaOmistus(Omistus o) {
         if (o == null || !omistukset.contains(o)) {
             return false;

@@ -16,6 +16,9 @@ public class Alkuikkuna implements Runnable {
     private JFrame alkuvalikko;
     private final Pelivelho pelivelho;
 
+    /**
+     * Luo alkuikkunan, joka luo itselleen pelin pelivelhon.
+     */
     public Alkuikkuna() {
         pelivelho = new Pelivelho();
     }
@@ -109,6 +112,11 @@ public class Alkuikkuna implements Runnable {
         });
     }
 
+    /**
+     * Katso ->.
+     *
+     * @see Kayttoliittyma#tuhoa()
+     */
     public void tuhoa() {
         alkuvalikko.setVisible(false);
         alkuvalikko.dispose();

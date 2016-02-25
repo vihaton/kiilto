@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import javax.swing.JComponent;
 
 /**
+ * Auttaa piirtämään useasti toistuvia elementtejä.
  *
  * @author xvixvi
  */
@@ -21,24 +22,60 @@ public class Piirtoavustaja {
         g.setColor(getVari(i));
     }
 
+    /**
+     * Asettaa komponentin taustaväriksi indeksin osoittaman karkin värin.
+     *
+     * @param komponentti jonka väri pitää asettaa.
+     * @param i minkä karkin väri pistetään.
+     */
     public void asetaNappulanVari(JComponent komponentti, int i) {
         komponentti.setBackground(getVari(i));
     }
 
+    /**
+     * Asetetaan reunan väri erottumaan muusta väristä.
+     *
+     * @param g grafiikat.
+     * @param i mikä on pääväri.
+     */
     public void asetaReunavari(Graphics g, int i) {
         int reunaVari = i != 5 ? 5 : 1;
         asetaVari(g, reunaVari);
     }
 
+    /**
+     * Piirtää annetun nimen.
+     *
+     * @param graphics millä piirretään.
+     * @param nimi nimi.
+     * @param x koord.
+     * @param y koord.
+     */
     public void piirraNimi(Graphics graphics, String nimi, int x, int y) {
         graphics.drawString("nimi: " + nimi, x, y);
     }
 
+    /**
+     * Piirtää arvovallan.
+     *
+     * @param graphics g.
+     * @param arvovalta se just.
+     * @param x minne.
+     * @param y sinne.
+     */
     public void piirraArvovalta(Graphics graphics, int arvovalta, int x, int y) {
         graphics.drawOval(x, y, 17, 16);
         graphics.drawString("" + arvovalta, x + 5, y + 13);
     }
 
+    /**
+     * Piirtää pienen arvovaltapalluran.
+     *
+     * @param graphics g.
+     * @param arvovalta a.
+     * @param x x.
+     * @param y y.
+     */
     public void piirraArvovaltaPieni(Graphics graphics, int arvovalta, int x, int y) {
         graphics.drawOval(x, y, 13, 12);
         graphics.drawString("" + arvovalta, x + 3, y + 11);

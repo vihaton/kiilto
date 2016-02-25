@@ -5,6 +5,7 @@ import javax.swing.*;
 import ui.gui.toiminnankuuntelijat.UusintanapinKuuntelija;
 
 /**
+ * Loppuvalikko.
  *
  * @author xvixvi
  */
@@ -13,9 +14,17 @@ public class Loppuikkuna implements Runnable {
     private final String voittaja;
     private final String voittovalta;
     private final String kierros;
-    private Kayttoliittyma kayttoliittyma;
+    private final Kayttoliittyma kayttoliittyma;
     private final JFrame ruutu;
 
+    /**
+     * Luo loppuikkunan, jolla on tärkeimmät tiedot pelistä.
+     *
+     * @param voittaja kuka voitti.
+     * @param voittovalta millä tuloksella.
+     * @param kierros millä kierroksella.
+     * @param kayttis käyttöliittymä, joka pitää sulkea.
+     */
     public Loppuikkuna(String voittaja, String voittovalta, String kierros, Kayttoliittyma kayttis) {
         this.voittaja = voittaja;
         this.voittovalta = voittovalta;
@@ -57,6 +66,11 @@ public class Loppuikkuna implements Runnable {
         ruutu.add(lopeta);
     }
 
+    /**
+     * Katso ->.
+     *
+     * @see Kayttoliittyma#tuhoa()
+     */
     public void tuhoa() {
         ruutu.setVisible(false);
         ruutu.dispose();

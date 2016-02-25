@@ -6,6 +6,7 @@ import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
 
 /**
+ * Luokka sisältää kaikki pelin elementit.
  *
  * @author xvixvi
  */
@@ -17,6 +18,11 @@ public class Poyta {
     private final Random arpoja = new Random();
     private final ArrayList<Merkkihenkilo> merkkihenkilot;
 
+    /**
+     * Luo pelipöydän, johon myös pelaajat sisällytetään.
+     *
+     * @param pelaajat veikkaapa.
+     */
     public Poyta(ArrayList<Pelaaja> pelaajat) {
         this.pelaajat = pelaajat;
         karkkimarkkinat = new Kasakokoelma(pelaajat.size());
@@ -90,6 +96,22 @@ public class Poyta {
         return new Omistus(palat[0], Integer.parseInt(palat[1]), palat[2], hinta);
     }
 
+    public Kasakokoelma getMarkkinat() {
+        return karkkimarkkinat;
+    }
+
+    /**
+     * Veikkaappa.
+     * @return Veikkaappa.
+     */
+    public ArrayList<String> getNakyvienNimet() {
+        ArrayList<String> nimet = new ArrayList<>();
+        for (Omaisuus o : omistuspakat) {
+            nimet.addAll(o.getPaallimmaistenNimet());
+        }
+        return nimet;
+    }
+
     public ArrayList<Omaisuus> getOmistuspakat() {
         return omistuspakat;
     }
@@ -142,6 +164,11 @@ public class Poyta {
         }
     }
 
+    /**
+     * Tarkistetaan, vaikuttuiko joku merkkihenkilö pelaajan toimista.
+     *
+     * @param vuorossaOleva pelaaja.
+     */
     public void vaikuttikoPelaajaMerkkihenkilon(Pelaaja vuorossaOleva) {
         ArrayList<Merkkihenkilo> vaikuttuneet = new ArrayList<>();
         for (Merkkihenkilo mh : merkkihenkilot) {
@@ -180,19 +207,8 @@ public class Poyta {
         return s;
     }
 
-    public Kasakokoelma getMarkkinat() {
-        return karkkimarkkinat;
-    }
-
-    public ArrayList<String> getNakyvienNimet() {
-        ArrayList<String> nimet = new ArrayList<>();
-        for (Omaisuus o : omistuspakat) {
-            nimet.addAll(o.getPaallimmaistenNimet());
-        }
-        return nimet;
-    }
-
     /**
+     * Suorittaa oston.
      *
      * @param pelaaja Joka ostaa omaisuutta pöydältä.
      * @param ostonNumero Joka ostetaan.
@@ -222,6 +238,7 @@ public class Poyta {
     }
 
     /**
+     * Suorittaa oston varauksista.
      *
      * @param pelaaja joka yrittää lunastaa varauksensa.
      * @param varauksenNumero varaus, jota lunastetaan.
@@ -240,8 +257,9 @@ public class Poyta {
     }
 
     /**
+     * Tekee varauksen.
      *
-     * @param pelaaja
+     * @param pelaaja joka varaa.
      * @param varauksenNro varattavan varauksen numero (eli nimi).
      * @return boolean, onnistuiko varaaminen.
      */
@@ -308,7 +326,7 @@ public class Poyta {
                 for (int i = 1; i < 2; i++) {
                     teeVaraus(pelaaja, Integer.parseInt(nakyvat.get(i)));
                 }
-                
+
                 nakyvat = pelaaja.getVaraustenNimet();
                 nakyvat.addAll(omistuspakat.get(0).getPaallimmaistenNimet());
                 for (String nakyva : nakyvat) {

@@ -1,9 +1,7 @@
 package logiikka.valineluokat;
 
-import java.awt.Graphics;
-import ui.gui.piirtaminen.Piirtoavustaja;
-
 /**
+ * Kuvaa karkkikasakokoelmaa.
  *
  * @author xvixvi
  */
@@ -12,8 +10,13 @@ public class Kasakokoelma {
     //0-kul, 1-val, 2-sin, 3-vih, 4-pun, 5-mus
     private Nallekarkkikasa[] kasat = new Nallekarkkikasa[6];
 
-    //konstruktori pelaajien karkeille ja pöydän karkkimarkkinoille
-    public Kasakokoelma(int pelaajia) { // 0 -> tyhjät kasat pelaajille, 2-4 -> pelaajien lukumäärän mukaiset markkinat
+    /**
+     * Luo kasakokoelman.
+     *
+     * @param pelaajia 0 -> tyhjät kasat pelaajille, 2-4 -> pelaajien lukumäärän
+     * mukaiset markkinat pöydälle.
+     */
+    public Kasakokoelma(int pelaajia) {
         int karkkeja = 0;
         if (pelaajia == 2) {
             karkkeja = 4;
@@ -32,6 +35,11 @@ public class Kasakokoelma {
         }
     }
 
+    /**
+     * Luo kasakokoelman, jossa on annettu määrä karkkeja.
+     *
+     * @param karkkeja no niitä just.
+     */
     public Kasakokoelma(int[] karkkeja) {
         if (karkkeja.length != 6) {
             throw new IllegalArgumentException();
@@ -42,7 +50,11 @@ public class Kasakokoelma {
         }
     }
 
-    //konstruktori omistusten hintoja kuvaaville kasoille
+    /**
+     * Luo kasakokoelman, jossa on annettu määrä karkkeja.
+     *
+     * @param palat luetut karkkimäärät.
+     */
     public Kasakokoelma(String[] palat) {
         kasat[0] = new Nallekarkkikasa(0);
         for (int i = 1; i < 6; i++) {
@@ -50,6 +62,11 @@ public class Kasakokoelma {
         }
     }
 
+    /**
+     * Veikkaapa.
+     * @param kasanNro Veikkaapa.
+     * @return Veikkaapa.
+     */
     public int getKasanKoko(int kasanNro) {
         if (kasanNro < 0 || kasanNro > 5) {
             return 0;
@@ -67,6 +84,11 @@ public class Kasakokoelma {
         return s;
     }
 
+    /**
+     * Tekstiesitys nro 2.
+     *
+     * @return kasat tekstinä, ilman kultakasaa.
+     */
     public String toStringIlmanKultaa() {
         String s = "";
         for (int i = 1; i < kasat.length - 1; i++) {
@@ -76,6 +98,13 @@ public class Kasakokoelma {
         return s;
     }
 
+    /**
+     * Kasvattaa tiettyä kasaa tietyn määrän. Ei voi tehdä kasasta negatiivisen
+     * kokoista.
+     *
+     * @param i mikä kasa (0-5)
+     * @param maara kuinka paljon kasvatetaan (myös negatiiviset arvot käyvät).
+     */
     public void kasvataKasaa(int i, int maara) {
         if (maara < -this.getKasanKoko(i)) {
             kasat[i].kasvata(-kasat[i].getKoko());
@@ -84,15 +113,27 @@ public class Kasakokoelma {
         }
     }
 
-    public void siirraToiseenKasaan(Kasakokoelma karkit, int i, int m) {
+    /**
+     * Siirtää tästä kasakokoelmasta karkkeja annettuun kasakokoelmaan.
+     *
+     * @param kohdekasat minne siirretään.
+     * @param i mistä siirretään.
+     * @param m paljonko siirretään (ei voi siirtää enempää, kuin kasasta
+     * löytyy.
+     */
+    public void siirraToiseenKasaan(Kasakokoelma kohdekasat, int i, int m) {
         if (m > this.getKasanKoko(i)) {
             //jos ei ole varaa siirtää niin paljon, siirretään kaikki muttei enempää;
             m = this.getKasanKoko(i);
         }
         this.kasvataKasaa(i, -m);
-        karkit.kasvataKasaa(i, m);
+        kohdekasat.kasvataKasaa(i, m);
     }
 
+    /**
+     * Veikkaapa.
+     * @return Veikkaapa.
+     */
     public int getKarkkienMaara() {
         int summa = 0;
         for (Nallekarkkikasa kasa : kasat) {
@@ -101,6 +142,11 @@ public class Kasakokoelma {
         return summa;
     }
 
+    /**
+     * Veikkaapa.
+     * @param i Veikkaapa.
+     * @return Veikkaapa.
+     */
     public Nallekarkkikasa getKasa(int i) {
         return kasat[i];
     }

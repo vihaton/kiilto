@@ -5,6 +5,7 @@ import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
 
 /**
+ * Simuloi pelaajaa.
  *
  * @author xvixvi
  */
@@ -16,10 +17,20 @@ public class Pelaaja {
     private final ArrayList<Varaus> varaukset = new ArrayList<>();
     private final ArrayList<Merkkihenkilo> merkkihenkilot = new ArrayList<>();
 
+    /**
+     * Luo Pelaaja olion.
+     *
+     * @param nimi pelaajan nimi.
+     */
     public Pelaaja(String nimi) {
         this.nimi = nimi;
     }
 
+    /**
+     * Lisää omistuksen.
+     *
+     * @param omistus joka lisätään.
+     */
     public void lisaaOmistus(Omistus omistus) {
         omaisuus.lisaaOmistus(omistus);
     }
@@ -28,6 +39,11 @@ public class Pelaaja {
         return omaisuus;
     }
 
+    /**
+     * Lue nimi.
+     *
+     * @return onko pelaajalla yli kymmenen karkkia.
+     */
     public boolean liikaaKarkkeja() {
         return karkit.getKarkkienMaara() > 10;
     }
@@ -63,6 +79,12 @@ public class Pelaaja {
         return nimi + "\n" + karkit + "\n" + varauksetToString() + omaisuus;
     }
 
+    /**
+     * Onko pelaaja voittaja.
+     *
+     * @param voittoraja mitä tarvitaan voittamiseen.
+     * @return onko pelaajalla enemmän arvovaltaa.
+     */
     public boolean voittaja(int voittoraja) {
         return getArvovalta() >= voittoraja;
     }
@@ -95,7 +117,13 @@ public class Pelaaja {
         return hintaOmaisuustulotHuomioituna;
     }
 
-    boolean onkoVaraa(Omistus omistus) {
+    /**
+     * Tarkistaa pelaajan varallisuuden verrattuna annettuun omistukseen.
+     *
+     * @param omistus joka aiotaan ostaa.
+     * @return onko pelaajalla varaa.
+     */
+    public boolean onkoVaraa(Omistus omistus) {
         if (omistus == null) {
             return false;
         }
@@ -139,10 +167,20 @@ public class Pelaaja {
         lahtoOmaisuus.siirraOmistus(omaisuus, o);
     }
 
+    /**
+     * Lisää merkkihenkilön pelaajan makuuhuoneen kalustoon.
+     *
+     * @param mh merkkihenkilö.
+     */
     public void merkkihenkiloVierailee(Merkkihenkilo mh) {
         merkkihenkilot.add(mh);
     }
 
+    /**
+     * Veikkaappa.
+     *
+     * @return Veikkaappa.
+     */
     public int getMerkkihenkiloidenArvo() {
         int summa = 0;
         for (Merkkihenkilo mh : merkkihenkilot) {
@@ -150,11 +188,16 @@ public class Pelaaja {
         }
         return summa;
     }
-    
+
     public int getMerkkihenkiloidenMaara() {
         return merkkihenkilot.size();
     }
 
+    /**
+     * Tekee varauksista nätin tulostusulostuksen.
+     *
+     * @return varauksien tekstiesitys.
+     */
     public String varauksetToString() {
         String s = "";
         for (int i = 0; i < varaukset.size(); i++) {
@@ -162,7 +205,7 @@ public class Pelaaja {
         }
         return s;
     }
-    
+
     public ArrayList<Varaus> getVaraukset() {
         return varaukset;
     }
@@ -171,6 +214,11 @@ public class Pelaaja {
         return varaukset.size();
     }
 
+    /**
+     * Veikkaappa.
+     *
+     * @return Veikkaappa.
+     */
     public ArrayList<String> getVaraustenNimet() {
         ArrayList<String> varaustenNrot = new ArrayList<>();
         for (int i = 0; i < varaukset.size(); i++) {
@@ -179,6 +227,12 @@ public class Pelaaja {
         return varaustenNrot;
     }
 
+    /**
+     * Veikkaappa.
+     *
+     * @param varauksenNumero se just.
+     * @return Veikkaappa.
+     */
     public Omistus getVaraus(int varauksenNumero) {
         for (int i = 0; i < varaukset.size(); i++) {
             Omistus o = varaukset.get(i).getOmistus();
@@ -189,6 +243,12 @@ public class Pelaaja {
         return null;
     }
 
+    /**
+     * Pelaaja varaa tämän omistuksen.
+     *
+     * @param o varattava omistus.
+     * @return onnistuiko varaus.
+     */
     public boolean teeVaraus(Omistus o) {
         if (varaukset.size() >= 3 || o == null) {
             return false;
@@ -258,5 +318,4 @@ public class Pelaaja {
             }
         }
     }
-    
 }

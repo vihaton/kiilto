@@ -9,6 +9,7 @@ import ui.gui.piirtaminen.Piirtoalusta;
 import ui.gui.Valintanapit;
 
 /**
+ * Kuuntelee osto- tai varaustoiminnon laukaisevaa nappia.
  *
  * @author xvixvi
  */
@@ -16,6 +17,15 @@ public class ValintanapinKuuntelija extends VuoronPaattavaKuuntelija implements 
 
     private final Valintanapit valintanapit;
 
+    /**
+     * Luo kuuntelijan.
+     * 
+     * @param valintanapit joita kuunnellaan.
+     * @param pelivelho Veikkaapa.
+     * @param napit joiden näkyvyyttä säädetään.
+     * @param pa piirtoalusta
+     * @param infokentta Veikkaapa.
+     */
     public ValintanapinKuuntelija(Valintanapit valintanapit, Pelivelho pelivelho, JComponent[] napit, Piirtoalusta pa, JLabel infokentta) {
         super(pelivelho, napit, pa, infokentta);
         this.valintanapit = valintanapit;

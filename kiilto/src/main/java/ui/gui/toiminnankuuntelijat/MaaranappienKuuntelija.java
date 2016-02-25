@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 
 /**
+ * Kuuntelija napeille, joilla valitaan nallekarkkien määriä.
  *
  * @author xvixvi
  */
@@ -13,6 +14,11 @@ public class MaaranappienKuuntelija implements ActionListener {
     private final JLabel kentta;
     private final boolean plus;
 
+    /**
+     * Luo kuuntelijan. 
+     * @param kentta valintakenttä.
+     * @param onkoPlussa lisätäänkö vai vähennetäänkö.
+     */
     public MaaranappienKuuntelija(JLabel kentta, boolean onkoPlussa) {
         this.kentta = kentta;
         this.plus = onkoPlussa;

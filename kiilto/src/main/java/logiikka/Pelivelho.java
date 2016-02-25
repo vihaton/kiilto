@@ -9,7 +9,7 @@ import ui.gui.Valintanapit;
  * Luokka vastaa pelin pyörittämisestä. Esimerkiksi pelin alustaminen, vuorojen
  * organisoiminen sekä UI.n ja logiikan rajapintana toimiminen ovat sen
  * tehtäviä.
- * 
+ *
  * @author xvixvi
  */
 public class Pelivelho {
@@ -34,19 +34,19 @@ public class Pelivelho {
     }
 
     /**
-     * Alustaa ja pelaa kiilto-pelin graafisella käyttöliittymällä.
+     * Alustaa ja pelaa kiilto-pelin graafisella käyttöliittymällä. Pelaajat on
+     * pitänyt määritellä ennen tämän metodin suorittamista!
      */
     public void pelaa() {
         poyta = new Poyta(pelaajat);
 
         vuorossaOleva = pelaajat.get(0);
-        
-        kierros = poyta.luoTestattavaPelitilanne(5);
-        
+
+//        kierros = poyta.luoTestattavaPelitilanne(5);
         kayttoliittyma = new Kayttoliittyma(this);
         kayttoliittyma.run();
     }
-    
+
     public Poyta getPoyta() {
         return poyta;
     }

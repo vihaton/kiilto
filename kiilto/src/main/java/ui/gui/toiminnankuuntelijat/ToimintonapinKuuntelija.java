@@ -6,6 +6,7 @@ import javax.swing.*;
 import logiikka.Pelivelho;
 
 /**
+ * Kuuntelee nappeja, joilla pelaaja päättää mitä tekee vuorollaan.
  *
  * @author xvixvi
  */
@@ -15,6 +16,13 @@ public class ToimintonapinKuuntelija implements ActionListener {
     private final JComponent[] napit;
     private final String teksti;
 
+    /**
+     * Luo kuuntelijan.
+     * 
+     * @param pelivelho Veikkaapa.
+     * @param n tämän napin teskti.
+     * @param napit napit, joiden näkyvyyttä säädetään.
+     */
     public ToimintonapinKuuntelija(Pelivelho pelivelho, JButton n, JComponent[] napit) {
         this.pelivelho = pelivelho;
         this.napit = napit;

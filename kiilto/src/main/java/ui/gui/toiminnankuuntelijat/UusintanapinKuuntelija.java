@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import ui.gui.*;
 
 /**
+ * Aloittaa uuden pelin.
  *
  * @author xvixvi
  */
@@ -14,6 +15,12 @@ public class UusintanapinKuuntelija implements ActionListener {
     private final Kayttoliittyma kayttoliittyma;
     private final Loppuikkuna loppuikkuna;
 
+    /**
+     * Luo kuuntelijan.
+     * 
+     * @param kayttis joka tuhotaan.
+     * @param loppis joka tuhotaan.
+     */
     public UusintanapinKuuntelija(Kayttoliittyma kayttis, Loppuikkuna loppis) {
         alkuikkuna = new Alkuikkuna();
         kayttoliittyma = kayttis;

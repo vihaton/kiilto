@@ -23,6 +23,13 @@ public class MerkkihenkilonPiirtaja {
         piirtoavustaja = pa;
     }
 
+    /**
+     * Veikkaapa.
+     * @param graphics Veikkaapa.
+     * @param mh Veikkaapa.
+     * @param x Veikkaapa.
+     * @param y Veikkaapa.
+     */
     public void piirra(Graphics graphics, Merkkihenkilo mh, int x, int y) {
         graphics.setColor(Color.darkGray);
         graphics.fill3DRect(x, y, 90, 100, true);

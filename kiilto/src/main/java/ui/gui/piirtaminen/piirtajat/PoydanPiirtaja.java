@@ -35,6 +35,11 @@ public class PoydanPiirtaja {
         pelaajanpiirtaja = new PelaajanPiirtaja(pa, kasakokoelmanpiirtaja, omaisuudenpiirtaja);
     }
 
+    /**
+     * Veikkaapa.
+     *
+     * @param graphics Veikkaapa.
+     */
     public void piirra(Graphics graphics) {
         int x = 20;
         int y = 10;

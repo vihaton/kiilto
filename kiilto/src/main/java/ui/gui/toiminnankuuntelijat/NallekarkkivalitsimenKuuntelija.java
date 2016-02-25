@@ -6,6 +6,7 @@ import logiikka.Pelivelho;
 import ui.gui.piirtaminen.Piirtoalusta;
 
 /**
+ * Nimensä mukaisesti.
  *
  * @author xvixvi
  */
@@ -16,6 +17,15 @@ public class NallekarkkivalitsimenKuuntelija extends VuoronPaattavaKuuntelija im
     private final JLabel infokentta;
     private int[] nostettavat;
 
+    /**
+     * Luo kuuntelijan.
+     * 
+     * @param pelivelho Veikkaapa.
+     * @param infokentta Veikkaapa.
+     * @param nallekarkkikentat Veikkaapa.
+     * @param pa piirtoavustaja.
+     * @param napit joita näytetään ja piilotetaan.
+     */
     public NallekarkkivalitsimenKuuntelija(Pelivelho pelivelho, JLabel infokentta, JLabel[] nallekarkkikentat, Piirtoalusta pa, JComponent[] napit) {
         super(pelivelho, napit, pa, infokentta);
         this.pelivelho = pelivelho;

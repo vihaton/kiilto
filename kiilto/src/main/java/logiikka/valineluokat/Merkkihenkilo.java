@@ -1,17 +1,13 @@
 package logiikka.valineluokat;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import logiikka.omaisuusluokat.*;
-import ui.gui.piirtaminen.Piirtoavustaja;
 
 /**
- *
- * @author xvixvi
- *
  * Merkkihenkilot tulevat pelaajien luokse kyläilemään, jos pelaajalla tarpeeksi
  * monipuolisesti omaisuutta. Merkkihenkilön vierailu antaa pelaajalle lisää
  * arvovaltaa, ja ehkä kupan.
+ *
+ * @author xvixvi
  */
 public class Merkkihenkilo {
 
@@ -20,6 +16,7 @@ public class Merkkihenkilo {
     private int arvovaltalisa;
 
     /**
+     * Luo merkkihenkilön.
      *
      * @param ov int[] jossa omaisuusvaatimus (kul,val,sin,vih,pun,mus).
      * @param arvo Merkkihenkilön vierailun pelaajalle antama lisäarvovalta.
@@ -38,12 +35,17 @@ public class Merkkihenkilo {
      * Konstruktori, joka luo arvovaltalisäykseltään 3 arvoisen merkkihenkilön.
      *
      * @param nimi nimi.
-     * @param omaisuusvaatimus kuuden kokoisessa taulukossa.
+     * @param ov kuuden kokoisessa taulukossa.
      */
     public Merkkihenkilo(String nimi, int[] ov) {
         this(nimi, ov, 3);
     }
 
+    /**
+     * Luo "homo" nimise merkkihenkilön arvovallaltaan 3.
+     *
+     * @param ov omaisuusvaatimus.
+     */
     public Merkkihenkilo(int[] ov) {
         this("homo", ov, 3);
     }
@@ -73,7 +75,7 @@ public class Merkkihenkilo {
     /**
      * Metodi merkkihenkilön mielenliikkeiden selvittämiseksi.
      *
-     * @param omaisuus omaisuus jolla yritetään houkutella merkkihenkilö kylään.
+     * @param o  omaisuus jolla yritetään houkutella merkkihenkilö kylään.
      * @return vaikuttuuko merkkihenkilö.
      */
     public boolean vaikuttuukoOmaisuudesta(Omaisuus o) {

@@ -9,6 +9,7 @@ import logiikka.omaisuusluokat.Varaus;
 import ui.gui.piirtaminen.Piirtoavustaja;
 
 /**
+ * Piirtää pelin pelaajat.
  *
  * @author xvixvi
  */
@@ -18,6 +19,13 @@ public class PelaajanPiirtaja {
     private final KasakokoelmanPiirtaja kasakokoelmanpiirtaja;
     private final OmaisuudenPiirtaja omaisuudenpiirtaja;
     
+    /**
+     * Luo pelaajanpiirtäjän.
+     * 
+     * @param pa piirtoavustaja.
+     * @param kkp kasakokoelmanpiirtäjä.
+     * @param op omaisuudenpiirtäjä.
+     */
     public PelaajanPiirtaja(Piirtoavustaja pa, KasakokoelmanPiirtaja kkp, OmaisuudenPiirtaja op) {
         this.piirtoavustaja = pa;
         kasakokoelmanpiirtaja = kkp;

@@ -99,3 +99,9 @@ Käyttöliittymään toiminnallisuutta, piirtämisen täydentämistä, ensimmäi
 **24.2 2h**
 
 Tiedostopolkujen muuttamista suhteellisiksi
+
+**25.2 9h**
+
+Piirtämisen eriyttäminen logiikkaluokilta omiin luokkiinsa 4h
+Räpistelyä checkstylen conffaamiseksi niin, että se ignoraa ^set.*$ ja ^get.*$ metodit 2h
+Kaikkien turhien javadokkien kirjoittaminen 3h
