@@ -37,7 +37,7 @@ public class Poyta {
         valitsePelinMerkkihenkilot();
     }
 
-    public Iterable<Pelaaja> getPelaajat() {
+    public ArrayList<Pelaaja> getPelaajat() {
         return pelaajat;
     }
 
@@ -125,7 +125,7 @@ public class Poyta {
         op.sekoita(arpoja);
     }
 
-    public Iterable<Merkkihenkilo> getMerkkihenkilot() {
+    public ArrayList<Merkkihenkilo> getMerkkihenkilot() {
         return merkkihenkilot;
     }
 

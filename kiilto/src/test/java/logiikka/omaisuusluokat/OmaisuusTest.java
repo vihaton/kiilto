@@ -210,4 +210,11 @@ public class OmaisuusTest {
         assertTrue(o.poistaOmistus(omi));
         assertTrue(o.onkoPA());
     }
+    
+    @Test
+    public void toStringitToimiiJotenkin() {
+        o.lisaaOmistus(new Omistus("1", 1, 1, new Kasakokoelma(0)));
+        assertTrue(o.toString().contains(o.getPaallimmaistenNimet().get(0)));
+        assertTrue(o.paallimmaisetToString().contains(o.getPaallimmaistenNimet().get(0)));
+    }
 }

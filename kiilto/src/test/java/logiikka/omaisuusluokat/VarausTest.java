@@ -44,4 +44,9 @@ public class VarausTest {
     public void getHintakasatToimii() {
         assertTrue(v.getHintaKasat().getKarkkienMaara() == 3);
     }
+    
+    @Test
+    public void toStringToimiiJotenkin() {
+        assertTrue(v.toString().contains(v.getOmistus().getNimi()));
+    }
 }

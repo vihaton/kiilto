@@ -15,12 +15,12 @@ import ui.gui.Valintanapit;
 public class Pelivelho {
 
     private Kayttoliittyma kayttoliittyma;
-    private final ArrayList<Pelaaja> pelaajat;
+    private final ArrayList<Pelaaja> pelaajat;  //luodaan vasta, kun käyttäjältä on kerätty tarvittavat tiedot.
     private Valintanapit valintanapit;
-    private Poyta poyta;
+    private Poyta poyta;                        //luodaan heti, kun pelaajat on luotu.
     private final int voittoValta;
     private int kierros;
-    private Pelaaja vuorossaOleva;
+    private Pelaaja vuorossaOleva;              //nimetään ensimmäisen kerran pelaajien luomisen yhteydessä.
 
     /**
      * Luo pelivelhon.
@@ -34,8 +34,8 @@ public class Pelivelho {
     }
 
     /**
-     * Alustaa ja pelaa kiilto-pelin graafisella käyttöliittymällä. Pelaajat on
-     * pitänyt määritellä ennen tämän metodin suorittamista!
+     * Pelaa Kiilto -pelin graafisella käyttöliittymällä. Pelaajat on pitänyt
+     * määritellä ennen tämän metodin suorittamista!
      */
     public void pelaa() {
         poyta = new Poyta(pelaajat);
@@ -81,6 +81,8 @@ public class Pelivelho {
         for (int i = 0; i < nimet.size(); i++) {
             this.pelaajat.add(new Pelaaja(nimet.get(i)));
         }
+        luoPoyta();
+        vuorossaOleva = pelaajat.get(0);
     }
 
     /**
@@ -93,6 +95,12 @@ public class Pelivelho {
             Pelaaja p = new Pelaaja("Pelaaja" + (i + 1));
             pelaajat.add(p);
         }
+        luoPoyta();
+        vuorossaOleva = pelaajat.get(0);
+    }
+
+    private void luoPoyta() {
+        poyta = new Poyta(pelaajat);
     }
 
     /**
