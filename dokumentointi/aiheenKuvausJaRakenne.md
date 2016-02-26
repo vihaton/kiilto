@@ -39,7 +39,11 @@ Omaisuutta voi ostaa nallekarkeilla, joita pelaaja voi vuorollaan (tiettyjen sä
 * Pelin pyörittämisen neljä tärkeintä solmukohtaa (katso [kuva 1](#kuva 1)): 
  * Pelivelho, joka toimii rajapintana käyttöliittymän ja pelilogiikan välillä
  * Käyttöliittymä, joka sisältää Piirtoalustan sekä toimii rajapintana käyttäjän ja pelilogiikan välillä
- * 
+ * Alkuikkuna, jonka avulla käyttäjä alustaa pelin
+ * Loppuikkuna, joka sulkee vanhan käyttöliittymän ja avaa uuden Alkuikkunan
+* Graafisen esityksen kannalta tärkeimmät solmukohdat ovat
+ * Piirtoalusta ja PöydänPiirtäjä, jotka vastaavat kaiken pelin sisällön piirtämisestä
+ * Käyttöliittymä, joka pitää sisällään graafiset elementit
 
 ##Luokkakaaviot
 
