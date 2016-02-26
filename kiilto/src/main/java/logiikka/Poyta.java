@@ -27,10 +27,13 @@ public class Poyta {
         this.pelaajat = pelaajat;
         karkkimarkkinat = new Kasakokoelma(pelaajat.size());
         merkkihenkilot = new ArrayList<>();
+        
         alustaOmistuspakat();
-        luoOmistukset(luoLukija("src/aputiedostoja/omistustentiedot.csv"));
-        sekoitaOmistuspakat();
-        luoMerkkihenkilot(luoLukija("src/aputiedostoja/merkkihenkilot.csv"));
+        Scanner lukija = luoLukija("src/main/resources/omistustentiedot.csv");
+        luoOmistukset(lukija);
+        
+        lukija = luoLukija("src/main/resources/merkkihenkilot.csv");
+        luoMerkkihenkilot(lukija);
         valitsePelinMerkkihenkilot();
     }
 
@@ -56,15 +59,6 @@ public class Poyta {
         try {
             File f = new File(filePath);
             lukija = new Scanner(f);
-
-            /*
-             yritys olisi kova muokata koodia siten,
-             että se lukee tiedoston
-             muissakin koneissa kuin alkuperäisessä,
-             vaan kun ei toimi niin ei toimi...
-             */
-//            File file = new File(getClass().getResource("/resources/classes/aputiedostoja/filename.file").getFile());
-//            lukija = new Scanner(f);
         } catch (Exception e) {
             System.out.println("lukuongelmia @ Poyta:luoLukija,\n syötteellä " + filePath + "\n" + e);
         }
@@ -88,6 +82,8 @@ public class Poyta {
                 omistustenMaara--;
             }
         }
+        
+        sekoitaOmistuspakat();
     }
 
     private Omistus luoOmistus(String rivi) {
