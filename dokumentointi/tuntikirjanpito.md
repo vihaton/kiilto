@@ -78,7 +78,7 @@ Viimeiset (toivottavasti) logiikat: varaukset ja merkkihenkilöt näyttäisivät
 
 Pyydettyjä raportteja (checkstyle ym), koodikatselmoinnit, tuskastuttava (ja hävitty) vääntö tiedoston lukemiseksi toisesta pakkauksesta (2h), GUI alkuun.
 
-##Viikko 6 : *32h*
+##Viikko 6 : *48h*
 
 **20.2 5,5h**
 
@@ -103,5 +103,17 @@ Tiedostopolkujen muuttamista suhteellisiksi
 **25.2 9h**
 
 Piirtämisen eriyttäminen logiikkaluokilta omiin luokkiinsa 4h
+
 Räpistelyä checkstylen conffaamiseksi niin, että se ignoraa ^set.*$ ja ^get.*$ metodit 2h
+
 Kaikkien turhien javadokkien kirjoittaminen 3h
+
+**26.2 7h**
+
+Ajettavan .jar tiedoston sijoittaminen oikeaan kansioon 1h
+
+Testien rivikattavuuden nostaminen 91% 2h
+
+Luokka- ja sekvenssikaavioiden päivittäminen 2h
+
+Sääntöjen, rakennekuvauksen ym. dokumentaation kirjoittaminen 2h
