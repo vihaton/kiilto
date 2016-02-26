@@ -44,6 +44,27 @@ Omaisuutta voi ostaa nallekarkeilla, joita pelaaja voi vuorollaan (tiettyjen sä
 * Graafisen esityksen kannalta tärkeimmät solmukohdat ovat
  * Piirtoalusta ja PöydänPiirtäjä, jotka vastaavat kaiken pelin sisällön piirtämisestä
  * Käyttöliittymä, joka pitää sisällään graafiset elementit
+ 
+###Pelilogiikka
+
+Kiillon pelilogiikka on hyvin suoraviivainen: Pelivelho käskee ja muut toteuttavat. Katso [kuva 2](#kuva 2).
+
+###Käyttöliittymä
+
+Pelissä esiintyy kolme ikkunaa, jotka kukin vastaavat itse itsestään omina luokkinaan:
+* Alkuikkuna
+* Kayttoliittyma
+* Loppuikkuna
+
+Kaikki käyttöliittymät on toteutettu Swingillä omin pikku kätösin, minkä vuoksi jälki on vähintäänkin rumaa. Koodi on kuitenkin luettavanpaa (kuin autogeneroidulla käyttöliittymällä olisi ollut) ja toiminnankuuntelijat ovat (toivottavasti) selkeästi nimetyt. Tämän pitäisi mahdollistaa ohjelman jatkokehitys (jos joku ikinä jaksaisi).
+
+Käyttöliittymästä pitää mainita vielä omituisuus Valintanapit: luokka vastaa ostettavien (tai varattavien) omaisuuksien (ja varausten) selaamisesta ja valitsemisesta, ja joutuu tämän vuoksi keskustelemaan suoraan Pelivelhon kanssa. Valintanapit siis hakevat Pelivelholta tiedon esillä olevista omistuksista (ja varauksista) ja käyttävät saatuja nimiä selaustoiminnon perustana. Kun käyttäjä valitsee ostettavan (/varattavan) omistuksen, lähettää valintanapit Pelivelholle tiedon, mikä omistus varataan tai ostetaan (ja onko kyseessä osto vai varaus).
+
+###Piirtäminen
+
+Piirtäminen on askarreltu käsin, ja erotettu täysin pelilogiikasta (toisin kuin esim ohjan matopelissä). Tämä mahdollistaa helpon muokattavuuden, jos joku joskus haluaisi parannella grafiikoita (niissä ei ole kuin parannettavaa).
+
+Käytännössä pelipöytä piirretään kutsumalla piirtoalustaa, joka käskee PoydanPiirtajaa piirtämään pelipöydän. PoydanPiirtajalla on viite Poyta olioon, jolta piirtäjä kyselee kaikki tarvittavat tiedot, jotka delegoi edelleen muille piirtäjille piirrettäväksi.
 
 ##Luokkakaaviot
 
