@@ -5,6 +5,7 @@ import logiikka.*;
 import logiikka.valineluokat.*;
 
 /**
+ * Text User Interface - tekstikäyttöliittymä pelin kevyempään pyörittämiseen.
  *
  * @author xvixvi
  */

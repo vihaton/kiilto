@@ -12,7 +12,7 @@ import ui.gui.piirtaminen.Piirtoavustaja;
  *
  * @author xvixvi
  */
-class OmaisuudenPiirtaja {
+public class OmaisuudenPiirtaja {
     
     private final Piirtoavustaja piirtoavustaja;
 

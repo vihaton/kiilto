@@ -9,7 +9,7 @@ import ui.gui.piirtaminen.Piirtoavustaja;
  *
  * @author xvixvi
  */
-class KasakokoelmanPiirtaja {
+public class KasakokoelmanPiirtaja {
 
     private final Piirtoavustaja piirtoavustaja;
 

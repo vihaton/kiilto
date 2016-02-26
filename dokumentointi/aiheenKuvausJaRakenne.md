@@ -33,7 +33,11 @@ Omaisuutta voi ostaa nallekarkeilla, joita pelaaja voi vuorollaan (tiettyjen sä
 
 ##Luokkakaaviot
 
-###yksinkertaistettu luokkakaavio tavoitteesta
+###yksinkertaistettu luokkakaavio koko ohjelmasta
+
+![](https://raw.githubusercontent.com/xvixvi/kiilto/master/dokumentointi/kiilto_luokkakaavio3-0.png "luokkakaavio 3-0")
+
+###yksinkertaistettu luokkakaavio pelilogiikasta
 
 ![Teksti](https://raw.githubusercontent.com/xvixvi/kiilto/master/dokumentointi/luokkakaavio2-0.jpg "luokkakaavio 2-0")
 

@@ -1,13 +1,9 @@
 package ui.gui;
 
 import ui.gui.piirtaminen.Piirtoalusta;
-import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import logiikka.Pelivelho;
 import ui.gui.toiminnankuuntelijat.*;
 
