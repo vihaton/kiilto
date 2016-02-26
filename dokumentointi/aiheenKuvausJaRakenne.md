@@ -35,18 +35,18 @@ Omaisuutta voi ostaa nallekarkeilla, joita pelaaja voi vuorollaan (tiettyjen sä
 
 ###yksinkertaistettu luokkakaavio koko ohjelmasta
 
-![](https://raw.githubusercontent.com/xvixvi/kiilto/master/dokumentointi/kiilto_luokkakaavio3-0.png "luokkakaavio 3-0")
+![](kuvat/kiilto_luokkakaavio3-0.png "luokkakaavio 3-0")
 
 ###yksinkertaistettu luokkakaavio pelilogiikasta
 
-![Teksti](https://raw.githubusercontent.com/xvixvi/kiilto/master/dokumentointi/luokkakaavio2-0.jpg "luokkakaavio 2-0")
+![Teksti](https://raw.githubusercontent.com/xvixvi/kiilto/master/dokumentointi/kuvat/luokkakaavio2-0.jpg "luokkakaavio 2-0")
 
 ###sekvenssikaavio: Pelin aloitus ja alkuikkunan luominen
 
-![](https://github.com/xvixvi/kiilto/blob/master/dokumentointi/sekvenssikaavio:Alkuikkuna.png "alkuikkunan luominen")
+![](https://github.com/xvixvi/kiilto/blob/master/dokumentointi/kuvat/sekvenssikaavio:Alkuikkuna.png "alkuikkunan luominen")
 
 ###sekvenssikaavio: Pelivelhon luominen ja käyttöliittymän käynnistäminen
 
-![](https://github.com/xvixvi/kiilto/blob/master/dokumentointi/sekvenssikaavio:PelivelhonLuominen.png "pelivelhon luominen")
+![](https://github.com/xvixvi/kiilto/blob/master/dokumentointi/kuvat/sekvenssikaavio:PelivelhonLuominen.png "pelivelhon luominen")
 
 
