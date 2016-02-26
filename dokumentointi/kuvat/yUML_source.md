@@ -33,7 +33,6 @@
 [Valintanapit]1++-1>[ValintanapinKuuntelija]
 [Valintanapit]1++-2>[SelausnapinKuuntelija]
 [Kayttoliittyma]-[Loppuikkuna]
-[Loppuikkuna]1++-2>[UusintanapinKuuntelija]
 [Piirtoalusta]1++-1>[PoydanPiirtaja]
 [PoydanPiirtaja]1++-1>[PelaajanPiirtaja]
 [PoydanPiirtaja]1++-1>[OmaisuudenPiirtaja]
@@ -48,6 +47,12 @@
 [PelaajanPiirtaja]1->1[KasakokoelmanPiirtaja]
 [UusintanapinKuuntelija]->1[Kayttoliittyma]
 [UusintanapinKuuntelija]->1[Alkuikkuna]
+[UusintanapinKuuntelija]2->1[Loppuikkuna]
+[VuoronPaattavaKuuntelija]->1[Pelivelho]
+[VuoronPaattavaKuuntelija]->1[Piirtoalusta]
+[ToimintonapinKuuntelija]->1[Pelivelho]
+[NallekarkkivalitsimenKuuntelija]->1[Pelivelho]
+
 
 [Pelivelho]
 [Pelaaja]
@@ -76,4 +81,3 @@
 [Omistus]0..1->1[Nallekarkkikasa]
 [Varaus]0..1->1[Omistus]
 [Nallekarkkikasa]*->1[Enum:Vari]
-
