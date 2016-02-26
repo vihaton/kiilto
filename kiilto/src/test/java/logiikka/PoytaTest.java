@@ -184,7 +184,7 @@ public class PoytaTest {
             pelaajat.add(new Pelaaja("" + i));
             p = new Poyta(pelaajat);
 
-            int oikeaMaara = 2;
+            int oikeaMaara = 3;
             if (i == 3) {
                 oikeaMaara = 4;
             } else if (i == 4) {

@@ -151,7 +151,7 @@ public class Poyta {
             henkiloita = 4;
         }
         if (pelaajat.size() == 2) {
-            henkiloita = 2;
+            henkiloita = 3;
         }
 
         while (merkkihenkilot.size() > henkiloita) {
