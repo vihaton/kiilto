@@ -49,7 +49,7 @@ Omaisuutta voi ostaa nallekarkeilla, joita pelaaja voi vuorollaan (tiettyjen sä
 
 ###kuva 1: yksinkertaistettu luokkakaavio koko ohjelmasta
 
-![](kuvat/kiilto_luokkakaavio3-0.png "luokkakaavio 3-0")
+![](kuvat/kiilto_luokkakaavio3-1.png "luokkakaavio 3-1")
 
 ###kuva 2: yksinkertaistettu luokkakaavio pelilogiikasta
 
