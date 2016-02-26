@@ -29,6 +29,10 @@ Omaisuutta voi ostaa nallekarkeilla, joita pelaaja voi vuorollaan (tiettyjen sä
   3. varaa omaisuutta pöydästä ja saa yhden kultaisen nallekarkin
     * max kolme yhtäaikaista varausta per pelaaja
     * saa kultaisen nallekarkin vain, jos niitä on tarjolla
+ 
+Pelin loputtua pelaaja voi
+* aloittaa uuden pelin tai
+* sulkea ohjelman.
 
 ##Säännöt
 
