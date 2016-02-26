@@ -34,23 +34,30 @@ Omaisuutta voi ostaa nallekarkeilla, joita pelaaja voi vuorollaan (tiettyjen sä
 
 [Säännöt](saannot.md)
 
+##Ohjelman rakenne
+
+* Pelin pyörittämisen neljä tärkeintä solmukohtaa (katso [kuva 1](#kuva 1)): 
+ * Pelivelho, joka toimii rajapintana käyttöliittymän ja pelilogiikan välillä
+ * Käyttöliittymä, joka sisältää Piirtoalustan sekä toimii rajapintana käyttäjän ja pelilogiikan välillä
+ * 
+
 ##Luokkakaaviot
 
-###yksinkertaistettu luokkakaavio koko ohjelmasta
+###kuva 1: yksinkertaistettu luokkakaavio koko ohjelmasta
 
 ![](kuvat/kiilto_luokkakaavio3-0.png "luokkakaavio 3-0")
 
-###yksinkertaistettu luokkakaavio pelilogiikasta
+###kuva 2: yksinkertaistettu luokkakaavio pelilogiikasta
 
 ![Teksti](https://raw.githubusercontent.com/xvixvi/kiilto/master/dokumentointi/kuvat/luokkakaavio2-0.jpg "luokkakaavio 2-0")
 
 ##Sekvenssiokaaviot
 
-###sekvenssikaavio: Pelin aloitus ja alkuikkunan luominen
+###kuva 3: sekvenssikaavio: Pelin aloitus ja alkuikkunan luominen
 
 ![](https://github.com/xvixvi/kiilto/blob/master/dokumentointi/kuvat/sekvenssikaavio:Alkuikkuna.png "alkuikkunan luominen")
 
-###sekvenssikaavio: Pelivelhon luominen ja käyttöliittymän käynnistäminen
+###kuva 4: sekvenssikaavio: Pelivelhon luominen ja käyttöliittymän käynnistäminen
 
 ![](https://github.com/xvixvi/kiilto/blob/master/dokumentointi/kuvat/sekvenssikaavio:PelivelhonLuominen.png "pelivelhon luominen")
 
