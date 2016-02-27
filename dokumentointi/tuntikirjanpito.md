@@ -117,3 +117,11 @@ Testien rivikattavuuden nostaminen 91% 2h
 Luokka- ja sekvenssikaavioiden päivittäminen 2h
 
 Sääntöjen, rakennekuvauksen ym. dokumentaation kirjoittaminen 2h
+
+##Viimeinen palautus : _3h_
+
+**27.2 3h**
+
+InputStreamin käyttäytyminen windowsissa vs .jar tiedoston ajettavuus 1,5h
+
+testaus.md 1,5h
