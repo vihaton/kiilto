@@ -38,6 +38,10 @@ Pelin loputtua pelaaja voi
 
 [Säännöt](saannot.md)
 
+##Testauksesta
+
+Katso tämä [dokumentti ohjelman testaamisesta](testaus.md).
+
 ##Ohjelman rakenne
 
 * Pelin pyörittämisen neljä tärkeintä solmukohtaa (katso [kuva 1](#kuva 1)): 
