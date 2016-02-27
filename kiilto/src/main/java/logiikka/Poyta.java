@@ -29,10 +29,10 @@ public class Poyta {
         merkkihenkilot = new ArrayList<>();
 
         alustaOmistuspakat();
-        Scanner lukija = luoLukija(File.separator + "omistustentiedot.csv");
+        Scanner lukija = luoLukija("/omistustentiedot.csv");
         luoOmistukset(lukija);
 
-        lukija = luoLukija(File.separator + "merkkihenkilot.csv");
+        lukija = luoLukija("/merkkihenkilot.csv");
         luoMerkkihenkilot(lukija);
         valitsePelinMerkkihenkilot();
     }
@@ -51,17 +51,17 @@ public class Poyta {
     /**
      * Yrittää luoda lukijan annetusta tiedostopolusta.
      *
-     * @param fileNameWithSeparator tiedoston nimi siten, että nimen edessä on
-     * käyttöjärjestelmän käyttämä merkki kansioiden erottamiseksi (linuxissa
-     * '/').
+     * @param fileNameWithForwardSlash tiedoston nimi siten, että nimen edessä
+     * on käyttöjärjestelmästä riippumatta forwardSlash, koska ClassLoader
+     * haluaa tiedoston nimen siten käyttöjärjestelmästä riippumatta.
      * @return Scanner lukija, joka lukee parametrina annetusta tiedostosta.
      */
-    public Scanner luoLukija(String fileNameWithSeparator) {
+    public Scanner luoLukija(String fileNameWithForwardSlash) {
         Scanner lukija = null;
         try {
-            lukija = new Scanner(Poyta.class.getResourceAsStream(fileNameWithSeparator));
+            lukija = new Scanner(Poyta.class.getResourceAsStream(fileNameWithForwardSlash));
         } catch (Exception e) {
-            System.out.println("lukuongelmia @ Poyta:luoLukija,\n syötteellä " + fileNameWithSeparator + "\n" + e);
+            System.out.println("lukuongelmia @ Poyta:luoLukija,\n syötteellä " + fileNameWithForwardSlash + "\n" + e);
         }
 
         return lukija;
