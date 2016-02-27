@@ -40,4 +40,4 @@ Peli itsessään on pelattu läpi muutaman kerran, samalla testaten toimiviksi:
   * Ikkuna tulee esiin oikeaan aikaan
   * kaikki tekstit näkyvät odotetusti
   * uusintanappi aloittaa uuden pelin
-  * lopettamisnappi aloittaa uuden pelin :grin:
+  * lopettamisnappi aloittaa uuden pelin :grin: /play trololo
