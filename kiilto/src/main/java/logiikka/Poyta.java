@@ -56,12 +56,12 @@ public class Poyta {
      * '/').
      * @return Scanner lukija, joka lukee parametrina annetusta tiedostosta.
      */
-    public Scanner luoLukija(String fileNameWithPathSeparator) {
+    public Scanner luoLukija(String fileNameWithSeparator) {
         Scanner lukija = null;
         try {
-            lukija = new Scanner(Poyta.class.getResourceAsStream(fileNameWithPathSeparator));
+            lukija = new Scanner(Poyta.class.getResourceAsStream(fileNameWithSeparator));
         } catch (Exception e) {
-            System.out.println("lukuongelmia @ Poyta:luoLukija,\n syötteellä " + fileNameWithPathSeparator + "\n" + e);
+            System.out.println("lukuongelmia @ Poyta:luoLukija,\n syötteellä " + fileNameWithSeparator + "\n" + e);
         }
 
         return lukija;
