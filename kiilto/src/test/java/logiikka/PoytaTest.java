@@ -1,5 +1,6 @@
 package logiikka;
 
+import java.io.File;
 import java.util.ArrayList;
 import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
@@ -47,7 +48,7 @@ public class PoytaTest {
 
     @Test
     public void poytaLuoLukijan() {
-        assertTrue(p.luoLukija("") == null);
+        assertTrue(p.luoLukija(File.separator + "omistustentiedot.csv") != null);
     }
 
     @Test

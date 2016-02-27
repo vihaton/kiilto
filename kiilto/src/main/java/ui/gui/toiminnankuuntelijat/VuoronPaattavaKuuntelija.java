@@ -8,7 +8,7 @@ import ui.gui.piirtaminen.Piirtoalusta;
  *
  * @author xvixvi
  */
-class VuoronPaattavaKuuntelija {
+public class VuoronPaattavaKuuntelija {
 
     private final Pelivelho pelivelho;
     private final JComponent[] nappulat;

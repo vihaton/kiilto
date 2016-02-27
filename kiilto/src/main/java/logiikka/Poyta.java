@@ -27,12 +27,12 @@ public class Poyta {
         this.pelaajat = pelaajat;
         karkkimarkkinat = new Kasakokoelma(pelaajat.size());
         merkkihenkilot = new ArrayList<>();
-        
+
         alustaOmistuspakat();
-        Scanner lukija = luoLukija("src/main/resources/omistustentiedot.csv");
+        Scanner lukija = luoLukija(File.separator + "omistustentiedot.csv");
         luoOmistukset(lukija);
-        
-        lukija = luoLukija("src/main/resources/merkkihenkilot.csv");
+
+        lukija = luoLukija(File.separator + "merkkihenkilot.csv");
         luoMerkkihenkilot(lukija);
         valitsePelinMerkkihenkilot();
     }
@@ -51,16 +51,17 @@ public class Poyta {
     /**
      * Yrittää luoda lukijan annetusta tiedostopolusta.
      *
-     * @param filePath (suhteellinen)tiedostopolku.
+     * @param fileNameWithSeparator tiedoston nimi siten, että nimen edessä on
+     * käyttöjärjestelmän käyttämä merkki kansioiden erottamiseksi (linuxissa
+     * '/').
      * @return Scanner lukija, joka lukee parametrina annetusta tiedostosta.
      */
-    public Scanner luoLukija(String filePath) {
+    public Scanner luoLukija(String fileNameWithPathSeparator) {
         Scanner lukija = null;
         try {
-            File f = new File(filePath);
-            lukija = new Scanner(f);
+            lukija = new Scanner(Poyta.class.getResourceAsStream(fileNameWithPathSeparator));
         } catch (Exception e) {
-            System.out.println("lukuongelmia @ Poyta:luoLukija,\n syötteellä " + filePath + "\n" + e);
+            System.out.println("lukuongelmia @ Poyta:luoLukija,\n syötteellä " + fileNameWithPathSeparator + "\n" + e);
         }
 
         return lukija;
@@ -82,7 +83,7 @@ public class Poyta {
                 omistustenMaara--;
             }
         }
-        
+
         sekoitaOmistuspakat();
     }
 
@@ -98,6 +99,7 @@ public class Poyta {
 
     /**
      * Veikkaappa.
+     *
      * @return Veikkaappa.
      */
     public ArrayList<String> getNakyvienNimet() {
