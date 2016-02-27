@@ -82,16 +82,16 @@ Käytännössä pelipöytä piirretään kutsumalla piirtoalustaa, joka käskee 
 
 ###kuva 2: yksinkertaistettu luokkakaavio pelilogiikasta
 
-![Teksti](https://raw.githubusercontent.com/xvixvi/kiilto/master/dokumentointi/kuvat/luokkakaavio2-0.jpg "luokkakaavio 2-0")
+![Teksti](kuvat/luokkakaavio2-0.jpg "luokkakaavio 2-0")
 
 ##Sekvenssiokaaviot
 
 ###kuva 3: sekvenssikaavio: Pelin aloitus ja alkuikkunan luominen
 
-![](https://github.com/xvixvi/kiilto/blob/master/dokumentointi/kuvat/sekvenssikaavio:Alkuikkuna.png "alkuikkunan luominen")
+![](kuvat/sekvenssikaavio-Alkuikkuna.png "alkuikkunan luominen")
 
 ###kuva 4: sekvenssikaavio: Pelivelhon luominen ja käyttöliittymän käynnistäminen
 
-![](https://github.com/xvixvi/kiilto/blob/master/dokumentointi/kuvat/sekvenssikaavio:PelivelhonLuominen.png "pelivelhon luominen")
+![](kuvat/sekvenssikaavio-PelivelhonLuominen.png "pelivelhon luominen")
 
 
