@@ -1,36 +1,36 @@
-#Säännöt
+# Säännöt
 
-##Liikkuvat osat
+## Liikkuvat osat
 
 * 40 nallekarkkia (5 kultaista, yhteensä 35 valkoista, sinistä, vihreää, punaista ja mustaa, 7 kutakin).
 * 90 omistusta (40 halpaa, 30 keskitason ja 20 kallista omistusta)
 * 10 merkkihenkilöä
 
-###Kahden pelaajan peli
+### Kahden pelaajan peli
 
 * nallekarkkeja: 5 kultaista, 4 kutakin muuta väriä.
 * kaikki omistukset
 * 3 merkkihenkilöä
 
-###Kolmen pelaajan peli
+### Kolmen pelaajan peli
 
 * nallekarkkeja: 5 kultaista, 5 kutakin muuta väriä.
 * kaikki omistukset
 * 4 merkkihenkilöä
 
-###Neljän pelaajan peli
+### Neljän pelaajan peli
 
 Kaikki liikkuvat osat mitä löytyy.
 
-###Nallekarkit
+### Nallekarkit
 
 Nallekarkit toimivat pelin valuuttana. Ostot suoritetaan nallekarkeissa, joiden värillä on merkitystä: sinisillä voi maksaa sinisen väristä hintavaatimusta jne. Kultaiset nallekarkeilla voi korvata minkä tahansa nallekarkin ostosta tehdessä, eli jos ostoon tarvitaan 3 sinistä nallekarkkia ja pelaajalla on vain 2, niin hän voi korvata puuttuvat nallekarkin yhdellä kultaisella nallekarkilla.
 
-###Omistukset
+### Omistukset
 
 Omistuksen vasemmassa yläkulmassa on sen arvovaltalisä, jonka pelaaja saa kun omistaa omistuksen ostettuaan sen. Omistuksen vasemmassa reunassa on ostamiseen tarvittava hinta erivärisinä nallekarkkeina. Yläreunan väri kuvaa, minkä *nallekarkkibonuksen* omistus tuottaa pelaajalle.
 
-####Nallekarkkibonus
+#### Nallekarkkibonus
 
 Kun pelaaja ostaa omistuksen, saa hän omistuksen nallekarkkibonuksen käyttöönsä. Nallekarkkibonuksilla voi
 * tehdä vaikutuksen merkkihenkilöihin
@@ -38,11 +38,11 @@ Kun pelaaja ostaa omistuksen, saa hän omistuksen nallekarkkibonuksen käyttöö
 
 Jos pelaaja ostaa esimerkiksi sinisen nallekarkkibonuksen antavan omistuksen, niin koko loppupelin ajan uudet ostot ovat yhden sinisen nallekarkin halvempia. Eli jos omistus maksaisi normaalisti 4 sinistä nallekarkkia, se maksaa bonuksen takia tälle pelaajalle vain 3 sinistä (tai kultaista) nallekarkkia.
 
-###Merkkihenkilöt
+### Merkkihenkilöt
 
 Merkkihenkilöiden vasemmassa yläkulmassa näkyy arvovaltalisä, jonka pelaaja saa houkuteltuaan merkkihenkilön kylään. Vasemmassa reunassa näkyy merkkihenkilön *omaisuusvaatimus*, joka ei tarkoita nallekarkkeja vaan *omistuksia*: vaikuttaakseen merkkihenkilön pelaajalla täytyy olla vähintään yhtä monta samanväristä omistusta, kuin merkkihenkilöllä on omaisuusvaatimuksessaan.
 
-##Pelin säännöt
+## Pelin säännöt
 
 Pelaajat saavat jokaisella kierroksella yhden vuoron. Vuorollaan pelaaja voi tehdä yhden asian seuraavista
 * ottaa kolme eriväristä nallekarkkia
