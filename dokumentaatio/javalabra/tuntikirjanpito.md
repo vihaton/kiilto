@@ -1,6 +1,6 @@
-#Tuntikirjanpito
+# Tuntikirjanpito
 
-##Viikko 1 : *5,5h*
+## Viikko 1 : *5,5h*
 
 **21.1 5,5h**
 
@@ -15,7 +15,7 @@ Homma | aika
  aiheen alustus |
  tuntikirjanpidon luominen |
 
-##Viikko 2 : *14,5h*
+## Viikko 2 : *14,5h*
 
 **22.1(23.1) 3,5h**
 
@@ -40,7 +40,7 @@ Luokkien työstämistä niin, että omistukset saadaan generoitua pelin alussa |
 toString -metodien vääntämistä käsintestaamista ja tulevaa tui-pelaamista varten | 2h
 ensimmäisten testien pyöräyttäminen | 1h
 
-##Viikko 3 : *7h*
+## Viikko 3 : *7h*
 
 **29.1(30.1) 2h**
 
@@ -50,7 +50,7 @@ pitvääntöä 2h
 
 Pelin perus-perustoiminnallisuuden rakentaminen, ja tekstikäyttöliittymän päivittäminen tarpeeseen 7h
 
-##Viikko 4 : *10h*
+## Viikko 4 : *10h*
 
 **6.2 3h**
 
@@ -68,7 +68,7 @@ logiikkaa + testejä
 
 checkstyle ym kysyttyä, hieman logiikkaa
 
-##Viikko 5 : *15,5h*
+## Viikko 5 : *15,5h*
 
 **18.2 3h**
 
@@ -78,7 +78,7 @@ Viimeiset (toivottavasti) logiikat: varaukset ja merkkihenkilöt näyttäisivät
 
 Pyydettyjä raportteja (checkstyle ym), koodikatselmoinnit, tuskastuttava (ja hävitty) vääntö tiedoston lukemiseksi toisesta pakkauksesta (2h), GUI alkuun.
 
-##Viikko 6 : *48h*
+## Viikko 6 : *48h*
 
 **20.2 5,5h**
 
@@ -118,7 +118,7 @@ Luokka- ja sekvenssikaavioiden päivittäminen 2h
 
 Sääntöjen, rakennekuvauksen ym. dokumentaation kirjoittaminen 2h
 
-##Viimeinen palautus : _3h_
+## Viimeinen palautus : _3h_
 
 **27.2 3h**
 
