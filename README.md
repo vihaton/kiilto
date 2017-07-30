@@ -1,12 +1,19 @@
 # Kiilto
 Peli, jossa nallekarkkeja tuhlataan, va(a)rallisuutta haalitaan ja vaikutusvaltaisia henkilöitä houkutellaan (yö)kylään.
 
-##Dokumentointi
+## Dokumentaatio
 
-[aiheen kuvaus ja rakenne](dokumentointi/aiheenKuvausJaRakenne.md)
+### tiralabra
 
-[tuntikirjanpito](/dokumentointi/tuntikirjanpito.md)
+- [määrittelydokumentti](/dokumentaatio/tiralabra/maarittelydokumentti.md)
+- [viikkoraportti 1](/dokumentaatio/tiralabra/viikkoraportti1.md)
 
-[pelin säännöt](/dokumentointi/saannot.md)
+### javalabra
 
-[ohjelman testauksesta](/dokumentointi/testaus.md)
+[aiheen kuvaus ja rakenne](/dokumentaatio/javalabra/aiheenKuvausJaRakenne.md)
+
+[tuntikirjanpito](/dokumentaatio/javalabra/tuntikirjanpito.md)
+
+[pelin säännöt](/dokumentaatio/javalabra/saannot.md)
+
+[ohjelman testauksesta](/dokumentaatio/javalabra/testaus.md)
