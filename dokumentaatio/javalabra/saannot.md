@@ -54,7 +54,7 @@ Pelaajat saavat jokaisella kierroksella yhden vuoron. Vuorollaan pelaaja voi teh
 
 Vuoron lopulla merkkihenkilöt tarkastavat pelaajat, ja jos joku pelaajista on onnistunut tekemään vaikutuksen merkkihenkilöön, lähtee tämä välittömästi vieraisille.
 
-##Pelin päättyminen
+## Pelin päättyminen
 
 Kun joku pelaajista saavuttaa 15 arvovaltapistettä tai enemmän, pelataan käynnissä oleva kierros loppuun (jokainen pelaaja saa siis yhtä monta vuoroa). Kierroksen loputtua se pelaaja, jolla on eniten arvovaltapisteitä, voittaa. Jos kahdella pelaajalla on sama määrä arvovaltapisteitä, voittaa se pelaaja, jolla on vähemmän ostettuja omaisuuksia. Kuka nyt porvareista tykkäisi!
 
