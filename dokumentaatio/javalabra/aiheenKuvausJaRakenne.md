@@ -1,6 +1,6 @@
 *xvixvi ylpeänä(?) esittää:*
 
-#Kiilto
+# Kiilto
 
 **Aihe:** Kiilto on peli, jossa on 2-4 pelaajaa. Pelaajat pyrkivät keräämään 15 arvovaltapistettä voittaakseen. Pisteitä saa omaisuudesta sekä "viettelemistään" merkkihenkilöistä.
 
@@ -34,15 +34,15 @@ Pelin loputtua pelaaja voi
 * aloittaa uuden pelin tai
 * sulkea ohjelman.
 
-##Säännöt
+## Säännöt
 
 [Säännöt](saannot.md)
 
-##Testauksesta
+## Testauksesta
 
 Katso tämä [dokumentti ohjelman testaamisesta](testaus.md).
 
-##Ohjelman rakenne
+## Ohjelman rakenne
 
 * Pelin pyörittämisen neljä tärkeintä solmukohtaa (katso [kuva 1](#kuva 1)): 
  * Pelivelho, joka toimii rajapintana käyttöliittymän ja pelilogiikan välillä
@@ -53,11 +53,11 @@ Katso tämä [dokumentti ohjelman testaamisesta](testaus.md).
  * Piirtoalusta ja PöydänPiirtäjä, jotka vastaavat kaiken pelin sisällön piirtämisestä
  * Käyttöliittymä, joka pitää sisällään graafiset elementit
  
-###Pelilogiikka
+### Pelilogiikka
 
 Kiillon pelilogiikka on hyvin suoraviivainen: Pelivelho käskee ja muut toteuttavat. Katso [kuva 2](#kuva 2).
 
-###Käyttöliittymä
+### Käyttöliittymä
 
 Pelissä esiintyy kolme ikkunaa, jotka kukin vastaavat itse itsestään omina luokkinaan:
 * Alkuikkuna
@@ -68,29 +68,29 @@ Kaikki käyttöliittymät on toteutettu Swingillä omin pikku kätösin, minkä 
 
 Käyttöliittymästä pitää mainita vielä omituisuus Valintanapit: luokka vastaa ostettavien (tai varattavien) omaisuuksien (ja varausten) selaamisesta ja valitsemisesta, ja joutuu tämän vuoksi keskustelemaan suoraan Pelivelhon kanssa. Valintanapit siis hakevat Pelivelholta tiedon esillä olevista omistuksista (ja varauksista) ja käyttävät saatuja nimiä selaustoiminnon perustana. Kun käyttäjä valitsee ostettavan (/varattavan) omistuksen, lähettää valintanapit Pelivelholle tiedon, mikä omistus varataan tai ostetaan (ja onko kyseessä osto vai varaus).
 
-###Piirtäminen
+### Piirtäminen
 
 Piirtäminen on askarreltu käsin, ja erotettu täysin pelilogiikasta (toisin kuin esim ohjan matopelissä). Tämä mahdollistaa helpon muokattavuuden, jos joku joskus haluaisi parannella grafiikoita (niissä ei ole kuin parannettavaa).
 
 Käytännössä pelipöytä piirretään kutsumalla piirtoalustaa, joka käskee PoydanPiirtajaa piirtämään pelipöydän. PoydanPiirtajalla on viite Poyta olioon, jolta piirtäjä kyselee kaikki tarvittavat tiedot, jotka delegoi edelleen muille piirtäjille piirrettäväksi.
 
-##Luokkakaaviot
+## Luokkakaaviot
 
-###kuva 1: yksinkertaistettu luokkakaavio koko ohjelmasta
+### kuva 1: yksinkertaistettu luokkakaavio koko ohjelmasta
 
 ![](kuvat/kiilto_luokkakaavio3-1.png "luokkakaavio 3-1")
 
-###kuva 2: yksinkertaistettu luokkakaavio pelilogiikasta
+### kuva 2: yksinkertaistettu luokkakaavio pelilogiikasta
 
 ![Teksti](kuvat/luokkakaavio2-0.jpg "luokkakaavio 2-0")
 
-##Sekvenssiokaaviot
+## Sekvenssiokaaviot
 
-###kuva 3: sekvenssikaavio: Pelin aloitus ja alkuikkunan luominen
+### kuva 3: sekvenssikaavio: Pelin aloitus ja alkuikkunan luominen
 
 ![](kuvat/sekvenssikaavio-Alkuikkuna.png "alkuikkunan luominen")
 
-###kuva 4: sekvenssikaavio: Pelivelhon luominen ja käyttöliittymän käynnistäminen
+### kuva 4: sekvenssikaavio: Pelivelhon luominen ja käyttöliittymän käynnistäminen
 
 ![](kuvat/sekvenssikaavio-PelivelhonLuominen.png "pelivelhon luominen")
 
