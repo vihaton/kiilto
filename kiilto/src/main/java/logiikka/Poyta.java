@@ -14,7 +14,7 @@ public class Poyta {
 
     private final ArrayList<Pelaaja> pelaajat;
     private final Kasakokoelma karkkimarkkinat;
-    private ArrayList<Omaisuus> omistuspakat;
+    private Omaisuus[] omistuspakat;
     private final Random arpoja = new Random();
     private final ArrayList<Merkkihenkilo> merkkihenkilot;
 
@@ -42,10 +42,11 @@ public class Poyta {
     }
 
     private void alustaOmistuspakat() {
-        omistuspakat = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            omistuspakat.add(new Omaisuus());
-        }
+        omistuspakat = new Omaisuus[]{
+                new Omaisuus(),
+                new Omaisuus(),
+                new Omaisuus()
+        };
     }
 
     /**
@@ -69,7 +70,7 @@ public class Poyta {
 
     private void luoOmistukset(Scanner lukija) {
         for (int i = 0; i < 3; i++) {
-            Omaisuus omistuspakka = omistuspakat.get(i);
+            Omaisuus omistuspakka = omistuspakat[i];
             int omistustenMaara = 40;
             if (i == 1) {
                 omistustenMaara = 30;
@@ -110,7 +111,7 @@ public class Poyta {
         return nimet;
     }
 
-    public ArrayList<Omaisuus> getOmistuspakat() {
+    public Omaisuus[] getOmistuspakat() {
         return omistuspakat;
     }
 
@@ -194,9 +195,9 @@ public class Poyta {
             s = s.concat(merkkihenkilot.get(i).toString() + "\n");
         }
 
-        for (int i = omistuspakat.size() - 1; i > -1; i--) {
+        for (int i = omistuspakat.length - 1; i > -1; i--) {
             s = s.concat("Omistuspakasta " + (i + 1) + ":\n\n");
-            Omaisuus oma = omistuspakat.get(i);
+            Omaisuus oma = omistuspakat[i];
             s = s.concat(oma.paallimmaisetToString() + "\n");
         }
         s = s.concat("***\n");
@@ -219,11 +220,11 @@ public class Poyta {
         }
 
         if (ostonNumero < 41) {
-            omistuspakka = omistuspakat.get(0);
+            omistuspakka = omistuspakat[0];
         } else if (ostonNumero < 71) {
-            omistuspakka = omistuspakat.get(1);
+            omistuspakka = omistuspakat[1];
         } else {
-            omistuspakka = omistuspakat.get(2);
+            omistuspakka = omistuspakat[2];
         }
 
         //kysytään pelaajalta, onko hänellä varaa ostaa nimeämänsä omistus
@@ -275,7 +276,7 @@ public class Poyta {
         if (varauksenNro > 70) {
             pakka = 2;
         }
-        Omaisuus omistusPakka = omistuspakat.get(pakka);
+        Omaisuus omistusPakka = omistuspakat[pakka];
 
         Omistus varattava = omistusPakka.getNakyvaOmistus(varauksenNro);
         if (varattava == null) {
@@ -320,13 +321,13 @@ public class Poyta {
                     karkkimarkkinat.siirraToiseenKasaan(pelaaja.getKarkit(), i, 1);
                 }
 
-                ArrayList<String> nakyvat = omistuspakat.get(1).getPaallimmaistenNimet();
+                ArrayList<String> nakyvat = omistuspakat[1].getPaallimmaistenNimet();
                 for (int i = 1; i < 2; i++) {
                     teeVaraus(pelaaja, Integer.parseInt(nakyvat.get(i)));
                 }
 
                 nakyvat = pelaaja.getVaraustenNimet();
-                nakyvat.addAll(omistuspakat.get(0).getPaallimmaistenNimet());
+                nakyvat.addAll(omistuspakat[0].getPaallimmaistenNimet());
                 for (String nakyva : nakyvat) {
                     suoritaOsto(pelaaja, Integer.parseInt(nakyva));
                 }

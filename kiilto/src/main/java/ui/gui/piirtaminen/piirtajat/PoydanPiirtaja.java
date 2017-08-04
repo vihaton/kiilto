@@ -58,7 +58,7 @@ public class PoydanPiirtaja {
 
     private void piirraOmistuspakat(Graphics graphics, int x, int y) {
         for (int i = 0; i < 3; i++) {
-            if (poyta.getOmistuspakat().get(2 - i).getKoko() > 4) {
+            if (poyta.getOmistuspakat()[2 - i].getKoko() > 4) {
                 graphics.setColor(Color.gray);
                 graphics.fill3DRect(x, y, 100, 125, true);
                 graphics.setColor(Color.black);
@@ -78,7 +78,7 @@ public class PoydanPiirtaja {
 
     private void piirraNakyvatOmistukset(Graphics graphics, int x, int y) {
         for (int i = 2; i > -1; i--) {
-            omaisuudenpiirtaja.piirraNakyvatOmistukset(graphics, poyta.getOmistuspakat().get(i), x, y);
+            omaisuudenpiirtaja.piirraNakyvatOmistukset(graphics, poyta.getOmistuspakat()[i], x, y);
             y += 135;
         }
     }

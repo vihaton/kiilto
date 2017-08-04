@@ -295,7 +295,7 @@ public class Pelaaja {
      * Siirtää ostettavan omaisuuden hinnan (korjattuna ostavan pelaajan
      * omaisuuden vaikutuksella) mukaisen määrän karkkeja takaisin markkinoille.
      *
-     * @param omaisuus jonka (omaisuuskorjatun)hinnan mukaan karkit siirretään.
+     * @param o jonka (omaisuuskorjatun)hinnan mukaan karkit siirretään.
      * @param markkinat karkkikasat, joihin omistuksen hinnan mukainen määrä
      * karkkeja siirretään.
      */

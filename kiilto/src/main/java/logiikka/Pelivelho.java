@@ -21,6 +21,7 @@ public class Pelivelho {
     private final int voittoValta;
     private int kierros;
     private Pelaaja vuorossaOleva;              //nimetään ensimmäisen kerran pelaajien luomisen yhteydessä.
+    private boolean[] onkoPelaajaAI;            //onko paikalla i oleva pelaaja tekoäly?
 
     /**
      * Luo pelivelhon.
@@ -73,11 +74,30 @@ public class Pelivelho {
     }
 
     /**
+     *
+     * @param onkoAI lista, mitkä pelaajat ovat tekoälyjä
+     */
+    public void luoPelaajatJaAIt(boolean[] onkoAI) {
+        ArrayList<String> nimet = new ArrayList<>();
+        int tekoalyja = 0;
+        for (int i = 0; i < onkoAI.length ; i++) {
+            if (onkoAI[i]) {
+                tekoalyja++;
+                nimet.add("AI " + tekoalyja);
+            } else {
+                nimet.add("Pelaaja " + (i - tekoalyja + 1));
+            }
+        }
+        luoPelaajat(nimet, onkoAI);
+    }
+
+    /**
      * Luo annettujen nimien mukaiset pelaajat.
      *
      * @param nimet pelaajien nimet.
      */
-    public void luoPelaajat(ArrayList<String> nimet) {
+    public void luoPelaajat(ArrayList<String> nimet, boolean[] onkoAI) {
+        this.onkoPelaajaAI = onkoAI;
         for (int i = 0; i < nimet.size(); i++) {
             this.pelaajat.add(new Pelaaja(nimet.get(i)));
         }
@@ -91,12 +111,11 @@ public class Pelivelho {
      * @param pelaajia kuinka monta pelaajaa luodaan.
      */
     public void luoPelaajat(int pelaajia) {
+        ArrayList<String> nimet = new ArrayList<>();
         for (int i = 0; i < pelaajia; i++) {
-            Pelaaja p = new Pelaaja("Pelaaja" + (i + 1));
-            pelaajat.add(p);
+            nimet.add("Pelaaja" + (i + 1));
         }
-        luoPoyta();
-        vuorossaOleva = pelaajat.get(0);
+        luoPelaajat(nimet, new boolean[nimet.size()]);
     }
 
     private void luoPoyta() {
