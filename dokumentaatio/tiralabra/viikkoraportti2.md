@@ -14,3 +14,4 @@ Tämä viikko on mennyt pitkälti töissä, ensi viikolla pitäisi olla hieman h
 
 2.8. 3h *ympäristön asennus, .jar riippuvuuksien ja tiedostonlukuongelmien ihmettelyä*
 4.8. 3h *ympäristö, build ja run toimimaan .jar -tiedostolla; älyn toiminta-ajatus*
+4.8. 2h *pelin refaktorointia älyn yhteensopivuutta ajatellen, älyn toimintalogiikan hahmottelu*
