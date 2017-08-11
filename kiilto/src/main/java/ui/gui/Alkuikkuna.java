@@ -15,12 +15,14 @@ public class Alkuikkuna implements Runnable {
 
     private JFrame alkuvalikko;
     private final Pelivelho pelivelho;
+    private boolean[] onePlayerOthersAreAI;
 
     /**
      * Luo alkuikkunan, joka luo itselleen pelin pelivelhon.
      */
     public Alkuikkuna() {
         pelivelho = new Pelivelho();
+        onePlayerOthersAreAI = new boolean[]{false, true, true, true};
     }
 
     @Override
@@ -55,10 +57,13 @@ public class Alkuikkuna implements Runnable {
 
         /*
          WIP
-        
+
          -mahdollisuus syöttää pelaajien nimet tekstikenttiin
          */
-        lisaaKuuntelijat(kaksiPelaa, kolmePelaa, neljaPelaa, lopeta);
+        lisaaKuuntelijaPelinaloitusnappulalle(kaksiPelaa, 2, kuinkaMontaIhmistaJaAlya(1,1));
+        lisaaKuuntelijaPelinaloitusnappulalle(kolmePelaa, 3, kuinkaMontaIhmistaJaAlya(1,2));
+        lisaaKuuntelijaPelinaloitusnappulalle(neljaPelaa, 4, kuinkaMontaIhmistaJaAlya(1,3));
+        lisaaKuuntelijaLopetaNapille(lopeta);
 
         container.add(pelaajia);
         container.add(kaksiPelaa);
@@ -67,43 +72,29 @@ public class Alkuikkuna implements Runnable {
         container.add(lopeta);
     }
 
-    private void lisaaKuuntelijat(JButton kaksiPelaa, JButton kolmePelaa, JButton neljaPelaa, JButton lopeta) {
-        kaksiPelaa.addActionListener(new ActionListener() {
+    protected boolean[] kuinkaMontaIhmistaJaAlya(int ihmisia, int alyja) {
+        boolean[] onkoAI = new boolean[ihmisia+alyja];
+        for (int i = ihmisia; i < onkoAI.length; i++) {
+            onkoAI[i] = true;
+        }
+        return onkoAI;
+    }
 
+    private void lisaaKuuntelijaPelinaloitusnappulalle(JButton nappi, int kuinkaMontaPelaajaa, boolean[] onkoPelaajaAI) {
+        nappi.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae) {
+            public void actionPerformed(ActionEvent e) {
                 alkuvalikko.setVisible(false);
                 alkuvalikko.dispose();
 
-                pelivelho.luoPelaajat(2);
+                //pelivelho.luoPelaajat(kuinkaMontaPelaajaa);
+                pelivelho.luoPelaajatJaAIt(onkoPelaajaAI);
                 pelivelho.pelaa();
             }
         });
+    }
 
-        kolmePelaa.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                alkuvalikko.setVisible(false);
-                alkuvalikko.dispose();
-
-                pelivelho.luoPelaajat(3);
-                pelivelho.pelaa();
-            }
-        });
-
-        neljaPelaa.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                alkuvalikko.setVisible(false);
-                alkuvalikko.dispose();
-
-                pelivelho.luoPelaajat(4);
-                pelivelho.pelaa();
-            }
-        });
-
+    private void lisaaKuuntelijaLopetaNapille(JButton lopeta) {
         lopeta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {

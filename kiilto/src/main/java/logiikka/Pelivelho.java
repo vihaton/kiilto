@@ -1,7 +1,9 @@
 package logiikka;
 
-import ui.gui.Kayttoliittyma;
 import java.util.*;
+
+import tiralabra.AlmaIlmari;
+import ui.gui.Kayttoliittyma;
 import logiikka.valineluokat.*;
 import ui.gui.Valintanapit;
 
@@ -21,7 +23,9 @@ public class Pelivelho {
     private final int voittoValta;
     private int kierros;
     private Pelaaja vuorossaOleva;              //nimetään ensimmäisen kerran pelaajien luomisen yhteydessä.
+    private int vuorossaOlevanNro;
     private boolean[] onkoPelaajaAI;            //onko paikalla i oleva pelaaja tekoäly?
+    private AlmaIlmari AI;
 
     /**
      * Luo pelivelhon.
@@ -40,8 +44,13 @@ public class Pelivelho {
      */
     public void pelaa() {
         poyta = new Poyta(pelaajat);
+        AI = new AlmaIlmari();
 
-        vuorossaOleva = pelaajat.get(0);
+        vuorossaOlevanNro = 0;
+        vuorossaOleva = pelaajat.get(vuorossaOlevanNro);
+        if (onkoPelaajaAI[vuorossaOlevanNro]) {
+            peluutaAInVuoro();
+        }
 
 //        kierros = poyta.luoTestattavaPelitilanne(5);
         kayttoliittyma = new Kayttoliittyma(this);
@@ -101,8 +110,6 @@ public class Pelivelho {
         for (int i = 0; i < nimet.size(); i++) {
             this.pelaajat.add(new Pelaaja(nimet.get(i)));
         }
-        luoPoyta();
-        vuorossaOleva = pelaajat.get(0);
     }
 
     /**
@@ -116,10 +123,6 @@ public class Pelivelho {
             nimet.add("Pelaaja" + (i + 1));
         }
         luoPelaajat(nimet, new boolean[nimet.size()]);
-    }
-
-    private void luoPoyta() {
-        poyta = new Poyta(pelaajat);
     }
 
     /**
@@ -139,7 +142,7 @@ public class Pelivelho {
      * kasvaa ja vuoro siirtyy ensimmäiselle pelaajalle.
      */
     public void seuraavaPelaajanVuoro() {
-        poyta.vaikuttikoPelaajaMerkkihenkilon(vuorossaOleva);
+        poyta.vaikuttikoPelaajaMerkkihenkiloon(vuorossaOleva);
 
         if (kierroksenViimeinen() && onkoVoittaja()) {
             julistaVoittaja();
@@ -149,20 +152,23 @@ public class Pelivelho {
         if (kierroksenViimeinen()) {
             kierros++;
             vuorossaOleva = pelaajat.get(0);
-            return;
+            vuorossaOlevanNro = 0;
+        } else {
+            vuorossaOlevanNro++;
+            vuorossaOleva = pelaajat.get(vuorossaOlevanNro);
         }
 
-        Pelaaja seuraava = pelaajat.get(pelaajat.size() - 1);
-        for (int i = pelaajat.size() - 2; i > -1; i--) {
-            Pelaaja p = pelaajat.get(i);
-
-            if (p == vuorossaOleva) {
-                vuorossaOleva = seuraava;
-                break;
-            }
-
-            seuraava = p;
+        if (onkoPelaajaAI[vuorossaOlevanNro]) {
+            peluutaAInVuoro();
+            kayttoliittyma.repaint();
+            seuraavaPelaajanVuoro();
         }
+    }
+
+    private void peluutaAInVuoro() {
+        System.out.println("Pelivelho kutsuu AI.ta pelaamaan vuoron pelaajalla nro " + vuorossaOlevanNro +
+                "\n" + vuorossaOleva);
+        AI.pelaaVuoro(vuorossaOleva, poyta);
     }
 
     /**

@@ -178,6 +178,10 @@ public class Kayttoliittyma implements Runnable {
         loppuikkuna.run();
     }
 
+    public void repaint() {
+        piirtoalusta.repaint();
+    }
+
     /**
      * piilottaa ja "disposaa" pelin ruudun.
      */

@@ -2,7 +2,6 @@ package main;
 
 import ui.gui.Alkuikkuna;
 import javax.swing.SwingUtilities;
-import tuilogiikka.TUIPelivelho;
 
 /**
  * Pistetään peli pyörimään!

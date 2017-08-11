@@ -1,4 +1,4 @@
-package java;
+package tiralabra;
 
 import logiikka.*;
 
@@ -15,11 +15,11 @@ public class AlmaIlmari {
 
     /**
      * AI pelaa vuoron pelaajan puolesta, kuten oikeakin pelaaja (eli kutsuu pelivelhon metodeita toiminnan mukaan).
-     * @param keho jota AlmaIlmari ohjailee
+     * @param keho jota java.AI.AlmaIlmari ohjailee
      * @param poyta jolla näkyy tämänhetkinen pelitilanne
      */
     public void pelaaVuoro(Pelaaja keho, Poyta poyta) {
-        System.out.println("tekoälyn pitäisi pelata vuoro kehon puolesta:\n" + keho);
+        System.out.println("tekoälyn pitäisi pelata vuoro kehon puolesta:\n");
         //todo AI tekee siirron
         //todo AI tekee aina laillisen siirron
     }

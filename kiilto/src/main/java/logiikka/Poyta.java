@@ -1,6 +1,5 @@
 package logiikka;
 
-import java.io.File;
 import java.util.*;
 import logiikka.omaisuusluokat.*;
 import logiikka.valineluokat.*;
@@ -168,7 +167,7 @@ public class Poyta {
      *
      * @param vuorossaOleva pelaaja.
      */
-    public void vaikuttikoPelaajaMerkkihenkilon(Pelaaja vuorossaOleva) {
+    public void vaikuttikoPelaajaMerkkihenkiloon(Pelaaja vuorossaOleva) {
         ArrayList<Merkkihenkilo> vaikuttuneet = new ArrayList<>();
         for (Merkkihenkilo mh : merkkihenkilot) {
             if (mh.vaikuttuukoOmaisuudesta(vuorossaOleva.getOmaisuus())) {
@@ -331,7 +330,7 @@ public class Poyta {
                 for (String nakyva : nakyvat) {
                     suoritaOsto(pelaaja, Integer.parseInt(nakyva));
                 }
-                vaikuttikoPelaajaMerkkihenkilon(pelaaja);
+                vaikuttikoPelaajaMerkkihenkiloon(pelaaja);
             }
         }
         return kierros;
