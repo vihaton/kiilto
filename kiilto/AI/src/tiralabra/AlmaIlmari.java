@@ -90,14 +90,14 @@ public class AlmaIlmari {
 
     protected Vuoro paataMitaNostetaan(Pelaaja keho, Poyta poyta) {
         Vuoro v = new Vuoro(VuoronToiminto.NOSTA);
-        v.mitaNallekarkkejaNostetaan = new int[]{0,0,0,0,0};
+        v.mitaNallekarkkejaNostetaan = new int[]{0,0,0,0,0,0};
         int nostettavia = 0;
         Kasakokoelma markkinat = poyta.getMarkkinat();
-        while (nostettavia <= 3 && keho.getKarkit().getKarkkienMaara() + nostettavia <= 10) {
+        while (nostettavia < 3 && keho.getKarkit().getKarkkienMaara() + nostettavia < 10) {
             for (int i = 1; i < 6; i++) {
                 int karkkejaSaatavilla = markkinat.getKasanKoko(i);
                 if (karkkejaSaatavilla > 0) {
-                    v.mitaNallekarkkejaNostetaan[i-1]++;
+                    v.mitaNallekarkkejaNostetaan[i]++;
                     nostettavia++;
                 }
                 if (nostettavia > 2) {
