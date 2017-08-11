@@ -110,6 +110,14 @@ public class Poyta {
         return nimet;
     }
 
+    public List<Omistus> getNakyvatOmistukset() {
+        List<Omistus> nakyvat = new ArrayList<Omistus>();
+        for (Omaisuus o:omistuspakat) {
+            nakyvat.addAll(o.getPaallimmaiset());
+        }
+        return nakyvat;
+    }
+
     public Omaisuus[] getOmistuspakat() {
         return omistuspakat;
     }

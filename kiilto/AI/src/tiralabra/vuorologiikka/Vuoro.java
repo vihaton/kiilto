@@ -7,7 +7,7 @@ public class Vuoro {
 
     public VuoronToiminto toiminto;
     public int[] mitaNallekarkkejaNostetaan;
-    public String varattavanOmaisuudenNimi;
+    public String varattavanOmistuksenNimi;
     public String ostettavanOmaisuudenNimi;
 
     public Vuoro(VuoronToiminto toiminto) {

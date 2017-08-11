@@ -1,6 +1,7 @@
 package tiralabra;
 
 import logiikka.*;
+import logiikka.omaisuusluokat.Omistus;
 import logiikka.valineluokat.Kasakokoelma;
 import tiralabra.vuorologiikka.*;
 
@@ -23,6 +24,8 @@ public class AlmaIlmari {
 
     /**
      * AI pelaa vuoron pelaajan puolesta, kuten oikeakin pelaaja (eli kutsuu pelivelhon metodeita toiminnan mukaan).
+     *
+     * Pseudo idea:
      *
      * arvioi pelitilanne
      *      -mikä tilanne minulla on?
@@ -47,6 +50,10 @@ public class AlmaIlmari {
      *          -pöydästä
      *          -kädestä
      *
+     * tilanteen arviointi ja vuoron toteuttaminen on eriytetty,
+     * jotta tulevaisuudessa edistyneempi tekoäly pystyisi harkitsemaan
+     * eri vaihtoehtoja vapaammin.
+     *
      * @param keho jota AlmaIlmari ohjailee
      * @param poyta jolla näkyy tämänhetkinen pelitilanne
      */
@@ -62,32 +69,48 @@ public class AlmaIlmari {
         //todo AI tekee aina laillisen siirron
     }
 
+    /**
+     *
+     * @param keho jota ohjataan
+     * @param poyta jolla pelataan
+     * @return suunnitelman toteutettavasta vuorosta
+     */
     protected Vuoro arvioiPelitilanne(Pelaaja keho, Poyta poyta) {
         Vuoro v;
         int karkkeja = keho.getKarkit().getKarkkienMaara();
         if (karkkeja < 9) {
             v = paataMitaNostetaan(keho, poyta);
         } else if (keho.getVaraukset().size() < 3){
-            v = new Vuoro(VuoronToiminto.VARAA);
+            v = paataMitaVarataan(keho, poyta);
         } else {
             v = new Vuoro(VuoronToiminto.OSTA);
         }
 
-        v.varattavanOmaisuudenNimi = poyta.getNakyvienNimet().get(0);
+        v.varattavanOmistuksenNimi = poyta.getNakyvienNimet().get(0);
         v.ostettavanOmaisuudenNimi = poyta.getNakyvienNimet().get(0);
         return v;
     }
 
+    /**
+     * implementoi vuoro olioon suunnitellun vuoron.
+     * @param v
+     */
     protected void toteutaVuoro(Vuoro v) {
         switch (v.toiminto) {
             case NOSTA: pelivelho.nostaNallekarkkeja(v.mitaNallekarkkejaNostetaan);
                         break;
-            case VARAA: pelivelho.varaa(v.varattavanOmaisuudenNimi);
+            case VARAA: pelivelho.varaa(v.varattavanOmistuksenNimi);
                         break;
             case OSTA:  pelivelho.osta(v.ostettavanOmaisuudenNimi);
         }
     }
 
+    /**
+     *
+     * @param keho mitä ohjataan
+     * @param poyta millä pelataan
+     * @return Vuoro-olio, johon on paketoitu mitä nallekarkkeja pitäisi nostaa
+     */
     protected Vuoro paataMitaNostetaan(Pelaaja keho, Poyta poyta) {
         Vuoro v = new Vuoro(VuoronToiminto.NOSTA);
         v.mitaNallekarkkejaNostetaan = new int[]{0,0,0,0,0,0};
@@ -106,5 +129,39 @@ public class AlmaIlmari {
             }
         }
         return v;
+    }
+
+    /**
+     *
+     * @param keho jota ohjataan
+     * @param poyta jolla pelataan
+     * @return Vuoro-olio, johon on paketoitu mikä omistus pitäisi varata
+     */
+    protected Vuoro paataMitaVarataan(Pelaaja keho, Poyta poyta) {
+        Vuoro v = new Vuoro(VuoronToiminto.VARAA);
+        v.varattavanOmistuksenNimi = koitaValitaOmistusJohonOnHetiVaraa(keho, poyta);
+
+        //todo valitse varattava omistus fiksummin
+        //jos yhteenkään omistukseen ei heti suoraan ole varaa, otetaan pöydästä ensimmäinen joka osuu käteen
+        if (v.varattavanOmistuksenNimi == null) {
+            v.varattavanOmistuksenNimi = poyta.getNakyvienNimet().get(0);
+        }
+        return v;
+    }
+
+    /**
+     *
+     * @param keho jota ohjaillaan
+     * @param poyta jolla pelataan
+     * @return pöydällä olevan omistuksen nimi, minkä voisi heti olemassa olevilla varoilla lunastaa, null jos sellaista ei ole.
+     */
+    protected String koitaValitaOmistusJohonOnHetiVaraa(Pelaaja keho, Poyta poyta) {
+        //todo tämä on fiksuinta testata mockaamalla, mockito maven depencyihin
+        for (Omistus o : poyta.getNakyvatOmistukset()) {
+            if (keho.onkoVaraa(o)) {
+                return o.getNimi();
+            }
+        }
+        return null;
     }
 }

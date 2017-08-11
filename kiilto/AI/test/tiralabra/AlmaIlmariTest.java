@@ -34,7 +34,7 @@ public class AlmaIlmariTest {
     public void paataMitaNostetaanTest() {
         //annetaan ensimmäinen tekoäly
         Vuoro v = AI.paataMitaNostetaan(pv.getPelaajat().get(1), pv.getPoyta());
-        assertTrue("pelin alussa tekoäly aina nostaa karkkeja", v.toiminto.equals(VuoronToiminto.NOSTA));
+        assertTrue("vuoron toiminto on oikein", v.toiminto.equals(VuoronToiminto.NOSTA));
         Kasakokoelma nostetutKarkit = new Kasakokoelma(v.mitaNallekarkkejaNostetaan);
         assertTrue("on kannattavampaa nostaa kolme karkkia kuin vain kaksi, kun ei ole varauksia ja karkkeja on saatavilla.\n" +
                         "karkkeja nostettiin " + nostetutKarkit.getKarkkienMaara(),
@@ -44,5 +44,13 @@ public class AlmaIlmariTest {
             assertTrue("jos karkkeja nostetaan 3kpl, niin kaikkien täytyy olla erivärisiä",
                     nostetutKarkit.getKasa(i).getKoko() < 2);
         }
+    }
+
+    @Test
+    public void paataMitaVarataanTest() {
+        Vuoro v = AI.paataMitaVarataan(pv.getPelaajat().get(1), pv.getPoyta());
+        assertTrue(v.toiminto.equals(VuoronToiminto.VARAA));
+        assertTrue("varattavan omistuksen pitäisi löytyä pöydältä!",
+                pv.getPoyta().getNakyvienNimet().contains(v.varattavanOmistuksenNimi));
     }
 }
