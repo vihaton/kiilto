@@ -13,25 +13,11 @@ import static org.junit.Assert.*;
  */
 public class PelivelhoTest {
 
-    public PelivelhoTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
     @Before
     public void setUp() {
         p = new Pelivelho();
         p.luoPelaajat(3);
-    }
-
-    @After
-    public void tearDown() {
+        p.setPoyta(new Poyta(p.getPelaajat()));
     }
 
     private Pelivelho p;

@@ -46,8 +46,6 @@ public class Pelivelho {
         poyta = new Poyta(pelaajat);
         AI = new AlmaIlmari();
 
-        vuorossaOlevanNro = 0;
-        vuorossaOleva = pelaajat.get(vuorossaOlevanNro);
         if (onkoPelaajaAI[vuorossaOlevanNro]) {
             peluutaAInVuoro();
         }
@@ -59,6 +57,10 @@ public class Pelivelho {
 
     public Poyta getPoyta() {
         return poyta;
+    }
+
+    public void setPoyta(Poyta poyta) {
+        this.poyta = poyta;
     }
 
     public ArrayList<Pelaaja> getPelaajat() {
@@ -110,6 +112,12 @@ public class Pelivelho {
         for (int i = 0; i < nimet.size(); i++) {
             this.pelaajat.add(new Pelaaja(nimet.get(i)));
         }
+        alustaAloittavaPelaaja();
+    }
+
+    private void alustaAloittavaPelaaja() {
+        vuorossaOlevanNro = 0;
+        vuorossaOleva = pelaajat.get(vuorossaOlevanNro);
     }
 
     /**
