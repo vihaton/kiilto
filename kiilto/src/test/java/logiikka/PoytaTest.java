@@ -38,7 +38,7 @@ public class PoytaTest {
         pelaajat.add("homo3");
         pelaajat.add("mr Gandalf");
         Pelivelho pv = new Pelivelho();
-        pv.luoPelaajat(pelaajat);
+        pv.luoPelaajat(pelaajat, new boolean[4]);
         p = new Poyta(pv.getPelaajat());
     }
 
@@ -53,10 +53,10 @@ public class PoytaTest {
 
     @Test
     public void luoOikeanMaaranOmistuksiaAlustuksessa() {
-        assertTrue("omistuspakkoja ei ole oikeaa määrää", p.getOmistuspakat().size() == 3);
-        Omaisuus pakka1 = p.getOmistuspakat().get(0);
-        Omaisuus pakka2 = p.getOmistuspakat().get(1);
-        Omaisuus pakka3 = p.getOmistuspakat().get(2);
+        assertTrue("omistuspakkoja ei ole oikeaa määrää", p.getOmistuspakat().length == 3);
+        Omaisuus pakka1 = p.getOmistuspakat()[0];
+        Omaisuus pakka2 = p.getOmistuspakat()[1];
+        Omaisuus pakka3 = p.getOmistuspakat()[2];
         assertTrue("omistuspakassa 1 väärä määrä omistuksia", pakka1.getOmaisuudenKoko() == 40);
         assertTrue("omistuspakassa 2 väärä määrä omistuksia", pakka2.getOmaisuudenKoko() == 30);
         assertTrue("omistuspakassa 3 väärä määrä omistuksia", pakka3.getOmaisuudenKoko() == 20);
@@ -64,8 +64,8 @@ public class PoytaTest {
 
     @Test
     public void sekoittaaOmistuspakatLuotaessa() {
-        ArrayList<Omaisuus> pakat = p.getOmistuspakat();
-        Omaisuus o = pakat.get(0);
+        Omaisuus[] pakat = p.getOmistuspakat();
+        Omaisuus o = pakat[0];
         ArrayList<String> nn = o.getPaallimmaistenNimet();
 
         int x = 0;
