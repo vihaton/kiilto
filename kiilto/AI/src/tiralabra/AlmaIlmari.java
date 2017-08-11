@@ -1,6 +1,7 @@
 package tiralabra;
 
 import logiikka.*;
+import logiikka.valineluokat.Kasakokoelma;
 import tiralabra.vuorologiikka.*;
 
 /**
@@ -62,8 +63,16 @@ public class AlmaIlmari {
     }
 
     protected Vuoro arvioiPelitilanne(Pelaaja keho, Poyta poyta) {
-        Vuoro v = new Vuoro(VuoronToiminto.NOSTA);
-        v.mitaNallekarkkejaNostetaan = new int[]{0,1,1,1,0};
+        Vuoro v;
+        int karkkeja = keho.getKarkit().getKarkkienMaara();
+        if (karkkeja < 9) {
+            v = paataMitaNostetaan(keho, poyta);
+        } else if (keho.getVaraukset().size() < 3){
+            v = new Vuoro(VuoronToiminto.VARAA);
+        } else {
+            v = new Vuoro(VuoronToiminto.OSTA);
+        }
+
         v.varattavanOmaisuudenNimi = poyta.getNakyvienNimet().get(0);
         v.ostettavanOmaisuudenNimi = poyta.getNakyvienNimet().get(0);
         return v;
@@ -77,5 +86,25 @@ public class AlmaIlmari {
                         break;
             case OSTA:  pelivelho.osta(v.ostettavanOmaisuudenNimi);
         }
+    }
+
+    protected Vuoro paataMitaNostetaan(Pelaaja keho, Poyta poyta) {
+        Vuoro v = new Vuoro(VuoronToiminto.NOSTA);
+        v.mitaNallekarkkejaNostetaan = new int[]{0,0,0,0,0};
+        int nostettavia = 0;
+        Kasakokoelma markkinat = poyta.getMarkkinat();
+        while (nostettavia <= 3 && keho.getKarkit().getKarkkienMaara() + nostettavia <= 10) {
+            for (int i = 1; i < 6; i++) {
+                int karkkejaSaatavilla = markkinat.getKasanKoko(i);
+                if (karkkejaSaatavilla > 0) {
+                    v.mitaNallekarkkejaNostetaan[i-1]++;
+                    nostettavia++;
+                }
+                if (nostettavia > 2) {
+                    break;
+                }
+            }
+        }
+        return v;
     }
 }
