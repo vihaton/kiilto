@@ -44,7 +44,7 @@ public class Pelivelho {
      */
     public void pelaa() {
         poyta = new Poyta(pelaajat);
-        AI = new AlmaIlmari();
+        AI = new AlmaIlmari(this);
 
         if (onkoPelaajaAI[vuorossaOlevanNro]) {
             peluutaAInVuoro();
@@ -174,8 +174,7 @@ public class Pelivelho {
     }
 
     private void peluutaAInVuoro() {
-        System.out.println("Pelivelho kutsuu AI.ta pelaamaan vuoron pelaajalla nro " + vuorossaOlevanNro +
-                "\n" + vuorossaOleva);
+        System.out.println("Pelivelho kutsuu AI.ta pelaamaan vuoron pelaajalla nro " + vuorossaOlevanNro);
         AI.pelaaVuoro(vuorossaOleva, poyta);
     }
 
