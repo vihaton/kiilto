@@ -15,14 +15,12 @@ public class Alkuikkuna implements Runnable {
 
     private JFrame alkuvalikko;
     private final Pelivelho pelivelho;
-    private boolean[] onePlayerOthersAreAI;
 
     /**
      * Luo alkuikkunan, joka luo itselleen pelin pelivelhon.
      */
     public Alkuikkuna() {
         pelivelho = new Pelivelho();
-        onePlayerOthersAreAI = new boolean[]{false, true, true, true};
     }
 
     @Override
