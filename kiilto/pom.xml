@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>kiilto</groupId>
+
+    <groupId>org.vili.kiilto</groupId>
     <artifactId>Kiilto-the-Game</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <version>1.01</version>
+    <packaging>pom</packaging>
+    <name>Multi chapter parent project</name>
+
+    <modules>
+        <module>AI</module>
+        <module>main</module>
+        <module>logic</module>
+    </modules>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
@@ -13,73 +25,78 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.7.22</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+    </dependencies>
 
-</dependencies>
+    <build>
+      <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>2.4.3</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                    <configuration>
+                        <transformers>
+                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <mainClass>main.Main</mainClass>
+                            </transformer>
+                        </transformers>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
 
-<build>
-  <plugins>
-  	<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-shade-plugin</artifactId>
-		<version>2.4.3</version>
-		<executions>
-		    <execution>
-		        <phase>package</phase>
-		        <goals>
-		            <goal>shade</goal>
-		        </goals>
-		        <configuration>
-		            <transformers>
-		                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-		                    <mainClass>main.Main</mainClass>
-		                </transformer>
-		            </transformers>
-		        </configuration>
-		    </execution>
-		</executions>
-	</plugin>
-	
-	<plugin>
-        <groupId>org.pitest</groupId>
-        <artifactId>pitest-maven</artifactId>
-        <version>1.1.8</version>
-        <configuration>
-	        <targetClasses>
-	            <param>logiikka.*</param>
-	            <param>tiralabra.*</param>
-	        </targetClasses>
-            <targetTests>
-                <param>logiikka.*</param>
-                <param>tiralabra.*</param>
-            </targetTests>
-        </configuration>
-	</plugin>
-	
-	<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-javadoc-plugin</artifactId>
-		<version>2.10.3</version>
-	</plugin>
-	
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-checkstyle-plugin</artifactId>
-      <version>2.17</version>
-      <configuration>
-        <configLocation>checkstyle.xml</configLocation>
-      </configuration>
-    </plugin>
-    
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-jxr-plugin</artifactId>
-      <version>2.4</version>
-    </plugin> 
-  </plugins>
-</build>
+        <plugin>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-maven</artifactId>
+            <version>1.1.8</version>
+            <configuration>
+                <targetClasses>
+                    <param>java.logiikka.*</param>
+                    <param>tiralabra.*</param>
+                </targetClasses>
+                <targetTests>
+                    <param>java.logiikka.*</param>
+                    <param>tiralabra.*</param>
+                </targetTests>
+            </configuration>
+        </plugin>
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.10.3</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>2.17</version>
+          <configuration>
+            <configLocation>checkstyle.xml</configLocation>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jxr-plugin</artifactId>
+          <version>2.4</version>
+        </plugin>
+      </plugins>
+    </build>
 </project>

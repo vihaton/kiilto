@@ -1,8 +1,9 @@
 package tiralabra;
 
-import logiikka.*;
-import logiikka.omaisuusluokat.Omistus;
-import logiikka.valineluokat.Kasakokoelma;
+import javaa.Pelaaja;
+import javaa.Poyta;
+import javaa.omaisuusluokat.Omistus;
+import javaa.valineluokat.Kasakokoelma;
 import tiralabra.vuorologiikka.*;
 
 /**
@@ -12,12 +13,6 @@ import tiralabra.vuorologiikka.*;
  * On AI:n vastuulla tehdä laillisia siirtoja, tai vaihtoehtoisesti käsitellä pelivelhon huomautukset laittomista siirroista.
  */
 public class AlmaIlmari {
-
-    private Pelivelho pelivelho;
-
-    public AlmaIlmari(Pelivelho pelivelho) {
-        this.pelivelho = pelivelho;
-    }
 
     //todo AI ottaa huomioon pelissä olevat merkkihenkilöt
     //todo AI ottaa huomioon pöydällä näkyvillä olevat omistukset
@@ -57,16 +52,15 @@ public class AlmaIlmari {
      * @param keho jota AlmaIlmari ohjailee
      * @param poyta jolla näkyy tämänhetkinen pelitilanne
      */
-    public void pelaaVuoro(Pelaaja keho, Poyta poyta) {
+    public Vuoro suunnitteleVuoro(Pelaaja keho, Poyta poyta) {
         System.out.println("tekoälyn pitäisi pelata vuoro kehon puolesta:\n" + keho);
 
         //arvioidaan
         Vuoro mitaTehdaan = arvioiPelitilanne(keho, poyta);
 
-        //toimitaan
-        toteutaVuoro(mitaTehdaan);
-
         //todo AI tekee aina laillisen siirron
+
+        return mitaTehdaan;
     }
 
     /**
@@ -89,20 +83,6 @@ public class AlmaIlmari {
         v.varattavanOmistuksenNimi = poyta.getNakyvienNimet().get(0);
         v.ostettavanOmaisuudenNimi = poyta.getNakyvienNimet().get(0);
         return v;
-    }
-
-    /**
-     * implementoi vuoro olioon suunnitellun vuoron.
-     * @param v
-     */
-    protected void toteutaVuoro(Vuoro v) {
-        switch (v.toiminto) {
-            case NOSTA: pelivelho.nostaNallekarkkeja(v.mitaNallekarkkejaNostetaan);
-                        break;
-            case VARAA: pelivelho.varaa(v.varattavanOmistuksenNimi);
-                        break;
-            case OSTA:  pelivelho.osta(v.ostettavanOmaisuudenNimi);
-        }
     }
 
     /**

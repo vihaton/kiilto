@@ -1,8 +1,7 @@
 package tiralabra;
 
-import logiikka.Pelivelho;
-import logiikka.Poyta;
-import logiikka.valineluokat.Kasakokoelma;
+import javaa.Pelinpystyttaja;
+import javaa.valineluokat.Kasakokoelma;
 import org.junit.Before;
 import org.junit.Test;
 import tiralabra.vuorologiikka.Vuoro;
@@ -16,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 public class AlmaIlmariTest {
 
     private AlmaIlmari AI;
-    private Pelivelho pv;
+    private Pelinpystyttaja pp;
     private boolean[] humanAndAI = new boolean[]{false, true};
     private boolean[] twoAIs = new boolean[]{true, true};
     private boolean[] humanAndtwoAIs = new boolean[]{false, true, true};
@@ -24,16 +23,14 @@ public class AlmaIlmariTest {
 
     @Before
     public void setAI() {
-        pv = new Pelivelho();
-        pv.luoPelaajatJaAIt(humanAndtwoAIs);
-        pv.setPoyta(new Poyta(pv.getPelaajat()));
-        AI = new AlmaIlmari(pv);
+        pp = new Pelinpystyttaja(humanAndtwoAIs);
+        AI = new AlmaIlmari();
     }
 
     @Test
     public void paataMitaNostetaanTest() {
         //annetaan ensimmäinen tekoäly
-        Vuoro v = AI.paataMitaNostetaan(pv.getPelaajat().get(1), pv.getPoyta());
+        Vuoro v = AI.paataMitaNostetaan(pp.pelaajat.get(1), pp.poyta);
         assertTrue("vuoron toiminto on oikein", v.toiminto.equals(VuoronToiminto.NOSTA));
         Kasakokoelma nostetutKarkit = new Kasakokoelma(v.mitaNallekarkkejaNostetaan);
         assertTrue("on kannattavampaa nostaa kolme karkkia kuin vain kaksi, kun ei ole varauksia ja karkkeja on saatavilla.\n" +
@@ -48,9 +45,9 @@ public class AlmaIlmariTest {
 
     @Test
     public void paataMitaVarataanTest() {
-        Vuoro v = AI.paataMitaVarataan(pv.getPelaajat().get(1), pv.getPoyta());
+        Vuoro v = AI.paataMitaVarataan(pp.pelaajat.get(1), pp.poyta);
         assertTrue(v.toiminto.equals(VuoronToiminto.VARAA));
         assertTrue("varattavan omistuksen pitäisi löytyä pöydältä!",
-                pv.getPoyta().getNakyvienNimet().contains(v.varattavanOmistuksenNimi));
+                pp.poyta.getNakyvienNimet().contains(v.varattavanOmistuksenNimi));
     }
 }
