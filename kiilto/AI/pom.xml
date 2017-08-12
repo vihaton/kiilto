@@ -28,6 +28,7 @@
                 </configuration>
                 <version>2.5</version>
             </plugin>
+
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
