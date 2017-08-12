@@ -1,7 +1,7 @@
 package tiralabra;
 
-import javaa.Pelinpystyttaja;
-import javaa.valineluokat.Kasakokoelma;
+import logiikka.Pelinpystyttaja;
+import logiikka.valineluokat.Kasakokoelma;
 import org.junit.Before;
 import org.junit.Test;
 import tiralabra.vuorologiikka.Vuoro;

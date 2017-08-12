@@ -6,16 +6,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.vili.kiilto</groupId>
+        <groupId>kiilto</groupId>
         <artifactId>Kiilto-the-Game</artifactId>
         <version>1.01</version>
     </parent>
-    <artifactId>kiilto-logic</artifactId>
+    <artifactId>logic</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
     <name>Multi Chapter Logic</name>
 
     <build>
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
+
+        <resources>
+            <resource>
+                <directory>resources</directory>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -29,6 +38,14 @@
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
                 <version>1.1.8</version>
+                <configuration>
+                    <targetClasses>
+                        <param>logiikka.*</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>logiikka.*</param>
+                    </targetTests>
+                </configuration>
             </plugin>
         </plugins>
     </build>

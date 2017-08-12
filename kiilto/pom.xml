@@ -5,11 +5,11 @@
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.vili.kiilto</groupId>
+    <groupId>kiilto</groupId>
     <artifactId>Kiilto-the-Game</artifactId>
     <version>1.01</version>
     <packaging>pom</packaging>
-    <name>Multi chapter parent project</name>
+    <name>Multi Chapter Parent Project</name>
 
     <modules>
         <module>AI</module>

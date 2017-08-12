@@ -1,9 +1,9 @@
 package tiralabra;
 
-import javaa.Pelaaja;
-import javaa.Poyta;
-import javaa.omaisuusluokat.Omistus;
-import javaa.valineluokat.Kasakokoelma;
+import logiikka.Pelaaja;
+import logiikka.Poyta;
+import logiikka.omaisuusluokat.Omistus;
+import logiikka.valineluokat.Kasakokoelma;
 import tiralabra.vuorologiikka.*;
 
 /**

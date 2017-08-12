@@ -6,16 +6,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.vili.kiilto</groupId>
+        <groupId>kiilto</groupId>
         <artifactId>Kiilto-the-Game</artifactId>
         <version>1.01</version>
     </parent>
-    <artifactId>kiilto-AI</artifactId>
+    <artifactId>AI</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
     <name>Multi Chapter AI</name>
 
     <build>
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
+
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -29,14 +32,22 @@
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
                 <version>1.1.8</version>
+                <configuration>
+                    <targetClasses>
+                        <param>tiralabra.*</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>tiralabra.*</param>
+                    </targetTests>
+                </configuration>
             </plugin>
         </plugins>
     </build>
 
     <dependencies>
         <dependency>
-            <groupId>org.vili.kiilto</groupId>
-            <artifactId>kiilto-logic</artifactId>
+            <groupId>kiilto</groupId>
+            <artifactId>logic</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>
