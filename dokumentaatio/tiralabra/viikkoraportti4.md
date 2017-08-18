@@ -6,7 +6,7 @@ Perjantaina pääsin kiroilemaan muutaman kerran swingin typeryyden ja jäykkyyd
 
 Mutta samaan aikaan tällä on aloitettu joten valmiiksi on saatava. Nyt tekoälyjä vastaan pystyy pelaamaan ja tekoälyjä (pikakelauksella loppuun) peluuttamaan. Seuraavaksi (triviaalihkot) testit tekoälylle ja sitten älyä fiksuuntamaan.
 
-Myös koodikatselmoinnin tein, siitä kattavampi kuvaus kohderepon issueissa.
+Myös koodikatselmoinnin tein ajan kanssa, siitä kattavampi kuvaus kohderepon issueissa.
 
 12.8. 4h
 - säätöä moduulien kanssa
@@ -14,7 +14,7 @@ Myös koodikatselmoinnin tein, siitä kattavampi kuvaus kohderepon issueissa.
 - tekoälyn testaaminen
 - riippuvuuksien yksinkertaistaminen ja vastuiden selkeyttäminen
 
-18.8 5h
+18.8 7h
 - pit testit toimimaan koko projektiin
 - tekoäly vs tekoäly toimimaan (jäätävä swing säätö)
 - pelaaja vs tekoäly(t) toimimaan

@@ -1,12 +1,15 @@
 package tiralabra;
 
+import logiikka.Pelaaja;
 import logiikka.Pelinpystyttaja;
+import logiikka.Poyta;
 import logiikka.valineluokat.Kasakokoelma;
 import org.junit.Before;
 import org.junit.Test;
 import tiralabra.vuorologiikka.Vuoro;
 import tiralabra.vuorologiikka.VuoronToiminto;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -16,6 +19,8 @@ public class AlmaIlmariTest {
 
     private AlmaIlmari AI;
     private Pelinpystyttaja pp;
+    private Pelaaja keho;
+    private Poyta poyta;
     private boolean[] humanAndAI = new boolean[]{false, true};
     private boolean[] twoAIs = new boolean[]{true, true};
     private boolean[] humanAndtwoAIs = new boolean[]{false, true, true};
@@ -25,12 +30,30 @@ public class AlmaIlmariTest {
     public void setAI() {
         pp = new Pelinpystyttaja(humanAndtwoAIs);
         AI = new AlmaIlmari();
+        keho = pp.pelaajat.get(1);
+        poyta = pp.poyta;
+    }
+
+    @Test
+    public void suunnitteleVuoroReturnsValidVuoro() {
+        Vuoro v = AI.suunnitteleVuoro(keho, poyta);
+        assertTrue(v.toiminto != null);
+    }
+
+    @Test
+    public void onkoVaraaOstaaOmistusPoydasta() {
+        String nimi = AI.onkoVaraaOstaaOmistusPoydasta(keho, poyta);
+        assertTrue("ei oo varaa jos ei oo rahaa", nimi.equals("ei"));
+        keho.setKarkit(new int[]{5,1,1,1,1,1});
+        nimi = AI.onkoVaraaOstaaOmistusPoydasta(keho, poyta);
+        assertTrue("jos on parhaat rahat niin on aina varaa", nimi != null);
+        assertTrue("varattava omaisuus löytyy pöydästä", poyta.getNakyvienNimet().contains(nimi));
     }
 
     @Test
     public void paataMitaNostetaanTest() {
         //annetaan ensimmäinen tekoäly
-        Vuoro v = AI.paataMitaNostetaan(pp.pelaajat.get(1), pp.poyta);
+        Vuoro v = AI.paataMitaNostetaan(keho, poyta);
         assertTrue("vuoron toiminto on oikein", v.toiminto.equals(VuoronToiminto.NOSTA));
         Kasakokoelma nostetutKarkit = new Kasakokoelma(v.mitaNallekarkkejaNostetaan);
         assertTrue("on kannattavampaa nostaa kolme karkkia kuin vain kaksi, kun ei ole varauksia ja karkkeja on saatavilla.\n" +
@@ -45,9 +68,9 @@ public class AlmaIlmariTest {
 
     @Test
     public void paataMitaVarataanTest() {
-        Vuoro v = AI.paataMitaVarataan(pp.pelaajat.get(1), pp.poyta);
+        Vuoro v = AI.paataMitaVarataan(keho, poyta);
         assertTrue(v.toiminto.equals(VuoronToiminto.VARAA));
         assertTrue("varattavan omistuksen pitäisi löytyä pöydältä!",
-                pp.poyta.getNakyvienNimet().contains(v.varattavanOmistuksenNimi));
+                poyta.getNakyvienNimet().contains(v.varattavanOmistuksenNimi));
     }
 }

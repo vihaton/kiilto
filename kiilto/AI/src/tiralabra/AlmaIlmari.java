@@ -70,7 +70,7 @@ public class AlmaIlmari {
     protected Vuoro arvioiPelitilanne(Pelaaja keho, Poyta poyta) {
         Vuoro v;
         int karkkeja = keho.getKarkit().getKarkkienMaara();
-        String onkoVaraaOstaaOmistusX = onkoVaraaOstaaOmistus(keho, poyta);
+        String onkoVaraaOstaaOmistusX = onkoVaraaOstaaOmistusPoydasta(keho, poyta);
 
         if (karkkeja < 9 && poyta.getMarkkinat().getKarkkienMaara() > 3) { //ensisijaisesti rohmutaan karkkeja, jos niitä vielä on
             v = paataMitaNostetaan(keho, poyta);
@@ -120,30 +120,14 @@ public class AlmaIlmari {
      */
     protected Vuoro paataMitaVarataan(Pelaaja keho, Poyta poyta) {
         Vuoro v = new Vuoro(VuoronToiminto.VARAA);
-        v.varattavanOmistuksenNimi = koitaValitaOmistusJohonOnHetiVaraa(keho, poyta);
+        v.varattavanOmistuksenNimi = onkoVaraaOstaaOmistusPoydasta(keho, poyta);
 
         //todo valitse varattava omistus fiksummin
         //jos yhteenkään omistukseen ei heti suoraan ole varaa, otetaan pöydästä ensimmäinen joka osuu käteen
-        if (v.varattavanOmistuksenNimi == null) {
+        if (v.varattavanOmistuksenNimi.equals("ei")) {
             v.varattavanOmistuksenNimi = poyta.getNakyvienNimet().get(0);
         }
         return v;
-    }
-
-    /**
-     *
-     * @param keho jota ohjaillaan
-     * @param poyta jolla pelataan
-     * @return pöydällä olevan omistuksen nimi, minkä voisi heti olemassa olevilla varoilla lunastaa, null jos sellaista ei ole.
-     */
-    protected String koitaValitaOmistusJohonOnHetiVaraa(Pelaaja keho, Poyta poyta) {
-        //todo tämä on fiksuinta testata mockaamalla, mockito maven depencyihin
-        for (Omistus o : poyta.getNakyvatOmistukset()) {
-            if (keho.onkoVaraa(o)) {
-                return o.getNimi();
-            }
-        }
-        return null;
     }
 
     /**
@@ -152,7 +136,7 @@ public class AlmaIlmari {
      * @param poyta jolla pelataan
      * @return String "ei", jos ei ole varaa ostaa omistusta, muuten ostettavan omaisuuden nimi.
      */
-    protected String onkoVaraaOstaaOmistus(Pelaaja keho, Poyta poyta) {
+    protected String onkoVaraaOstaaOmistusPoydasta(Pelaaja keho, Poyta poyta) {
         String nimi = "ei";
         for (Omistus o : poyta.getNakyvatOmistukset()) {
             if (keho.onkoVaraa(o)) {
