@@ -54,12 +54,19 @@ public class AlmaIlmari {
      */
     public Vuoro suunnitteleVuoro(Pelaaja keho, Poyta poyta) {
         System.out.println("tekoälyn pitäisi pelata vuoro kehon puolesta:\n" + keho);
-
+        Long start = System.currentTimeMillis();
         //arvioidaan
         Vuoro mitaTehdaan = arvioiPelitilanne(keho, poyta);
 
         //todo AI tekee aina laillisen siirron
-
+        Long ready = System.currentTimeMillis();
+        if (ready - start < 1e6) {
+            try {
+                Thread.sleep(ready - start);
+            } catch (Exception e) {
+                System.out.println("Exception @ AI, thread sleep:\n" + e);
+            }
+        }
         return mitaTehdaan;
     }
 
