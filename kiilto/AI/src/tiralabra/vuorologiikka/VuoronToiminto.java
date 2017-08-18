@@ -7,7 +7,8 @@ public enum VuoronToiminto {
 
     NOSTA("nosta"),
     VARAA("varaa"),
-    OSTA("osta");
+    OSTA("osta"),
+    ENTEEMITAAN("en tee mitään");
 
     private final String toiminto;
 

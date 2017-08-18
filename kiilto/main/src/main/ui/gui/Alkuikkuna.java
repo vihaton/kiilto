@@ -48,9 +48,15 @@ public class Alkuikkuna implements Runnable {
         JLabel pelaajia = new JLabel("Kuinka monen pelaajan pelin haluaisit pelata?");
         pelaajia.setHorizontalAlignment(JLabel.CENTER);
 
-        final JButton kaksiPelaa = new JButton("Kaksin aina kaunihimpi");
-        final JButton kolmePelaa = new JButton("Kolmin selvästi kovempi");
-        final JButton neljaPelaa = new JButton("Nelistään, saa eniten nautintoa, pelistään");
+        //final JButton kaksiPelaa = new JButton("Kaksin aina kaunihimpi");
+        final JButton kaksiPelaa = new JButton("AI vs AI");
+
+        //final JButton kolmePelaa = new JButton("Kolmin selvästi kovempi");
+        //final JButton kolmePelaa = new JButton("AI vs AI vs AI");
+        final JButton kolmePelaa = new JButton("Player vs AI vs AI");
+
+        //final JButton neljaPelaa = new JButton("Nelistään, saa eniten nautintoa, pelistään");
+        final JButton neljaPelaa = new JButton("Player and 3 AIs");
         final JButton lopeta = new JButton("Lopeta sekoilu, kiitos!");
 
         /*
@@ -58,7 +64,7 @@ public class Alkuikkuna implements Runnable {
 
          -mahdollisuus syöttää pelaajien nimet tekstikenttiin
          */
-        lisaaKuuntelijaPelinaloitusnappulalle(kaksiPelaa, 2, kuinkaMontaIhmistaJaAlya(1,1));
+        lisaaKuuntelijaPelinaloitusnappulalle(kaksiPelaa, 2, kuinkaMontaIhmistaJaAlya(0,2));
         lisaaKuuntelijaPelinaloitusnappulalle(kolmePelaa, 3, kuinkaMontaIhmistaJaAlya(1,2));
         lisaaKuuntelijaPelinaloitusnappulalle(neljaPelaa, 4, kuinkaMontaIhmistaJaAlya(1,3));
         lisaaKuuntelijaLopetaNapille(lopeta);

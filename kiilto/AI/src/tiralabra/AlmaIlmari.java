@@ -54,19 +54,10 @@ public class AlmaIlmari {
      */
     public Vuoro suunnitteleVuoro(Pelaaja keho, Poyta poyta) {
         System.out.println("tekoälyn pitäisi pelata vuoro kehon puolesta:\n" + keho);
-        Long start = System.currentTimeMillis();
         //arvioidaan
         Vuoro mitaTehdaan = arvioiPelitilanne(keho, poyta);
 
         //todo AI tekee aina laillisen siirron
-        Long ready = System.currentTimeMillis();
-        if (ready - start < 1e6) {
-            try {
-                Thread.sleep(ready - start);
-            } catch (Exception e) {
-                System.out.println("Exception @ AI, thread sleep:\n" + e);
-            }
-        }
         return mitaTehdaan;
     }
 
@@ -79,16 +70,19 @@ public class AlmaIlmari {
     protected Vuoro arvioiPelitilanne(Pelaaja keho, Poyta poyta) {
         Vuoro v;
         int karkkeja = keho.getKarkit().getKarkkienMaara();
-        if (karkkeja < 9) {
+        String onkoVaraaOstaaOmistusX = onkoVaraaOstaaOmistus(keho, poyta);
+
+        if (karkkeja < 9 && poyta.getMarkkinat().getKarkkienMaara() > 3) { //ensisijaisesti rohmutaan karkkeja, jos niitä vielä on
             v = paataMitaNostetaan(keho, poyta);
-        } else if (keho.getVaraukset().size() < 3){
+        } else if (keho.getVaraukset().size() < 3){ //toissijaisesti varataan lisää omistuksia pöydästä
             v = paataMitaVarataan(keho, poyta);
-        } else {
+        } else if (!onkoVaraaOstaaOmistusX.equals("ei")) { //kolmas vaihtoehto on ostaa omistuksia
             v = new Vuoro(VuoronToiminto.OSTA);
+            v.ostettavanOmaisuudenNimi = onkoVaraaOstaaOmistusX;
+        } else {
+            v = new Vuoro(VuoronToiminto.ENTEEMITAAN);
         }
 
-        v.varattavanOmistuksenNimi = poyta.getNakyvienNimet().get(0);
-        v.ostettavanOmaisuudenNimi = poyta.getNakyvienNimet().get(0);
         return v;
     }
 
@@ -150,5 +144,21 @@ public class AlmaIlmari {
             }
         }
         return null;
+    }
+
+    /**
+     *
+     * @param keho jota ohjataan
+     * @param poyta jolla pelataan
+     * @return String "ei", jos ei ole varaa ostaa omistusta, muuten ostettavan omaisuuden nimi.
+     */
+    protected String onkoVaraaOstaaOmistus(Pelaaja keho, Poyta poyta) {
+        String nimi = "ei";
+        for (Omistus o : poyta.getNakyvatOmistukset()) {
+            if (keho.onkoVaraa(o)) {
+                nimi = o.getNimi();
+            }
+        }
+        return nimi;
     }
 }
