@@ -34,10 +34,10 @@
                 <version>1.1.8</version>
                 <configuration>
                     <targetClasses>
-                        <param>main.*</param>
+                        <param>main.Pelivelho</param>
                     </targetClasses>
                     <targetTests>
-                        <param>main.*</param>
+                        <param>main.PelivelhoTest</param>
                     </targetTests>
                 </configuration>
             </plugin>
