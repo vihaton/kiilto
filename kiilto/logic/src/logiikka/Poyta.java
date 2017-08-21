@@ -15,7 +15,7 @@ import java.util.*;
 public class Poyta {
 
     private final ArrayList<Pelaaja> pelaajat;
-    private final Kasakokoelma karkkimarkkinat;
+    private Kasakokoelma karkkimarkkinat;
     private Omaisuus[] omistuspakat;
     private final Random arpoja = new Random();
     private final ArrayList<Merkkihenkilo> merkkihenkilot;
@@ -96,6 +96,11 @@ public class Poyta {
         Kasakokoelma hinta = new Kasakokoelma(palat);
         return new Omistus(palat[0], Integer.parseInt(palat[1]), palat[2], hinta);
     }
+
+    public void setKarkkimarkkinat(Kasakokoelma karkkimarkkinat) {
+        this.karkkimarkkinat = karkkimarkkinat;
+    }
+
 
     public Kasakokoelma getMarkkinat() {
         return karkkimarkkinat;
@@ -264,6 +269,16 @@ public class Poyta {
             return pelaaja.ostaVaraus(o, karkkimarkkinat);
         }
         return false;
+    }
+
+    /**
+     *
+     * @param pelaaja joka varaa
+     * @param varauksenNimi
+     * @return boolean, onnistuiko varaus
+     */
+    public boolean teeVaraus(Pelaaja pelaaja, String varauksenNimi) {
+        return teeVaraus(pelaaja, Integer.parseInt(varauksenNimi));
     }
 
     /**

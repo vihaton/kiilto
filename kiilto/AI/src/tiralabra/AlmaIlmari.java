@@ -56,13 +56,17 @@ public class AlmaIlmari {
         if (!kadestaOstettavanNimi.equals("ei")) {//lunastetaan varaus kädestä
             v = new Vuoro(VuoronToiminto.OSTA);
             v.ostettavanOmaisuudenNimi = kadestaOstettavanNimi;
-        } else if (karkkeja < 9 && poyta.getMarkkinat().getKarkkienMaara() > 3) { //rohmutaan karkkeja, jos niitä saadaan kolme kerralla
+        } else if (karkkeja < 8 && poyta.getMarkkinat().getKarkkienMaara() > 3) { //rohmutaan karkkeja, jos niitä saadaan kolme kerralla
             v = paataMitaNostetaan(keho, poyta);
-        } else if (keho.getVaraukset().size() < 3){ //varataan lisää omistuksia pöydästä
+        } else if (keho.getVaraukset().size() < 3 && karkkeja < 10 && poyta.getMarkkinat().getKasanKoko(0) != 0){ //varataan lisää omistuksia pöydästä jos kultakarkkeja on saatavilla ja ne mahtuvat käteen
             v = paataMitaVarataan(keho, poyta);
         } else if (!poydastaOstettavanNimi.equals("ei")) { //ostetaan omistuksia pöydästä, jos on varaa
             v = new Vuoro(VuoronToiminto.OSTA);
             v.ostettavanOmaisuudenNimi = poydastaOstettavanNimi;
+        } else if (keho.getVaraukset().size() < 3) { //jos ei ollut varaa ostaa mitään, niin varataan sitten
+            v = paataMitaVarataan(keho, poyta);
+        } else if (karkkeja < 10 && poyta.getMarkkinat().getKarkkienMaara() > 0) { //jos on karkkeja mitä nostaa
+            v = paataMitaNostetaan(keho, poyta);
         } else {
             v = new Vuoro(VuoronToiminto.ENTEEMITAAN);
         }
@@ -101,7 +105,7 @@ public class AlmaIlmari {
             return v;
         else if (nostetaan == 1) { //valittuna on yksi, eli muut kasat ovat olleet tyhjiä ja pelaajalla on vielä tilaa nostaa
             for (int i = 1; i < 6; i++) {
-                if (markkinat.getKasanKoko(i) > 2) { //kasassa on oltava 4 karkkia, että siitä voi nostaa 2 samanväristä
+                if (markkinat.getKasanKoko(i) > 3) { //kasassa on oltava aluksi väh. 4 karkkia, että siitä voi nostaa 2 samanväristä
                     v.mitaNallekarkkejaNostetaan[i]++;
                     return v;
                 }
