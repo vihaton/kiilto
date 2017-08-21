@@ -19,7 +19,7 @@ public class AlmaIlmari {
     //todo AI ottaa huomioon pöydällä näkyvillä olevat omistukset
 
     /**
-     * AI pelaa vuoron pelaajan puolesta, kuten oikeakin pelaaja (eli kutsuu pelivelhon metodeita toiminnan mukaan).
+     * AI suunnittelee pelaajalle vuoron pelaajan ja pöydän tilanteen mukaan.
      *
      * Pseudo idea:
      *
@@ -39,49 +39,28 @@ public class AlmaIlmari {
      *          -potentiaalisten ostosten sopivuus nykyiseen omistusprofiiliin & nallekarkkeihin?
      *          -tulevan omistusprofiilin linjaus merkkihenkilön viekotteluun?
      *
-     * käytä vuoro
-     *      -nosta karkkeja
-     *      -varaa omaisuutta
-     *      -osta omaisuutta
-     *          -pöydästä
-     *          -kädestä
-     *
      * tilanteen arviointi ja vuoron toteuttaminen on eriytetty,
      * jotta tulevaisuudessa edistyneempi tekoäly pystyisi harkitsemaan
      * eri vaihtoehtoja vapaammin.
      *
      * @param keho jota AlmaIlmari ohjailee
      * @param poyta jolla näkyy tämänhetkinen pelitilanne
+     * @return suoritettavan vuoron käsikirjoitus
      */
     public Vuoro suunnitteleVuoro(Pelaaja keho, Poyta poyta) {
-        //System.out.println("tekoälyn pitäisi pelata vuoro kehon puolesta:\n" + keho);
-        //arvioidaan
-        Vuoro mitaTehdaan = arvioiPelitilanne(keho, poyta);
-
-        //todo AI tekee aina laillisen siirron
-        return mitaTehdaan;
-    }
-
-    /**
-     *
-     * @param keho jota ohjataan
-     * @param poyta jolla pelataan
-     * @return suunnitelman toteutettavasta vuorosta
-     */
-    protected Vuoro arvioiPelitilanne(Pelaaja keho, Poyta poyta) {
         Vuoro v;
         int karkkeja = keho.getKarkit().getKarkkienMaara();
         String poydastaOstettavanNimi = onkoVaraaOstaaOmistusPoydasta(keho, poyta);
         String kadestaOstettavanNimi = onkoVaraaOstaaOmistusVarauksista(keho);
 
-        if (!kadestaOstettavanNimi.equals("ei")) {
+        if (!kadestaOstettavanNimi.equals("ei")) {//lunastetaan varaus kädestä
             v = new Vuoro(VuoronToiminto.OSTA);
             v.ostettavanOmaisuudenNimi = kadestaOstettavanNimi;
-        } else if (karkkeja < 9 && poyta.getMarkkinat().getKarkkienMaara() > 3) { //ensisijaisesti rohmutaan karkkeja, jos niitä vielä on
+        } else if (karkkeja < 9 && poyta.getMarkkinat().getKarkkienMaara() > 3) { //rohmutaan karkkeja, jos niitä saadaan kolme kerralla
             v = paataMitaNostetaan(keho, poyta);
-        } else if (keho.getVaraukset().size() < 3){ //toissijaisesti varataan lisää omistuksia pöydästä
+        } else if (keho.getVaraukset().size() < 3){ //varataan lisää omistuksia pöydästä
             v = paataMitaVarataan(keho, poyta);
-        } else if (!poydastaOstettavanNimi.equals("ei")) { //kolmas vaihtoehto on ostaa omistuksia
+        } else if (!poydastaOstettavanNimi.equals("ei")) { //ostetaan omistuksia pöydästä, jos on varaa
             v = new Vuoro(VuoronToiminto.OSTA);
             v.ostettavanOmaisuudenNimi = poydastaOstettavanNimi;
         } else {
@@ -100,20 +79,35 @@ public class AlmaIlmari {
     protected Vuoro paataMitaNostetaan(Pelaaja keho, Poyta poyta) {
         Vuoro v = new Vuoro(VuoronToiminto.NOSTA);
         v.mitaNallekarkkejaNostetaan = new int[]{0,0,0,0,0,0};
-        int nostettavia = 0;
         Kasakokoelma markkinat = poyta.getMarkkinat();
-        while (nostettavia < 3 && keho.getKarkit().getKarkkienMaara() + nostettavia < 10) {
+
+        //jos karkkeja on 7 tai vähemmän, voidaan nostaa 3 eriväristä karkkia, muuten nostettavana on 10-määrä
+        int tilaaNostaa = keho.getKarkit().getKarkkienMaara() < 8 ? 3 : 10 - keho.getKarkit().getKarkkienMaara();
+        int nostetaan = 0;
+        for (int i = 1; i < 6; i++) { //kasoille mistä voi nostaa
+            int karkkejaSaatavilla = markkinat.getKasanKoko(i);
+            if (karkkejaSaatavilla > 0) {
+                v.mitaNallekarkkejaNostetaan[i]++;
+                tilaaNostaa--;
+                nostetaan++;
+            }
+            if (tilaaNostaa == 0) {
+                return v;
+            }
+        }
+        //karkkikasoista ei saanut kolmea eriväristä karkkia.
+
+        if (nostetaan == 2) //valittuna on jo kaksi, otetaan ne
+            return v;
+        else if (nostetaan == 1) { //valittuna on yksi, eli muut kasat ovat olleet tyhjiä ja pelaajalla on vielä tilaa nostaa
             for (int i = 1; i < 6; i++) {
-                int karkkejaSaatavilla = markkinat.getKasanKoko(i);
-                if (karkkejaSaatavilla > 0) {
+                if (markkinat.getKasanKoko(i) > 2) { //kasassa on oltava 4 karkkia, että siitä voi nostaa 2 samanväristä
                     v.mitaNallekarkkejaNostetaan[i]++;
-                    nostettavia++;
-                }
-                if (nostettavia > 2) {
-                    break;
+                    return v;
                 }
             }
         }
+
         return v;
     }
 
