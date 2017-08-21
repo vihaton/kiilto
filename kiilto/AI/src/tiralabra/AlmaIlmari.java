@@ -3,6 +3,7 @@ package tiralabra;
 import logiikka.Pelaaja;
 import logiikka.Poyta;
 import logiikka.omaisuusluokat.Omistus;
+import logiikka.omaisuusluokat.Varaus;
 import logiikka.valineluokat.Kasakokoelma;
 import tiralabra.vuorologiikka.*;
 
@@ -53,7 +54,7 @@ public class AlmaIlmari {
      * @param poyta jolla näkyy tämänhetkinen pelitilanne
      */
     public Vuoro suunnitteleVuoro(Pelaaja keho, Poyta poyta) {
-        System.out.println("tekoälyn pitäisi pelata vuoro kehon puolesta:\n" + keho);
+        //System.out.println("tekoälyn pitäisi pelata vuoro kehon puolesta:\n" + keho);
         //arvioidaan
         Vuoro mitaTehdaan = arvioiPelitilanne(keho, poyta);
 
@@ -70,15 +71,19 @@ public class AlmaIlmari {
     protected Vuoro arvioiPelitilanne(Pelaaja keho, Poyta poyta) {
         Vuoro v;
         int karkkeja = keho.getKarkit().getKarkkienMaara();
-        String onkoVaraaOstaaOmistusX = onkoVaraaOstaaOmistusPoydasta(keho, poyta);
+        String poydastaOstettavanNimi = onkoVaraaOstaaOmistusPoydasta(keho, poyta);
+        String kadestaOstettavanNimi = onkoVaraaOstaaOmistusVarauksista(keho);
 
-        if (karkkeja < 9 && poyta.getMarkkinat().getKarkkienMaara() > 3) { //ensisijaisesti rohmutaan karkkeja, jos niitä vielä on
+        if (!kadestaOstettavanNimi.equals("ei")) {
+            v = new Vuoro(VuoronToiminto.OSTA);
+            v.ostettavanOmaisuudenNimi = kadestaOstettavanNimi;
+        } else if (karkkeja < 9 && poyta.getMarkkinat().getKarkkienMaara() > 3) { //ensisijaisesti rohmutaan karkkeja, jos niitä vielä on
             v = paataMitaNostetaan(keho, poyta);
         } else if (keho.getVaraukset().size() < 3){ //toissijaisesti varataan lisää omistuksia pöydästä
             v = paataMitaVarataan(keho, poyta);
-        } else if (!onkoVaraaOstaaOmistusX.equals("ei")) { //kolmas vaihtoehto on ostaa omistuksia
+        } else if (!poydastaOstettavanNimi.equals("ei")) { //kolmas vaihtoehto on ostaa omistuksia
             v = new Vuoro(VuoronToiminto.OSTA);
-            v.ostettavanOmaisuudenNimi = onkoVaraaOstaaOmistusX;
+            v.ostettavanOmaisuudenNimi = poydastaOstettavanNimi;
         } else {
             v = new Vuoro(VuoronToiminto.ENTEEMITAAN);
         }
@@ -141,6 +146,21 @@ public class AlmaIlmari {
         for (Omistus o : poyta.getNakyvatOmistukset()) {
             if (keho.onkoVaraa(o)) {
                 nimi = o.getNimi();
+            }
+        }
+        return nimi;
+    }
+
+    /**
+     *
+     * @param keho jota ohjataan
+     * @return String "ei", jos ei ole varaa, muuten kyseisen omistuksen nimi.
+     */
+    protected String onkoVaraaOstaaOmistusVarauksista(Pelaaja keho) {
+        String nimi = "ei";
+        for (Varaus v : keho.getVaraukset()) {
+            if (keho.onkoVaraa(v.getOmistus())) {
+                nimi = v.getOmistus().getNimi();
             }
         }
         return nimi;

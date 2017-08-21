@@ -55,6 +55,7 @@ public class Pelivelho {
         if (pp.onkoPelaajaAI[vuorossaOlevanNro]) {
             while (peliJatkuu) {
                 peluutaSeuraavatTekoalyt();
+                //nuku(100); doesn't work as intented
             }
         }
     }
@@ -69,9 +70,16 @@ public class Pelivelho {
             peluutaAInVuoro();
             Long ready = System.currentTimeMillis();
             System.out.println("AI took " + (ready - start) + "ms\n");
-            //kayttoliittyma.repaint();
 
             seuraavaPelaajanVuoro();
+        }
+    }
+
+    private void nuku(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
@@ -148,7 +156,7 @@ public class Pelivelho {
     }
 
     private void peluutaAInVuoro() {
-        System.out.println("Pelivelho kutsuu AI.ta pelaamaan vuoron pelaajalla nro " + vuorossaOlevanNro);
+        System.out.println("Pelivelho kutsuu AI.ta suunnittelemaan vuoron pelaajalla nro " + vuorossaOlevanNro + ", arvovaltaa " + vuorossaOleva.getArvovalta());
         Vuoro v = AI.suunnitteleVuoro(vuorossaOleva, pp.poyta);
 
         switch (v.toiminto) {
@@ -161,7 +169,7 @@ public class Pelivelho {
             case ENTEEMITAAN:
                 System.out.println("\t\tAI nro " + vuorossaOlevanNro + " ei osannut tehdä mitään!");
         }
-        System.out.println("\tAIn nro " + vuorossaOlevanNro + " vuoro on ohi\n");
+        System.out.println("\tAIn nro " + vuorossaOlevanNro + " vuoro on ohi, arvovaltaa nyt " + vuorossaOleva.getArvovalta() + "\n");
     }
 
     /**
