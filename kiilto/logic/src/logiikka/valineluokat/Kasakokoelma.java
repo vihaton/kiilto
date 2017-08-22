@@ -150,4 +150,18 @@ public class Kasakokoelma {
     public Nallekarkkikasa getKasa(int i) {
         return kasat[i];
     }
+
+    /**
+     *
+     * @return lue nimi
+     */
+    public int kuinkaMonessaTavallisessaKasassaOnKarkkeja() {
+        int kuinkaMonessaKasassa = 0;
+        for (int i = 1; i < 6; i++) {
+            if (getKasanKoko(i) > 0) {
+                kuinkaMonessaKasassa++;
+            }
+        }
+        return kuinkaMonessaKasassa;
+    }
 }

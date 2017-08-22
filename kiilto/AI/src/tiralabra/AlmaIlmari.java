@@ -52,12 +52,13 @@ public class AlmaIlmari {
         int karkkeja = keho.getKarkit().getKarkkienMaara();
         String poydastaOstettavanNimi = onkoVaraaOstaaOmistusPoydasta(keho, poyta);
         String kadestaOstettavanNimi = onkoVaraaOstaaOmistusVarauksista(keho);
+        int kuinkaMontaVoidaanNostaaKerralla = kuinkaMontaKarkkiaVoiNostaaKerralla(poyta);
 
         if (!kadestaOstettavanNimi.equals("ei")) {//lunastetaan varaus kädestä
             v = new Vuoro(VuoronToiminto.OSTA);
             v.ostettavanOmaisuudenNimi = kadestaOstettavanNimi;
-        } else if (karkkeja < 8 && poyta.getMarkkinat().getKarkkienMaara() > 3) { //rohmutaan karkkeja, jos niitä saadaan kolme kerralla
-            v = paataMitaNostetaan(keho, poyta);
+        } else if (karkkeja < 8 && kuinkaMontaVoidaanNostaaKerralla == 3) { //rohmutaan karkkeja, jos niitä saadaan kolme kerralla
+            v = paataMitaNostetaan(keho, poyta, kuinkaMontaVoidaanNostaaKerralla);
         } else if (keho.getVaraukset().size() < 3 && karkkeja < 10 && poyta.getMarkkinat().getKasanKoko(0) != 0){ //varataan lisää omistuksia pöydästä jos kultakarkkeja on saatavilla ja ne mahtuvat käteen
             v = paataMitaVarataan(keho, poyta);
         } else if (!poydastaOstettavanNimi.equals("ei")) { //ostetaan omistuksia pöydästä, jos on varaa
@@ -65,8 +66,8 @@ public class AlmaIlmari {
             v.ostettavanOmaisuudenNimi = poydastaOstettavanNimi;
         } else if (keho.getVaraukset().size() < 3) { //jos ei ollut varaa ostaa mitään, niin varataan sitten
             v = paataMitaVarataan(keho, poyta);
-        } else if (karkkeja < 10 && poyta.getMarkkinat().getKarkkienMaara() > 0) { //jos on karkkeja mitä nostaa
-            v = paataMitaNostetaan(keho, poyta);
+        } else if (karkkeja < 10 && kuinkaMontaVoidaanNostaaKerralla > 0) { //jos on karkkeja mitä nostaa
+            v = paataMitaNostetaan(keho, poyta, kuinkaMontaVoidaanNostaaKerralla);
         } else {
             v = new Vuoro(VuoronToiminto.ENTEEMITAAN);
         }
@@ -76,14 +77,49 @@ public class AlmaIlmari {
 
     /**
      *
+     * @param poyta jolla pelataan
+     * @return int kuinka monta karkkia voidaan maksimissaan nostaa vuorolla
+     */
+    protected int kuinkaMontaKarkkiaVoiNostaaKerralla(Poyta poyta) {
+        Kasakokoelma markkinat = poyta.getMarkkinat();
+        int kultaisia = markkinat.getKasanKoko(0);
+        int yhteensa = markkinat.getKarkkienMaara();
+        int kuinkaMonessaKasassa = markkinat.kuinkaMonessaTavallisessaKasassaOnKarkkeja();
+
+        if (kultaisia == yhteensa) {
+            return 0;
+        } else if (yhteensa - kultaisia < 4 && kuinkaMonessaKasassa == 1) {
+            return 1;
+        } else if ((kuinkaMonessaKasassa == 1 && yhteensa - kultaisia > 3) || kuinkaMonessaKasassa == 2) {
+            return 2;
+        } else
+            return 3;
+    }
+
+    /**
+     *
      * @param keho mitä ohjataan
      * @param poyta millä pelataan
      * @return Vuoro-olio, johon on paketoitu mitä nallekarkkeja pitäisi nostaa
      */
     protected Vuoro paataMitaNostetaan(Pelaaja keho, Poyta poyta) {
+        return paataMitaNostetaan(keho, poyta, -1);
+    }
+
+    /**
+     *
+     * @param keho mitä ohjataan
+     * @param poyta millä pelataan
+     * @param kuinkaMontaVoidaanNostaaKerralla
+     * @return Vuoro-olio, johon on paketoitu mitä nallekarkkeja pitäisi nostaa
+     */
+    protected Vuoro paataMitaNostetaan(Pelaaja keho, Poyta poyta, int kuinkaMontaVoidaanNostaaKerralla) {
         Vuoro v = new Vuoro(VuoronToiminto.NOSTA);
         v.mitaNallekarkkejaNostetaan = new int[]{0,0,0,0,0,0};
         Kasakokoelma markkinat = poyta.getMarkkinat();
+        if (kuinkaMontaVoidaanNostaaKerralla == -1) { //undefined
+            kuinkaMontaVoidaanNostaaKerralla = kuinkaMontaKarkkiaVoiNostaaKerralla(poyta);
+        }
 
         //jos karkkeja on 7 tai vähemmän, voidaan nostaa 3 eriväristä karkkia, muuten nostettavana on 10-määrä
         int tilaaNostaa = keho.getKarkit().getKarkkienMaara() < 8 ? 3 : 10 - keho.getKarkit().getKarkkienMaara();

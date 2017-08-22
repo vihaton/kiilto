@@ -10,7 +10,6 @@ import tiralabra.vuorologiikka.Vuoro;
 import tiralabra.vuorologiikka.VuoronToiminto;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
 
 /**
  * Created by vili on 11.8.2017.
@@ -60,6 +59,38 @@ public class AlmaIlmariTest {
         keho.setKarkit(new int[]{5,1,1,1,1,1});
         nimi = AI.onkoVaraaOstaaOmistusVarauksista(keho);
         assertTrue("maksimikarkeilla pitää olla varaa ostaa mikä tahansa 1 pakan omistus", !nimi.equals("ei"));
+    }
+
+    @Test
+    public void kuinkaMontaKarkkiaVoiNostaaTest() {
+        int[][] markkinatilanteet0 = {
+                {4,0,0,0,0,0},
+                {0,0,0,0,0,0}
+        };
+        int[] markkinatilanne1 = new int[]{0,3,0,0,0,0};
+        int[][] markkinatilanteet2 = {
+                {0,0,0,0,5,0},
+                {0,0,0,5,5,0},
+                {0,0,0,5,1,0},
+                {4,0,0,4,4,0}
+        };
+        int[] markkinatilanne3 = new int[]{0,1,1,1,0,0};
+
+        for (int i = 0; i < markkinatilanteet0.length; i++) {
+            poyta.setKarkkimarkkinat(new Kasakokoelma(markkinatilanteet0[i]));
+            assertTrue(AI.kuinkaMontaKarkkiaVoiNostaaKerralla(poyta) == 0);
+        }
+
+        poyta.setKarkkimarkkinat(new Kasakokoelma(markkinatilanne1));
+        assertTrue(AI.kuinkaMontaKarkkiaVoiNostaaKerralla(poyta) == 1);
+
+        for (int i = 0; i < markkinatilanteet2.length; i++) {
+            poyta.setKarkkimarkkinat(new Kasakokoelma(markkinatilanteet2[i]));
+            assertTrue(AI.kuinkaMontaKarkkiaVoiNostaaKerralla(poyta) == 2);
+        }
+
+        poyta.setKarkkimarkkinat(new Kasakokoelma(markkinatilanne3));
+        assertTrue(AI.kuinkaMontaKarkkiaVoiNostaaKerralla(poyta) == 3);
     }
 
     @Test
@@ -130,7 +161,6 @@ public class AlmaIlmariTest {
         v = AI.suunnitteleVuoro(keho, poyta);
         assertTrue(v.toiminto == VuoronToiminto.VARAA);
         assertTrue("annettu nimi on validi",poyta.teeVaraus(keho, v.varattavanOmistuksenNimi));
-        assertTrue("varataan ensisijaisesti sellainen omistus, johon olisi varaa", keho.onkoVaraa(keho.getVaraukset().get(0).getOmistus()));
 
         //karkkeja ei mahdu enää hamstraamaan, joten ostetaan jotain!
         v = AI.suunnitteleVuoro(keho, poyta);
@@ -143,5 +173,23 @@ public class AlmaIlmariTest {
         v = AI.suunnitteleVuoro(keho, poyta);
         assertTrue(v.toiminto == VuoronToiminto.OSTA);
         assertTrue("nimi oli validi", poyta.suoritaOsto(keho, Integer.parseInt(v.ostettavanOmaisuudenNimi)));
+
+        keho.setKarkit(new int[]{0,0,0,0,0,0});
+        poyta.setKarkkimarkkinat(new Kasakokoelma(new int[]{0,0,0,0,0,0}));
+        //ollaan köyhiä kuin opiskelija ja markkinoilla on yhtä paljon karkkia kuin suoritusotteella opintopisteitä
+        v = AI.suunnitteleVuoro(keho, poyta);
+        assertTrue("ei ole varaa ostaa mitään, pöydässä ei ole mitä nostaa, ei varata koska ei saada kultaa mutta varataan sitten kuitenkin kun mitään muuta ei saada tehtyä",
+                v.toiminto == VuoronToiminto.VARAA);
+        assertTrue("nimi oli validi", poyta.teeVaraus(keho, v.varattavanOmistuksenNimi));
+        assertTrue("kultaa ei saatu koska sitä ei ole jaossa", keho.getKarkit().getKasanKoko(0) == 0);
+
+        poyta.teeVaraus(keho, poyta.getNakyvienNimet().get(0));
+        poyta.teeVaraus(keho, poyta.getNakyvienNimet().get(0));
+        poyta.setKarkkimarkkinat(new Kasakokoelma(new int[]{0,3,0,0,0,0}));
+        //nyt pelaajalla on kolme varausta, ei yhtään karkkia, pöydästä voi nostaa < 3 karkkia kerralla
+        v = AI.suunnitteleVuoro(keho, poyta);
+        assertTrue("ei voida ostaa, nostaa kolmea karkkia tai varata, joten nostetaan mitä voidaan",
+                v.toiminto == VuoronToiminto.NOSTA);
+        assertTrue("nostettiin yksi karkki, koska säännöt", new Kasakokoelma(v.mitaNallekarkkejaNostetaan).getKarkkienMaara() == 1);
     }
 }
