@@ -5,13 +5,13 @@ import java.util.*;
 import main.ui.gui.Kayttoliittyma;
 import main.ui.gui.Valintanapit;
 import logiikka.*;
-import logiikka.valineluokat.Kasakokoelma;
 import tiralabra.AlmaIlmari;
+import tiralabra.iterointi.Peluuttaja;
 import tiralabra.vuorologiikka.Vuoro;
 
 /**
- * Luokka vastaa pelin pyörittämisestä. Puuttuva linkki logiikka- ja main-moduulien välillä. Vastaa vuorojen
- * organisoimisesta sekä logiikka - gui rajapintana toimimisesta.
+ * Luokka vastaa pelin pyörittämisestä. Puuttuva linkki logiikka- ja main-moduulien välillä.
+ * Vastaa logiikka - gui rajapintana toimimisesta.
  *
  * @author xvixvi
  */
@@ -19,26 +19,16 @@ public class Pelivelho {
 
     private Kayttoliittyma kayttoliittyma;
     private Valintanapit valintanapit;
-    private final int voittoValta;
-    private int kierros;
     private Pelinpystyttaja pp;
+    private Peluuttaja koutsi;
     private ArrayList<Pelaaja> pelaajat;
-    private Pelaaja vuorossaOleva;              //nimetään ensimmäisen kerran pelaajien luomisen yhteydessä.
-    private int vuorossaOlevanNro;
-    private AlmaIlmari AI;
-    private boolean peliJatkuu;
-    private final Long AITurnDuration = 1000l;   //ms
 
     /**
      * Luo pelivelhon.
      */
     public Pelivelho() {
         pelaajat = new ArrayList<>();
-        voittoValta = 15;
-        kierros = 1;
-        vuorossaOleva = null;
         valintanapit = null;
-        peliJatkuu = true;
     }
 
     /**
@@ -46,40 +36,17 @@ public class Pelivelho {
      * määritellä ennen tämän metodin suorittamista!
      */
     public void pelaa() {
-        AI = new AlmaIlmari();
+        koutsi = new Peluuttaja(pp);
 
-//        kierros = poyta.luoTestattavaPelitilanne(5);
+        pp.kierros = pp.poyta.luoTestattavaPelitilanne(5);
         kayttoliittyma = new Kayttoliittyma(this);
         kayttoliittyma.run();
 
-        if (pp.onkoPelaajaAI[vuorossaOlevanNro]) {
-            while (peliJatkuu) {
-                peluutaSeuraavatTekoalyt();
-                //nuku(100); doesn't work as intented
+        if (pp.onkoPelkkiaTekoalyja()) {
+            while (pp.peliJatkuu) {
+                koutsi.peluutaSeuraavatTekoalyt();
             }
-        }
-    }
-
-    /**
-     * peluuttaa seuraavaksi vuorossa olevat, peräkkäiset tekoälyt, kunnes seuraava pelaaja on ihminen tai kierros loppuu.
-     */
-    private void peluutaSeuraavatTekoalyt() {
-        int round = kierros;
-        while (pp.onkoPelaajaAI[vuorossaOlevanNro] && kierros == round && peliJatkuu) {
-            Long start = System.currentTimeMillis();
-            peluutaAInVuoro();
-            Long ready = System.currentTimeMillis();
-            System.out.println("AI took " + (ready - start) + "ms\n");
-
-            seuraavaPelaajanVuoro();
-        }
-    }
-
-    private void nuku(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (Exception e) {
-            System.out.println(e);
+            julistaVoittaja(pp.julistaVoittaja());
         }
     }
 
@@ -88,110 +55,43 @@ public class Pelivelho {
     }
 
     public void alustaPeli(boolean[] onkoPelaajaAI) {
-        pp = new Pelinpystyttaja(onkoPelaajaAI);
-        this.pelaajat = pp.pelaajat;
-        vuorossaOlevanNro = 0;
-        vuorossaOleva = pelaajat.get(vuorossaOlevanNro);
+        pp = new Pelinpystyttaja(onkoPelaajaAI, true);
     }
 
-
     public ArrayList<Pelaaja> getPelaajat() {
-        return pelaajat;
+        return pp.pelaajat;
     }
 
     public String getVuorossaOleva() {
-        return vuorossaOleva.getNimi();
+        return pp.vuorossaOleva.getNimi();
     }
 
     public String getKierros() {
-        return "" + kierros;
-    }
-
-    private boolean onkoVoittaja() {
-        for (Pelaaja p : pelaajat) {
-            if (p.voittaja(voittoValta)) {
-                return true;
-            }
-        }
-        return false;
+        return "" + pp.kierros;
     }
 
     /**
-     * Onko vuorossa oleva pelaaja kierroksen viimeinen.
-     *
-     * @return -:-
+     * Metodi kutsuu @Pelinpystyttajan metodia seuraavanPelaajanVuoro.
      */
-    public boolean kierroksenViimeinen() {
-        return pelaajat.get(pelaajat.size() - 1) == vuorossaOleva;
-    }
+    public void seuraavanPelaajanVuoro() {
+        boolean oliIhmisenVuoro = !pp.onkoPelaajaAI[pp.vuorossaOlevanNro];
 
-    /**
-     * Metodi siirtää vuoron seuraavalle pelaajalle. Jos joku merkkihenkilö on
-     * vaikuttunut pelaajan omaisuudesta, siirretään merkkihenkilö vierailemaan
-     * pelaajalle. Jos joku pelaajista on voittaja, ja kierros on lopussa, peli
-     * päättyy. Jos vuorossa oleva pelaaja on kierroksen viimeinen, kierrosluku
-     * kasvaa ja vuoro siirtyy ensimmäiselle pelaajalle.
-     */
-    public void seuraavaPelaajanVuoro() {
-        pp.poyta.vaikuttikoPelaajaMerkkihenkiloon(vuorossaOleva);
-        boolean oliIhmisenVuoro = !pp.onkoPelaajaAI[vuorossaOlevanNro];
-
-        if (kierroksenViimeinen() && onkoVoittaja()) {
-            julistaVoittaja();
-            return;
-        }
-
-        if (kierroksenViimeinen()) {
-            kierros++;
-            vuorossaOleva = pelaajat.get(0);
-            vuorossaOlevanNro = 0;
-        } else {
-            vuorossaOlevanNro++;
-            vuorossaOleva = pelaajat.get(vuorossaOlevanNro);
-        }
+        if (!pp.seuraavanPelaajanVuoro())
+            julistaVoittaja(pp.julistaVoittaja());
 
         if (oliIhmisenVuoro) {
-            peluutaSeuraavatTekoalyt();
+            koutsi.peluutaSeuraavatTekoalyt();
+            if (!pp.peliJatkuu)
+                julistaVoittaja(pp.julistaVoittaja());
         }
-    }
-
-    private void peluutaAInVuoro() {
-        System.out.println("Pelivelho kutsuu AI.ta suunnittelemaan vuoron pelaajalla nro " + vuorossaOlevanNro + ", arvovaltaa " + vuorossaOleva.getArvovalta());
-        Vuoro v = AI.suunnitteleVuoro(vuorossaOleva, pp.poyta);
-        String toiminto = v.toiminto.toString();
-
-        if (toiminto.contains("NOSTA"))
-            nostaNallekarkkeja(v.mitaNallekarkkejaNostetaan);
-        else if (toiminto.contains("VARAA"))
-            varaa(v.varattavanOmistuksenNimi);
-        else if (toiminto.contains("OSTA"))
-            osta(v.ostettavanOmaisuudenNimi);
-        else
-            System.out.println("\t\tAI nro " + vuorossaOlevanNro + " ei osannut tehdä mitään!");
-
-        System.out.println("\tAIn nro " + vuorossaOlevanNro + " vuoro on ohi, toiminto: " +toiminto +", arvovaltaa nyt " + vuorossaOleva.getArvovalta() + "\n");
     }
 
     /**
      * Tiedetään varmaksi, että joku on voittanut, muttei vielä varmuudella
      * kuka.
      */
-    private void julistaVoittaja() {
-        peliJatkuu = false;
-        Pelaaja voittaja = pelaajat.get(0);
-        for (int i = 1; i < pelaajat.size(); i++) {
-            Pelaaja haastaja = pelaajat.get(i);
-            if (haastaja.getArvovalta() > voittaja.getArvovalta()) {
-                voittaja = haastaja;
-            }
-        }
-        for (Pelaaja pelaaja : pelaajat) {
-            if (pelaaja != voittaja && pelaaja.getOmaisuudenKoko() < voittaja.getOmaisuudenKoko() && pelaaja.getArvovalta() == voittaja.getArvovalta()) {
-                voittaja = pelaaja;
-            }
-        }
-
-        kayttoliittyma.julistaVoittaja(voittaja.getNimi(), "" + voittaja.getArvovalta(), "" + kierros);
+    private void julistaVoittaja(Pelaaja voittaja) {
+        kayttoliittyma.julistaVoittaja(voittaja.getNimi(), "" + voittaja.getArvovalta(), "" + pp.kierros);
     }
 
     /**
@@ -211,13 +111,7 @@ public class Pelivelho {
      * @param maarat nostettavien nallekarkkien määrät.
      */
     public void nostaNallekarkkeja(int[] maarat) {
-        Kasakokoelma karkit = vuorossaOleva.getKarkit();
-        for (int i = 1; i < maarat.length; i++) {
-            int m = maarat[i];
-            if (m > 0) {
-                pp.poyta.getMarkkinat().siirraToiseenKasaan(karkit, i, m);
-            }
-        }
+        pp.nostaNallekarkkeja(maarat);
     }
 
     /**
@@ -226,7 +120,7 @@ public class Pelivelho {
      */
     public void vieVarauksetJaNakyvatOmistuksetValitsimelle() {
         ArrayList<String> nimet = pp.poyta.getNakyvienNimet();
-        nimet.addAll(vuorossaOleva.getVaraustenNimet());
+        nimet.addAll(pp.vuorossaOleva.getVaraustenNimet());
         valintanapit.setNakyvienNimet(nimet, true);
     }
 
@@ -255,11 +149,7 @@ public class Pelivelho {
      * niin false, muuten true.
      */
     public boolean osta(String ostettavanNimi) {
-        if (pp.poyta.getNakyvienNimet().contains(ostettavanNimi)) {
-            return pp.poyta.suoritaOsto(vuorossaOleva, Integer.parseInt(ostettavanNimi));
-        } else {
-            return pp.poyta.suoritaOstoVarauksista(vuorossaOleva, Integer.parseInt(ostettavanNimi));
-        }
+        return pp.osta(ostettavanNimi);
     }
 
     /**
@@ -270,6 +160,6 @@ public class Pelivelho {
      * @return suoritettiinko varaus.
      */
     public boolean varaa(String varattavanNimi) {
-        return pp.poyta.teeVaraus(vuorossaOleva, Integer.parseInt(varattavanNimi));
+        return pp.varaa(varattavanNimi);
     }
 }

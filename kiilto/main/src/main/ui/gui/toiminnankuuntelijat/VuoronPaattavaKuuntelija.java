@@ -23,7 +23,7 @@ public class VuoronPaattavaKuuntelija {
     }
 
     public void lopetaVuoro() {
-        pelivelho.seuraavaPelaajanVuoro();
+        pelivelho.seuraavanPelaajanVuoro();
         piirtoalusta.repaint();
         nappulat[0].setVisible(true);
         for (int i = 1; i < 4; i++) {
