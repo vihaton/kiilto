@@ -158,17 +158,17 @@ public class Pelivelho {
     private void peluutaAInVuoro() {
         System.out.println("Pelivelho kutsuu AI.ta suunnittelemaan vuoron pelaajalla nro " + vuorossaOlevanNro + ", arvovaltaa " + vuorossaOleva.getArvovalta());
         Vuoro v = AI.suunnitteleVuoro(vuorossaOleva, pp.poyta);
+        String toiminto = v.toiminto.name();
 
-        switch (v.toiminto) {
-            case NOSTA: nostaNallekarkkeja(v.mitaNallekarkkejaNostetaan);
-                break;
-            case VARAA: varaa(v.varattavanOmistuksenNimi);
-                break;
-            case OSTA:  osta(v.ostettavanOmaisuudenNimi);
-                break;
-            case ENTEEMITAAN:
-                System.out.println("\t\tAI nro " + vuorossaOlevanNro + " ei osannut tehdä mitään!");
-        }
+        if (toiminto.contains("nosta"))
+            nostaNallekarkkeja(v.mitaNallekarkkejaNostetaan);
+        else if (toiminto.contains("varaa"))
+            varaa(v.varattavanOmistuksenNimi);
+        else if (toiminto.contains("osta"))
+            osta(v.ostettavanOmaisuudenNimi);
+        else
+            System.out.println("\t\tAI nro " + vuorossaOlevanNro + " ei osannut tehdä mitään!");
+
         System.out.println("\tAIn nro " + vuorossaOlevanNro + " vuoro on ohi, arvovaltaa nyt " + vuorossaOleva.getArvovalta() + "\n");
     }
 

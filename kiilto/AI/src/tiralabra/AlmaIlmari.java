@@ -12,11 +12,18 @@ import tiralabra.vuorologiikka.*;
  *
  * AI tekee päätökset sille annetun pelaajaolion tilanteen mukaan, eli ikään kuin tuo "älyn" ja "tavoitteen" tyhmälle oliolle.
  * On AI:n vastuulla tehdä laillisia siirtoja, tai vaihtoehtoisesti käsitellä pelivelhon huomautukset laittomista siirroista.
+ *
+ * Peliin oleellisesti liittyvät Pelaaja "keho" sekä Poyta "poyta" kuljetetaan luokan läpi metodin parametreina (ei luokkamuuttujina)
+ * helpomman testattavuuden saavuttamiseksi.
  */
 public class AlmaIlmari {
 
-    //todo AI ottaa huomioon pelissä olevat merkkihenkilöt
-    //todo AI ottaa huomioon pöydällä näkyvillä olevat omistukset
+    //kehon tilanteen tallettamiseen algoritmien dynaamisuutta ajatellen
+    private int karkkeja;
+    private int varauksia;
+    private String poydastaOstettavanNimi;
+    private String kadestaOstettavanNimi;
+    private int kuinkaMontaVoidaanNostaaKerralla;
 
     /**
      * AI suunnittelee pelaajalle vuoron pelaajan ja pöydän tilanteen mukaan.
@@ -28,16 +35,16 @@ public class AlmaIlmari {
      *          -nallekarkit
      *          -varaukset
      *          -omistukset
-     *          -merkkihenkilöt
-     *          -arvovalta
+     *          -merkkihenkilöt todo
+     *          -arvovalta todo
      *      -mitä pöydässä on saatavilla?
      *          -nallekarkit
      *          -omistukset
-     *          -merkkihenkilöt
+     *          -merkkihenkilöt todo
      *      -mitä minun kannattaisi tehdä?
-     *          -omistusten suhteelliset arvot?
-     *          -potentiaalisten ostosten sopivuus nykyiseen omistusprofiiliin & nallekarkkeihin?
-     *          -tulevan omistusprofiilin linjaus merkkihenkilön viekotteluun?
+     *          -omistusten suhteelliset arvot? todo
+     *          -potentiaalisten ostosten sopivuus nykyiseen omistusprofiiliin & nallekarkkeihin? todo
+     *          -tulevan omistusprofiilin linjaus merkkihenkilön viekotteluun? todo
      *
      * tilanteen arviointi ja vuoron toteuttaminen on eriytetty,
      * jotta tulevaisuudessa edistyneempi tekoäly pystyisi harkitsemaan
@@ -48,38 +55,104 @@ public class AlmaIlmari {
      * @return suoritettavan vuoron käsikirjoitus
      */
     public Vuoro suunnitteleVuoro(Pelaaja keho, Poyta poyta) {
-        Vuoro v;
-        int karkkeja = keho.getKarkit().getKarkkienMaara();
-        String poydastaOstettavanNimi = onkoVaraaOstaaOmistusPoydasta(keho, poyta);
-        String kadestaOstettavanNimi = onkoVaraaOstaaOmistusVarauksista(keho);
-        int kuinkaMontaVoidaanNostaaKerralla = kuinkaMontaKarkkiaVoiNostaaKerralla(poyta);
+        return suunnitteleVuoro(keho, poyta, Strategia.OLETUS);
+    }
 
-        if (!kadestaOstettavanNimi.equals("ei")) {//lunastetaan varaus kädestä
-            v = new Vuoro(VuoronToiminto.OSTA);
-            v.ostettavanOmaisuudenNimi = kadestaOstettavanNimi;
-        } else if (karkkeja < 8 && kuinkaMontaVoidaanNostaaKerralla == 3) { //rohmutaan karkkeja, jos niitä saadaan kolme kerralla
-            v = paataMitaNostetaan(keho, poyta, kuinkaMontaVoidaanNostaaKerralla);
-        } else if (keho.getVaraukset().size() < 3 && karkkeja < 10 && poyta.getMarkkinat().getKasanKoko(0) != 0){ //varataan lisää omistuksia pöydästä jos kultakarkkeja on saatavilla ja ne mahtuvat käteen
-            v = paataMitaVarataan(keho, poyta);
-        } else if (!poydastaOstettavanNimi.equals("ei")) { //ostetaan omistuksia pöydästä, jos on varaa
-            v = new Vuoro(VuoronToiminto.OSTA);
-            v.ostettavanOmaisuudenNimi = poydastaOstettavanNimi;
-        } else if (keho.getVaraukset().size() < 3) { //jos ei ollut varaa ostaa mitään, niin varataan sitten
-            v = paataMitaVarataan(keho, poyta);
-        } else if (karkkeja < 10 && kuinkaMontaVoidaanNostaaKerralla > 0) { //jos on karkkeja mitä nostaa
-            v = paataMitaNostetaan(keho, poyta, kuinkaMontaVoidaanNostaaKerralla);
-        } else {
-            v = new Vuoro(VuoronToiminto.ENTEEMITAAN);
+     /**
+     *
+     * @param keho jota AlmaIlmari ohjailee
+     * @param poyta jolla näkyy tämänhetkinen pelitilanne
+     * @param strategia jonka mukaan määräytyy vuorontoimintojen priorisointijärjestys
+     * @return suoritettavan vuoron käsikirjoitus
+     */
+    public Vuoro suunnitteleVuoro(Pelaaja keho, Poyta poyta, Strategia strategia) {
+        paivitaApumuuttujat(keho, poyta);
+        Vuoro v = new Vuoro(VuoronToiminto.ENTEEMITAAN);
+
+        for (int i = 0; i < strategia.kuinkaMontaVaihtoehtoa(); i++) {
+            v = kokeileValitaStrategianMukainenToiminto(keho, poyta, strategia.getToiminto(i));
+            if (v != null)
+                break;
         }
 
         return v;
     }
 
+    private void paivitaApumuuttujat(Pelaaja keho, Poyta poyta) {
+        this.karkkeja = keho.getKarkit().getKarkkienMaara();
+        this.varauksia = keho.getVarauksienMaara();
+        this.poydastaOstettavanNimi = onkoVaraaOstaaOmistusPoydasta(keho, poyta);
+        this.kadestaOstettavanNimi = onkoVaraaOstaaOmistusVarauksista(keho);
+        this.kuinkaMontaVoidaanNostaaKerralla = kuinkaMontaKarkkiaVoiNostaaKerralla(poyta);
+    }
+
     /**
      *
+     * @param keho jota ohjataan
      * @param poyta jolla pelataan
-     * @return int kuinka monta karkkia voidaan maksimissaan nostaa vuorolla
+     * @param toiminto joka haluttaisiin seuraavaksi toteuttaa
+     * @return Vuoro, joka on joko null (haluttua toiminnallisuutta ei pystytty toteuttamaan) tai sisältää suunnitelman vuoron toteutuksesta.
      */
+    protected Vuoro kokeileValitaStrategianMukainenToiminto(Pelaaja keho, Poyta poyta, VuoronToiminto toiminto) {
+        Vuoro v = null;
+        switch (toiminto) {
+            case NOSTA_KOLME:
+                if (kuinkaMontaVoidaanNostaaKerralla == 3 && karkkeja < 8) {
+                    v = paataMitaNostetaan(keho, poyta, kuinkaMontaVoidaanNostaaKerralla);
+                    v.toiminto = VuoronToiminto.NOSTA_KOLME;
+                }
+                break;
+
+            case NOSTA_KAKSI:
+                if (kuinkaMontaVoidaanNostaaKerralla == 2 && karkkeja < 10) {
+                    v = paataMitaNostetaan(keho, poyta, kuinkaMontaVoidaanNostaaKerralla);
+                    v.toiminto = VuoronToiminto.NOSTA_KAKSI;
+                }
+                break;
+
+            case NOSTA:
+                if (kuinkaMontaVoidaanNostaaKerralla > 0 && karkkeja < 10) {
+                    v = paataMitaNostetaan(keho, poyta, kuinkaMontaVoidaanNostaaKerralla);
+                }
+                break;
+
+            case VARAA_ARVOKAS:
+                if (varauksia < 3 && poyta.getMarkkinat().getKasanKoko(0) != 0 && karkkeja < 10)
+                    v = paataMitaVarataan(keho, poyta, VuoronToiminto.VARAA_ARVOKAS);
+                break;
+
+            case VARAA_HALPA:
+                if (varauksia < 3)
+                    v = paataMitaVarataan(keho, poyta, VuoronToiminto.VARAA_HALPA);
+                break;
+
+            case OSTA_VARAUS:
+                if (!kadestaOstettavanNimi.equals("ei")) {
+                    v = new Vuoro(VuoronToiminto.OSTA_VARAUS);
+                    v.ostettavanOmaisuudenNimi = kadestaOstettavanNimi;
+                }
+                break;
+
+            case OSTA_POYDASTA:
+                if (!poydastaOstettavanNimi.equals("ei")) {
+                    v = new Vuoro(VuoronToiminto.OSTA_POYDASTA);
+                    v.ostettavanOmaisuudenNimi = poydastaOstettavanNimi;
+                }
+                break;
+
+            default:
+                v = new Vuoro(VuoronToiminto.ENTEEMITAAN);
+                break;
+        }
+        return v;
+    }
+
+
+        /**
+         *
+         * @param poyta jolla pelataan
+         * @return int kuinka monta karkkia voidaan maksimissaan nostaa vuorolla
+         */
     protected int kuinkaMontaKarkkiaVoiNostaaKerralla(Poyta poyta) {
         Kasakokoelma markkinat = poyta.getMarkkinat();
         int kultaisia = markkinat.getKasanKoko(0);
@@ -120,6 +193,7 @@ public class AlmaIlmari {
         if (kuinkaMontaVoidaanNostaaKerralla == -1) { //undefined
             kuinkaMontaVoidaanNostaaKerralla = kuinkaMontaKarkkiaVoiNostaaKerralla(poyta);
         }
+        //todo käytä tietoa maksiminostomäärästä hyödyksi
 
         //jos karkkeja on 7 tai vähemmän, voidaan nostaa 3 eriväristä karkkia, muuten nostettavana on 10-määrä
         int tilaaNostaa = keho.getKarkit().getKarkkienMaara() < 8 ? 3 : 10 - keho.getKarkit().getKarkkienMaara();
@@ -155,14 +229,20 @@ public class AlmaIlmari {
      *
      * @param keho jota ohjataan
      * @param poyta jolla pelataan
+     * @param toiminto varataanko arvokas vai halpa omistus?
      * @return Vuoro-olio, johon on paketoitu mikä omistus pitäisi varata
      */
-    protected Vuoro paataMitaVarataan(Pelaaja keho, Poyta poyta) {
-        Vuoro v = new Vuoro(VuoronToiminto.VARAA);
-        v.varattavanOmistuksenNimi = onkoVaraaOstaaOmistusPoydasta(keho, poyta);
+    protected Vuoro paataMitaVarataan(Pelaaja keho, Poyta poyta, VuoronToiminto toiminto) {
+        Vuoro v = new Vuoro(toiminto);
+        //todo
+        /*
+        if (toiminto.equals(VuoronToiminto.VARAA_ARVOKAS)) {
+        } else
+        */
+            v.varattavanOmistuksenNimi = onkoVaraaOstaaOmistusPoydasta(keho, poyta);
 
         //todo valitse varattava omistus fiksummin
-        //jos yhteenkään omistukseen ei heti suoraan ole varaa, otetaan pöydästä ensimmäinen joka osuu käteen
+        //jos edellä olevat metodit eivät tuottaneet tulosta, niin varataan nyt edes jotain
         if (v.varattavanOmistuksenNimi.equals("ei")) {
             v.varattavanOmistuksenNimi = poyta.getNakyvienNimet().get(0);
         }

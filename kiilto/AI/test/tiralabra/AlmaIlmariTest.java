@@ -144,42 +144,51 @@ public class AlmaIlmariTest {
 
     @Test
     public void paataMitaVarataanTest() {
-        Vuoro v = AI.paataMitaVarataan(keho, poyta);
-        assertTrue(v.toiminto.equals(VuoronToiminto.VARAA));
+        Vuoro v = AI.paataMitaVarataan(keho, poyta, VuoronToiminto.VARAA_HALPA);
+        assertTrue(v.toiminto.equals(VuoronToiminto.VARAA_HALPA));
+        assertTrue("varattavan omistuksen pitäisi löytyä pöydältä!",
+                poyta.getNakyvienNimet().contains(v.varattavanOmistuksenNimi));
+        v = AI.paataMitaVarataan(keho, poyta, VuoronToiminto.VARAA_ARVOKAS);
+        assertTrue(v.toiminto.equals(VuoronToiminto.VARAA_ARVOKAS));
         assertTrue("varattavan omistuksen pitäisi löytyä pöydältä!",
                 poyta.getNakyvienNimet().contains(v.varattavanOmistuksenNimi));
     }
 
     @Test
-    public void AIIntegraatioTest() {
-        //ensisijaisesti nostetaan karkkeja
-        Vuoro v = AI.suunnitteleVuoro(keho, poyta);
-        assertTrue(v.toiminto == VuoronToiminto.NOSTA);
+    public void AIIntegraatioTestStrategiaOLETUS() {
+        //käsi on tyhjä, joten ensisijaisesti nostetaan karkkeja
+        Vuoro v = AI.suunnitteleVuoro(keho, poyta, Strategia.OLETUS);
+        assertTrue(v.toiminto == VuoronToiminto.NOSTA_KOLME);
 
         keho.setKarkit(new int[]{0,2,3,2,1,1});
-        //jos karkkeja on paljon, varataan omaisuutta
-        v = AI.suunnitteleVuoro(keho, poyta);
-        assertTrue(v.toiminto == VuoronToiminto.VARAA);
+        //jos karkkeja on paljon, ja pöydässä on kultaa, varataan omaisuutta
+        v = AI.suunnitteleVuoro(keho, poyta, Strategia.OLETUS);
+        assertTrue(v.toiminto == VuoronToiminto.VARAA_ARVOKAS);
         assertTrue("annettu nimi on validi",poyta.teeVaraus(keho, v.varattavanOmistuksenNimi));
 
         //karkkeja ei mahdu enää hamstraamaan, joten ostetaan jotain!
-        v = AI.suunnitteleVuoro(keho, poyta);
-        assertTrue(v.toiminto == VuoronToiminto.OSTA);
+        v = AI.suunnitteleVuoro(keho, poyta, Strategia.OLETUS);
+        assertTrue(v.toiminto == VuoronToiminto.OSTA_VARAUS);
         assertTrue("ensisijaisesti ostetaan varaus", poyta.suoritaOstoVarauksista(keho, Integer.parseInt(v.ostettavanOmaisuudenNimi)));
         assertTrue("varaus on lunastettu", keho.getVaraukset().size() == 0);
 
         keho.setKarkit(new int[]{5,1,1,1,1,1});
-        //ei ole enää varauksia ja karkit on täynnä -> ostetaan pöydästä
-        v = AI.suunnitteleVuoro(keho, poyta);
-        assertTrue(v.toiminto == VuoronToiminto.OSTA);
+        v = AI.suunnitteleVuoro(keho, poyta, Strategia.OLETUS);
+        assertTrue("ei ole enää varauksia ja karkit on täynnä -> ostetaan pöydästä\nv.toiminto: " + v.toiminto ,v.toiminto == VuoronToiminto.OSTA_POYDASTA);
         assertTrue("nimi oli validi", poyta.suoritaOsto(keho, Integer.parseInt(v.ostettavanOmaisuudenNimi)));
 
         keho.setKarkit(new int[]{0,0,0,0,0,0});
+        poyta.setKarkkimarkkinat(new Kasakokoelma(new int[]{0,0,5,0,0,0}));
+        v = AI.suunnitteleVuoro(keho, poyta, Strategia.OLETUS);
+        assertTrue("ei voida nostaa kolmea, eikä ole varaa ostaa pöydästä, mutta varaaminen ei tuottaisi kultakarkkia -> nostetaan kaksi\nv.toiminto: " + v.toiminto,
+                v.toiminto == VuoronToiminto.NOSTA_KAKSI);
+
         poyta.setKarkkimarkkinat(new Kasakokoelma(new int[]{0,0,0,0,0,0}));
         //ollaan köyhiä kuin opiskelija ja markkinoilla on yhtä paljon karkkia kuin suoritusotteella opintopisteitä
-        v = AI.suunnitteleVuoro(keho, poyta);
-        assertTrue("ei ole varaa ostaa mitään, pöydässä ei ole mitä nostaa, ei varata koska ei saada kultaa mutta varataan sitten kuitenkin kun mitään muuta ei saada tehtyä",
-                v.toiminto == VuoronToiminto.VARAA);
+        v = AI.suunnitteleVuoro(keho, poyta, Strategia.OLETUS);
+        assertTrue("ei ole varaa ostaa mitään, pöydässä ei ole mitä nostaa, ei varata koska ei saada kultaa," +
+                        " mutta varataan sitten kuitenkin kun mitään muuta ei saada tehtyä\nv.toiminto: " + v.toiminto,
+                v.toiminto == VuoronToiminto.VARAA_HALPA);
         assertTrue("nimi oli validi", poyta.teeVaraus(keho, v.varattavanOmistuksenNimi));
         assertTrue("kultaa ei saatu koska sitä ei ole jaossa", keho.getKarkit().getKasanKoko(0) == 0);
 
@@ -187,9 +196,13 @@ public class AlmaIlmariTest {
         poyta.teeVaraus(keho, poyta.getNakyvienNimet().get(0));
         poyta.setKarkkimarkkinat(new Kasakokoelma(new int[]{0,3,0,0,0,0}));
         //nyt pelaajalla on kolme varausta, ei yhtään karkkia, pöydästä voi nostaa < 3 karkkia kerralla
-        v = AI.suunnitteleVuoro(keho, poyta);
-        assertTrue("ei voida ostaa, nostaa kolmea karkkia tai varata, joten nostetaan mitä voidaan",
+        v = AI.suunnitteleVuoro(keho, poyta, Strategia.OLETUS);
+        assertTrue("ei voida ostaa kädestä tai pöydästä, nostaa kolmea tai kahta karkkia tai varata mitään, joten nostetaan mitä voidaan",
                 v.toiminto == VuoronToiminto.NOSTA);
         assertTrue("nostettiin yksi karkki, koska säännöt", new Kasakokoelma(v.mitaNallekarkkejaNostetaan).getKarkkienMaara() == 1);
+
+        poyta.setKarkkimarkkinat(new Kasakokoelma(new int[]{0,0,0,0,0,0}));
+        v = AI.suunnitteleVuoro(keho, poyta, Strategia.OLETUS);
+        assertTrue("ei voida varata, nostaa mitään tai ostaa mitään, joten ei tehdä mitään", v.toiminto == VuoronToiminto.ENTEEMITAAN);
     }
 }
