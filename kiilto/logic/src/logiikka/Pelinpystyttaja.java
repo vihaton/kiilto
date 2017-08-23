@@ -21,6 +21,7 @@ public class Pelinpystyttaja {
     public Pelaaja vuorossaOleva;
     public boolean GUI;
     public int voittoValta = 15;
+    public String pelaajanNimi;
 
     public Pelinpystyttaja(int kuinkaMontaAIta) {
         this(new boolean[kuinkaMontaAIta]);
@@ -31,12 +32,13 @@ public class Pelinpystyttaja {
      * @param onkoPelaajaAI
      */
     public Pelinpystyttaja(boolean[] onkoPelaajaAI) {
-        this(onkoPelaajaAI, false);
+        this(onkoPelaajaAI, false, "Pelaaja");
     }
 
-    public Pelinpystyttaja(boolean[] onkoPelaajaAI, boolean GUI) {
+    public Pelinpystyttaja(boolean[] onkoPelaajaAI, boolean GUI, String nimi) {
         pelaajat = new ArrayList<>();
         this.onkoPelaajaAI = onkoPelaajaAI;
+        this.pelaajanNimi = nimi;
         luoPelaajat(generoiNimet(onkoPelaajaAI));
         this.poyta = new Poyta(pelaajat);
         this.peliJatkuu = true;
@@ -58,8 +60,10 @@ public class Pelinpystyttaja {
             if (onkoAI[i]) {
                 tekoalyja++;
                 nimet.add("AI " + tekoalyja);
+            } else if (!pelaajanNimi.equalsIgnoreCase("pelaajan nimi?")){
+                nimet.add(pelaajanNimi);
             } else {
-                nimet.add("logiikka.Pelaaja " + (i - tekoalyja + 1));
+                nimet.add("Pelaaja " + (i - tekoalyja + 1));
             }
         }
         return nimet;
@@ -189,5 +193,14 @@ public class Pelinpystyttaja {
      */
     public boolean varaa(String varattavanNimi) {
         return poyta.teeVaraus(vuorossaOleva, Integer.parseInt(varattavanNimi));
+    }
+
+    public int kuinkaMontaAIta() {
+        int c = 0;
+        for (int i = 0; i < onkoPelaajaAI.length; i++) {
+            if (onkoPelaajaAI[i])
+            c++;
+        }
+        return c;
     }
 }

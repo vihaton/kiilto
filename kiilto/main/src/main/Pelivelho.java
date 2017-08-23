@@ -36,9 +36,20 @@ public class Pelivelho {
      * määritellä ennen tämän metodin suorittamista!
      */
     public void pelaa() {
+        pelaa(false);
+    }
+
+        /**
+         * Pelaa Kiilto -pelin graafisella käyttöliittymällä. Pelaajat on pitänyt
+         * määritellä ennen tämän metodin suorittamista!
+         *
+         * @param keskeltaPelia luo testattavan pelitilanteen jos true
+         */
+    public void pelaa(boolean keskeltaPelia) {
         koutsi = new Peluuttaja(pp);
 
-        pp.kierros = pp.poyta.luoTestattavaPelitilanne(5);
+        if (keskeltaPelia)
+            pp.kierros = pp.poyta.luoTestattavaPelitilanne(5);
         kayttoliittyma = new Kayttoliittyma(this);
         kayttoliittyma.run();
 
@@ -55,7 +66,11 @@ public class Pelivelho {
     }
 
     public void alustaPeli(boolean[] onkoPelaajaAI) {
-        pp = new Pelinpystyttaja(onkoPelaajaAI, true);
+        alustaPeli(onkoPelaajaAI, "Pelaaja");
+    }
+
+    public void alustaPeli(boolean[] onkoPelaajaAI, String nimi) {
+        pp = new Pelinpystyttaja(onkoPelaajaAI, true, nimi);
     }
 
     public ArrayList<Pelaaja> getPelaajat() {

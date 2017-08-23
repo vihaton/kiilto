@@ -42,11 +42,18 @@ public class Alkuikkuna implements Runnable {
     }
 
     private void luoSisalto(Container container) {
-        GridLayout layout = new GridLayout(5, 0);
+        GridLayout layout = new GridLayout(6, 0);
         container.setLayout(layout);
 
-        JLabel pelaajia = new JLabel("Kuinka monen pelaajan pelin haluaisit pelata?");
+        JLabel pelaajia = new JLabel("Kuinka monen pelaajan pelin haluaisit pelata?\n");
         pelaajia.setHorizontalAlignment(JLabel.CENTER);
+
+        JPanel conffaukset = new JPanel();
+        conffaukset.setLayout(new GridLayout(0,2));
+        JCheckBox testipeli = new JCheckBox("pelaa testipeli");
+        conffaukset.add(testipeli);
+        JTextField pelaajanNimi = new JTextField("pelaajan nimi?");
+        conffaukset.add(pelaajanNimi);
 
         //final JButton kaksiPelaa = new JButton("Kaksin aina kaunihimpi");
         final JButton kaksiPelaa = new JButton("AI vs AI");
@@ -64,12 +71,13 @@ public class Alkuikkuna implements Runnable {
 
          -mahdollisuus syöttää pelaajien nimet tekstikenttiin
          */
-        lisaaKuuntelijaPelinaloitusnappulalle(kaksiPelaa, 2, kuinkaMontaIhmistaJaAlya(0,2));
-        lisaaKuuntelijaPelinaloitusnappulalle(kolmePelaa, 3, kuinkaMontaIhmistaJaAlya(1,2));
-        lisaaKuuntelijaPelinaloitusnappulalle(neljaPelaa, 4, kuinkaMontaIhmistaJaAlya(1,3));
+        lisaaKuuntelijaPelinaloitusnappulalle(kaksiPelaa, kuinkaMontaIhmistaJaAlya(0,2), conffaukset);
+        lisaaKuuntelijaPelinaloitusnappulalle(kolmePelaa, kuinkaMontaIhmistaJaAlya(1,2), conffaukset);
+        lisaaKuuntelijaPelinaloitusnappulalle(neljaPelaa, kuinkaMontaIhmistaJaAlya(1,3), conffaukset);
         lisaaKuuntelijaLopetaNapille(lopeta);
 
         container.add(pelaajia);
+        container.add(conffaukset);
         container.add(kaksiPelaa);
         container.add(kolmePelaa);
         container.add(neljaPelaa);
@@ -84,15 +92,18 @@ public class Alkuikkuna implements Runnable {
         return onkoAI;
     }
 
-    private void lisaaKuuntelijaPelinaloitusnappulalle(JButton nappi, int kuinkaMontaPelaajaa, final boolean[] onkoPelaajaAI) {
+    private void lisaaKuuntelijaPelinaloitusnappulalle(JButton nappi, final boolean[] onkoPelaajaAI, final JPanel conffaukset) {
         nappi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 alkuvalikko.setVisible(false);
                 alkuvalikko.dispose();
 
-                pelivelho.alustaPeli(onkoPelaajaAI);
-                pelivelho.pelaa();
+                JCheckBox testipeli = (JCheckBox) conffaukset.getComponent(0);
+                JTextField pelaajanNimi = (JTextField) conffaukset.getComponent(1);
+
+                pelivelho.alustaPeli(onkoPelaajaAI, pelaajanNimi.getText());
+                pelivelho.pelaa(testipeli.isSelected());
             }
         });
     }

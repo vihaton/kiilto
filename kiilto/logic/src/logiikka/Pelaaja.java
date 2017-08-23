@@ -17,7 +17,7 @@ public class Pelaaja {
 
     private final Kasakokoelma karkit = new Kasakokoelma(0);
     private final Omaisuus omaisuus = new Omaisuus();
-    private final String nimi;
+    private String nimi;
     private final ArrayList<Varaus> varaukset = new ArrayList<>();
     private final ArrayList<Merkkihenkilo> merkkihenkilot = new ArrayList<>();
 
@@ -75,6 +75,10 @@ public class Pelaaja {
 
     public String getNimi() {
         return nimi;
+    }
+
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
     }
 
     @Override
