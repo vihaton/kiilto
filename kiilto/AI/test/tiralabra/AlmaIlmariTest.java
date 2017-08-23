@@ -167,9 +167,10 @@ public class AlmaIlmariTest {
         assertTrue(v.toiminto == VuoronToiminto.VARAA_ARVOKAS);
         assertTrue("annettu nimi on validi",poyta.teeVaraus(keho, v.varattavanOmistuksenNimi));
 
+        keho.setKarkit(new int[]{5,1,1,1,1,1});
         //karkkeja ei mahdu enää hamstraamaan, joten ostetaan jotain!
         v = AI.suunnitteleVuoro(keho, poyta, Strategia.OLETUS);
-        assertTrue(v.toiminto == VuoronToiminto.OSTA_VARAUS);
+        assertTrue("vuoron toiminto oli " + v.toiminto, v.toiminto == VuoronToiminto.OSTA_VARAUS);
         assertTrue("ensisijaisesti ostetaan varaus", poyta.suoritaOstoVarauksista(keho, Integer.parseInt(v.ostettavanOmaisuudenNimi)));
         assertTrue("varaus on lunastettu", keho.getVaraukset().size() == 0);
 
