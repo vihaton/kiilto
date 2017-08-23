@@ -59,7 +59,7 @@ public enum Strategia {
         return this.strategia.length;
     }
 
-    public VuoronToiminto getToiminto(int i) {
+    public VuoronToiminto Toiminto(int i) {
         return strategia[i];
     }
 }
