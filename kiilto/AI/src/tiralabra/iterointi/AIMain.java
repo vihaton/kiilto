@@ -1,7 +1,7 @@
 package tiralabra.iterointi;
 
 import logiikka.Pelinpystyttaja;
-import tiralabra.vuorologiikka.Strategia;
+import tiralabra.tietorakenteet.Strategia;
 
 /**
  * To run AI-module iterations

@@ -5,7 +5,7 @@ import logiikka.Poyta;
 import logiikka.omaisuusluokat.Omistus;
 import logiikka.omaisuusluokat.Varaus;
 import logiikka.valineluokat.Kasakokoelma;
-import tiralabra.vuorologiikka.*;
+import tiralabra.tietorakenteet.*;
 
 /**
  * Created by vili on 4.8.2017.

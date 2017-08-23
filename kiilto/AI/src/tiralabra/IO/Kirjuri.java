@@ -1,6 +1,4 @@
-package tiralabra.iterointi;
-
-import com.google.gson.Gson;
+package tiralabra.IO;
 
 /**
  * Kirjaa pelien tulokset ylös.

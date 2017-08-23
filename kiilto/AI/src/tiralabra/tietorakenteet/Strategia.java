@@ -1,4 +1,4 @@
-package tiralabra.vuorologiikka;
+package tiralabra.tietorakenteet;
 
 /**
  * Created by vili on 22.8.2017.

@@ -5,9 +5,7 @@ import java.util.*;
 import main.ui.gui.Kayttoliittyma;
 import main.ui.gui.Valintanapit;
 import logiikka.*;
-import tiralabra.AlmaIlmari;
 import tiralabra.iterointi.Peluuttaja;
-import tiralabra.vuorologiikka.Vuoro;
 
 /**
  * Luokka vastaa pelin pyörittämisestä. Puuttuva linkki logiikka- ja main-moduulien välillä.

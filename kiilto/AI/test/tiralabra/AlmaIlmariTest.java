@@ -6,9 +6,9 @@ import logiikka.Poyta;
 import logiikka.valineluokat.Kasakokoelma;
 import org.junit.Before;
 import org.junit.Test;
-import tiralabra.vuorologiikka.Strategia;
-import tiralabra.vuorologiikka.Vuoro;
-import tiralabra.vuorologiikka.VuoronToiminto;
+import tiralabra.tietorakenteet.Strategia;
+import tiralabra.tietorakenteet.Vuoro;
+import tiralabra.tietorakenteet.VuoronToiminto;
 
 import static org.junit.Assert.assertTrue;
 

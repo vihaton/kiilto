@@ -2,8 +2,8 @@ package tiralabra.iterointi;
 
 import logiikka.Pelinpystyttaja;
 import tiralabra.AlmaIlmari;
-import tiralabra.vuorologiikka.Strategia;
-import tiralabra.vuorologiikka.Vuoro;
+import tiralabra.tietorakenteet.Strategia;
+import tiralabra.tietorakenteet.Vuoro;
 
 /**
  * Peluuttaa tekoälyä itseään vastaan erilaisilla strategioilla.
