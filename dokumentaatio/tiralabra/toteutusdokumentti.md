@@ -1,5 +1,5 @@
 ### Toteutusdokumentti
 
-![moduulit][moduulit]
+![alt text][moduulit]
 
-[moduulit]: https://github.com/xvixvi/kiilto/dokumentaatio/tiralabra/kuvat/kiilto_moduulit.png "projektin rakenne moduulitasolla"
+[moduulit]: https://github.com/xvixvi/kiilto/raw/TLproduction/dokumentaatio/tiralabra/kuvat/kiilto_moduulit.png "projektin rakenne moduulitasolla"
