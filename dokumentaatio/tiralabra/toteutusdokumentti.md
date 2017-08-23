@@ -1,5 +1,11 @@
 ### Toteutusdokumentti
 
+#### Projektin moduulirakenne
 ![alt text][moduulit]
 
-[moduulit]: https://github.com/xvixvi/kiilto/raw/TLproduction/dokumentaatio/tiralabra/kuvat/kiilto_moduulit.png "projektin rakenne moduulitasolla"
+#### AI 
+![alt text][ai]
+
+[moduulit]: https://github.com/xvixvi/kiilto/dokumentaatio/tiralabra/kuvat/kiilto_moduulit.png "projektin rakenne moduulitasolla"
+[ai]: https://github.com/xvixvi/kiilto/dokumentaatio/tiralabra/kuvat/AI-moduuli.png "AI -moduulin rakenne"
+
