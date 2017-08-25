@@ -15,8 +15,12 @@ public class Peluuttaja {
     public Strategia[] strategiat;
 
     public Peluuttaja(Pelinpystyttaja pp) {
-        this.pp = pp;
-        this.AI = new AlmaIlmari();
+        this(pp, new AlmaIlmari());
+    }
+
+    protected Peluuttaja(Pelinpystyttaja pelinpystyttaja, AlmaIlmari AI) {
+        this.pp = pelinpystyttaja;
+        this.AI = AI;
         asetaStrategiat();
         korjaaPelaajienNimet();
     }
@@ -49,9 +53,11 @@ public class Peluuttaja {
     }
 
 
-    private void peluutaAInVuoro(Strategia strategia) {
+    protected void peluutaAInVuoro(Strategia strategia) {
+        /*
         System.out.println("Peluuttaja kutsuu AI.ta suunnittelemaan vuoron pelaajalla nro " + pp.vuorossaOlevanNro +
                 ", strategia " + strategia + ", arvovaltaa " + pp.vuorossaOleva.getArvovalta());
+                */
         Vuoro v = AI.suunnitteleVuoro(pp.vuorossaOleva, pp.poyta, strategia);
         String toiminto = v.toiminto.toString();
 
@@ -64,7 +70,7 @@ public class Peluuttaja {
         else
             System.out.println("\t\tAI nro " + pp.vuorossaOlevanNro + " ei osannut tehdä mitään!");
 
-        System.out.println("\tAIn nro " + pp.vuorossaOlevanNro + " vuoro on ohi, toiminto: " +toiminto +", arvovaltaa nyt " + pp.vuorossaOleva.getArvovalta() + "\n");
+        //System.out.println("\tAIn nro " + pp.vuorossaOlevanNro + " vuoro on ohi, toiminto: " +toiminto +", arvovaltaa nyt " + pp.vuorossaOleva.getArvovalta() + "\n");
     }
 
     private void asetaStrategiat() {
@@ -77,6 +83,9 @@ public class Peluuttaja {
 
     private void korjaaPelaajienNimet() {
         int ind = 0;
+        if (pp.onkoPelaajaAI == null) { //for mock testing
+            return;
+        }
         for (int i = 0; i < pp.onkoPelaajaAI.length; i++) {
             if (pp.onkoPelaajaAI[i]) {
                 pp.pelaajat.get(i).setNimi("AI " + strategiat[ind].name());
