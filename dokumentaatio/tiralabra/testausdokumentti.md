@@ -14,11 +14,17 @@ Kaikista mielenkiintoisinta tässä tapauksessa on tekoälyn **suorituskykytesta
 
 #### Suorituskykytestaus
 
-Suorituskyky, tai ehkä paremminkin suoriutumiskyky, -testauksessa tekoälyä [AlmaIlmari](https://github.com/xvixvi/kiilto/blob/TLproduction/kiilto/AI/src/tiralabra/AlmariIlmari.java) peluutetaan itseään vastaan erilaisilla [Strategioilla](https://github.com/xvixvi/kiilto/blob/TLproduction/kiilto/AI/src/tiralabra/tietorakenteet/Strategia.java), ja testataan:
+Suorituskyky, tai ehkä paremminkin suoriutumiskyky, -testauksessa tekoälyä [AlmaIlmari][AI] peluutetaan itseään vastaan erilaisilla [Strategioilla][strat] ja testataan:
 
 - miten äly pärjää itseään vastaan eri strategioilla pelatessa;
 - mikä strategioista on paras;
 - onko tekoälyjen välillä paras strategia hyvä myös ihmistä vastaan pelatessa?
 
-Käytännössä tämä toteutetaan peluuttamalla älyä itseään vastaan (katso [Peluuttaja](https://github.com/xvixvi/kiilto/blob/TLproduction/kiilto/AI/src/tiralabra/iterointi/Peluuttaja.java)), jonka jälkeen tarvittavia tietorakenteita (Peli, Kierros jne.) hyväksikäyttäen tulokset tallennetaan tiedostoon [results](TODO LINK HERE) käyttämällä hyödyksi IO kansiossa olevaa [Kirjuria]((https://github.com/xvixvi/kiilto/blob/TLproduction/kiilto/AI/src/tiralabra/IO/Kirjuri.java) ja Json parseria. Kun pelejä on pelattu tarpeeksi suuri määrä, voidaan tuloksista ja käytetyistä strategioista vetää johtopäätöksiä eri strategioiden 'suorituskyvystä', ja vastata edellä esitettyihin kysymyksiin.
+Käytännössä tämä toteutetaan peluuttamalla älyä itseään vastaan (katso [Peluuttaja][peluuttaja]), jonka jälkeen tarvittavia tietorakenteita (Peli, Kierros jne.) hyväksikäyttäen tulokset tallennetaan tiedostoon [results](TODO LINK HERE) käyttämällä hyödyksi IO kansiossa olevaa [Kirjuria][kirjuri] ja Json parseria. Kun pelejä on pelattu tarpeeksi suuri määrä, voidaan tuloksista ja käytetyistä strategioista vetää johtopäätöksiä eri strategioiden 'suorituskyvystä', ja vastata edellä esitettyihin kysymyksiin.
 
+
+
+[AI]: https://github.com/xvixvi/kiilto/blob/TLproduction/kiilto/AI/src/tiralabra/AlmaIlmari.java "AlmariIlmari.java"
+[strat]: https://github.com/xvixvi/kiilto/blob/TLproduction/kiilto/AI/src/tiralabra/tietorakenteet/Strategia.java "Strategia.java"
+[kirjuri]: https://github.com/xvixvi/kiilto/blob/TLproduction/kiilto/AI/src/tiralabra/IO/Kirjuri.java "Kirjuri.java"
+[peluuttaja]: https://github.com/xvixvi/kiilto/blob/TLproduction/kiilto/AI/src/tiralabra/iterointi/Peluuttaja.java "Peluuttaja.java"
