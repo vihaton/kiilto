@@ -16,3 +16,14 @@ Toisaalta pidemmän aikavälin suunnittelu on mahdollista lyhyen aikavälin vali
 - Strategia -palikan implementoiminen
 - Kattava integraatiotestaus, testaustapausten suunnittelu
 - Tekoälyn jatkokehityksen ja potentiaalisen koneoppimisen maalailu
+
+23.8 *5h*
+- Dokumentaatiota, kuvaajia, toteutusdokumentti alkuun
+- Demo
+- Uusi rakenne (Kirjuri, Peli, Kierros jne) AI-moduuliin
+
+25.8 *8h*
+- koodikatselmointi 2
+- mock-testauksen ihmettelyä
+- testausdokumentin kirjoittamista
+- kattava yksikkötestaus Listalle sekä Peluuttajalle
