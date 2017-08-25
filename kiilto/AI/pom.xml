@@ -44,6 +44,7 @@
                     </targetClasses>
                     <excludedClasses>
                         <param>tiralabra.iterointi.AIMain</param>
+                        <param>tiralabra.IO.*</param>
                     </excludedClasses>
                     <targetTests>
                         <param>tiralabra.*</param>
