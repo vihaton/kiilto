@@ -13,6 +13,9 @@ import tiralabra.tietorakenteet.Strategia;
 import tiralabra.tietorakenteet.Vuoro;
 import tiralabra.tietorakenteet.VuoronToiminto;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import static org.mockito.Mockito.*;
 
 /**
@@ -31,6 +34,11 @@ public class PeluuttajaTest {
         doNothing().doThrow(new RuntimeException()).when(mockPP).nostaNallekarkkeja(any(int[].class));
         when(mockPP.osta(any(String.class))).thenReturn(true);
         when(mockPP.varaa(any(String.class))).thenReturn(true);
+        mockPP.onkoPelaajaAI = new boolean[]{true,true,true};
+        mockPP.pelaajat = new ArrayList<>();
+        mockPP.pelaajat.add(new Pelaaja("1")); mockPP.pelaajat.add(new Pelaaja("2")); mockPP.pelaajat.add(new Pelaaja("3"));
+        when(mockPP.kuinkaMontaAIta()).thenReturn(3);
+        mockPP.peliJatkuu = true;
 
         //setup mokattava AI
         mockAI = mock(AlmaIlmari.class);
@@ -57,5 +65,14 @@ public class PeluuttajaTest {
         verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.HAMSTRAA_KARKKEJA));
         p.peluutaAInVuoro(Strategia.HAMSTRAA_OMISTUKSIA);
         verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.HAMSTRAA_OMISTUKSIA));
+    }
+
+    @Test
+    public void peluutaKierroksenAIt() {
+        p.peluutaSeuraavatTekoalyt();
+        //olettaa, että strategioiden kolme ensimmäistä ovat OLETUS, KARKIT, OMISTUKSET
+        verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.HAMSTRAA_OMISTUKSIA));
+        verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.HAMSTRAA_KARKKEJA));
+        verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.OLETUS));
     }
 }

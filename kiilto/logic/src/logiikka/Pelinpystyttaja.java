@@ -25,6 +25,10 @@ public class Pelinpystyttaja {
 
     public Pelinpystyttaja(int kuinkaMontaAIta) {
         this(new boolean[kuinkaMontaAIta]);
+        //muutetaan luodut pelaajat tekoälyiksi
+        for (int i = 0; i < onkoPelaajaAI.length; i++) {
+            onkoPelaajaAI[i] = true;
+        }
     }
 
     /**

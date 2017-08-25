@@ -34,12 +34,14 @@ public class Peluuttaja {
     }
 
     /**
+     * Olettaa, että kaikki tekoälyt ovat yhteen putkeen, ja että vuorossa oleva on tekoäly.
+     *
      * peluuttaa seuraavaksi vuorossa olevat, peräkkäiset tekoälyt, kunnes seuraava pelaaja on ihminen tai kierros loppuu.
      */
     public void peluutaSeuraavatTekoalyt() {
         int round = pp.kierros;
         int i = 0;
-        while (pp.onkoPelaajaAI[pp.vuorossaOlevanNro] && pp.kierros == round && pp.peliJatkuu) {
+        for (int j = 0; j < pp.kuinkaMontaAIta(); j++) {
             Long start = System.currentTimeMillis();
             peluutaAInVuoro(strategiat[i]);
             Long ready = System.currentTimeMillis();
@@ -83,11 +85,12 @@ public class Peluuttaja {
 
     private void korjaaPelaajienNimet() {
         int ind = 0;
-        if (pp.onkoPelaajaAI == null) { //for mock testing
+        if (strategiat == null || pp.pelaajat == null)
             return;
-        }
+
         for (int i = 0; i < pp.onkoPelaajaAI.length; i++) {
             if (pp.onkoPelaajaAI[i]) {
+                strategiat[0].name();
                 pp.pelaajat.get(i).setNimi("AI " + strategiat[ind].name());
                 ind++;
             }
