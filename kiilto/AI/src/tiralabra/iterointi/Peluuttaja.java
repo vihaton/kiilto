@@ -85,8 +85,6 @@ public class Peluuttaja {
 
     private void korjaaPelaajienNimet() {
         int ind = 0;
-        if (strategiat == null || pp.pelaajat == null)
-            return;
 
         for (int i = 0; i < pp.onkoPelaajaAI.length; i++) {
             if (pp.onkoPelaajaAI[i]) {

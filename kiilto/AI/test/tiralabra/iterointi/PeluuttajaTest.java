@@ -75,4 +75,10 @@ public class PeluuttajaTest {
         verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.HAMSTRAA_KARKKEJA));
         verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.OLETUS));
     }
+
+    @Test
+    public void peluutaTest() {
+        p = new Peluuttaja(new Pelinpystyttaja(kuinkaMontaAIta));
+        p.peluuta(new Strategia[]{Strategia.OLETUS, Strategia.HAMSTRAA_KARKKEJA, Strategia.HAMSTRAA_OMISTUKSIA});
+    }
 }
