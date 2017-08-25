@@ -1,6 +1,6 @@
-### Testausdokumentti
+## Testausdokumentti
 
-#### Mitä testataan
+### Mitä testataan
 
 Tiralabrassa keskityn pelkästään AI -moduuliin, myös testaamispuolella. Käytännössä tämä tarkoittaa yksikkö- integraatio- ja (tietynlaista) suorituskykytestausta AI:moduulille. Toki logiikkamoduuliakin testataan kattavasti, mutta tämä (jo kerran arvosteltu) kokonaisuus ei kuulu tiralabran alueeseen.
 
@@ -12,7 +12,7 @@ Täydellistä rivi- ja mutaationtappamiskattavuutta tärkeämpänä pidän testi
 
 Kaikista mielenkiintoisinta tässä tapauksessa on tekoälyn **suorituskykytestaaminen**. Tämä ei liity niinkään syötteen kokoon tai malliin: käytännössä pelissä on tekoälyn näkökulmasta kaksi syötettä, jotka molemmat ovat vakiokokoisia ja suhteellisen vakiomallisia. Testaaminen painottuukin tekoälyjen *suoriutumisen* testaamiseen.
 
-#### Suorituskykytestaus
+### Suorituskykytestaus
 
 Suorituskyky, tai ehkä paremminkin suoriutumiskyky, -testauksessa tekoälyä [AlmaIlmari][AI] peluutetaan itseään vastaan erilaisilla [Strategioilla][strat] ja testataan:
 
