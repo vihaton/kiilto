@@ -207,4 +207,7 @@ public class Pelinpystyttaja {
         }
         return c;
     }
+
+    public void uusiPeli() {
+    }
 }

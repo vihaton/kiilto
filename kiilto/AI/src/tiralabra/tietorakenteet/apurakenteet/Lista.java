@@ -16,6 +16,10 @@ public class Lista<E> {
         return koko < 0;
     }
 
+    public int koko() {
+        return koko + 1;
+    }
+
     public void lisaa(E asia) {
         if (!onkoTilaa(koko + 1)) {
             tuplaaPituus();

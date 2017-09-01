@@ -2,17 +2,20 @@ package tiralabra.iterointi;
 
 import logiikka.Pelinpystyttaja;
 import tiralabra.AlmaIlmari;
-import tiralabra.tietorakenteet.Strategia;
-import tiralabra.tietorakenteet.Vuoro;
+import tiralabra.IO.Kirjuri;
+import tiralabra.tietorakenteet.*;
+import tiralabra.tietorakenteet.apurakenteet.Lista;
 
 /**
  * Peluuttaa tekoälyä itseään vastaan erilaisilla strategioilla.
  */
 public class Peluuttaja {
 
+    public Strategia[] strategiat;
+
+    private Kirjuri kirjuri;
     private Pelinpystyttaja pp;
     private AlmaIlmari AI;
-    public Strategia[] strategiat;
 
     public Peluuttaja(Pelinpystyttaja pp) {
         this(pp, new AlmaIlmari());
@@ -21,16 +24,55 @@ public class Peluuttaja {
     protected Peluuttaja(Pelinpystyttaja pelinpystyttaja, AlmaIlmari AI) {
         this.pp = pelinpystyttaja;
         this.AI = AI;
+        this.kirjuri = new Kirjuri();
         asetaStrategiat();
         korjaaPelaajienNimet();
     }
 
-    public void peluuta(Strategia[] strategias) {
-        if (strategias.length < 2 || strategias.length > 4) {
+    public void peluuta(Strategia[] strategias, int peleja) {
+        if (strategias.length < 2 || strategias.length > 4) { //onko pelaajia älyjä laillinen määrä?
             return;
         }
         this.strategiat = strategias;
 
+        Lista<Peli> pelit = new Lista<>();
+        for (int i = 0; i < peleja; i++) {
+            pelit.lisaa(peluutaPeli(strategiat));
+        }
+
+        kirjuri.kirjaa(pelit);
+    }
+
+    /**
+     *
+     * @param strategias joilla älyt pelaavat (2-4kpl)
+     * @return
+     */
+    public Peli peluutaPeli(Strategia[] strategias) {
+        pp.uusiPeli();
+        Peli peli = new Peli();
+        peli.strategiat = strategias;
+
+        while (pp.peliJatkuu) {
+            peli.kierrokset.lisaa(peluutaSeuraavatTekoalyt());
+        }
+        peli.voittaja = pp.julistaVoittaja();
+        selvitaVoittostrategia(peli);
+        return peli;
+    }
+
+    /**
+     * selvittää ja tallentaa parametrinä annettuun peliin, mikä strategia voitti
+     * @param peli jonka voittaja on jo selvillä
+     */
+    private void selvitaVoittostrategia(Peli peli) {
+        String nimi = peli.voittaja.getNimi();
+        for (int i = 0; i < strategiat.length; i++) {
+            if (nimi.contains(strategiat[i].name())) {
+                peli.voittoStrategia = strategiat[i];
+                return;
+            }
+        }
     }
 
     /**
@@ -38,28 +80,24 @@ public class Peluuttaja {
      *
      * peluuttaa seuraavaksi vuorossa olevat, peräkkäiset tekoälyt, kunnes seuraava pelaaja on ihminen tai kierros loppuu.
      */
-    public void peluutaSeuraavatTekoalyt() {
-        int round = pp.kierros;
+    public Kierros peluutaSeuraavatTekoalyt() {
+        Kierros kierros = new Kierros();
         int i = 0;
         for (int j = 0; j < pp.kuinkaMontaAIta(); j++) {
             Long start = System.currentTimeMillis();
-            peluutaAInVuoro(strategiat[i]);
+            Vuoro v = peluutaAInVuoro(strategiat[i]);
             Long ready = System.currentTimeMillis();
-            System.out.println("AI took " + (ready - start) + "ms\n");
-            if (i+1 < strategiat.length) {
+            if (i+1 < strategiat.length) { //jos strategioita on vielä peluuttamatta, peluutetaan seuraavaa
                 i++;
             }
-
+            kierros.lisaaVuoro(new AInVuoro(v, strategiat[i], ready - start));
             pp.seuraavanPelaajanVuoro();
         }
+        return kierros;
     }
 
 
-    protected void peluutaAInVuoro(Strategia strategia) {
-        /*
-        System.out.println("Peluuttaja kutsuu AI.ta suunnittelemaan vuoron pelaajalla nro " + pp.vuorossaOlevanNro +
-                ", strategia " + strategia + ", arvovaltaa " + pp.vuorossaOleva.getArvovalta());
-                */
+    protected Vuoro peluutaAInVuoro(Strategia strategia) {
         Vuoro v = AI.suunnitteleVuoro(pp.vuorossaOleva, pp.poyta, strategia);
         String toiminto = v.toiminto.toString();
 
@@ -72,7 +110,7 @@ public class Peluuttaja {
         else
             System.out.println("\t\tAI nro " + pp.vuorossaOlevanNro + " ei osannut tehdä mitään!");
 
-        //System.out.println("\tAIn nro " + pp.vuorossaOlevanNro + " vuoro on ohi, toiminto: " +toiminto +", arvovaltaa nyt " + pp.vuorossaOleva.getArvovalta() + "\n");
+        return v;
     }
 
     private void asetaStrategiat() {

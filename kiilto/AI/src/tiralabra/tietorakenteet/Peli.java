@@ -1,5 +1,6 @@
 package tiralabra.tietorakenteet;
 
+import logiikka.Pelaaja;
 import tiralabra.tietorakenteet.apurakenteet.Lista;
 
 /**
@@ -8,5 +9,11 @@ import tiralabra.tietorakenteet.apurakenteet.Lista;
 public class Peli {
 
     public Lista<Kierros> kierrokset;
+    public Pelaaja voittaja;
+    public Strategia voittoStrategia;
+    public Strategia[] strategiat;
 
+    public Peli() {
+        kierrokset = new Lista<>();
+    }
 }

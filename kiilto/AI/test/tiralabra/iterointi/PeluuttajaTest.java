@@ -5,16 +5,12 @@ import logiikka.Pelinpystyttaja;
 import logiikka.Poyta;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.internal.matchers.Null;
 import tiralabra.AlmaIlmari;
-import tiralabra.tietorakenteet.Peli;
 import tiralabra.tietorakenteet.Strategia;
 import tiralabra.tietorakenteet.Vuoro;
 import tiralabra.tietorakenteet.VuoronToiminto;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import static org.mockito.Mockito.*;
 
@@ -79,6 +75,6 @@ public class PeluuttajaTest {
     @Test
     public void peluutaTest() {
         p = new Peluuttaja(new Pelinpystyttaja(kuinkaMontaAIta));
-        p.peluuta(new Strategia[]{Strategia.OLETUS, Strategia.HAMSTRAA_KARKKEJA, Strategia.HAMSTRAA_OMISTUKSIA});
+        p.peluutaPeli(new Strategia[]{Strategia.OLETUS, Strategia.HAMSTRAA_KARKKEJA, Strategia.HAMSTRAA_OMISTUKSIA});
     }
 }
