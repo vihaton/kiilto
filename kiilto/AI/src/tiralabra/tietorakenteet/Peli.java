@@ -12,8 +12,14 @@ public class Peli {
     public Pelaaja voittaja;
     public Strategia voittoStrategia;
     public Strategia[] strategiat;
+    public int pelaajia;
 
-    public Peli() {
+    public Peli(int pelaajia) {
+        this.pelaajia = pelaajia;
         kierrokset = new Lista<>();
+    }
+
+    public int kierroksia() {
+        return kierrokset.koko();
     }
 }

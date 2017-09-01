@@ -30,7 +30,7 @@ public class Peluuttaja {
     }
 
     public void peluuta(Strategia[] strategias, int peleja) {
-        if (strategias.length < 2 || strategias.length > 4) { //onko pelaajia älyjä laillinen määrä?
+        if (strategias.length < 2 || strategias.length > 4) { //onko älyjä laillinen määrä?
             return;
         }
         this.strategiat = strategias;
@@ -50,7 +50,7 @@ public class Peluuttaja {
      */
     public Peli peluutaPeli(Strategia[] strategias) {
         pp.uusiPeli();
-        Peli peli = new Peli();
+        Peli peli = new Peli(pp.pelaajat.size());
         peli.strategiat = strategias;
 
         while (pp.peliJatkuu) {
@@ -67,9 +67,9 @@ public class Peluuttaja {
      */
     private void selvitaVoittostrategia(Peli peli) {
         String nimi = peli.voittaja.getNimi();
-        for (int i = 0; i < strategiat.length; i++) {
-            if (nimi.contains(strategiat[i].name())) {
-                peli.voittoStrategia = strategiat[i];
+        for (int i = 0; i < pp.pelaajat.size(); i++) {
+            if (nimi.equalsIgnoreCase(pp.pelaajat.get(i).getNimi())) {
+                peli.voittoStrategia = strategiat[i < strategiat.length ? i : strategiat.length - 1];
                 return;
             }
         }

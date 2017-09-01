@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import tiralabra.tietorakenteet.*;
 import tiralabra.tietorakenteet.apurakenteet.Lista;
 
+//IO:ta varten
 import java.util.ArrayList;
 
 /**

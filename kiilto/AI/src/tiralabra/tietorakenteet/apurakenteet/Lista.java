@@ -1,34 +1,37 @@
 package tiralabra.tietorakenteet.apurakenteet;
 
+import java.util.Iterator;
+
 /**
  * Created by vili on 23.8.2017.
  */
 public class Lista<E> {
 
     private Object[] dataelementti;
-    private int koko = -1; //-1 -> tyhjä lista
+    private int viimIndeksi = -1; //-1 -> tyhjä lista
+    private int kursori = 0;
 
     public Lista() {
         this.dataelementti = new Object[10];
     }
 
     public boolean onTyhja() {
-        return koko < 0;
+        return viimIndeksi < 0;
     }
 
     public int koko() {
-        return koko + 1;
+        return viimIndeksi + 1;
     }
 
     public void lisaa(E asia) {
-        if (!onkoTilaa(koko + 1)) {
+        if (!onkoTilaa(viimIndeksi + 1)) {
             tuplaaPituus();
         }
-        dataelementti[++koko] = asia;
+        dataelementti[++viimIndeksi] = asia;
     }
 
     public E haeViimeinen() {
-        return (E) dataelementti[koko];
+        return (E) dataelementti[viimIndeksi];
     }
 
     public E haeEnsimmainen() {
@@ -79,7 +82,7 @@ public class Lista<E> {
      * @return boolean onko indeksi listan alun ja lopun välissä (alku ja loppu mukaanluettuina)
      */
     protected boolean onkoIndeksiListalla(int indeksi) {
-        return indeksi >= 0 && indeksi <= koko && (indeksi != 0 || dataelementti[0] != null);
+        return indeksi >= 0 && indeksi <= viimIndeksi && (indeksi != 0 || dataelementti[0] != null);
     }
 
     protected int getElementinKoko() {

@@ -40,16 +40,20 @@ public class Pelinpystyttaja {
     }
 
     public Pelinpystyttaja(boolean[] onkoPelaajaAI, boolean GUI, String nimi) {
-        pelaajat = new ArrayList<>();
         this.onkoPelaajaAI = onkoPelaajaAI;
         this.pelaajanNimi = nimi;
+        this.GUI = GUI;
+        uusiPeli();
+    }
+
+    public void uusiPeli() {
+        pelaajat = new ArrayList<>();
         luoPelaajat(generoiNimet(onkoPelaajaAI));
         this.poyta = new Poyta(pelaajat);
         this.peliJatkuu = true;
         this.kierros = 1;
         vuorossaOlevanNro = 0;
         vuorossaOleva = pelaajat.get(vuorossaOlevanNro);
-        this.GUI = GUI;
     }
 
     /**
@@ -206,8 +210,5 @@ public class Pelinpystyttaja {
             c++;
         }
         return c;
-    }
-
-    public void uusiPeli() {
     }
 }
