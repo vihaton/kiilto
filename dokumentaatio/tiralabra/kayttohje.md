@@ -10,7 +10,7 @@ Peliä pelataan samalla tavalla kuin usean pelaajan tapauksessa käyttäjän nä
 
 ### tekoälyjen peluuttaminen toisiaan vastaan
 
-Käännetään ja ajetaan AIMain.java -luokka. Luokan koodia muuttamalla voidaan valita, minkälaista peliskenaariota peluutetaan. Tulokset tallennetaan /AI/logs/ kansioon.
+Käännetään ja ajetaan [AIMain.java](https://github.com/xvixvi/kiilto/blob/TLproduction/kiilto/AI/src/tiralabra/iterointi/AIMain.java) -luokka. Luokan koodia muuttamalla voidaan valita, minkälaista peliskenaariota peluutetaan. Tulokset tallennetaan [/AI/logs/](https://github.com/xvixvi/kiilto/tree/TLproduction/kiilto/AI/logs) kansioon.
 
 
 [jar]: https://github.com/xvixvi/kiilto/tree/TLproduction/kiilto/out/artifacts/Kiilto_jar "Kiilto.jar"
