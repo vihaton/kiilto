@@ -5,7 +5,9 @@ import logiikka.Poyta;
 import logiikka.omaisuusluokat.Omistus;
 import logiikka.omaisuusluokat.Varaus;
 import logiikka.valineluokat.Kasakokoelma;
-import tiralabra.tietorakenteet.*;
+import tiralabra.tietorakenteet.Strategia;
+import tiralabra.tietorakenteet.Vuoro;
+import tiralabra.tietorakenteet.VuoronToiminto;
 
 /**
  * Created by vili on 4.8.2017.
