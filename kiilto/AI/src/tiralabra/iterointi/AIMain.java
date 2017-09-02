@@ -17,7 +17,7 @@ public class AIMain {
     public static void main(String[] args) {
         Strategia[] peluutettavat = kolmenKopla;
 
-        Peluuttaja koutsi = new Peluuttaja(new Pelinpystyttaja(peluutettavat.length));
-        koutsi.peluuta(peluutettavat, 10000);
+        Peluuttaja koutsi = new Peluuttaja(new Pelinpystyttaja(peluutettavat.length), true);
+        koutsi.peluuta(peluutettavat, 1000);
     }
 }

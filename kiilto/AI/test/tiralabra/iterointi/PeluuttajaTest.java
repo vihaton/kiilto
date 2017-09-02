@@ -45,20 +45,20 @@ public class PeluuttajaTest {
 
         when(mockAI.suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.OLETUS)))
                 .thenReturn(varaaJoku);
-        when(mockAI.suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.HAMSTRAA_KARKKEJA)))
+        when(mockAI.suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.TEHOKAS)))
                 .thenReturn(nostaKolme);
         when(mockAI.suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.HAMSTRAA_OMISTUKSIA)))
                 .thenReturn(ostaEka);
 
-        p = new Peluuttaja(mockPP, mockAI);
+        p = new Peluuttaja(mockPP, mockAI, false);
     }
 
     @Test
     public void peluutaAInVuoroTest() {
         p.peluutaAInVuoro(Strategia.OLETUS);
         verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.OLETUS));
-        p.peluutaAInVuoro(Strategia.HAMSTRAA_KARKKEJA);
-        verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.HAMSTRAA_KARKKEJA));
+        p.peluutaAInVuoro(Strategia.TEHOKAS);
+        verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.TEHOKAS));
         p.peluutaAInVuoro(Strategia.HAMSTRAA_OMISTUKSIA);
         verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.HAMSTRAA_OMISTUKSIA));
     }
@@ -66,9 +66,9 @@ public class PeluuttajaTest {
     @Test
     public void peluutaKierroksenAIt() {
         p.peluutaSeuraavatTekoalyt();
-        //olettaa, että strategioiden kolme ensimmäistä ovat OLETUS, KARKIT, OMISTUKSET
+        //olettaa, että strategioiden kolme ensimmäistä ovat OLETUS, TEHOKAS, OMISTUKSET
         verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.HAMSTRAA_OMISTUKSIA));
-        verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.HAMSTRAA_KARKKEJA));
+        verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.TEHOKAS));
         verify(mockAI, times(1)).suunnitteleVuoro(nullable(Pelaaja.class), nullable(Poyta.class), eq(Strategia.OLETUS));
     }
 

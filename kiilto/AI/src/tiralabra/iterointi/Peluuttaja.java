@@ -18,13 +18,18 @@ public class Peluuttaja {
     private AlmaIlmari AI;
 
     public Peluuttaja(Pelinpystyttaja pp) {
-        this(pp, new AlmaIlmari());
+        this(pp, new AlmaIlmari(), false);
     }
 
-    protected Peluuttaja(Pelinpystyttaja pelinpystyttaja, AlmaIlmari AI) {
+    public Peluuttaja(Pelinpystyttaja pp, boolean kirjataankoTuloksia) {
+        this(pp, new AlmaIlmari(), kirjataankoTuloksia);
+    }
+
+    protected Peluuttaja(Pelinpystyttaja pelinpystyttaja, AlmaIlmari AI, boolean kirjataankoTuloksia) {
         this.pp = pelinpystyttaja;
         this.AI = AI;
-        this.kirjuri = new Kirjuri();
+        if (kirjataankoTuloksia)
+            this.kirjuri = new Kirjuri();
         asetaStrategiat();
         korjaaPelaajienNimet();
     }
@@ -40,7 +45,8 @@ public class Peluuttaja {
             pelit.lisaa(peluutaPeli(strategiat));
         }
 
-        kirjuri.kirjaa(pelit);
+        if (kirjuri != null)
+            kirjuri.kirjaa(pelit);
     }
 
     /**

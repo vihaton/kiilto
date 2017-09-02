@@ -48,7 +48,7 @@ public enum Strategia {
 
     private VuoronToiminto[] strategia;
     public static Strategia[] strategiat = new Strategia[]{
-            OLETUS, HAMSTRAA_KARKKEJA, HAMSTRAA_OMISTUKSIA, TEHOKAS
+            HAMSTRAA_OMISTUKSIA, TEHOKAS, OLETUS, HAMSTRAA_KARKKEJA
     };
 
     Strategia(VuoronToiminto[] strategia) {
