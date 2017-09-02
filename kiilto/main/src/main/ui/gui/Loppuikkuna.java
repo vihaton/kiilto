@@ -67,7 +67,7 @@ public class Loppuikkuna implements Runnable {
     }
 
     /**
-     * Katso ->.
+     * Katso
      *
      * @see Kayttoliittyma#tuhoa()
      */

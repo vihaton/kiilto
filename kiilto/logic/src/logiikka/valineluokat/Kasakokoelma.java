@@ -13,7 +13,7 @@ public class Kasakokoelma {
     /**
      * Luo kasakokoelman.
      *
-     * @param pelaajia 0 -> tyhjät kasat pelaajille, 2-4 -> pelaajien lukumäärän
+     * @param pelaajia 0 - tyhjät kasat pelaajille, 2-4 - pelaajien lukumäärän
      * mukaiset markkinat pöydälle.
      */
     public Kasakokoelma(int pelaajia) {

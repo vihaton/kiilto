@@ -40,7 +40,7 @@ public class Lista<E> {
 
     /**
      *
-     * @param indeksi
+     * @param indeksi josta haetaan
      * @return objekti jos on mitä antaa, null jos ei ole
      */
     public E haeIndeksista(int indeksi) {
@@ -64,10 +64,10 @@ public class Lista<E> {
     }
 
     /**
-     * Kopioi <E> tyypin otuksia taulukosta toiseen.
+     * Kopioi annetun tyypin otuksia taulukosta toiseen.
      * @param minne taulukko, johon kopioidaan
      * @param mista taulukko, josta kopioidaan
-     * @return @see:minne
+     * @return taulukko, mihin kopioitiin
      */
     protected static Object[] kopioiUuteen(Object[] minne, Object[] mista) {
         for (int i = 0; i < mista.length; i++) {
@@ -78,7 +78,7 @@ public class Lista<E> {
 
     /**
      *
-     * @param indeksi
+     * @param indeksi jota tarkastellaan
      * @return boolean onko indeksi listan alun ja lopun välissä (alku ja loppu mukaanluettuina)
      */
     protected boolean onkoIndeksiListalla(int indeksi) {

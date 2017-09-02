@@ -118,7 +118,7 @@ public class Alkuikkuna implements Runnable {
     }
 
     /**
-     * Katso ->.
+     * Katso
      *
      * @see Kayttoliittyma#tuhoa()
      */

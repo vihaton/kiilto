@@ -22,7 +22,7 @@ public class KasakokoelmanPiirtaja {
      * Piirtää karkkimarkkinat.
      *
      * @param graphics joilla piirretään.
-     * @param pa piirtoavustaja.
+     * @param kasat joita piirretään.
      * @param x koordinaatti.
      * @param y koordinaatti.
      */
@@ -40,7 +40,7 @@ public class KasakokoelmanPiirtaja {
      * Piirtää pelaajalla olevat karkit.
      *
      * @param graphics joilla piirretään.
-     * @param pa piirtoavustaja.
+     * @param kasat joita piirretään.
      * @param x koordinaatti.
      * @param y koordinaatti.
      */

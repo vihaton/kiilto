@@ -47,6 +47,23 @@
           </targetTests>
         </configuration>
       </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.0.0-M1</version>
+        <executions>
+          <execution>
+            <id>aggregate</id>
+            <phase>site</phase>
+            <goals>
+              <goal>aggregate</goal>
+            </goals>
+            <configuration>
+              <includeDependencySources>true</includeDependencySources>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration />
+      </plugin>
     </plugins>
   </build>
   <dependencies>

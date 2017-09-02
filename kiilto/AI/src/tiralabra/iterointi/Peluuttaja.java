@@ -52,7 +52,7 @@ public class Peluuttaja {
     /**
      *
      * @param strategias joilla älyt pelaavat (2-4kpl)
-     * @return
+     * @return pelattu peli
      */
     public Peli peluutaPeli(Strategia[] strategias) {
         pp.uusiPeli();
@@ -85,6 +85,7 @@ public class Peluuttaja {
      * Olettaa, että kaikki tekoälyt ovat yhteen putkeen, ja että vuorossa oleva on tekoäly.
      *
      * peluuttaa seuraavaksi vuorossa olevat, peräkkäiset tekoälyt, kunnes seuraava pelaaja on ihminen tai kierros loppuu.
+     * @return pelattu kierros
      */
     public Kierros peluutaSeuraavatTekoalyt() {
         Kierros kierros = new Kierros();

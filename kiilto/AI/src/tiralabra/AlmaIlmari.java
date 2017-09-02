@@ -43,7 +43,7 @@ public class AlmaIlmari {
      *          -merkkihenkilöt todo
      *      -mitä minun kannattaisi tehdä?
      *          -omistusten suhteelliset arvot? todo
-     *          -potentiaalisten ostosten sopivuus nykyiseen omistusprofiiliin & nallekarkkeihin? todo
+     *          -potentiaalisten ostosten sopivuus nykyiseen omistusprofiiliin ja nallekarkkeihin? todo
      *          -tulevan omistusprofiilin linjaus merkkihenkilön viekotteluun? todo
      *
      * tilanteen arviointi ja vuoron toteuttaminen on eriytetty,
@@ -183,7 +183,7 @@ public class AlmaIlmari {
      *
      * @param keho mitä ohjataan
      * @param poyta millä pelataan
-     * @param kuinkaMontaVoidaanNostaaKerralla
+     * @param kuinkaMontaVoidaanNostaaKerralla niinpä
      * @return Vuoro-olio, johon on paketoitu mitä nallekarkkeja pitäisi nostaa
      */
     protected Vuoro paataMitaNostetaan(Pelaaja keho, Poyta poyta, int kuinkaMontaVoidaanNostaaKerralla) {

@@ -129,4 +129,13 @@ public class ListaTest {
         l.tuplaaPituus();
         assertTrue(l.getElementinKoko() == 40);
     }
+
+    @Test
+    public void kokoTest() {
+        assertTrue("alussa koko on 0", l.koko() == 0);
+        for (int i = 1; i < 100; i++) {
+            l.lisaa(i);
+            assertTrue("koko on i", l.koko() == i);
+        }
+    }
 }

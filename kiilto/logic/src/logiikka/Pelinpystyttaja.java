@@ -64,7 +64,7 @@ public class Pelinpystyttaja {
     public ArrayList<String> generoiNimet(boolean[] onkoAI) {
         ArrayList<String> nimet = new ArrayList<>();
         int tekoalyja = 0;
-        for (int i = 0; i < onkoAI.length ; i++) {
+        for (int i = 0; i < onkoAI.length; i++) {
             if (onkoAI[i]) {
                 tekoalyja++;
                 nimet.add("AI " + tekoalyja);
