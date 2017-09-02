@@ -8,14 +8,16 @@ import tiralabra.tietorakenteet.Strategia;
  */
 public class AIMain {
 
-    private static Strategia[] kolmeEnsimmaista = new Strategia[]{
+    private static Strategia[] kolmenKopla = new Strategia[]{
             Strategia.OLETUS,
-            Strategia.HAMSTRAA_KARKKEJA,
+            Strategia.TEHOKAS,
             Strategia.HAMSTRAA_OMISTUKSIA
     };
 
     public static void main(String[] args) {
-        Peluuttaja koutsi = new Peluuttaja(new Pelinpystyttaja(3));
-        koutsi.peluuta(kolmeEnsimmaista, 10);
+        Strategia[] peluutettavat = kolmenKopla;
+
+        Peluuttaja koutsi = new Peluuttaja(new Pelinpystyttaja(peluutettavat.length));
+        koutsi.peluuta(peluutettavat, 10000);
     }
 }

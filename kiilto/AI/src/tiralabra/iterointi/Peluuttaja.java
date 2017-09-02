@@ -107,8 +107,9 @@ public class Peluuttaja {
             pp.varaa(v.varattavanOmistuksenNimi);
         else if (toiminto.contains("OSTA"))
             pp.osta(v.ostettavanOmaisuudenNimi);
-        else
-            System.out.println("\t\tAI nro " + pp.vuorossaOlevanNro + " ei osannut tehdä mitään!");
+        else {
+            //System.out.println("\tAI nro " + pp.vuorossaOlevanNro + " ei osannut tehdä mitään!");
+        }
 
         return v;
     }
