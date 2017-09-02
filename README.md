@@ -6,6 +6,8 @@ Peli, jossa nallekarkkeja tuhlataan, va(a)rallisuutta haalitaan ja vaikutusvalta
 ### tiralabra
 
 - [määrittelydokumentti](/dokumentaatio/tiralabra/maarittelydokumentti.md)
+- [testausdokumentti](/dokumentaatio/tiralabra/testausdokumentti.md)
+- [toteutusdokumentti](/dokumentaatio/tiralabra/toteutusdokumentti.md)
 - [viikkoraportti 1](/dokumentaatio/tiralabra/viikkoraportti1.md)
 - [viikkoraportti 2](/dokumentaatio/tiralabra/viikkoraportti2.md)
 - [viikkoraportti 3](/dokumentaatio/tiralabra/viikkoraportti3.md)
