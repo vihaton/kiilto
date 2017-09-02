@@ -62,6 +62,19 @@ voittoarvovalta keskimäärin 	16.3542
 
 Toisin sanoen pelin keskimääräinen kierrosmäärä laskee huomattavasti, kun kaksi kovinta strategiaa pelaa ovat läsnä, eikä pelin lyheneminen johdu esimerkiksi pelaajien määrästä. Huomattavaa on myös tehokkaan ja omistuksia hamstraavan strategian voittoprosenttien samankaltaisuus 3 ja 4 pelaajan peleissä. Voimasuhteisiin ei siis vaikuta pelaajien (ja samalla jaossa olevien karkkien ja merkkihenkilöiden) määrä.
 
+#### Suoriutuminen ihmistä vastaan
+
+Huonon käytettävyyden, josta saan kyllä kiittää itseäni, ansiosta ihmistä vastaan testaaminen jäi melko vähäiseksi. Jo muutaman pelin jälkeen kävi selväksi, että tietyssä määrin tulokset tekoälyn peluuttamisesta itseään vastaan ovat yleistettävissä myös peleihin ihmistä vastaan.
+
+Menestyäkseen Kiillossa pelaajan täytyy pystyä lopettamaan peli mahdollisimman nopeasti. Ilman huolellista laskelmointia ihminen häviää usein jo näillä kahdelle karkealle tekoälylle (omistusten hamstraaminen sekä tehokas), koska tekoälyn käyttämä strategia on hyvä, vaikka yksittäiset päätökset eivät olisikaan loppuun asti optimoituja. Huolellinen pelaaja pystyy nämä karkeat älyt voittamaan optimoimalla jokaisen siirtonsa huolellisesti, minkä lisäksi tarvitaan myös hiukan onnea omistusten ilmestymisjärjestyksessä. Tämä on kuitenkin sekä aikaa vievää että haastavaa, joten rohkenen epäillä että suurelta osalta pelaajista jäisi nämä älyt voittamatta "paras kolmesta" -tyylisesti pelattuna.
+
+Tekoälyjen voimasuhteet pysyvät samoina ihmistä vastaan pelattaessa, ja kaikista merkityksellisin asia, eli kuinka monessa vuorossa tekoäly pystyy pelin päättämään, säilyy jotakuinkin samana. Esimerkiksi itse hävisin ensimmäisen testipelin kolmea parasta älyä vastaan (omistusten hamstraaja, tehokas, oletus) hamstraajalle 26:n kierroksen jälkeen.
+
+### Yhteenveto
+
+Tekoälyt toimivat hyvin optimoinnin puutteeseen nähden. Pelin keskiarvoinen kesto, noin 28 kierrosta, on parempi kuin useissa ihmisten pelaamissa peleissä. Tämän perusteella voidaan päätellä, että tekoälyn parhaiden strategiat (Hamstraa omistuksia sekä Tehokas) ovat erittäin suorituskykyisiä, sillä älyissä riittäisi vielä paljon optimoitavaa.
+
+On toki mahdollista, että optimoinnin jälkeen strategioiden voimasuhteet muuttuisivat. En kuitenkaan pidä suurta muutosta todennäiköisenä, koska erot parhaiden strategioiden ja muiden välillä ovat hyvin selkeät.
 
 
 [aimain]: https://github.com/xvixvi/kiilto/blob/TLproduction/kiilto/AI/src/tiralabra/iterointi/AIMain.java "AIMain.java"
