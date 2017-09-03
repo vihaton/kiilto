@@ -13,6 +13,7 @@ Peli, jossa nallekarkkeja tuhlataan, va(a)rallisuutta haalitaan ja vaikutusvalta
 - [viikkoraportti 3](/dokumentaatio/tiralabra/viikkoraportti3.md)
 - [viikkoraportti 4](/dokumentaatio/tiralabra/viikkoraportti4.md)
 - [viikkoraportti 5](/dokumentaatio/tiralabra/viikkoraportti5.md)
+- [loppupalautus](/dokumentaatio/tiralabra/loppupalautus.md)
 
 ### javalabra
 
