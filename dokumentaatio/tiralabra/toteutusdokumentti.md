@@ -21,7 +21,8 @@ Suorituskykytestauksessa tehtävä iterointi on hieman mielenkiintoisempi tapaus
 
 Alla on yksi osa metodia, joka kokoaa peleihin talletetun informaation tekstiksi ja jäsentää sen ihmiselle luettavaan muotoon:
 
-```     private Iterable<String> formatoiPelitTekstiksi(Lista<Peli> pelit) {
+```     
+    private Iterable<String> formatoiPelitTekstiksi(Lista<Peli> pelit) {
         ...
         int riveja = yhteenvetorivit + (pelaajia + 6) * peleja; //6 * pelaajien määrä rivejä per peli
         int yhteenvetorivit = 4 + pelaajia; //yhteenvetoon otsikko + pelaajien määrä + kierrosten määrän ka + voittoarvovallan ka + välirivi
