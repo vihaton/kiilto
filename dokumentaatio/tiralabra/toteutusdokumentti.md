@@ -21,9 +21,11 @@ Suorituskykytestauksessa tehtävä iterointi on hieman mielenkiintoisempi tapaus
 
 Alla on yksi osa metodia, joka kokoaa peleihin talletetun informaation tekstiksi ja jäsentää sen ihmiselle luettavaan muotoon:
 
-```     int riveja = yhteenvetorivit + (pelaajia + 6) * peleja; //6 * pelaajien määrä rivejä per peli
+```     private Iterable<String> formatoiPelitTekstiksi(Lista<Peli> pelit) {
+        ...
+        int riveja = yhteenvetorivit + (pelaajia + 6) * peleja; //6 * pelaajien määrä rivejä per peli
         int yhteenvetorivit = 4 + pelaajia; //yhteenvetoon otsikko + pelaajien määrä + kierrosten määrän ka + voittoarvovallan ka + välirivi
-        ....
+        ...
 
         String[] rivit = new String[riveja];
         int osoitin = yhteenvetorivit;
@@ -39,6 +41,9 @@ Alla on yksi osa metodia, joka kokoaa peleihin talletetun informaation tekstiksi
                 rivit[osoitin++] = yhteenveto[j];
             }
         }
+        
+        ...
+    }
 ```
 Ulommasta luupista kutsuttavat metodit `formatoiPeli`, `haeIndeksista`, `voittajanIndeksi` sekä `Integer.parseInt` ovat kaikki vakioaikaisia ja -tilaisia, joten ulomman luupin aikavaativuus on *O(n)* missä n = pelattujen pelien määrä. Sisemmän luupin
  ```
