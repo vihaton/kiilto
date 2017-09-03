@@ -41,14 +41,14 @@ public class Kirjuri {
     private Iterable<String> formatoiPelitTekstiksi(Lista<Peli> pelit) {
         int pelaajia = pelit.haeEnsimmainen().pelaajia;
         int peleja = pelit.koko();
-        int yhteenvetorivit = 4 + pelaajia; //yhteenvetoon pelaajien määrä + kierrosten määrän ka + voittoarvovallan ka + väli
+        int yhteenvetorivit = 4 + pelaajia; //yhteenvetoon otsikko + pelaajien määrä + kierrosten määrän ka + voittoarvovallan ka + välirivi
         int riveja = yhteenvetorivit + (pelaajia + 6) * peleja; //6 * pelaajien määrä rivejä per peli
-        String[] rivit = new String[riveja];
-        int osoitin = yhteenvetorivit;
         int[] strategioidenVoitot = new int[pelaajia];
         double kierroksia = 0;
         double voittoarvovalta = 0;
 
+        String[] rivit = new String[riveja];
+        int osoitin = yhteenvetorivit;
         //selvitetään jokaisen pelin yhteenveto
         for (int i = 0; i < peleja; i++) {
             String[] yhteenveto = formatoiPeli(pelit.haeIndeksista(i));
